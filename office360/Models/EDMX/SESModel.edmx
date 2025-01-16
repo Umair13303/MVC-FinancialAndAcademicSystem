@@ -1,0 +1,2421 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SESModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BM_Branch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuID" Type="uniqueidentifier" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="CampusTypeId" Type="int" />
+          <Property Name="OrganizationTypeId" Type="int" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="CityId" Type="int" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="ContactNo" Type="nvarchar(max)" />
+          <Property Name="EmailAddress" Type="nvarchar(max)" />
+          <Property Name="NTNNo" Type="nvarchar(max)" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="DocType" Type="int" />
+          <Property Name="DocumentStatus" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="BranchId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="BM_BranchSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuID" Type="uniqueidentifier" />
+          <Property Name="CampusId" Type="int" />
+          <Property Name="RollCallSystemId" Type="int" />
+          <Property Name="BillingMethodId" Type="int" />
+          <Property Name="StudyLevelIds" Type="nvarchar(max)" />
+          <Property Name="StudyGroupIds" Type="nvarchar(max)" />
+          <Property Name="PolicyPeriodId" Type="int" />
+          <Property Name="ChallanMethodId" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="DocType" Type="int" />
+          <Property Name="DocumentStatus" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="BranchId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CM_Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuID" Type="uniqueidentifier" />
+          <Property Name="CompanyName" Type="nvarchar(max)" />
+          <Property Name="CityId" Type="int" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="AddressLine" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="EmailAddress" Type="nvarchar(max)" />
+          <Property Name="CompanyWebsite" Type="nvarchar(max)" />
+          <Property Name="UploadLogo" Type="nvarchar(max)" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="DocType" Type="int" />
+          <Property Name="DocumentStatus" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="BranchId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="RSM_RightSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuID" Type="uniqueidentifier" />
+          <Property Name="RightId" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="URLTypeId" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="DocType" Type="int" />
+          <Property Name="DocumentStatus" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="BranchId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UM_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuID" Type="uniqueidentifier" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="EmailAddress" Type="nvarchar(max)" />
+          <Property Name="MobileNumber" Type="nvarchar(max)" />
+          <Property Name="EmployeeId" Type="int" />
+          <Property Name="RoleId" Type="int" />
+          <Property Name="AllowedCampusIds" Type="nvarchar(max)" />
+          <Property Name="IsLogIn" Type="bit" />
+          <Property Name="IsDeveloper" Type="bit" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="DocType" Type="int" />
+          <Property Name="DocumentStatus" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="BranchId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="URM_UserRight">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuID" Type="uniqueidentifier" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="RightId" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="DocType" Type="int" />
+          <Property Name="DocumentStatus" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="BranchId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.AdmissionCatagory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AdmissionCatagory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.BillingMethod' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BillingMethod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.CampusType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CampusType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.ChallanMethod' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ChallanMethod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ChallanNo" Type="int" />
+          <Property Name="MonthsNo" Type="int" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.ChallanType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ChallanType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="DB_IF_Condition" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.ChargingMethod' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ChargingMethod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.City' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="StateId" Type="int" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.CoaCatagory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CoaCatagory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ShortCode" Type="nvarchar(max)" />
+          <Property Name="CoaTypeId" Type="int" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.CoaType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CoaType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShortCode" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.Country' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="CallingCode" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.DocType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DocType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Purpose" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.DocumentStatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DocumentStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="DocumentId" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.EducationBoard' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="EducationBoard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.EnrollmentType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="EnrollmentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.ExportClass' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ExportClass">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Class" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Value" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.FeeCatagory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FeeCatagory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.Gender' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.MartialStatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MartialStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.Occupation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Occupation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.OrganizationType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="OrganizationType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.PolicyPeriod' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PolicyPeriod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="MonthNo" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.RegistrationType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RegistrationType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.Relationship' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Relationship">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.Religion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Religion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.Right' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Right">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FormName" Type="nvarchar(max)" />
+          <Property Name="DisplayName" Type="nvarchar(max)" />
+          <Property Name="IsDisplayAllowed" Type="bit" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Menu" Type="nvarchar(max)" />
+          <Property Name="RoleIds" Type="nvarchar(max)" />
+          <Property Name="SubMenu" Type="nvarchar(max)" />
+          <Property Name="Priority" Type="int" />
+          <Property Name="Purpose" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.Role' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.RollCallSystem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RollCallSystem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.StudyGroup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="StudyGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.StudyLevel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="StudyLevel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.URLType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="URLType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.WHTaxPolicy' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="WHTaxPolicy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Percentage" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="Section" Type="nvarchar(max)" />
+          <Property Name="SlabAmount" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="FixedCharges" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="IsOnExceedingAmount" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="WorkingShift">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="CreatedOn" Type="smalldatetime" />
+        </EntityType>
+        <Function Name="BM_Branch_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SessionCompanyId" Type="int" Mode="In" />
+          <Parameter Name="SessionBranchId" Type="int" Mode="In" />
+          <Parameter Name="AllowedCampusIds" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SearchParameter" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="BM_Branch_GetListBySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="InputTypeId" Type="int" Mode="In" />
+          <Parameter Name="InputText" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="BM_Branch_Upsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_OperationType" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="GuID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CampusTypeId" Type="int" Mode="In" />
+          <Parameter Name="OrganizationTypeId" Type="int" Mode="In" />
+          <Parameter Name="CountryId" Type="int" Mode="In" />
+          <Parameter Name="CityId" Type="int" Mode="In" />
+          <Parameter Name="Address" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ContactNo" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="EmailAddress" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="NTNNo" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+          <Parameter Name="UpdatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="UpdatedBy" Type="int" Mode="In" />
+          <Parameter Name="DocumentStatus" Type="int" Mode="In" />
+          <Parameter Name="DocType" Type="int" Mode="In" />
+          <Parameter Name="Status" Type="bit" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="Response" Type="int" Mode="InOut" />
+          <Parameter Name="CampusId" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="BM_BranchSetting_Upsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_OperationType" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="GuID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="CampusId" Type="int" Mode="In" />
+          <Parameter Name="RollCallSystemId" Type="int" Mode="In" />
+          <Parameter Name="BillingMethodId" Type="int" Mode="In" />
+          <Parameter Name="StudyLevelIds" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="StudyGroupIds" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="PolicyPeriodId" Type="int" Mode="In" />
+          <Parameter Name="ChallanMethodId" Type="int" Mode="In" />
+          <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+          <Parameter Name="UpdatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="UpdatedBy" Type="int" Mode="In" />
+          <Parameter Name="DocType" Type="int" Mode="In" />
+          <Parameter Name="DocumentStatus" Type="int" Mode="In" />
+          <Parameter Name="Status" Type="bit" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="Response" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="CM_Company_GetDetailByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="SearchParameter" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="CM_Company_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SessionCompanyId" Type="int" Mode="In" />
+          <Parameter Name="AllowedCampusIds" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SearchParameter" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CM_Company_Upsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_OperationType" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="GuID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="CompanyName" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CityId" Type="int" Mode="In" />
+          <Parameter Name="CountryId" Type="int" Mode="In" />
+          <Parameter Name="AddressLine" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="PhoneNumber" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="EmailAddress" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CompanyWebsite" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UploadLogo" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+          <Parameter Name="UpdatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="UpdatedBy" Type="int" Mode="In" />
+          <Parameter Name="DocType" Type="int" Mode="In" />
+          <Parameter Name="DocumentStatus" Type="int" Mode="In" />
+          <Parameter Name="Status" Type="bit" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Response" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="fn_CodeFormat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar(max)">
+          <Parameter Name="MaxCode" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="fn_CodeSplitByCommaAsINT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="psCSString" Type="nvarchar(max)" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="sID" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fn_CodeSplitByCommaAsUniqueIdentifier" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="psCSString" Type="nvarchar(max)" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="sID" Type="uniqueidentifier" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fn_GetCommaSepratedValuesInList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="psCSString" Type="nvarchar(max)" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="sID" Type="nvarchar(max)" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fn_GetGeneralBranchSettingForCampus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CampusId" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Id" Type="int" Nullable="false" />
+                <Property Name="GuID" Type="uniqueidentifier" />
+                <Property Name="RollCallSystem" Type="nvarchar(max)" />
+                <Property Name="BillingMethod" Type="nvarchar(max)" />
+                <Property Name="PolicyPeriod" Type="nvarchar(max)" />
+                <Property Name="ChallanMethod" Type="nvarchar(max)" />
+                <Property Name="AllowedChallanNo" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="LK_ChallanMethod_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LK_StudyGroup_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="CampusId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LK_StudyLevel_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="CampusId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LK_WHTaxPolicy_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="AccFeeStructureId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RSM_RightSetting_GetDetailByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="AllowedCampusIds" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="URLTypeId" Type="int" Mode="In" />
+          <Parameter Name="Status" Type="bit" Mode="In" />
+          <Parameter Name="Menu" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="RightId" Type="int" Mode="In" />
+          <Parameter Name="RightPath" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="UM_User_GetDetailByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ListCondition" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="IsLogIn" Type="bit" Mode="In" />
+          <Parameter Name="UserName" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UM_User_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SessionCompanyId" Type="int" Mode="In" />
+          <Parameter Name="SearchParameter" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UM_User_GetListBySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="InputTypeId" Type="int" Mode="In" />
+          <Parameter Name="InputText" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="UM_User_Upsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_OperationType" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="GuID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UserName" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="EmailAddress" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="MobileNumber" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="RoleId" Type="int" Mode="In" />
+          <Parameter Name="AllowedCampusIds" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="IsLogIn" Type="bit" Mode="In" />
+          <Parameter Name="IsDeveloper" Type="bit" Mode="In" />
+          <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+          <Parameter Name="UpdatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="UpdatedBy" Type="int" Mode="In" />
+          <Parameter Name="DocType" Type="int" Mode="In" />
+          <Parameter Name="DocumentStatus" Type="int" Mode="In" />
+          <Parameter Name="Status" Type="bit" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Response" Type="int" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="SESModelStoreContainer">
+          <EntitySet Name="BM_Branch" EntityType="Self.BM_Branch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BM_BranchSetting" EntityType="Self.BM_BranchSetting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CM_Company" EntityType="Self.CM_Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RSM_RightSetting" EntityType="Self.RSM_RightSetting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UM_User" EntityType="Self.UM_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="URM_UserRight" EntityType="Self.URM_UserRight" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdmissionCatagory" EntityType="Self.AdmissionCatagory" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AdmissionCatagory].[Id] AS [Id], 
+    [AdmissionCatagory].[Description] AS [Description]
+    FROM [dbo].[AdmissionCatagory] AS [AdmissionCatagory]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="BillingMethod" EntityType="Self.BillingMethod" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [BillingMethod].[Id] AS [Id], 
+    [BillingMethod].[Description] AS [Description], 
+    [BillingMethod].[Status] AS [Status]
+    FROM [dbo].[BillingMethod] AS [BillingMethod]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CampusType" EntityType="Self.CampusType" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CampusType].[Id] AS [Id], 
+    [CampusType].[Description] AS [Description], 
+    [CampusType].[Status] AS [Status]
+    FROM [dbo].[CampusType] AS [CampusType]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ChallanMethod" EntityType="Self.ChallanMethod" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ChallanMethod].[Id] AS [Id], 
+    [ChallanMethod].[Code] AS [Code], 
+    [ChallanMethod].[Description] AS [Description], 
+    [ChallanMethod].[ChallanNo] AS [ChallanNo], 
+    [ChallanMethod].[MonthsNo] AS [MonthsNo], 
+    [ChallanMethod].[Status] AS [Status]
+    FROM [dbo].[ChallanMethod] AS [ChallanMethod]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ChallanType" EntityType="Self.ChallanType" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ChallanType].[Id] AS [Id], 
+    [ChallanType].[Description] AS [Description], 
+    [ChallanType].[DB_IF_Condition] AS [DB_IF_Condition]
+    FROM [dbo].[ChallanType] AS [ChallanType]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ChargingMethod" EntityType="Self.ChargingMethod" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ChargingMethod].[Id] AS [Id], 
+    [ChargingMethod].[Description] AS [Description]
+    FROM [dbo].[ChargingMethod] AS [ChargingMethod]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="City" EntityType="Self.City" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [City].[Id] AS [Id], 
+    [City].[CountryId] AS [CountryId], 
+    [City].[Code] AS [Code], 
+    [City].[Description] AS [Description], 
+    [City].[StateId] AS [StateId], 
+    [City].[Status] AS [Status]
+    FROM [dbo].[City] AS [City]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CoaCatagory" EntityType="Self.CoaCatagory" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CoaCatagory].[Id] AS [Id], 
+    [CoaCatagory].[Description] AS [Description], 
+    [CoaCatagory].[ShortCode] AS [ShortCode], 
+    [CoaCatagory].[CoaTypeId] AS [CoaTypeId], 
+    [CoaCatagory].[Status] AS [Status]
+    FROM [dbo].[CoaCatagory] AS [CoaCatagory]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CoaType" EntityType="Self.CoaType" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CoaType].[Id] AS [Id], 
+    [CoaType].[ShortCode] AS [ShortCode], 
+    [CoaType].[Description] AS [Description], 
+    [CoaType].[Status] AS [Status]
+    FROM [dbo].[CoaType] AS [CoaType]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Country" EntityType="Self.Country" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Country].[Id] AS [Id], 
+    [Country].[Description] AS [Description], 
+    [Country].[Code] AS [Code], 
+    [Country].[CallingCode] AS [CallingCode], 
+    [Country].[Status] AS [Status]
+    FROM [dbo].[Country] AS [Country]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DocType" EntityType="Self.DocType" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DocType].[Id] AS [Id], 
+    [DocType].[Description] AS [Description], 
+    [DocType].[Purpose] AS [Purpose]
+    FROM [dbo].[DocType] AS [DocType]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DocumentStatus" EntityType="Self.DocumentStatus" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DocumentStatus].[Id] AS [Id], 
+    [DocumentStatus].[Description] AS [Description], 
+    [DocumentStatus].[DocumentId] AS [DocumentId]
+    FROM [dbo].[DocumentStatus] AS [DocumentStatus]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="EducationBoard" EntityType="Self.EducationBoard" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [EducationBoard].[Id] AS [Id], 
+    [EducationBoard].[Code] AS [Code], 
+    [EducationBoard].[Description] AS [Description], 
+    [EducationBoard].[Status] AS [Status]
+    FROM [dbo].[EducationBoard] AS [EducationBoard]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="EnrollmentType" EntityType="Self.EnrollmentType" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [EnrollmentType].[Id] AS [Id], 
+    [EnrollmentType].[Description] AS [Description], 
+    [EnrollmentType].[Status] AS [Status]
+    FROM [dbo].[EnrollmentType] AS [EnrollmentType]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ExportClass" EntityType="Self.ExportClass" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ExportClass].[Id] AS [Id], 
+    [ExportClass].[Class] AS [Class], 
+    [ExportClass].[Description] AS [Description], 
+    [ExportClass].[Value] AS [Value], 
+    [ExportClass].[Status] AS [Status]
+    FROM [dbo].[ExportClass] AS [ExportClass]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FeeCatagory" EntityType="Self.FeeCatagory" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FeeCatagory].[Id] AS [Id], 
+    [FeeCatagory].[Description] AS [Description], 
+    [FeeCatagory].[Status] AS [Status]
+    FROM [dbo].[FeeCatagory] AS [FeeCatagory]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Gender" EntityType="Self.Gender" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Gender].[Id] AS [Id], 
+    [Gender].[Description] AS [Description]
+    FROM [dbo].[Gender] AS [Gender]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MartialStatus" EntityType="Self.MartialStatus" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MartialStatus].[Id] AS [Id], 
+    [MartialStatus].[Description] AS [Description]
+    FROM [dbo].[MartialStatus] AS [MartialStatus]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Occupation" EntityType="Self.Occupation" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Occupation].[Id] AS [Id], 
+    [Occupation].[Description] AS [Description]
+    FROM [dbo].[Occupation] AS [Occupation]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OrganizationType" EntityType="Self.OrganizationType" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [OrganizationType].[Id] AS [Id], 
+    [OrganizationType].[Description] AS [Description], 
+    [OrganizationType].[Status] AS [Status]
+    FROM [dbo].[OrganizationType] AS [OrganizationType]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PolicyPeriod" EntityType="Self.PolicyPeriod" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PolicyPeriod].[Id] AS [Id], 
+    [PolicyPeriod].[Description] AS [Description], 
+    [PolicyPeriod].[MonthNo] AS [MonthNo]
+    FROM [dbo].[PolicyPeriod] AS [PolicyPeriod]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RegistrationType" EntityType="Self.RegistrationType" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RegistrationType].[Id] AS [Id], 
+    [RegistrationType].[Description] AS [Description]
+    FROM [dbo].[RegistrationType] AS [RegistrationType]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Relationship" EntityType="Self.Relationship" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Relationship].[Id] AS [Id], 
+    [Relationship].[Description] AS [Description]
+    FROM [dbo].[Relationship] AS [Relationship]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Religion" EntityType="Self.Religion" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Religion].[Id] AS [Id], 
+    [Religion].[Description] AS [Description]
+    FROM [dbo].[Religion] AS [Religion]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Right" EntityType="Self.Right" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Right].[Id] AS [Id], 
+    [Right].[FormName] AS [FormName], 
+    [Right].[DisplayName] AS [DisplayName], 
+    [Right].[IsDisplayAllowed] AS [IsDisplayAllowed], 
+    [Right].[Status] AS [Status], 
+    [Right].[Menu] AS [Menu], 
+    [Right].[RoleIds] AS [RoleIds], 
+    [Right].[SubMenu] AS [SubMenu], 
+    [Right].[Priority] AS [Priority], 
+    [Right].[Purpose] AS [Purpose]
+    FROM [dbo].[Right] AS [Right]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Role" EntityType="Self.Role" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Role].[Id] AS [Id], 
+    [Role].[Description] AS [Description], 
+    [Role].[Status] AS [Status]
+    FROM [dbo].[Role] AS [Role]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RollCallSystem" EntityType="Self.RollCallSystem" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RollCallSystem].[Id] AS [Id], 
+    [RollCallSystem].[Description] AS [Description]
+    FROM [dbo].[RollCallSystem] AS [RollCallSystem]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="StudyGroup" EntityType="Self.StudyGroup" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [StudyGroup].[Id] AS [Id], 
+    [StudyGroup].[Description] AS [Description], 
+    [StudyGroup].[Status] AS [Status]
+    FROM [dbo].[StudyGroup] AS [StudyGroup]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="StudyLevel" EntityType="Self.StudyLevel" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [StudyLevel].[Id] AS [Id], 
+    [StudyLevel].[Description] AS [Description], 
+    [StudyLevel].[Status] AS [Status]
+    FROM [dbo].[StudyLevel] AS [StudyLevel]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="URLType" EntityType="Self.URLType" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [URLType].[Id] AS [Id], 
+    [URLType].[Description] AS [Description], 
+    [URLType].[Status] AS [Status]
+    FROM [dbo].[URLType] AS [URLType]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="WHTaxPolicy" EntityType="Self.WHTaxPolicy" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [WHTaxPolicy].[Id] AS [Id], 
+    [WHTaxPolicy].[Description] AS [Description], 
+    [WHTaxPolicy].[Percentage] AS [Percentage], 
+    [WHTaxPolicy].[Section] AS [Section], 
+    [WHTaxPolicy].[SlabAmount] AS [SlabAmount], 
+    [WHTaxPolicy].[FixedCharges] AS [FixedCharges], 
+    [WHTaxPolicy].[IsOnExceedingAmount] AS [IsOnExceedingAmount]
+    FROM [dbo].[WHTaxPolicy] AS [WHTaxPolicy]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="WorkingShift" EntityType="Self.WorkingShift" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [WorkingShift].[Id] AS [Id], 
+    [WorkingShift].[Description] AS [Description], 
+    [WorkingShift].[Status] AS [Status], 
+    [WorkingShift].[CreatedOn] AS [CreatedOn]
+    FROM [dbo].[WorkingShift] AS [WorkingShift]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SESModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="fn_CodeSplitByCommaAsINT_Result">
+          <Property Name="sID" Type="Int32" />
+        </ComplexType>
+        <ComplexType Name="fn_CodeSplitByCommaAsUniqueIdentifier_Result">
+          <Property Name="sID" Type="Guid" />
+        </ComplexType>
+        <ComplexType Name="fn_GetCommaSepratedValuesInList_Result">
+          <Property Name="sID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </ComplexType>
+        <ComplexType Name="fn_GetGeneralBranchSettingForCampus_Result">
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="GuID" Type="Guid" />
+          <Property Name="RollCallSystem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BillingMethod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PolicyPeriod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ChallanMethod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AllowedChallanNo" Type="Int32" />
+        </ComplexType>
+        <EntityType Name="BM_Branch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuID" Type="Guid" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CampusTypeId" Type="Int32" />
+          <Property Name="OrganizationTypeId" Type="Int32" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="CityId" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NTNNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="DocType" Type="Int32" />
+          <Property Name="DocumentStatus" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="BranchId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="BM_BranchSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuID" Type="Guid" />
+          <Property Name="CampusId" Type="Int32" />
+          <Property Name="RollCallSystemId" Type="Int32" />
+          <Property Name="BillingMethodId" Type="Int32" />
+          <Property Name="StudyLevelIds" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StudyGroupIds" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PolicyPeriodId" Type="Int32" />
+          <Property Name="ChallanMethodId" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="DocType" Type="Int32" />
+          <Property Name="DocumentStatus" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="BranchId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CM_Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuID" Type="Guid" />
+          <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CityId" Type="Int32" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="AddressLine" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyWebsite" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UploadLogo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="DocType" Type="Int32" />
+          <Property Name="DocumentStatus" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="BranchId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="RSM_RightSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuID" Type="Guid" />
+          <Property Name="RightId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="URLTypeId" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="DocType" Type="Int32" />
+          <Property Name="DocumentStatus" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="BranchId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UM_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuID" Type="Guid" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="AllowedCampusIds" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsLogIn" Type="Boolean" />
+          <Property Name="IsDeveloper" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="DocType" Type="Int32" />
+          <Property Name="DocumentStatus" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="BranchId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="URM_UserRight">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuID" Type="Guid" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="RightId" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="DocType" Type="Int32" />
+          <Property Name="DocumentStatus" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="BranchId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AdmissionCatagory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="BillingMethod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CampusType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ChallanMethod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ChallanNo" Type="Int32" />
+          <Property Name="MonthsNo" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ChallanType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DB_IF_Condition" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ChargingMethod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StateId" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CoaCatagory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ShortCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CoaTypeId" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CoaType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShortCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CallingCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="DocType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Purpose" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DocumentStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="EducationBoard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="EnrollmentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ExportClass">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Class" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="FeeCatagory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MartialStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Occupation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OrganizationType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="PolicyPeriod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MonthNo" Type="Int32" />
+        </EntityType>
+        <EntityType Name="RegistrationType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Relationship">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Religion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Right">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FormName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDisplayAllowed" Type="Boolean" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Menu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RoleIds" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SubMenu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Priority" Type="Int32" />
+          <Property Name="Purpose" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="RollCallSystem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="StudyGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="StudyLevel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="URLType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="WHTaxPolicy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Percentage" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="Section" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SlabAmount" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="FixedCharges" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="IsOnExceedingAmount" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="WorkingShift">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityContainer Name="SESEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BM_Branch" EntityType="Self.BM_Branch" />
+          <EntitySet Name="BM_BranchSetting" EntityType="Self.BM_BranchSetting" />
+          <EntitySet Name="CM_Company" EntityType="Self.CM_Company" />
+          <EntitySet Name="RSM_RightSetting" EntityType="Self.RSM_RightSetting" />
+          <EntitySet Name="UM_User" EntityType="Self.UM_User" />
+          <EntitySet Name="URM_UserRight" EntityType="Self.URM_UserRight" />
+          <EntitySet Name="AdmissionCatagory" EntityType="Self.AdmissionCatagory" />
+          <EntitySet Name="BillingMethod" EntityType="Self.BillingMethod" />
+          <EntitySet Name="CampusType" EntityType="Self.CampusType" />
+          <EntitySet Name="ChallanMethod" EntityType="Self.ChallanMethod" />
+          <EntitySet Name="ChallanType" EntityType="Self.ChallanType" />
+          <EntitySet Name="ChargingMethod" EntityType="Self.ChargingMethod" />
+          <EntitySet Name="City" EntityType="Self.City" />
+          <EntitySet Name="CoaCatagory" EntityType="Self.CoaCatagory" />
+          <EntitySet Name="CoaType" EntityType="Self.CoaType" />
+          <EntitySet Name="Country" EntityType="Self.Country" />
+          <EntitySet Name="DocType" EntityType="Self.DocType" />
+          <EntitySet Name="DocumentStatus" EntityType="Self.DocumentStatus" />
+          <EntitySet Name="EducationBoard" EntityType="Self.EducationBoard" />
+          <EntitySet Name="EnrollmentType" EntityType="Self.EnrollmentType" />
+          <EntitySet Name="ExportClass" EntityType="Self.ExportClass" />
+          <EntitySet Name="FeeCatagory" EntityType="Self.FeeCatagory" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" />
+          <EntitySet Name="MartialStatus" EntityType="Self.MartialStatus" />
+          <EntitySet Name="Occupation" EntityType="Self.Occupation" />
+          <EntitySet Name="OrganizationType" EntityType="Self.OrganizationType" />
+          <EntitySet Name="PolicyPeriod" EntityType="Self.PolicyPeriod" />
+          <EntitySet Name="RegistrationType" EntityType="Self.RegistrationType" />
+          <EntitySet Name="Relationship" EntityType="Self.Relationship" />
+          <EntitySet Name="Religion" EntityType="Self.Religion" />
+          <EntitySet Name="Right" EntityType="Self.Right" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="RollCallSystem" EntityType="Self.RollCallSystem" />
+          <EntitySet Name="StudyGroup" EntityType="Self.StudyGroup" />
+          <EntitySet Name="StudyLevel" EntityType="Self.StudyLevel" />
+          <EntitySet Name="URLType" EntityType="Self.URLType" />
+          <EntitySet Name="WHTaxPolicy" EntityType="Self.WHTaxPolicy" />
+          <EntitySet Name="WorkingShift" EntityType="Self.WorkingShift" />
+          <FunctionImport Name="fn_CodeSplitByCommaAsINT" IsComposable="true" ReturnType="Collection(SESModel.fn_CodeSplitByCommaAsINT_Result)">
+            <Parameter Name="psCSString" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="fn_CodeSplitByCommaAsUniqueIdentifier" IsComposable="true" ReturnType="Collection(SESModel.fn_CodeSplitByCommaAsUniqueIdentifier_Result)">
+            <Parameter Name="psCSString" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="fn_GetCommaSepratedValuesInList" IsComposable="true" ReturnType="Collection(SESModel.fn_GetCommaSepratedValuesInList_Result)">
+            <Parameter Name="psCSString" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="fn_GetGeneralBranchSettingForCampus" IsComposable="true" ReturnType="Collection(SESModel.fn_GetGeneralBranchSettingForCampus_Result)">
+            <Parameter Name="CampusId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BM_Branch_GetListByParam" ReturnType="Collection(SESModel.BM_Branch_GetListByParam_Result)">
+            <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
+            <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="SessionBranchId" Mode="In" Type="Int32" />
+            <Parameter Name="AllowedCampusIds" Mode="In" Type="String" />
+            <Parameter Name="SearchParameter" Mode="In" Type="String" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BM_Branch_GetListBySearch" ReturnType="Collection(SESModel.BM_Branch_GetListBySearch_Result)">
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="InputTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="InputText" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="BM_Branch_Upsert">
+            <Parameter Name="DB_OperationType" Mode="In" Type="String" />
+            <Parameter Name="GuID" Mode="In" Type="Guid" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="CampusTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="OrganizationTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="CountryId" Mode="In" Type="Int32" />
+            <Parameter Name="CityId" Mode="In" Type="Int32" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="ContactNo" Mode="In" Type="String" />
+            <Parameter Name="EmailAddress" Mode="In" Type="String" />
+            <Parameter Name="NTNNo" Mode="In" Type="String" />
+            <Parameter Name="Remarks" Mode="In" Type="String" />
+            <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="DocumentStatus" Mode="In" Type="Int32" />
+            <Parameter Name="DocType" Mode="In" Type="Int32" />
+            <Parameter Name="Status" Mode="In" Type="Boolean" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="Response" Mode="InOut" Type="Int32" />
+            <Parameter Name="CampusId" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BM_BranchSetting_Upsert">
+            <Parameter Name="DB_OperationType" Mode="In" Type="String" />
+            <Parameter Name="GuID" Mode="In" Type="Guid" />
+            <Parameter Name="CampusId" Mode="In" Type="Int32" />
+            <Parameter Name="RollCallSystemId" Mode="In" Type="Int32" />
+            <Parameter Name="BillingMethodId" Mode="In" Type="Int32" />
+            <Parameter Name="StudyLevelIds" Mode="In" Type="String" />
+            <Parameter Name="StudyGroupIds" Mode="In" Type="String" />
+            <Parameter Name="PolicyPeriodId" Mode="In" Type="Int32" />
+            <Parameter Name="ChallanMethodId" Mode="In" Type="Int32" />
+            <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="DocType" Mode="In" Type="Int32" />
+            <Parameter Name="DocumentStatus" Mode="In" Type="Int32" />
+            <Parameter Name="Status" Mode="In" Type="Boolean" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="Response" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CM_Company_GetDetailByParam" ReturnType="Collection(SESModel.CM_Company_GetDetailByParam_Result)">
+            <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="SearchParameter" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CM_Company_GetListByParam" ReturnType="Collection(SESModel.CM_Company_GetListByParam_Result)">
+            <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
+            <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="AllowedCampusIds" Mode="In" Type="String" />
+            <Parameter Name="SearchParameter" Mode="In" Type="String" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CM_Company_Upsert">
+            <Parameter Name="DB_OperationType" Mode="In" Type="String" />
+            <Parameter Name="GuID" Mode="In" Type="Guid" />
+            <Parameter Name="CompanyName" Mode="In" Type="String" />
+            <Parameter Name="CityId" Mode="In" Type="Int32" />
+            <Parameter Name="CountryId" Mode="In" Type="Int32" />
+            <Parameter Name="AddressLine" Mode="In" Type="String" />
+            <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+            <Parameter Name="EmailAddress" Mode="In" Type="String" />
+            <Parameter Name="CompanyWebsite" Mode="In" Type="String" />
+            <Parameter Name="UploadLogo" Mode="In" Type="String" />
+            <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="DocType" Mode="In" Type="Int32" />
+            <Parameter Name="DocumentStatus" Mode="In" Type="Int32" />
+            <Parameter Name="Status" Mode="In" Type="Boolean" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="Remarks" Mode="In" Type="String" />
+            <Parameter Name="Response" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LK_ChallanMethod_GetListByParam" ReturnType="Collection(SESModel.LK_ChallanMethod_GetListByParam_Result)">
+            <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LK_StudyGroup_GetListByParam" ReturnType="Collection(SESModel.LK_StudyGroup_GetListByParam_Result)">
+            <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="CampusId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LK_StudyLevel_GetListByParam" ReturnType="Collection(SESModel.LK_StudyLevel_GetListByParam_Result)">
+            <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="CampusId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LK_WHTaxPolicy_GetListByParam" ReturnType="Collection(SESModel.LK_WHTaxPolicy_GetListByParam_Result)">
+            <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="AccFeeStructureId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RSM_RightSetting_GetDetailByParam" ReturnType="Collection(SESModel.RSM_RightSetting_GetDetailByParam_Result)">
+            <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
+            <Parameter Name="AllowedCampusIds" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="URLTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="Status" Mode="In" Type="Boolean" />
+            <Parameter Name="Menu" Mode="In" Type="String" />
+            <Parameter Name="RightId" Mode="In" Type="Int32" />
+            <Parameter Name="RightPath" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UM_User_GetDetailByParam" ReturnType="Collection(SESModel.UM_User_GetDetailByParam_Result)">
+            <Parameter Name="ListCondition" Mode="In" Type="String" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="IsLogIn" Mode="In" Type="Boolean" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UM_User_GetListByParam" ReturnType="Collection(SESModel.UM_User_GetListByParam_Result)">
+            <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
+            <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="SearchParameter" Mode="In" Type="String" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UM_User_GetListBySearch" ReturnType="Collection(SESModel.UM_User_GetListBySearch_Result)">
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="InputTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="InputText" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UM_User_Upsert">
+            <Parameter Name="DB_OperationType" Mode="In" Type="String" />
+            <Parameter Name="GuID" Mode="In" Type="Guid" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="EmailAddress" Mode="In" Type="String" />
+            <Parameter Name="MobileNumber" Mode="In" Type="String" />
+            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="RoleId" Mode="In" Type="Int32" />
+            <Parameter Name="AllowedCampusIds" Mode="In" Type="String" />
+            <Parameter Name="IsLogIn" Mode="In" Type="Boolean" />
+            <Parameter Name="IsDeveloper" Mode="In" Type="Boolean" />
+            <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="DocType" Mode="In" Type="Int32" />
+            <Parameter Name="DocumentStatus" Mode="In" Type="Int32" />
+            <Parameter Name="Status" Mode="In" Type="Boolean" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="Remarks" Mode="In" Type="String" />
+            <Parameter Name="Response" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="BM_Branch_GetListByParam_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GuID" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="ExtraClass" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="BM_Branch_GetListBySearch_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GuID" Nullable="true" />
+          <Property Type="String" Name="Code" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="CampusType" Nullable="true" />
+          <Property Type="String" Name="OrganizationType" Nullable="true" />
+          <Property Type="String" Name="Country" Nullable="true" />
+          <Property Type="String" Name="City" Nullable="true" />
+          <Property Type="String" Name="Address" Nullable="true" />
+          <Property Type="String" Name="ContactNo" Nullable="true" />
+          <Property Type="String" Name="EmailAddress" Nullable="true" />
+          <Property Type="String" Name="NTNNo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CM_Company_GetDetailByParam_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GuID" Nullable="true" />
+          <Property Type="String" Name="CompanyName" Nullable="true" />
+          <Property Type="Int32" Name="CityId" Nullable="true" />
+          <Property Type="Int32" Name="CountryId" Nullable="true" />
+          <Property Type="String" Name="AddressLine" Nullable="true" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" />
+          <Property Type="String" Name="EmailAddress" Nullable="true" />
+          <Property Type="String" Name="CompanyWebsite" Nullable="true" />
+          <Property Type="String" Name="UploadLogo" Nullable="true" />
+          <Property Type="Boolean" Name="Status" Nullable="true" />
+          <Property Type="String" Name="CityName" Nullable="true" />
+          <Property Type="String" Name="CountryName" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="CM_Company_GetListByParam_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GuID" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="LK_ChallanMethod_GetListByParam_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="Int32" Name="MonthsNo" Nullable="true" />
+          <Property Type="Int32" Name="ChallanNo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="LK_StudyGroup_GetListByParam_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="LK_StudyLevel_GetListByParam_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="LK_WHTaxPolicy_GetListByParam_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="Decimal" Name="SlabAmount" Nullable="true" Precision="18" Scale="4" />
+          <Property Type="Decimal" Name="FixedCharges" Nullable="true" Precision="18" Scale="4" />
+          <Property Type="Decimal" Name="Percentage" Nullable="true" Precision="18" Scale="4" />
+          <Property Type="Boolean" Name="IsOnExceedingAmount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="RSM_RightSetting_GetDetailByParam_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="FormName" Nullable="true" />
+          <Property Type="String" Name="DisplayName" Nullable="true" />
+          <Property Type="Boolean" Name="IsDisplayAllowed" Nullable="true" />
+          <Property Type="Boolean" Name="Status" Nullable="true" />
+          <Property Type="String" Name="Menu" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="DB_OperationType" Nullable="true" />
+          <Property Type="Int32" Name="URLTypeId" Nullable="true" />
+          <Property Type="String" Name="SubMenu" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UM_User_GetDetailByParam_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" />
+          <Property Type="String" Name="Password" Nullable="true" />
+          <Property Type="String" Name="EmailAddress" Nullable="true" />
+          <Property Type="String" Name="MobileNumber" Nullable="true" />
+          <Property Type="Int32" Name="RoleId" Nullable="true" />
+          <Property Type="Boolean" Name="IsLogIn" Nullable="true" />
+          <Property Type="String" Name="AllowedCampusIds" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="UpdatedOn" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="UpdatedBy" Nullable="true" />
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
+          <Property Type="Boolean" Name="IsDeveloper" Nullable="true" />
+          <Property Type="Int32" Name="EmployeeId" Nullable="true" />
+          <Property Type="Int32" Name="BranchId" Nullable="true" />
+          <Property Type="String" Name="RoleName" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UM_User_GetListByParam_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GuID" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UM_User_GetListBySearch_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GuID" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" />
+          <Property Type="String" Name="Password" Nullable="true" />
+          <Property Type="String" Name="EmailAddress" Nullable="true" />
+          <Property Type="String" Name="MobileNumber" Nullable="true" />
+          <Property Type="Int32" Name="EmployeeId" Nullable="true" />
+          <Property Type="Int32" Name="RoleId" Nullable="true" />
+          <Property Type="String" Name="AllowedCampusIds" Nullable="true" />
+          <Property Type="Boolean" Name="IsLogIn" Nullable="true" />
+          <Property Type="Boolean" Name="IsDeveloper" Nullable="true" />
+          <Property Type="Int32" Name="DocumentStatus" Nullable="true" />
+          <Property Type="String" Name="Branch" Nullable="false" />
+          <Property Type="String" Name="Company" Nullable="true" />
+          <Property Type="String" Name="Remarks" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SESModelStoreContainer" CdmEntityContainer="SESEntities">
+          <EntitySetMapping Name="BM_Branch">
+            <EntityTypeMapping TypeName="SESModel.BM_Branch">
+              <MappingFragment StoreEntitySet="BM_Branch">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CampusTypeId" ColumnName="CampusTypeId" />
+                <ScalarProperty Name="OrganizationTypeId" ColumnName="OrganizationTypeId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="NTNNo" ColumnName="NTNNo" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="DocType" ColumnName="DocType" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BM_BranchSetting">
+            <EntityTypeMapping TypeName="SESModel.BM_BranchSetting">
+              <MappingFragment StoreEntitySet="BM_BranchSetting">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="CampusId" ColumnName="CampusId" />
+                <ScalarProperty Name="RollCallSystemId" ColumnName="RollCallSystemId" />
+                <ScalarProperty Name="BillingMethodId" ColumnName="BillingMethodId" />
+                <ScalarProperty Name="StudyLevelIds" ColumnName="StudyLevelIds" />
+                <ScalarProperty Name="StudyGroupIds" ColumnName="StudyGroupIds" />
+                <ScalarProperty Name="PolicyPeriodId" ColumnName="PolicyPeriodId" />
+                <ScalarProperty Name="ChallanMethodId" ColumnName="ChallanMethodId" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="DocType" ColumnName="DocType" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CM_Company">
+            <EntityTypeMapping TypeName="SESModel.CM_Company">
+              <MappingFragment StoreEntitySet="CM_Company">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="AddressLine" ColumnName="AddressLine" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="CompanyWebsite" ColumnName="CompanyWebsite" />
+                <ScalarProperty Name="UploadLogo" ColumnName="UploadLogo" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="DocType" ColumnName="DocType" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RSM_RightSetting">
+            <EntityTypeMapping TypeName="SESModel.RSM_RightSetting">
+              <MappingFragment StoreEntitySet="RSM_RightSetting">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="RightId" ColumnName="RightId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="URLTypeId" ColumnName="URLTypeId" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="DocType" ColumnName="DocType" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UM_User">
+            <EntityTypeMapping TypeName="SESModel.UM_User">
+              <MappingFragment StoreEntitySet="UM_User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="AllowedCampusIds" ColumnName="AllowedCampusIds" />
+                <ScalarProperty Name="IsLogIn" ColumnName="IsLogIn" />
+                <ScalarProperty Name="IsDeveloper" ColumnName="IsDeveloper" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="DocType" ColumnName="DocType" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="URM_UserRight">
+            <EntityTypeMapping TypeName="SESModel.URM_UserRight">
+              <MappingFragment StoreEntitySet="URM_UserRight">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RightId" ColumnName="RightId" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="DocType" ColumnName="DocType" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdmissionCatagory">
+            <EntityTypeMapping TypeName="SESModel.AdmissionCatagory">
+              <MappingFragment StoreEntitySet="AdmissionCatagory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BillingMethod">
+            <EntityTypeMapping TypeName="SESModel.BillingMethod">
+              <MappingFragment StoreEntitySet="BillingMethod">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CampusType">
+            <EntityTypeMapping TypeName="SESModel.CampusType">
+              <MappingFragment StoreEntitySet="CampusType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChallanMethod">
+            <EntityTypeMapping TypeName="SESModel.ChallanMethod">
+              <MappingFragment StoreEntitySet="ChallanMethod">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ChallanNo" ColumnName="ChallanNo" />
+                <ScalarProperty Name="MonthsNo" ColumnName="MonthsNo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChallanType">
+            <EntityTypeMapping TypeName="SESModel.ChallanType">
+              <MappingFragment StoreEntitySet="ChallanType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DB_IF_Condition" ColumnName="DB_IF_Condition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChargingMethod">
+            <EntityTypeMapping TypeName="SESModel.ChargingMethod">
+              <MappingFragment StoreEntitySet="ChargingMethod">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="City">
+            <EntityTypeMapping TypeName="SESModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoaCatagory">
+            <EntityTypeMapping TypeName="SESModel.CoaCatagory">
+              <MappingFragment StoreEntitySet="CoaCatagory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ShortCode" ColumnName="ShortCode" />
+                <ScalarProperty Name="CoaTypeId" ColumnName="CoaTypeId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoaType">
+            <EntityTypeMapping TypeName="SESModel.CoaType">
+              <MappingFragment StoreEntitySet="CoaType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ShortCode" ColumnName="ShortCode" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Country">
+            <EntityTypeMapping TypeName="SESModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="CallingCode" ColumnName="CallingCode" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocType">
+            <EntityTypeMapping TypeName="SESModel.DocType">
+              <MappingFragment StoreEntitySet="DocType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentStatus">
+            <EntityTypeMapping TypeName="SESModel.DocumentStatus">
+              <MappingFragment StoreEntitySet="DocumentStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EducationBoard">
+            <EntityTypeMapping TypeName="SESModel.EducationBoard">
+              <MappingFragment StoreEntitySet="EducationBoard">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EnrollmentType">
+            <EntityTypeMapping TypeName="SESModel.EnrollmentType">
+              <MappingFragment StoreEntitySet="EnrollmentType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExportClass">
+            <EntityTypeMapping TypeName="SESModel.ExportClass">
+              <MappingFragment StoreEntitySet="ExportClass">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FeeCatagory">
+            <EntityTypeMapping TypeName="SESModel.FeeCatagory">
+              <MappingFragment StoreEntitySet="FeeCatagory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gender">
+            <EntityTypeMapping TypeName="SESModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MartialStatus">
+            <EntityTypeMapping TypeName="SESModel.MartialStatus">
+              <MappingFragment StoreEntitySet="MartialStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Occupation">
+            <EntityTypeMapping TypeName="SESModel.Occupation">
+              <MappingFragment StoreEntitySet="Occupation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrganizationType">
+            <EntityTypeMapping TypeName="SESModel.OrganizationType">
+              <MappingFragment StoreEntitySet="OrganizationType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PolicyPeriod">
+            <EntityTypeMapping TypeName="SESModel.PolicyPeriod">
+              <MappingFragment StoreEntitySet="PolicyPeriod">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="MonthNo" ColumnName="MonthNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegistrationType">
+            <EntityTypeMapping TypeName="SESModel.RegistrationType">
+              <MappingFragment StoreEntitySet="RegistrationType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Relationship">
+            <EntityTypeMapping TypeName="SESModel.Relationship">
+              <MappingFragment StoreEntitySet="Relationship">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Religion">
+            <EntityTypeMapping TypeName="SESModel.Religion">
+              <MappingFragment StoreEntitySet="Religion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Right">
+            <EntityTypeMapping TypeName="SESModel.Right">
+              <MappingFragment StoreEntitySet="Right">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FormName" ColumnName="FormName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IsDisplayAllowed" ColumnName="IsDisplayAllowed" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Menu" ColumnName="Menu" />
+                <ScalarProperty Name="RoleIds" ColumnName="RoleIds" />
+                <ScalarProperty Name="SubMenu" ColumnName="SubMenu" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="SESModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RollCallSystem">
+            <EntityTypeMapping TypeName="SESModel.RollCallSystem">
+              <MappingFragment StoreEntitySet="RollCallSystem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudyGroup">
+            <EntityTypeMapping TypeName="SESModel.StudyGroup">
+              <MappingFragment StoreEntitySet="StudyGroup">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudyLevel">
+            <EntityTypeMapping TypeName="SESModel.StudyLevel">
+              <MappingFragment StoreEntitySet="StudyLevel">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="URLType">
+            <EntityTypeMapping TypeName="SESModel.URLType">
+              <MappingFragment StoreEntitySet="URLType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WHTaxPolicy">
+            <EntityTypeMapping TypeName="SESModel.WHTaxPolicy">
+              <MappingFragment StoreEntitySet="WHTaxPolicy">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="SlabAmount" ColumnName="SlabAmount" />
+                <ScalarProperty Name="FixedCharges" ColumnName="FixedCharges" />
+                <ScalarProperty Name="IsOnExceedingAmount" ColumnName="IsOnExceedingAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkingShift">
+            <EntityTypeMapping TypeName="SESModel.WorkingShift">
+              <MappingFragment StoreEntitySet="WorkingShift">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="SESModel.Store.fn_CodeSplitByCommaAsINT" FunctionImportName="fn_CodeSplitByCommaAsINT">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SESModel.fn_CodeSplitByCommaAsINT_Result">
+                <ScalarProperty Name="sID" ColumnName="sID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="SESModel.Store.fn_CodeSplitByCommaAsUniqueIdentifier" FunctionImportName="fn_CodeSplitByCommaAsUniqueIdentifier">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SESModel.fn_CodeSplitByCommaAsUniqueIdentifier_Result">
+                <ScalarProperty Name="sID" ColumnName="sID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="SESModel.Store.fn_GetCommaSepratedValuesInList" FunctionImportName="fn_GetCommaSepratedValuesInList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SESModel.fn_GetCommaSepratedValuesInList_Result">
+                <ScalarProperty Name="sID" ColumnName="sID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="SESModel.Store.fn_GetGeneralBranchSettingForCampus" FunctionImportName="fn_GetGeneralBranchSettingForCampus">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SESModel.fn_GetGeneralBranchSettingForCampus_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="RollCallSystem" ColumnName="RollCallSystem" />
+                <ScalarProperty Name="BillingMethod" ColumnName="BillingMethod" />
+                <ScalarProperty Name="PolicyPeriod" ColumnName="PolicyPeriod" />
+                <ScalarProperty Name="ChallanMethod" ColumnName="ChallanMethod" />
+                <ScalarProperty Name="AllowedChallanNo" ColumnName="AllowedChallanNo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BM_Branch_GetListByParam" FunctionName="SESModel.Store.BM_Branch_GetListByParam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SESModel.BM_Branch_GetListByParam_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ExtraClass" ColumnName="ExtraClass" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BM_Branch_GetListBySearch" FunctionName="SESModel.Store.BM_Branch_GetListBySearch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SESModel.BM_Branch_GetListBySearch_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CampusType" ColumnName="CampusType" />
+                <ScalarProperty Name="OrganizationType" ColumnName="OrganizationType" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="NTNNo" ColumnName="NTNNo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BM_Branch_Upsert" FunctionName="SESModel.Store.BM_Branch_Upsert" />
+          <FunctionImportMapping FunctionImportName="BM_BranchSetting_Upsert" FunctionName="SESModel.Store.BM_BranchSetting_Upsert" />
+          <FunctionImportMapping FunctionImportName="CM_Company_GetDetailByParam" FunctionName="SESModel.Store.CM_Company_GetDetailByParam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SESModel.CM_Company_GetDetailByParam_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="AddressLine" ColumnName="AddressLine" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="CompanyWebsite" ColumnName="CompanyWebsite" />
+                <ScalarProperty Name="UploadLogo" ColumnName="UploadLogo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CM_Company_GetListByParam" FunctionName="SESModel.Store.CM_Company_GetListByParam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SESModel.CM_Company_GetListByParam_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CM_Company_Upsert" FunctionName="SESModel.Store.CM_Company_Upsert" />
+          <FunctionImportMapping FunctionImportName="LK_ChallanMethod_GetListByParam" FunctionName="SESModel.Store.LK_ChallanMethod_GetListByParam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SESModel.LK_ChallanMethod_GetListByParam_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="MonthsNo" ColumnName="MonthsNo" />
+                <ScalarProperty Name="ChallanNo" ColumnName="ChallanNo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LK_StudyGroup_GetListByParam" FunctionName="SESModel.Store.LK_StudyGroup_GetListByParam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SESModel.LK_StudyGroup_GetListByParam_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LK_StudyLevel_GetListByParam" FunctionName="SESModel.Store.LK_StudyLevel_GetListByParam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SESModel.LK_StudyLevel_GetListByParam_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LK_WHTaxPolicy_GetListByParam" FunctionName="SESModel.Store.LK_WHTaxPolicy_GetListByParam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SESModel.LK_WHTaxPolicy_GetListByParam_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SlabAmount" ColumnName="SlabAmount" />
+                <ScalarProperty Name="FixedCharges" ColumnName="FixedCharges" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="IsOnExceedingAmount" ColumnName="IsOnExceedingAmount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RSM_RightSetting_GetDetailByParam" FunctionName="SESModel.Store.RSM_RightSetting_GetDetailByParam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SESModel.RSM_RightSetting_GetDetailByParam_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FormName" ColumnName="FormName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IsDisplayAllowed" ColumnName="IsDisplayAllowed" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Menu" ColumnName="Menu" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DB_OperationType" ColumnName="DB_OperationType" />
+                <ScalarProperty Name="URLTypeId" ColumnName="URLTypeId" />
+                <ScalarProperty Name="SubMenu" ColumnName="SubMenu" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UM_User_GetDetailByParam" FunctionName="SESModel.Store.UM_User_GetDetailByParam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SESModel.UM_User_GetDetailByParam_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="IsLogIn" ColumnName="IsLogIn" />
+                <ScalarProperty Name="AllowedCampusIds" ColumnName="AllowedCampusIds" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="IsDeveloper" ColumnName="IsDeveloper" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UM_User_GetListByParam" FunctionName="SESModel.Store.UM_User_GetListByParam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SESModel.UM_User_GetListByParam_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UM_User_GetListBySearch" FunctionName="SESModel.Store.UM_User_GetListBySearch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SESModel.UM_User_GetListBySearch_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="AllowedCampusIds" ColumnName="AllowedCampusIds" />
+                <ScalarProperty Name="IsLogIn" ColumnName="IsLogIn" />
+                <ScalarProperty Name="IsDeveloper" ColumnName="IsDeveloper" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
+                <ScalarProperty Name="Branch" ColumnName="Branch" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UM_User_Upsert" FunctionName="SESModel.Store.UM_User_Upsert" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

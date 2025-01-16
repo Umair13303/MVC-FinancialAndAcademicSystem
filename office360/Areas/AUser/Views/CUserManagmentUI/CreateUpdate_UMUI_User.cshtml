@@ -1,0 +1,197 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="statbox widget box box-shadow">
+        <div class="widget-header">
+            <div class="row">
+                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                    <h4>@ViewBag.Title</h4>
+                </div>
+            </div>
+            <nav class="breadcrumb-one" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">User</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Managment</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><span>@ViewBag.Title</span></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <form>
+        @if (ViewBag.DB_OperationType == nameof(office360.Models.General.DBListCondition.DB_OperationType.UPDATE_DATA_INTO_DB))
+        {
+
+            <div class="card" style="margin-top:1%;width:100%">
+                <div class="card-body">
+
+                    <div class="row mb-0">
+                        <div class="col-sm-12 col-md-8">
+                            <div class="form-group">
+                                @Html.Label("User ( For Edit )", new { @class = "col-form-label", @for = "DropDownListUser" })
+                                @Html.DropDownList("DropDownListUser", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListUser" })
+                                <button type="button" class="btn btn-info" id="ButtonSubmitGetInfoForEdit">
+                                    <i class="fa fa-sync-alt"></i> Load Information
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="card" style="margin-top:1%;width:100%">
+            <div class="card-body">
+                <h3 style="font-family: 'Bahnschrift'; font-weight: bolder; color: navy">User Detail</h3>
+                <div class="row mb-0">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Name", new { @class = "col-form-label", @for = "TextBoxName" })
+                            @Html.TextBox("TextBoxName", null, new { @class = "form-control", placeholder = "Please Enter Name Here!", @id = "TextBoxName" })
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("User Name", new { @class = "col-form-label", @for = "TextBoxUserName" })
+                            @Html.TextBox("TextBoxUserName", null, new { @class = "form-control", placeholder = "Please Enter Name Here!", @id = "TextBoxUserName" })
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Password", new { @class = "col-form-label", @for = "TextBoxPassword" })
+                            @Html.TextBox("TextBoxPassword", null, new { @class = "form-control Password", placeholder = "Please Enter Password Here!", @id = "TextBoxPassword" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" style="margin-top:1%;width:100%">
+            <div class="card-body">
+                <h3 style="font-family: 'Bahnschrift'; font-weight: bolder; color: navy">Recovery Detail</h3>
+                <div class="row mb-0">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Email", new { @class = "col-form-label", @for = "TextBoxEmailAddress" })
+                            @Html.TextBox("TextBoxEmailAddress", null, new { @class = "form-control EmailAddress", placeholder = "Please Enter Email Here!", @id = "TextBoxEmailAddress" })
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Mobile Number", new { @class = "col-form-label", @for = "TextBoxMobileNumber" })
+                            @Html.TextBox("TextBoxMobileNumber", null, new { @class = "form-control MobileNumber", placeholder = "Please Enter Mobile Number Here!", @id = "TextBoxMobileNumber" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top:1%;width:100%">
+            <div class="card-body">
+                <h3 style="font-family: 'Bahnschrift'; font-weight: bolder; color: navy">User Setting</h3>
+                <div class="row mb-0">
+
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Company", new { @class = "col-form-label", @for = "DropDownListCompany" })
+                            @Html.DropDownList("DropDownListCompany", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListCompany" })
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Allowed Campus", new { @class = "col-form-label", @for = "DropDownListAllowedCampus" })
+                            @Html.DropDownList("DropDownListAllowedCampus", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListAllowedCampus" })
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Branch", new { @class = "col-form-label", @for = "DropDownListBranch" })
+                            @Html.DropDownList("DropDownListBranch", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListBranch" })
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Employee", new { @class = "col-form-label", @for = "DropDownListEmployee" })
+                            @Html.DropDownList("DropDownListEmployee", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListEmployee" })
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Role", new { @class = "col-form-label", @for = "DropDownListRole" })
+                            @Html.DropDownList("DropDownListRole", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListRole" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-0">
+                    <div class="col-sm-12 col-md-3">
+                        <div class="form-group">
+                            @Html.Label("Is LogIn", new { @class = "col-form-label", @for = "CheckBoxIsLogIn" })
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <div class="n-chk align-self-end">
+                                            <label class="new-control new-checkbox checkbox-danger" style="height: 21px; margin-bottom: 0; margin-right: 0">
+                                                @Html.CheckBox("CheckBoxIsLogIn", false, new { @class = "new-control-input CheckBox", @id = "CheckBoxIsLogIn" })
+                                                <span class="new-control-indicator"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                        <div class="form-group">
+                            @Html.Label("Is Developer", new { @class = "col-form-label", @for = "CheckBoxIsDeveloper" })
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <div class="n-chk align-self-end">
+                                            <label class="new-control new-checkbox checkbox-danger" style="height: 21px; margin-bottom: 0; margin-right: 0">
+                                                @Html.CheckBox("CheckBoxIsDeveloper", false, new { @class = "new-control-input CheckBox", @id = "CheckBoxIsDeveloper" })
+                                                <span class="new-control-indicator"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-0">
+
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Remarks", new { @class = "col-form-label", @for = "TextBoxRemarks" })
+                            @Html.TextBox("TextBoxRemarks", null, new { @class = "form-control", placeholder = "Please Enter Remarks Here!", @id = "TextBoxRemarks" })
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        @Html.TextBox("HiddenFieldUserGuID", null, new { @class = "form-control", Value = ViewBag.UserGuID, hidden = true, @id = "HiddenFieldUserGuID" })
+        @Html.TextBox("HiddenFieldDB_OperationType", null, new { @class = "form-control", Value = ViewBag.DB_OperationType, hidden = true, @id = "HiddenFieldDB_OperationType" })
+
+    </form>
+    <div class="card-footer">
+        <div class="col-sm-12 form-group">
+            <div class="card-heading" id="DivButtonSubmitDown" style="display:none">
+                <input type="button" class="btn btn-info" id="ButtonSubmitDown" value="Sumbit" />
+                <i class="fa fa-arrow-up"></i>
+            </div>
+            <div class="card-heading" id="DivButtonUpdateDown" style="display:none">
+                <input type="button" class="btn btn-warning" id="ButtonUpdateDown" value="Update" />
+                <i class="fa fa-arrow-up"></i>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Areas/AUser/Script/CUserManagmentUI_Script/CreateUpdate_UMUI_User.js"></script>
