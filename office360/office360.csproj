@@ -1954,6 +1954,8 @@
     <Content Include="Areas\AUser\Views\web.config" />
     <Content Include="Areas\AUser\Views\CUserManagmentUI\CreateUpdate_UMUI_User.cshtml" />
     <Content Include="Areas\AUser\Views\CUserManagmentUI\View_List_UMUI_User.cshtml" />
+    <Content Include="DB_BackUp\SESFINAL BACKUP.bak" />
+    <Content Include="DB_BackUp\XLookUp BACKUP.bak" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>
