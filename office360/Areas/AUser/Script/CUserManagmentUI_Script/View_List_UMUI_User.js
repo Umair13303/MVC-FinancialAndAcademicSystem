@@ -21,7 +21,7 @@ function InitDataTable() {
                 { extend: 'copy', className: 'btn' },
                 { extend: 'csv', className: 'btn' },
                 { extend: 'excel', className: 'btn' },
-                { extend: 'print', className: 'btn' }
+                { extend: 'print', className: 'btn' },
             ]
         },
         "oLanguage": {
@@ -37,9 +37,11 @@ function InitDataTable() {
         "responsive": true,
         "ordering": true,
         "processing": true,
+        "lengthMenu": [5,10, 25, 50, 75, 100],
         "columns": [
             { "data": null, "title": "#" },
             { "data": "Branch", "title": "Branch" },
+            { "data": "Company", "title": "Company" },
             { "data": "Name", "title": "Name" },
             { "data": "UserName", "title": "User Name" },
             { "data": "EmailAddress", "title": "Email" },
@@ -55,24 +57,11 @@ function InitDataTable() {
         ],
         columnDefs: [
             { visible: false, targets: 6 },
-            { "orderable": false, targets: [0, 1, 2, 3, 4, 5, 6] },
+            { "orderable": false, targets: [0, 1, 2, 3, 4, 5, 6,7,8] },
         ],
         order: [[ParentGroupColumn, 'asc']],
-        //displayLength: 10,
         drawCallback: function (settings) {
-            var api = this.api();
-            var rows = api.rows({ page: 'current' }).nodes();
-            //LAST GROUPING VARIABLES
-            var LastBranch = null;
-
-            rows.each(function (row, index) {
-                var data = table.row(row).data();
-                var Branch = data["Branch"];
-                if (Branch !== LastBranch) {
-                    $(row).before('<tr class="group"><td colspan="11" style="background-color: lightseagreen; color: white;"><b>Campus: ' + Branch + '</b></td></tr>');
-                    LastBranch = Branch;
-                }
-            });
+            DT_GroupBy(this, settings, '#MainTableUM_User', ['Company', 'Branch']);
         }
 
     });

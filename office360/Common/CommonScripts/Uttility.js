@@ -105,133 +105,72 @@ function GetStatus(Status) {
     var Badge = ""; // Initialize Badge variable to an empty string
     switch (Status) {
         case 1:
-            BadgeColor = "primary";
-            Display = "Working/Active Branch";
+            BadgeColor = "primary"; // Bootstrap badge color
+            Display = "Active Company";
             break;
-
         case 2:
-            BadgeColor = "secondary";
-            Display = "Non-Working/InActive Branch";
+            BadgeColor = "secondary"; // Bootstrap badge color
+            Display = "Inactive Company";
             break;
-
         case 3:
-            BadgeColor = "success";
-            Display = "Active Class/Degree/Program";
+            BadgeColor = "danger"; // Bootstrap badge color
+            Display = "Deleted Company";
             break;
-
         case 4:
-            BadgeColor = "danger";
-            Display = "InActive Class/Degree/Program";
+            BadgeColor = "primary"; // Bootstrap badge color
+            Display = "Active User";
             break;
-
         case 5:
-            BadgeColor = "info";
-            Display = "Admission Open";
+            BadgeColor = "secondary"; // Bootstrap badge color
+            Display = "Inactive User";
             break;
-
         case 6:
-            BadgeColor = "dark";
-            Display = "Admission Closed";
+            BadgeColor = "danger"; // Bootstrap badge color
+            Display = "Deleted User";
             break;
-
         case 7:
-            BadgeColor = "warning";
-            Display = "Admission Canceled";
+            BadgeColor = "primary"; // Bootstrap badge color
+            Display = "Active Right Setting";
             break;
-
         case 8:
-            BadgeColor = "success";
-            Display = "Student Currently Present In Institute";
+            BadgeColor = "secondary"; // Bootstrap badge color
+            Display = "Inactive Right Setting";
             break;
-
         case 9:
-            BadgeColor = "danger";
-            Display = "Student Left The Institute";
+            BadgeColor = "primary"; // Bootstrap badge color
+            Display = "Active User Right";
             break;
-
         case 10:
-            BadgeColor = "primary";
-            Display = "New Admission";
+            BadgeColor = "secondary"; // Bootstrap badge color
+            Display = "Inactive User Right";
             break;
-
         case 11:
-            BadgeColor = "info";
-            Display = "Existing Admission (Promoted To Class)";
+            BadgeColor = "primary"; // Bootstrap badge color
+            Display = "Active Branch";
             break;
-
         case 12:
-            BadgeColor = "warning";
-            Display = "Existing Admission (Demoted To Class)";
+            BadgeColor = "secondary"; // Bootstrap badge color
+            Display = "Inactive Branch";
             break;
-
         case 13:
-            BadgeColor = "danger";
-            Display = "Left Class";
+            BadgeColor = "danger"; // Bootstrap badge color
+            Display = "Deleted Branch";
             break;
-
         case 14:
-            BadgeColor = "success";
-            Display = "Active Fee Structure/Fee For Degree";
-            break;
-
-        case 15:
-            BadgeColor = "danger";
-            Display = "InActive Fee Structure/Fee For Degree";
-            break;
-
-        case 16:
-            BadgeColor = "info";
-            Display = "Un Paid Fee Challan";
-            break;
-
-        case 17:
-            BadgeColor = "secondary";
-            Display = "Cancelled Fee Challan";
-            break;
-
-        case 18:
-            BadgeColor = "warning";
-            Display = "Revised Fee Challan";
-            break;
-
-        case 19:
-            BadgeColor = "success";
-            Display = "Paid Fee Challan";
-            break;
-
-        case 20:
-            BadgeColor = "success";
-            Display = "Active Fee Type";
-            break;
-
-        case 21:
-            BadgeColor = "danger";
-            Display = "In Active Fee Type";
-            break;
-
-        case 22:
-            BadgeColor = "primary";
+            BadgeColor = "primary"; // Bootstrap badge color
             Display = "Active Branch Setting";
             break;
-
-        case 23:
-            BadgeColor = "success";
-            Display = "Active Discount Type";
+        case 15:
+            BadgeColor = "secondary"; // Bootstrap badge color
+            Display = "Inactive Branch Setting";
             break;
-
-        case 24:
-            BadgeColor = "danger";
-            Display = "InActive Discount Type";
+        case 16:
+            BadgeColor = "warning"; // Bootstrap badge color
+            Display = "Expired Branch Setting";
             break;
-
-        case 25:
-            BadgeColor = "success";
-            Display = "Active Chart of Account";
-            break;
-
-        case 26:
-            BadgeColor = "danger";
-            Display = "In Active Chart of Account";
+        default:
+            BadgeColor = "light"; // Default badge color
+            Display = "Unknown Status";
             break;
     }
     var Label = '<td> <span class="badge badge-' + BadgeColor + '">' + Display + '</span></td>';
@@ -259,7 +198,7 @@ function GetTextBox(Id) {
 
     return inputElement; // Return the inputElement, not DatePicker
 }
-function calculateSumOfColumn(TableId, ColumnIndex) {
+function DT_CaculateColumn(TableId, ColumnIndex) {
     var TotalSum = 0;
     $('#' + TableId + ' tbody tr').each(function () {
         var value = $(this).find('td').eq(ColumnIndex).find('input').val();
@@ -267,9 +206,8 @@ function calculateSumOfColumn(TableId, ColumnIndex) {
     });
     return TotalSum;
 }
-var sum = calculateSumOfColumn('myTable', 5);
-console.log(sum);
-function PopulateDTGroupByList(DataTableId, ListCondition, HTMLAttribute) {
+
+function DT_DropDownList(DataTableId, ListCondition, HTMLAttribute) {
     var Table = $('#' + DataTableId).DataTable();
     var DATA = [];
 
@@ -294,7 +232,7 @@ function PopulateDTGroupByList(DataTableId, ListCondition, HTMLAttribute) {
         });
     }
 }
-function AppendTableFooterTotals(TableId, ColumnSpan, TableDivId, Header) {
+function DT_CalculationFooter(TableId, ColumnSpan, TableDivId, Header) {
     return new Promise((resolve) => {
         $('#' + TableId).append(
             '<tfoot disabled="disabled">' +
@@ -309,7 +247,7 @@ function AppendTableFooterTotals(TableId, ColumnSpan, TableDivId, Header) {
         resolve();
     });
 }
-function addDataTableFooter(table, columnSpan, footerId, headerText, orderId) {
+function DT_CalculationFooter_New(table, columnSpan, footerId, headerText, orderId) {
     return new Promise((resolve) => {
         let footer = $('#' + table.table().container().id + ' tfoot');
 
@@ -339,6 +277,51 @@ function addDataTableFooter(table, columnSpan, footerId, headerText, orderId) {
 }
 
 
+
+function DT_GroupBy(TableAPI, Rows, TableId, ColumnNames, options = {}) {
+    var LastGroupValues = new Array(ColumnNames.length).fill(null);
+    var api = TableAPI.api();
+    var rows = api.rows({ page: 'current' }).nodes();
+    var columnCount = $(TableId).find('thead th').length;
+
+    rows.each(function (row, index) {
+        var data = api.row(row).data();
+        var groupKey = ColumnNames.map(function (col) {
+            return data[col];
+        });
+
+        var groupChanged = groupKey.some(function (value, idx) {
+            return value !== LastGroupValues[idx];
+        });
+
+        if (groupChanged) {
+            var groupRows = '';
+            ColumnNames.forEach(function (col, idx) {
+                var groupStyles = getColorForSequence(idx);
+                var indent = idx === 0 ? '' : 'padding-left: 20px;';
+                groupRows += `<tr class="${idx === 0 ? 'group' : 'subgroup'}">
+                    <td colspan="${columnCount}" style="background-color: ${groupStyles.backgroundColor}; color: ${groupStyles.color}; border-color: ${groupStyles.borderColor}; ${indent}">
+                        <b>${col}: </b>${groupKey[idx]}
+                    </td>
+                </tr>`;
+            });
+
+            $(row).before(groupRows);
+            LastGroupValues = groupKey;
+        }
+    });
+    function getColorForSequence(index) {
+        const colors = [
+            { backgroundColor: '#003366', color: '#FFFFFF', borderColor: '#F7DC6F' }, // Soft Yellow
+            { backgroundColor: '#ADD8E6', color: '#000000', borderColor: '#48C9B0' }, // Soft Teal
+            { backgroundColor: '#FAD7A0', color: '#000000', borderColor: '#F39C12' }, // Soft Peach
+
+            // Add more color sets here for additional columns
+        ];
+
+        return colors[index] || { backgroundColor: '#BDC3C7', color: '#2C3E50', borderColor: '#95A5A6' }; // Default color
+    }
+}
 
 
 

@@ -302,6 +302,7 @@
     <Compile Include="Areas\ACompany\HelperCode\Document_Detail_By_GUID_LINQ.cs" />
     <Compile Include="Areas\ACompany\HelperCode\Document_Detail_By_Id_DBO_FN.cs" />
     <Compile Include="Areas\AUser\AUserAreaRegistration.cs" />
+    <Compile Include="Areas\AUser\Controllers\CRightSettingManagmentUIController.cs" />
     <Compile Include="Areas\AUser\Controllers\CUserManagmentUIController.cs" />
     <Compile Include="Areas\AUser\HelperCode\CUD_Operation.cs" />
     <Compile Include="Areas\AUser\HelperCode\DATA_FROM_LINQ.cs" />
@@ -521,6 +522,7 @@
     <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\CreateUpdate_CBMUI_Branch.js" />
     <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\View_List_CBMUI_Branch.js" />
     <Content Include="Areas\ACompany\Script\CCompanyManagmentUI_Script\CreateUpdate_CMUI_Company.js" />
+    <Content Include="Areas\AUser\Script\CRightSettingManagmentUI_Script\CreateUpdate_RSMUI_RightSetting.js" />
     <Content Include="Areas\AUser\Script\CUserManagmentUI_Script\CreateUpdate_UMUI_User.js" />
     <Content Include="Areas\AUser\Script\CUserManagmentUI_Script\View_List_UMUI_User.js" />
     <Content Include="bin\Antlr3.Runtime.dll" />
@@ -1956,6 +1958,7 @@
     <Content Include="Areas\AUser\Views\CUserManagmentUI\View_List_UMUI_User.cshtml" />
     <Content Include="DB_BackUp\SESFINAL BACKUP.bak" />
     <Content Include="DB_BackUp\XLookUp BACKUP.bak" />
+    <Content Include="Areas\AUser\Views\CRightSettingManagmentUI\CreateUpdate_RSMUI_RightSetting.cshtml" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>
