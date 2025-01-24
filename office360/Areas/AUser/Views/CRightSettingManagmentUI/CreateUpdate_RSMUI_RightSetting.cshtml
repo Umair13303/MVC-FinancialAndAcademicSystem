@@ -49,8 +49,8 @@
                 <div class="row mb-0">
                     <div class="col-sm-12 col-md-4">
                         <div class="form-group">
-                            @Html.Label("Right", new { @class = "col-form-label", @for = "DropDownListRight" })
-                            @Html.DropDownList("DropDownListRight", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListRight" })
+                            @Html.Label("Right Setting", new { @class = "col-form-label", @for = "DropDownListRightSetting" })
+                            @Html.DropDownList("DropDownListRightSetting", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListRightSetting" })
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                             @Html.DropDownList("DropDownListURLType", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListURLType" })
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-3">
+                    <div class="col-sm-12 col-md-5">
                         <div class="form-group">
                             @Html.Label("Company", new { @class = "col-form-label", @for = "DropDownListCompany" })
                             @Html.DropDownList("DropDownListCompany", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListCompany" })
@@ -98,10 +98,23 @@
 
             </div>
         </div>
-        @Html.TextBox("HiddenFieldRightSettingGuID", null, new { @class = "form-control", Value = ViewBag.UserGuID, hidden = true, @id = "HiddenFieldRightSettingGuID" })
+        @Html.TextBox("HiddenFieldRightSettingGuID", null, new { @class = "form-control", Value = ViewBag.RightSettingGuID, hidden = true, @id = "HiddenFieldRightSettingGuID" })
         @Html.TextBox("HiddenFieldDB_OperationType", null, new { @class = "form-control", Value = ViewBag.DB_OperationType, hidden = true, @id = "HiddenFieldDB_OperationType" })
 
     </form>
+    <div class="card-footer">
+        <div class="col-sm-12 form-group">
+            <div class="card-heading" id="DivButtonSubmitDown" style="display:none">
+                <input type="button" class="btn btn-info" id="ButtonSubmitDown" value="Sumbit" />
+                <i class="fa fa-arrow-up"></i>
+            </div>
+            <div class="card-heading" id="DivButtonUpdateDown" style="display:none">
+                <input type="button" class="btn btn-warning" id="ButtonUpdateDown" value="Update" />
+                <i class="fa fa-arrow-up"></i>
+            </div>
+        </div>
+    </div>
+
 
 }
 <script src="~/Areas/AUser/Script/CRightSettingManagmentUI_Script/CreateUpdate_RSMUI_RightSetting.js"></script>

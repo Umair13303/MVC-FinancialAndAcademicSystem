@@ -42,5 +42,44 @@ namespace office360.Areas.AUser.Controllers
             }
         }
         #endregion
+
+        /*---------------------- ** ACTION RESULTS FOR :: RENDER OF DROP DOWN LIST FROM DB_LOOKUP USING LINQUERY ** ---------------------------- */
+
+        #region ACTION RESULT FOR :: RENDER DROP DOWN FROM DB_LOOKUP -- LINQ-QUERY
+        public ActionResult GET_LK1_RIGHT(_SqlParameters PostedData)
+        {
+            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_Right(PostedData).ToList();
+            return Json(DATA, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GET_LK1_URLTYPE(_SqlParameters PostedData)
+        {
+            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_URLType(PostedData).ToList();
+            return Json(DATA, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        /*---------------------- ** ACTION RESULTS FOR :: RENDER OF DROP DOWN LIST FROM DB_MAIN USING STOREDPROCEDURE ** ---------------------------- */
+
+        #region ACTION RESULT FOR :: RENDER DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
+        public ActionResult GET_MT_CM_COMPANY_BYPARAMTER(_SqlParameters PostedData)
+        {
+            var DATA = ACompany.HelperCode.DATA_FROM_SP.GET_MT_CM_COMPANY_BYPARAM(PostedData).ToList();
+            return Json(DATA, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        /*---------------------- ** ACTION RESULTS FOR :: DATABASE OPERATION BY USER (INSERT/UPDATE/DELETE OF RIGHT SETTING) ** ---------------------- */
+        #region ACTION RESULT FOR :: INSERT/UPDATE/DELETE INTO DBO.RSM_RightSetting
+        [HttpPost]
+        public ActionResult UpSert_Into_RSM_RightSetting(_SqlParameters PostedData)
+        {
+            _Exe = AUser.HelperCode.CUD_Operation.Update_Insert_RSM_RightSetting(PostedData);
+            var data = new { Message = Http_Server_Status.HTTP_DB_TransactionMessagByStatusCode(_Exe), StatusCode = _Exe };
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+
     }
 }

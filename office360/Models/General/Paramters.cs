@@ -105,6 +105,7 @@ namespace office360.Models.General
         public int? DocType { get; set; }
         public int? EmployeeId { get; set; }
         public int? RoleId { get; set; }
+        public int? URLTypeId { get; set; }
 
         public string ActionCondition { get; set; }
         public string Address { get; set; }
@@ -135,6 +136,7 @@ namespace office360.Models.General
         public string DB_IF_PARAM { get; set; }
         public string LookUpActionCondition { get; set; }
         public string Menu { get; set; }
+        public string SubMenu { get; set; }
         public string MobileNumber { get; set; }
         public string NTNNo { get; set; }
         public string OperationType { get; set; }

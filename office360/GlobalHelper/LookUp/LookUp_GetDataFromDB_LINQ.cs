@@ -275,6 +275,38 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
+        public static List<_SqlParameters> GET_LK1_Right(_SqlParameters PostedData)
+        {
+            using (SESEntities db = new SESEntities())
+            {
+                var DATA = db.Right
+                         .Select(x => new _SqlParameters
+                         {
+                             Id = x.Id,
+                             Description = x.DisplayName + " [" + x.Menu +" / "+x.SubMenu +" ]",
+                             Menu =  x.Menu,
+                             SubMenu =  x.SubMenu,
+                         })
+                         .ToList();
+
+                return DATA;
+            }
+        }
+        public static List<_SqlParameters> GET_LK1_URLType(_SqlParameters PostedData)
+        {
+            using (SESEntities db = new SESEntities())
+            {
+                var DATA = db.URLType
+                         .Select(x => new _SqlParameters
+                         {
+                             Id = x.Id,
+                             Description = x.Description,
+                         })
+                         .ToList();
+
+                return DATA;
+            }
+        }
         #endregion
 
     }
