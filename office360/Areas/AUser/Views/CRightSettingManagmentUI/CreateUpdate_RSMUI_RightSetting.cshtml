@@ -49,8 +49,8 @@
                 <div class="row mb-0">
                     <div class="col-sm-12 col-md-4">
                         <div class="form-group">
-                            @Html.Label("Right Setting", new { @class = "col-form-label", @for = "DropDownListRightSetting" })
-                            @Html.DropDownList("DropDownListRightSetting", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListRightSetting" })
+                            @Html.Label("Right", new { @class = "col-form-label", @for = "DropDownListRight" })
+                            @Html.DropDownList("DropDownListRight", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListRight" })
                         </div>
                     </div>
                 </div>
@@ -58,17 +58,7 @@
                     <div class="col-sm-12 col-md-10">
                         <div class="form-group">
                             @Html.Label("Description (URL Path)", new { @class = "col-form-label", @for = "TextBoxDescription" })
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Area</span>
-                                @Html.TextBox("TextBoxArea", null, new { @class = "form-control col-md-4", placeholder = "Please Enter Area Here!", @id = "TextBoxArea" })
-                                <span class="input-group-text">Controller</span>
-                                @Html.TextBox("TextBoxController", null, new { @class = "form-control col-md-4", placeholder = "Please Enter Controller Here!", @id = "TextBoxController" })
-                                <span class="input-group-text">View</span>
-                                @Html.TextBox("TextBoxView", null, new { @class = "form-control col-md-4", placeholder = "Please Enter View Here!", @id = "TextBoxView" })
-
-
-                            </div>
-
+                            @Html.TextBox("TextBoxDescription", null, new { @class = "form-control", placeholder = "Please Enter Description Here!", @id = "TextBoxDescription" })
                         </div>
                     </div>
                 </div>

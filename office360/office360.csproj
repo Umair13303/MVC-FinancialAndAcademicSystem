@@ -458,6 +458,9 @@
     <Compile Include="Models\EDMX\RSM_RightSetting_GetDetailByParam_Result.cs">
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EDMX\RSM_RightSetting_GetListByParam_Result.cs">
+      <DependentUpon>SESModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EDMX\SESModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

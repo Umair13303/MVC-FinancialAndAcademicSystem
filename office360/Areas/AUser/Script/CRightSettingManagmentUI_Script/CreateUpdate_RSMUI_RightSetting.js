@@ -14,13 +14,13 @@ $(document).ready(function () {
             $('#DivButtonUpdateDown').hide();
             break;
         case DBOperation.UPDATE:
-      //      GET_UM_USER_LISTBYPARAM();
+            GET_RSM_RIGHTSETTING_LISTBYPARAM();
             $('#DivButtonSubmitDown').hide();
             $('#DivButtonUpdateDown').show();
             break;
     }
     PopulateDropDownLists();
-    //ChangeCase();
+    ChangeCase();
 
 });
 
@@ -31,8 +31,10 @@ function PopulateDropDownLists() {
 }
 function ChangeCase() {
 
+
+
     //-----------FOR ::EDIT CASE
-    $('#DropDownListRight').change(function () {
+    $('#DropDownListRightSetting').change(function () {
         if (!IsFieldClear) {
             IsFieldClear = true;
             ClearInputFields();
@@ -122,9 +124,23 @@ function PopulateMT_CM_Company_ListByParam() {
 /*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,UPSERT,CLEAR) **----------------------------------------------*/
 function ValidateInputFields() {
 
-    if ($('#TextBoxName').RequiredTextBoxInputGroup() == false) {
+    if ($('#DropDownListRight').RequiredDropdown() == false) {
         return false;
     }
+    if ($('#TextBoxDescription').RequiredTextBoxInputGroup() == false) {
+        return false;
+    }
+    if ($('#DropDownListURLType').RequiredDropdown() == false) {
+        return false;
+    }
+    if ($('#DropDownListCompany').RequiredDropdown() == false) {
+        return false;
+    }
+    if ($('#TextBoxRemarks').RequiredTextBoxInputGroup() == false) {
+        return false;
+    }
+    return true;
+
 }
 $('#ButtonSubmitDown').click(function (event) {
     event.preventDefault();
@@ -154,12 +170,22 @@ $('#ButtonUpdateDown').click(function (event) {
 });
 function UpSertDataIntoDB() {
 
+    var RightId = $('#DropDownListRight :selected').val();
+    var Description = $('#TextBoxDescription').val();
+    var URLTypeId = $('#DropDownListURLType :selected').val();
+    var CompanyId = $('#DropDownListCompany :selected').val();
     var Remarks = $('#TextBoxRemarks').val();
     var RightSettingGuID = $('#HiddenFieldRightSettingGuID').val();
 
     var JsonArg = {
         GuID: RightSettingGuID,
         OperationType: OperationType,
+
+        RightId: RightId,
+        Description: Description,
+        URLTypeId: URLTypeId,
+        CompanyId: CompanyId,
+        Remarks: Remarks,
     }
     $.ajax({
         type: "POST",
@@ -188,3 +214,92 @@ function ClearInputFields() {
     $('.select2').not('#DropDownListRightSetting').val('-1').change();
     $('form').removeClass('Is-Valid');
 }
+
+/*----------------------------------** FUNCTION FOR:: UPDATE COMPANY (LOAD DROPDOWN,DATA FOR RIGHTSETTINGID) **-----------------------------------------*/
+$('#ButtonSubmitGetInfoForEdit').click(function () {
+    if ($('#DropDownListRightSetting').RequiredDropdown() == false) {
+        return false;
+    }
+    else {
+        GET_RSM_RIGHTSETTING_INFOBYGUID();
+    }
+});
+function GET_RSM_RIGHTSETTING_LISTBYPARAM() {
+    $('#DropDownListRightSetting').empty();
+    $('#DropDownListRightSetting').select2({
+        placeholder: 'Search By Right Name / URL Path',
+        minimumInputLength: 3,
+        templateResult: function (item) {
+            return AjaxDropDownListFormat_PLAIN(item, ['Company','Right']);
+        },
+        templateSelection: function (item) {
+            return item.text;
+        },
+        ajax: {
+            url: BasePath + "/AUser/CRightSettingManagmentUI/GET_MT_RSM_RIGHTSETTING_BYPARAMETER_SEARCH",
+            type: "POST",
+            delay: 250,
+            data: function (params) {
+                return {
+                    PostedData: {
+                        SearchParameter: params.term,
+                        DB_IF_PARAM: DOCUMENT_LIST_CONDITION.RSM_RIGHTSETTING_BY_SEARCH_PARAMETER_UPDATERIGHTSETTING,
+                    }
+                };
+            },
+            beforeSend: function () {
+                startLoading();
+            },
+            processResults: function (data) {
+                return {
+                    results: data.data.map(function (item) {
+                        return {
+                            id: item.GuID,
+                            text: item.Description,
+                            Right: item.Description,
+                            Company: item.CompanyName,
+                            ClassDecor: item.Description,
+                        };
+                    })
+                };
+            },
+            complete: function () {
+                stopLoading();
+            },
+        },
+    });
+}
+function GET_RSM_RIGHTSETTING_INFOBYGUID() {
+    var RightSettingId = $('#DropDownListRightSetting :selected').val();
+    if (RightSettingId != null && RightSettingId != undefined && RightSettingId != "" && RightSettingId != "-1") {
+
+        var JsonArg = {
+            GuID: RightSettingId,
+        }
+        $.ajax({
+            type: "POST",
+            url: BasePath + "/AUser/CRightSettingManagmentUI/GET_MT_RSM_RIGHTSETTING_INFOBYGUID",
+            dataType: 'json',
+            data: { 'PostedData': (JsonArg) },
+            beforeSend: function () {
+                startLoading();
+            },
+            success: function (data) {
+                $('#DropDownListRight').val(data[0].RightId).change();
+                $('#TextBoxDescription').val(data[0].Description);
+                $('#DropDownListURLType').val(data[0].URLTypeId).change();
+                $('#DropDownListCompany').val(data[0].CompanyId).change();
+                $('#TextBoxRemarks').val(data[0].Remarks);
+                $('#HiddenFieldRightSettingGuID').val(data[0].GuID);
+            },
+            complete: function () {
+
+                stopLoading();
+            },
+        });
+    }
+    else {
+        GetMessageBox("Please Select A Company's Right Setting", 505);
+        return;
+    }
+};

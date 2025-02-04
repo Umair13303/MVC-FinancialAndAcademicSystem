@@ -69,6 +69,7 @@ namespace office360.Areas.AUser.Controllers
         #endregion
 
         /*---------------------- ** ACTION RESULTS FOR :: DATABASE OPERATION BY USER (INSERT/UPDATE/DELETE OF RIGHT SETTING) ** ---------------------- */
+
         #region ACTION RESULT FOR :: INSERT/UPDATE/DELETE INTO DBO.RSM_RightSetting
         [HttpPost]
         public ActionResult UpSert_Into_RSM_RightSetting(_SqlParameters PostedData)
@@ -76,6 +77,27 @@ namespace office360.Areas.AUser.Controllers
             _Exe = AUser.HelperCode.CUD_Operation.Update_Insert_RSM_RightSetting(PostedData);
             var data = new { Message = Http_Server_Status.HTTP_DB_TransactionMessagByStatusCode(_Exe), StatusCode = _Exe };
             return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+
+        /*---------------------- ** ACTION RESULTS FOR :: EDIT (LOAD DOCUMENT OF RSM_RIGHTSETTING) ** ------------------------ */
+
+        #region ACTION RESULT FOR :: SEARCH DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
+        public ActionResult GET_MT_RSM_RIGHTSETTING_BYPARAMETER_SEARCH(_SqlParameters PostedData)
+        {
+            var DATA = AUser.HelperCode.DATA_FROM_SP.GET_MT_RSM_RIGHTSETTING_BYPARAM(PostedData).ToList();
+            return Json(new { data = DATA }, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+        #region ACTION RESULT FOR :: GET DOCUMENT DETAIL (DBO.UM_RIGHTSETTING) -- LINQ-QUERY
+        public ActionResult GET_MT_RSM_RIGHTSETTING_INFOBYGUID(_SqlParameters PostedData)
+        {
+            var DATA = AUser.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_RSM_RIGHTSETTING_INFO_BY_GUID(PostedData).ToList();
+            return Json(DATA, JsonRequestBehavior.AllowGet);
         }
 
         #endregion

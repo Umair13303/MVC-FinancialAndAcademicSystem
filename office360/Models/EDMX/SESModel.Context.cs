@@ -558,6 +558,27 @@ namespace office360.Models.EDMX
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RSM_RightSetting_GetDetailByParam_Result>("RSM_RightSetting_GetDetailByParam", dB_IF_PARAMParameter, allowedCampusIdsParameter, userIdParameter, companyIdParameter, uRLTypeIdParameter, statusParameter, menuParameter, rightIdParameter, rightPathParameter);
         }
     
+        public virtual ObjectResult<RSM_RightSetting_GetListByParam_Result> RSM_RightSetting_GetListByParam(string dB_IF_PARAM, Nullable<int> sessionCompanyId, string searchParameter, Nullable<int> companyId)
+        {
+            var dB_IF_PARAMParameter = dB_IF_PARAM != null ?
+                new ObjectParameter("DB_IF_PARAM", dB_IF_PARAM) :
+                new ObjectParameter("DB_IF_PARAM", typeof(string));
+    
+            var sessionCompanyIdParameter = sessionCompanyId.HasValue ?
+                new ObjectParameter("SessionCompanyId", sessionCompanyId) :
+                new ObjectParameter("SessionCompanyId", typeof(int));
+    
+            var searchParameterParameter = searchParameter != null ?
+                new ObjectParameter("SearchParameter", searchParameter) :
+                new ObjectParameter("SearchParameter", typeof(string));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RSM_RightSetting_GetListByParam_Result>("RSM_RightSetting_GetListByParam", dB_IF_PARAMParameter, sessionCompanyIdParameter, searchParameterParameter, companyIdParameter);
+        }
+    
         public virtual int RSM_RightSetting_Upsert(string dB_OperationType, Nullable<System.Guid> guID, Nullable<int> rightId, string description, Nullable<int> uRLTypeId, Nullable<System.DateTime> createdOn, Nullable<int> createdBy, Nullable<System.DateTime> updatedOn, Nullable<int> updatedBy, Nullable<int> docType, Nullable<int> documentStatus, Nullable<bool> status, Nullable<int> branchId, Nullable<int> companyId, string remarks, ObjectParameter response)
         {
             var dB_OperationTypeParameter = dB_OperationType != null ?

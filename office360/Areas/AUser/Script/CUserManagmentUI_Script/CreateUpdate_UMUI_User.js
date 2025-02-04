@@ -344,7 +344,7 @@ function ClearInputFields() {
     $('form').removeClass('Is-Valid');
 }
 
-/*----------------------------------** FUNCTION FOR:: UPDATE COMPANY (LOAD DROPDOWN,DATA FOR COMPANYID) **-----------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: UPDATE COMPANY (LOAD DROPDOWN,DATA FOR USERID) **-----------------------------------------*/
 $('#ButtonSubmitGetInfoForEdit').click(function () {
     if ($('#DropDownListUser').RequiredDropdown() == false) {
         return false;
@@ -436,7 +436,7 @@ function GET_UM_USER_INFOBYGUID() {
 
     }
     else {
-        GetMessageBox("Please Select A Company", 505);
+        GetMessageBox("Please Select A User", 505);
         return;
     }
 };

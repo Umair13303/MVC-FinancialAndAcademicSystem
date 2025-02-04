@@ -91,7 +91,7 @@ namespace office360.Models.General
         public int? RegistrationTypeId { get; set; }
         public int? RelationshipId { get; set; }
         public int? ReligionId { get; set; }
-        public int RightId { get; set; }
+        public int? RightId { get; set; }
         public int? RevenueAccountId { get; set; }
         public int? RollCallSystemId { get; set; }
         public int? SearchById { get; set; }

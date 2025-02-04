@@ -659,6 +659,12 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Parameter Name="RightId" Type="int" Mode="In" />
           <Parameter Name="RightPath" Type="nvarchar(max)" Mode="In" />
         </Function>
+        <Function Name="RSM_RightSetting_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SessionCompanyId" Type="int" Mode="In" />
+          <Parameter Name="SearchParameter" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+        </Function>
         <Function Name="RSM_RightSetting_Upsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DB_OperationType" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="GuID" Type="uniqueidentifier" Mode="In" />
@@ -1586,6 +1592,12 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <Parameter Name="RightId" Mode="In" Type="Int32" />
             <Parameter Name="RightPath" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="RSM_RightSetting_GetListByParam" ReturnType="Collection(SESModel.RSM_RightSetting_GetListByParam_Result)">
+            <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
+            <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="SearchParameter" Mode="In" Type="String" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="RSM_RightSetting_Upsert">
             <Parameter Name="DB_OperationType" Mode="In" Type="String" />
             <Parameter Name="GuID" Mode="In" Type="Guid" />
@@ -1724,6 +1736,12 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Property Type="String" Name="DB_OperationType" Nullable="true" />
           <Property Type="Int32" Name="URLTypeId" Nullable="true" />
           <Property Type="String" Name="SubMenu" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="RSM_RightSetting_GetListByParam_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GuID" Nullable="true" />
+          <Property Type="String" Name="CompanyName" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
         </ComplexType>
         <ComplexType Name="UM_User_GetDetailByParam_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -2372,6 +2390,16 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
                 <ScalarProperty Name="DB_OperationType" ColumnName="DB_OperationType" />
                 <ScalarProperty Name="URLTypeId" ColumnName="URLTypeId" />
                 <ScalarProperty Name="SubMenu" ColumnName="SubMenu" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RSM_RightSetting_GetListByParam" FunctionName="SESModel.Store.RSM_RightSetting_GetListByParam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SESModel.RSM_RightSetting_GetListByParam_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

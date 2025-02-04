@@ -24,6 +24,7 @@ function initializeSelect2(selector) {
 }
 
 // Initialize InputMask for a given class selector and mask pattern
+
 function initializeInputMask(selector, maskPattern) {
     $(selector).inputmask(maskPattern);
 }
@@ -32,31 +33,45 @@ function initializeInputMask(selector, maskPattern) {
 $.fn.RequiredTextBoxInputGroup = function () {
     $(this).removeClass('is-invalid is-valid');
     $(this).css('border', ''); // Reset the border
+
     var labelText = '';
     var inputId = $(this).attr('id');
     var labelForInput = $('label[for="' + inputId + '"]');
+
     if (labelForInput.length) {
         labelText = labelForInput.text();
     }
+
+    var $existingError = $(this).parent().next('.error'); // Check for existing error
+
     if ($(this).val() == null || $(this).val() == '' || $(this).val() == undefined) {
         var errorMessage = labelText + ' is required.';
-        var $errorDiv = $('<div class="col-sm-12 error text-danger">' + errorMessage + '</div>');
-        $(this).parent().after($errorDiv);
+
+        // Add the error only if it doesn't already exist
+        if ($existingError.length === 0) {
+            var $errorDiv = $('<div class="col-sm-12 error text-danger">' + errorMessage + '</div>');
+            $(this).parent().after($errorDiv);
+
+            // Scroll to the input field
+            $(this)[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            setTimeout(function () {
+                $errorDiv.remove();
+            }, 5000);
+        }
+
         $(this).addClass('is-invalid');
-
-        // Scroll to the input field
-        $(this)[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-        setTimeout(function () {
-            $errorDiv.remove();
-        }, 5000);
         return false;
     } else {
-        $(this).parent().next('.error').remove();
+        // Remove the error if input is valid
+        if ($existingError.length) {
+            $existingError.remove();
+        }
         $(this).addClass('is-valid');
         return true;
     }
 };
+
 $.fn.RequiredDropdown = function () {
     // Remove any existing validation messages and icons
     $(this).removeClass('is-invalid is-valid');
@@ -99,6 +114,23 @@ $.fn.RequiredDropdown = function () {
         return true;
     }
 };
+function AjaxDropDownListFormat_PLAIN(item, fields = []) {
+    if (!item.id) return item.text;
+
+    let template = '<div style="padding: 5px; border-bottom: 0px solid #ddd;">';
+    fields.forEach(field => {
+        if (item[field]) {
+            template += `<div><strong>${field.replace(/([A-Z])/g, ' $1')}: </strong> ${item[field]}</div>`;
+        }
+    });
+    template += '</div>';
+
+    return $(template);
+}
+
+
+
+
 
 //------------ UTTILITY BUTTON :: DATA TABLE
 function GetStatus(Status) {
