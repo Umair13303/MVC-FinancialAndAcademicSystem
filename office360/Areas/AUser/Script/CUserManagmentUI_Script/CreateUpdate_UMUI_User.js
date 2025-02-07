@@ -22,7 +22,6 @@ $(document).ready(function () {
     }
     PopulateDropDownLists();
     ChangeCase();
-
 });
 
 function PopulateDropDownLists() {
@@ -216,7 +215,7 @@ function PopulateMT_EM_Employee_ListByParam() {
     });
 }
 
-/*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,UPSERT,CLEAR) **----------------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,UPSERT,CLEAR) **---------------------------------------------------*/
 function ValidateInputFields() {
 
     if ($('#TextBoxName').RequiredTextBoxInputGroup() == false) {
@@ -344,7 +343,7 @@ function ClearInputFields() {
     $('form').removeClass('Is-Valid');
 }
 
-/*----------------------------------** FUNCTION FOR:: UPDATE COMPANY (LOAD DROPDOWN,DATA FOR USERID) **-----------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: UPDATE COMPANY (LOAD DROPDOWN,DATA FOR USERID) **-----------------------------------------------*/
 $('#ButtonSubmitGetInfoForEdit').click(function () {
     if ($('#DropDownListUser').RequiredDropdown() == false) {
         return false;
@@ -366,7 +365,7 @@ function GET_UM_USER_LISTBYPARAM() {
                 return {
                     PostedData: {
                         SearchParameter: params.term,
-                        DB_IF_PARAM: DOCUMENT_LIST_CONDITION.UM_USER_BY_COMPANYID_SEARCH_PARAMETER_UPDATEUSER,
+                        DB_IF_PARAM: DOCUMENT_LIST_CONDITION.UM_USER_BY_SEARCH_PARAMETER_UPDATEUSER,
                     }
                 };
             },

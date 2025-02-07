@@ -160,5 +160,73 @@ namespace office360.Areas.AUser.HelperCode
             }
         }
         #endregion
+
+
+        #region HELPER FOR :: INSERT/UPDATE DATA USING STORED PROCEDURE (DBO.URM_UserRight) ::-- MAIN DB
+        public static int? Update_Insert_URM_UserRight(_SqlParameters PostedData)
+        {
+            using (var db = new SESEntities())
+            {
+                using (System.Data.Entity.DbContextTransaction dbTran = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        #region DB SETTING
+                        if (PostedData.OperationType == nameof(DB_OperationType.INSERT_DATA_INTO_DB))
+                        {
+                            PostedData.GuID = Uttility.fn_GetHashGuid();
+                        }
+                        #endregion
+                        #region OUTPUT VARAIBLE
+                        var ResponseParameter = new ObjectParameter("Response", typeof(int));
+                        #endregion
+                        #region EXECUTE STORE PROCEDURE
+                        var URM_UserRight = db.URM_UserRight_Upsert(
+                                                                            PostedData.OperationType,
+                                                                            PostedData.GuID,
+                                                                            PostedData.UserId,
+                                                                            PostedData.RightId,
+                                                                            DateTime.Now,
+                                                                            Session_Manager.UserId,
+                                                                            DateTime.Now,
+                                                                            Session_Manager.UserId,
+                                                                            (int?)DocumentStatus.DocType.USER_RIGHT,
+                                                                            (int?)DocumentStatus.DocStatus.ACTIVE_USER_RIGHT,
+                                                                            true,
+                                                                            PostedData.BranchId,
+                                                                            PostedData.CompanyId,
+                                                                            PostedData.Remarks,
+                                                                            ResponseParameter
+                                                        );
+                        #endregion
+                        #region RESPONSE VALUES IN VARIABLE
+                        int? Response = (int)ResponseParameter.Value;
+                        #endregion
+                        #region TRANSACTION HANDLING DETAIL
+                        switch (Response)
+                        {
+                            case (int?)Http_DB_Response.CODE_SUCCESS:
+                            case (int?)Http_DB_Response.CODE_DATA_UPDATED:
+
+                                dbTran.Commit();
+                                break;
+
+                            case (int?)Http_DB_Response.CODE_BAD_REQUEST:
+                                dbTran.Rollback();
+                                break;
+                        }
+                        #endregion
+                        return Http_Server_Status.Http_DB_ResponseByReturnValue(Response);
+
+                    }
+                    catch (Exception Ex)
+                    {
+                        dbTran.Rollback();
+                        return Http_Server_Status.Http_DB_Response.CODE_INTERNAL_SERVER_ERROR.ToInt();
+                    }
+                }
+            }
+        }
+        #endregion
     }
 }

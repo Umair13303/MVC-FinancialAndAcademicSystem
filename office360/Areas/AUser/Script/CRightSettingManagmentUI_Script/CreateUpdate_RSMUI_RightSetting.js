@@ -56,7 +56,7 @@ function PopulateLK_Right_List() {
         success: function (data) {
             var s = '<option  value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '</option>';
             }
             $("#DropDownListRight").html(s);
         },
@@ -76,7 +76,7 @@ function PopulateLK_URLType_List() {
         success: function (data) {
             var s = '<option  value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '</option>';
             }
             $("#DropDownListURLType").html(s);
         },
@@ -110,7 +110,7 @@ function PopulateMT_CM_Company_ListByParam() {
         success: function (data) {
             var s = '<option value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '</option>';
             }
             $("#DropDownListCompany").html(s);
         },

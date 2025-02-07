@@ -304,6 +304,7 @@
     <Compile Include="Areas\AUser\AUserAreaRegistration.cs" />
     <Compile Include="Areas\AUser\Controllers\CRightSettingManagmentUIController.cs" />
     <Compile Include="Areas\AUser\Controllers\CUserManagmentUIController.cs" />
+    <Compile Include="Areas\AUser\Controllers\CUserRightManagmentUIController.cs" />
     <Compile Include="Areas\AUser\HelperCode\CUD_Operation.cs" />
     <Compile Include="Areas\AUser\HelperCode\DATA_FROM_LINQ.cs" />
     <Compile Include="Areas\AUser\HelperCode\DATA_FROM_SP.cs" />
@@ -528,6 +529,7 @@
     <Content Include="Areas\AUser\Script\CRightSettingManagmentUI_Script\CreateUpdate_RSMUI_RightSetting.js" />
     <Content Include="Areas\AUser\Script\CUserManagmentUI_Script\CreateUpdate_UMUI_User.js" />
     <Content Include="Areas\AUser\Script\CUserManagmentUI_Script\View_List_UMUI_User.js" />
+    <Content Include="Areas\AUser\Script\CUserRightManagmentUI_Script\CreateUpdate_URMUI_UserRight.js" />
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\AspNet.ScriptManager.jQuery.UI.Combined.dll" />
@@ -1963,6 +1965,7 @@
     <Content Include="DB_BackUp\SESFINAL BACKUP.bak" />
     <Content Include="DB_BackUp\XLookUp BACKUP.bak" />
     <Content Include="Areas\AUser\Views\CRightSettingManagmentUI\CreateUpdate_RSMUI_RightSetting.cshtml" />
+    <Content Include="Areas\AUser\Views\CUserRightManagmentUI\CreateUpdate_URMUI_UserRight.cshtml" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>
