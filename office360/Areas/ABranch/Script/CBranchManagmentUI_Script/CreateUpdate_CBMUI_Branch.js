@@ -4,8 +4,7 @@ var DDL_Condition = "";
 var DB_OperationType = $('#HiddenFieldDB_OperationType').val();
 var IsFieldClear = false;
 
-var StudyLevelIds = "";
-var StudyGroupIds = "";
+
 
 /*----------------------------------** FUNCTION FOR::PAGE LOADER **------------------------------------------------------------------------------*/
 $(document).ready(function () {
@@ -31,13 +30,6 @@ function PopulateDropDownLists() {
     PopulateLK_CampusType_List();
     PopulateLK_OrganizationType_List();
     PopulateLK_Country_List();
-    PopulateLK_PolicyPeriod_List();
-    PopulateLK_RollCallSystem_List();
-    PopulateLK_BillingMethod_List();
-
-    PopulateLK_ChallanMethod_List();
-    PopulateLK_StudyLevel_List();
-    PopulateLK_StudyGroup_List();
 }
 /*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER **-----------------------------------------------------------------------*/
 function ChangeCase() {
@@ -161,138 +153,7 @@ function PopulateLK_City_ListByParam() {
     });
 
 }
-function PopulateLK_PolicyPeriod_List() {
-    $.ajax({
-        type: "POST",
-        url: BasePath + "/ABranch/CBranchManagmentUI/GET_LK1_POLICYPERIOD",
-        data: { },
-        beforeSend: function () {
-            startLoading();
-        },
-        success: function (data) {
-            var s = '<option  value="-1">Select an option</option>';
-            for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
-            }
-            $("#DropDownListPolicyPeriod").html(s);
-        },
-        complete: function () {
-            stopLoading();
-        },
-    });
-}
-function PopulateLK_RollCallSystem_List() {
-    $.ajax({
-        type: "POST",
-        url: BasePath + "/ABranch/CBranchManagmentUI/GET_LK1_ROLLCALLSYSTEM",
-        data: { },
-        beforeSend: function () {
-            startLoading();
-        },
-        success: function (data) {
-            var s = '<option  value="-1">Select an option</option>';
-            for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
-            }
-            $("#DropDownListRollCallSystem").html(s);
-        },
-        complete: function () {
-            stopLoading();
-        },
-    });
-}
-function PopulateLK_BillingMethod_List() {
-    $.ajax({
-        type: "POST",
-        url: BasePath + "/ABranch/CBranchManagmentUI/GET_LK1_BILLINGMETHOD",
-        data: { },
-        beforeSend: function () {
-            startLoading();
-        },
-        success: function (data) {
-            var s = '<option  value="-1">Select an option</option>';
-            for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
-            }
-            $("#DropDownListBillingMethod").html(s);
-        },
-        complete: function () {
-            stopLoading();
-        },
-    });
-}
 
-/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_LOOKUP-- STORED PROCEDURE **--------------------------------------*/
-function PopulateLK_ChallanMethod_List() {
-    var JsonArg = {
-        DB_IF_PARAM: LK_LIST_CONDITION.CHALLANMETHOD_LIST,
-    }
-    $.ajax({
-        type: "POST",
-        url: BasePath + "/ABranch/CBranchManagmentUI/GET_LK1_CHALLANMETHOD_BYPARAMTER",
-        data: { 'PostedData': (JsonArg) },
-        beforeSend: function () {
-            startLoading();
-        },
-        success: function (data) {
-            var s = '<option  value="-1">Select an option</option>';
-            for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
-            }
-            $("#DropDownListChallanMethod").html(s);
-        },
-        complete: function () {
-            stopLoading();
-        },
-    });
-}
-function PopulateLK_StudyLevel_List() {
-    var JsonArg = {
-        DB_IF_PARAM: LK_LIST_CONDITION.STUDYLEVEL_LIST,
-    }
-    $.ajax({
-        type: "POST",
-        url: BasePath + "/ABranch/CBranchManagmentUI/GET_LK1_STUDYLEVEL_BYPARAMTER",
-        data: { 'PostedData': (JsonArg) },
-        beforeSend: function () {
-            startLoading();
-        },
-        success: function (data) {
-            var s = '<option  value="-1">Select an option</option>';
-            for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
-            }
-            $("#DropDownListStudyLevels").html(s);
-        },
-        complete: function () {
-            stopLoading();
-        },
-    });
-}
-function PopulateLK_StudyGroup_List() {
-    
-    var JsonArg = {
-        DB_IF_PARAM: LK_LIST_CONDITION.STUDYGROUP_LIST,
-    }
-    $.ajax({
-        type: "POST",
-        url: BasePath + "/ABranch/CBranchManagmentUI/GET_LK1_STUDYGROUP_BYPARAMTER",
-        data: { 'PostedData': (JsonArg) },
-        beforeSend: function () {
-            startLoading();
-        },
-        success: function (data) {
-            var s = '<option  value="-1">Select an option</option>';
-            for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
-            }
-            $("#DropDownListStudyGroups").html(s);
-        },
-        complete: function () {
-            stopLoading();
-        },
-    });
-}
 
 
 /*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,UPSERT,CLEAR) **----------------------------------------------*/
@@ -320,25 +181,6 @@ function ValidateInputFields() {
         return false;
     }
     if ($('#TextBoxEmailAddress').RequiredTextBoxInputGroup() == false) {
-        return false;
-    }
-    if ($('#DropDownListPolicyPeriod').RequiredDropdown() == false) {
-        return false;
-    }
-    if ($('#DropDownListChallanMethod').RequiredDropdown() == false) {
-        return false;
-    }
-
-    if ($('#DropDownListRollCallSystem').RequiredDropdown() == false) {
-        return false;
-    }
-    if ($('#DropDownListBillingMethod').RequiredDropdown() == false) {
-        return false;
-    }
-    if ($('#DropDownListStudyLevels').RequiredDropdown() == false) {
-        return false;
-    }
-    if ($('#DropDownListStudyGroups').RequiredDropdown() == false) {
         return false;
     }
     if ($('#TextBoxNTNNo').RequiredTextBoxInputGroup() == false) {
@@ -384,10 +226,6 @@ function UpSertDataIntoDB() {
     var Address = $('#TextBoxAddress').val();
     var ContactNo = $('#TextBoxContactNo').val();
     var EmailAddress = $('#TextBoxEmailAddress').val();
-    var PolicyPeriodId = $('#DropDownListPolicyPeriod :selected').val();
-    var ChallanMethodId = $('#DropDownListChallanMethod :selected').val();
-    var RollCallSystemId = $('#DropDownListRollCallSystem :selected').val();
-    var BillingMethodId = $('#DropDownListBillingMethod :selected').val();
     var NTNNo = $('#TextBoxNTNNo').val();
     var Remarks = $('#TextBoxRemarks').val();
 
@@ -405,12 +243,6 @@ function UpSertDataIntoDB() {
         Address: Address,
         ContactNo: ContactNo,
         EmailAddress: EmailAddress,
-        ChallanMethodId: ChallanMethodId,
-        PolicyPeriodId: PolicyPeriodId,
-        RollCallSystemId: RollCallSystemId,
-        BillingMethodId: BillingMethodId,
-        StudyLevelIds: StudyLevelIds.toString(),
-        StudyGroupIds: StudyGroupIds.toString(),
         NTNNo: NTNNo,
         Remarks: Remarks,
     }
@@ -515,15 +347,6 @@ function GET_BM_BRANCH_INFOBYGUID() {
                 $('#TextBoxAddress').val(data[0].Address);
                 $('#TextBoxContactNo').val(data[0].ContactNo);
                 $('#TextBoxEmailAddress').val(data[0].EmailAddress);
-                $('#DropDownListPolicyPeriod').val(data[0].PolicyPeriodId).change().prop('disabled', true);
-                $('#DropDownListChallanMethod').val(data[0].ChallanMethodId).change().prop('disabled', true);
-                $('#DropDownListRollCallSystem').val(data[0].RollCallSystemId).change().prop('disabled', true);
-                $('#DropDownListBillingMethod').val(data[0].BillingMethodId).change().prop('disabled', true);
-                setTimeout(function () {
-                    $('#DropDownListStudyLevels').val(data[0].StudyLevelIds.split(',')).change().prop('disabled', true);
-                    $('#DropDownListStudyGroups').val(data[0].StudyGroupIds.split(',')).change().prop('disabled', true);
-                }, 500);
-
                 $('#TextBoxNTNNo').val(data[0].NTNNo);
                 $('#TextBoxRemarks').val(data[0].Remarks).prop('disabled', true);
                 $('#HiddenFieldCampusGuID').val(data[0].GuID);

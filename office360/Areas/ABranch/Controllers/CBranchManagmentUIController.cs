@@ -85,48 +85,13 @@ namespace office360.Areas.ABranch.Controllers
             var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_City(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GET_LK1_POLICYPERIOD(_SqlParameters PostedData)
-        {
-            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_PolicyPeriod(PostedData).ToList();
-            return Json(DATA, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult GET_LK1_ROLLCALLSYSTEM(_SqlParameters PostedData)
-        {
-            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_RollCallSystem(PostedData).ToList();
-            return Json(DATA, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult GET_LK1_BILLINGMETHOD(_SqlParameters PostedData)
-        {
-            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_BillingMethod(PostedData).ToList();
-            return Json(DATA, JsonRequestBehavior.AllowGet);
-        }
 
         #endregion
 
-        /*---------------------- ** ACTION RESULTS FOR :: RENDER OF DROP DOWN LIST FROM DB_LOOKUP USING STOREDPROCEDURE ** -------------------- */
-
-        #region ACTION RESULT FOR :: RENDER DROP DOWN FROM DB_LOOKUP -- STORED PROCEDURE
-        public ActionResult GET_LK1_CHALLANMETHOD_BYPARAMTER(_SqlParameters PostedData)
-        {
-            var DATA = LookUp_GetDataFromDB_SP.GET_LK1_ChallanMethod(PostedData).ToList();
-            return Json(DATA, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult GET_LK1_STUDYGROUP_BYPARAMTER(_SqlParameters PostedData)
-        {
-            var DATA = LookUp_GetDataFromDB_SP.GET_LK1_StudyGroup(PostedData).ToList();
-            return Json(DATA, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult GET_LK1_STUDYLEVEL_BYPARAMTER(_SqlParameters PostedData)
-        {
-            var DATA = LookUp_GetDataFromDB_SP.GET_LK1_StudyLevel(PostedData).ToList();
-            return Json(DATA, JsonRequestBehavior.AllowGet);
-        }
-
-        #endregion
 
         /*---------------------- ** ACTION RESULTS FOR :: DATABASE OPERATION BY USER (INSERT/UPDATE/DELETE OF BRANCH) ** ---------------------- */
 
-        #region ACTION RESULT FOR :: INSERT/UPDATE/DELETE INTO DBO.BM_Branch & DBO.BM_BranchSetting
+        #region ACTION RESULT FOR :: INSERT/UPDATE/DELETE INTO DBO.BM_Branch
         [HttpPost]
         public ActionResult UpSert_Into_BM_Branch(_SqlParameters PostedData)
         {

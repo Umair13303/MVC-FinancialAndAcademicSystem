@@ -67,6 +67,24 @@ namespace office360.Areas.AUser.HelperCode
                 return DATA;
             }
         }
+        public static List<URM_UserRight_GetListBySearch_Result> GET_MT_URM_USERRIGHT_LIST_BY_USERID_SEARCHPARAM(_SqlParameters PostedData)
+        {
+
+            using (SESEntities db = new SESEntities())
+            {
+                List<URM_UserRight_GetListBySearch_Result> DATA = new List<URM_UserRight_GetListBySearch_Result>();
+
+                DATA = db.URM_UserRight_GetListBySearch(
+                                                        Session_Manager.CompanyId,
+                                                        Session_Manager.BranchId,
+                                                        PostedData.GuID,
+                                                        PostedData.SearchById,
+                                                        PostedData.InputText
+                                                       ).ToList();
+
+                return DATA;
+            }
+        }
 
         #endregion
 

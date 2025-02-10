@@ -156,7 +156,7 @@ namespace office360.Models.EDMX
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BM_Branch_GetListBySearch_Result>("BM_Branch_GetListBySearch", companyIdParameter, branchIdParameter, inputTypeIdParameter, inputTextParameter);
         }
     
-        public virtual int BM_Branch_Upsert(string dB_OperationType, Nullable<System.Guid> guID, string description, Nullable<int> campusTypeId, Nullable<int> organizationTypeId, Nullable<int> countryId, Nullable<int> cityId, string address, string contactNo, string emailAddress, string nTNNo, string remarks, Nullable<System.DateTime> createdOn, Nullable<int> createdBy, Nullable<System.DateTime> updatedOn, Nullable<int> updatedBy, Nullable<int> documentStatus, Nullable<int> docType, Nullable<bool> status, Nullable<int> branchId, Nullable<int> companyId, ObjectParameter response, ObjectParameter campusId)
+        public virtual int BM_Branch_Upsert(string dB_OperationType, Nullable<System.Guid> guID, string description, Nullable<int> campusTypeId, Nullable<int> organizationTypeId, Nullable<int> countryId, Nullable<int> cityId, string address, string contactNo, string emailAddress, string nTNNo, string remarks, Nullable<System.DateTime> createdOn, Nullable<int> createdBy, Nullable<System.DateTime> updatedOn, Nullable<int> updatedBy, Nullable<int> documentStatus, Nullable<int> docType, Nullable<bool> status, Nullable<int> branchId, Nullable<int> companyId, ObjectParameter response)
         {
             var dB_OperationTypeParameter = dB_OperationType != null ?
                 new ObjectParameter("DB_OperationType", dB_OperationType) :
@@ -242,10 +242,10 @@ namespace office360.Models.EDMX
                 new ObjectParameter("CompanyId", companyId) :
                 new ObjectParameter("CompanyId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BM_Branch_Upsert", dB_OperationTypeParameter, guIDParameter, descriptionParameter, campusTypeIdParameter, organizationTypeIdParameter, countryIdParameter, cityIdParameter, addressParameter, contactNoParameter, emailAddressParameter, nTNNoParameter, remarksParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, documentStatusParameter, docTypeParameter, statusParameter, branchIdParameter, companyIdParameter, response, campusId);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BM_Branch_Upsert", dB_OperationTypeParameter, guIDParameter, descriptionParameter, campusTypeIdParameter, organizationTypeIdParameter, countryIdParameter, cityIdParameter, addressParameter, contactNoParameter, emailAddressParameter, nTNNoParameter, remarksParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, documentStatusParameter, docTypeParameter, statusParameter, branchIdParameter, companyIdParameter, response);
         }
     
-        public virtual int BM_BranchSetting_Upsert(string dB_OperationType, Nullable<System.Guid> guID, Nullable<int> campusId, Nullable<int> rollCallSystemId, Nullable<int> billingMethodId, string studyLevelIds, string studyGroupIds, Nullable<int> policyPeriodId, Nullable<int> challanMethodId, Nullable<System.DateTime> createdOn, Nullable<int> createdBy, Nullable<System.DateTime> updatedOn, Nullable<int> updatedBy, Nullable<int> docType, Nullable<int> documentStatus, Nullable<bool> status, Nullable<int> branchId, Nullable<int> companyId, ObjectParameter response)
+        public virtual int BM_BranchSetting_Upsert(string dB_OperationType, Nullable<System.Guid> guID, Nullable<int> campusId, Nullable<int> rollCallSystemId, Nullable<int> billingMethodId, string studyLevelIds, string studyGroupIds, Nullable<int> policyPeriodId, Nullable<int> challanMethodId, string remarks, Nullable<System.DateTime> createdOn, Nullable<int> createdBy, Nullable<System.DateTime> updatedOn, Nullable<int> updatedBy, Nullable<int> docType, Nullable<int> documentStatus, Nullable<bool> status, Nullable<int> branchId, Nullable<int> companyId, ObjectParameter response)
         {
             var dB_OperationTypeParameter = dB_OperationType != null ?
                 new ObjectParameter("DB_OperationType", dB_OperationType) :
@@ -283,6 +283,10 @@ namespace office360.Models.EDMX
                 new ObjectParameter("ChallanMethodId", challanMethodId) :
                 new ObjectParameter("ChallanMethodId", typeof(int));
     
+            var remarksParameter = remarks != null ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(string));
+    
             var createdOnParameter = createdOn.HasValue ?
                 new ObjectParameter("CreatedOn", createdOn) :
                 new ObjectParameter("CreatedOn", typeof(System.DateTime));
@@ -319,7 +323,7 @@ namespace office360.Models.EDMX
                 new ObjectParameter("CompanyId", companyId) :
                 new ObjectParameter("CompanyId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BM_BranchSetting_Upsert", dB_OperationTypeParameter, guIDParameter, campusIdParameter, rollCallSystemIdParameter, billingMethodIdParameter, studyLevelIdsParameter, studyGroupIdsParameter, policyPeriodIdParameter, challanMethodIdParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, response);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BM_BranchSetting_Upsert", dB_OperationTypeParameter, guIDParameter, campusIdParameter, rollCallSystemIdParameter, billingMethodIdParameter, studyLevelIdsParameter, studyGroupIdsParameter, policyPeriodIdParameter, challanMethodIdParameter, remarksParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, response);
         }
     
         public virtual ObjectResult<CM_Company_GetDetailByParam_Result> CM_Company_GetDetailByParam(string dB_IF_PARAM, Nullable<int> companyId, string searchParameter)
@@ -806,6 +810,31 @@ namespace office360.Models.EDMX
                 new ObjectParameter("Remarks", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UM_User_Upsert", dB_OperationTypeParameter, guIDParameter, nameParameter, userNameParameter, passwordParameter, emailAddressParameter, mobileNumberParameter, employeeIdParameter, roleIdParameter, allowedCampusIdsParameter, isLogInParameter, isDeveloperParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, remarksParameter, response);
+        }
+    
+        public virtual ObjectResult<URM_UserRight_GetListBySearch_Result> URM_UserRight_GetListBySearch(Nullable<int> companyId, Nullable<int> branchId, Nullable<System.Guid> userId, Nullable<int> inputTypeId, string inputText)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(int));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(System.Guid));
+    
+            var inputTypeIdParameter = inputTypeId.HasValue ?
+                new ObjectParameter("InputTypeId", inputTypeId) :
+                new ObjectParameter("InputTypeId", typeof(int));
+    
+            var inputTextParameter = inputText != null ?
+                new ObjectParameter("InputText", inputText) :
+                new ObjectParameter("InputText", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<URM_UserRight_GetListBySearch_Result>("URM_UserRight_GetListBySearch", companyIdParameter, branchIdParameter, userIdParameter, inputTypeIdParameter, inputTextParameter);
         }
     
         public virtual int URM_UserRight_Upsert(string dB_OperationType, Nullable<System.Guid> guID, Nullable<int> userId, Nullable<int> rightId, Nullable<System.DateTime> createdOn, Nullable<int> createdBy, Nullable<System.DateTime> updatedOn, Nullable<int> updatedBy, Nullable<int> docType, Nullable<int> documentStatus, Nullable<bool> status, Nullable<int> branchId, Nullable<int> companyId, string remarks, ObjectParameter response)

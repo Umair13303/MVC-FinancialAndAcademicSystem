@@ -35,12 +35,6 @@ namespace office360.Areas.ABranch.HelperCode
                             EmailAddress = GB.EmailAddress,
                             NTNNo = GB.NTNNo,
                             Remarks = GB.Remarks,
-                            RollCallSystemId = db.BM_BranchSetting.Where(BS => BS.CampusId == GB.Id && BS.DocumentStatus == (int?)DocStatus.ACTIVE_BRANCH_SETTING).Select(BS => BS.RollCallSystemId).FirstOrDefault(),
-                            BillingMethodId = db.BM_BranchSetting.Where(BS => BS.CampusId == GB.Id && BS.DocumentStatus == (int?)DocStatus.ACTIVE_BRANCH_SETTING).Select(BS => BS.BillingMethodId).FirstOrDefault(),
-                            StudyLevelIds = db.BM_BranchSetting.Where(BS => BS.CampusId == GB.Id && BS.DocumentStatus == (int?)DocStatus.ACTIVE_BRANCH_SETTING).Select(BS => BS.StudyLevelIds).FirstOrDefault(),
-                            StudyGroupIds = db.BM_BranchSetting.Where(BS => BS.CampusId == GB.Id && BS.DocumentStatus == (int?)DocStatus.ACTIVE_BRANCH_SETTING).Select(BS => BS.StudyGroupIds).FirstOrDefault(),
-                            PolicyPeriodId = db.BM_BranchSetting.Where(BS => BS.CampusId == GB.Id && BS.DocumentStatus == (int?)DocStatus.ACTIVE_BRANCH_SETTING).Select(BS => BS.PolicyPeriodId).FirstOrDefault(),
-                            ChallanMethodId = db.BM_BranchSetting.Where(BS => BS.CampusId == GB.Id && BS.DocumentStatus == (int?)DocStatus.ACTIVE_BRANCH_SETTING).Select(BS => BS.ChallanMethodId).FirstOrDefault()
 
                         }).ToList());
 

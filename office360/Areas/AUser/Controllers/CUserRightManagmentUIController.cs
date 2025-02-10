@@ -40,6 +40,22 @@ namespace office360.Areas.AUser.Controllers
                 return RedirectToAction(_ActionsURL.LogIn, _Controller.Home, new { area = "" });
             }
         }
+        public ActionResult View_List_URMUI_UserRight(_SqlParameters PostedData)
+        {
+            #region PASS VIEW
+            _Exe = GetAllListFromDB.GetAllowedUsersRightsByParameter(PostedData.RightId);
+            #endregion
+            if (_Exe == (int?)Http_DB_Response.CODE_SUCCESS)
+            {
+                ViewBag.Title = PostedData.DisplayName.ToSafeString();
+                ViewBag.DB_OperationType = PostedData.OperationType.ToSafeString();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction(_ActionsURL.LogIn, _Controller.Home, new { area = "" });
+            }
+        }
         #endregion
 
 
@@ -79,6 +95,22 @@ namespace office360.Areas.AUser.Controllers
             var data = new { Message = Http_Server_Status.HTTP_DB_TransactionMessagByStatusCode(_Exe), StatusCode = _Exe };
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+        #endregion
+
+        /*---------------------- ** ACTION RESULTS FOR :: DATA TABLE (LOAD TABLE OF USER BY INPUT TYPE & TEXT) ** ---------------------------- */
+
+        #region ACTION RESULT FOR :: GET LIST BY SEARCH PARAMETER FOR DATA-TABLE (DBO.UM_USER & URM_USERRIGHT)-- STORED PROCEDURE
+        public ActionResult GET_MT_UM_USER_LIST_BY_SEARCHQUERY_FORDATATABLE(_SqlParameters PostedData)
+        {
+            var DATA = AUser.HelperCode.DATA_FROM_SP.GET_MT_UM_USER_LIST_BY_SEARCHQUERY(PostedData).ToList();
+            return Json(new { success = true, data = DATA }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GET_MT_URM_USERRIGHT_LIST_BY_USERID_SEARCHQUERY_FORDATATABLE(_SqlParameters PostedData)
+        {
+            var DATA = AUser.HelperCode.DATA_FROM_SP.GET_MT_URM_USERRIGHT_LIST_BY_USERID_SEARCHPARAM(PostedData).ToList();
+            return Json( DATA, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
 
     }

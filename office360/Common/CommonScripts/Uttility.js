@@ -220,6 +220,9 @@ function GetDeletebtn(url, title, text) {
 function GetCheckBox_row(Id) {
     return '<td><div class="form-group"><div class="checkbox checbox-switch switch-success"><label><input type="checkbox" Id="IsChecked' + Id + '" /><span></span></label></div></div></td>';
 }
+function GetDetailControlBtn(ClassName) {
+    return "<td class='center " + ClassName + "'><a class='btn btn-sm  " + ClassName +" view'><i class='far fa-plus " + ClassName +"'></i> " + '' + "</a></td>";
+}
 function GetTextBox(Id) {
     debugger
     var inputElement = document.createElement('input');

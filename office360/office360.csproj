@@ -289,6 +289,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\ABranch\ABranchAreaRegistration.cs" />
     <Compile Include="Areas\ABranch\Controllers\CBranchManagmentUIController.cs" />
+    <Compile Include="Areas\ABranch\Controllers\CBranchSettingManagmentUIController.cs" />
+    <Compile Include="Areas\ABranch\HelperCode\Check_Duplicate_By_LINQ.cs" />
     <Compile Include="Areas\ABranch\HelperCode\CUD_Operation.cs" />
     <Compile Include="Areas\ABranch\HelperCode\DATA_FROM_LINQ.cs" />
     <Compile Include="Areas\ABranch\HelperCode\DATA_FROM_SP.cs" />
@@ -501,6 +503,9 @@
     <Compile Include="Models\EDMX\URM_UserRight.cs">
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EDMX\URM_UserRight_GetListBySearch_Result.cs">
+      <DependentUpon>SESModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EDMX\WHTaxPolicy.cs">
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
@@ -525,11 +530,13 @@
   <ItemGroup>
     <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\CreateUpdate_CBMUI_Branch.js" />
     <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\View_List_CBMUI_Branch.js" />
+    <Content Include="Areas\ABranch\Script\CBranchSettingManagmentUI_Script\CreateUpdate_CBSMUI_BranchSetting.js" />
     <Content Include="Areas\ACompany\Script\CCompanyManagmentUI_Script\CreateUpdate_CMUI_Company.js" />
     <Content Include="Areas\AUser\Script\CRightSettingManagmentUI_Script\CreateUpdate_RSMUI_RightSetting.js" />
     <Content Include="Areas\AUser\Script\CUserManagmentUI_Script\CreateUpdate_UMUI_User.js" />
     <Content Include="Areas\AUser\Script\CUserManagmentUI_Script\View_List_UMUI_User.js" />
     <Content Include="Areas\AUser\Script\CUserRightManagmentUI_Script\CreateUpdate_URMUI_UserRight.js" />
+    <Content Include="Areas\AUser\Script\CUserRightManagmentUI_Script\View_List_URMUI_UserRight.js" />
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Antlr3.Runtime.pdb" />
     <Content Include="bin\AspNet.ScriptManager.jQuery.UI.Combined.dll" />
@@ -1966,6 +1973,8 @@
     <Content Include="DB_BackUp\XLookUp BACKUP.bak" />
     <Content Include="Areas\AUser\Views\CRightSettingManagmentUI\CreateUpdate_RSMUI_RightSetting.cshtml" />
     <Content Include="Areas\AUser\Views\CUserRightManagmentUI\CreateUpdate_URMUI_UserRight.cshtml" />
+    <Content Include="Areas\AUser\Views\CUserRightManagmentUI\View_List_URMUI_UserRight.cshtml" />
+    <Content Include="Areas\ABranch\Views\CBranchSettingManagmentUI\CreateUpdate_CBSMUI_BranchSetting.cshtml" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>

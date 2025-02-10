@@ -130,55 +130,7 @@
 
 
 
-        <div class="card" style="margin-top:1%;width:100%">
-            <div class="card-body">
-
-                <h3 style="font-family: 'Bahnschrift'; font-weight: bolder; color: navy">Settings</h3>
-                <div class="row mb-0">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="form-group">
-                            @Html.Label("Policy Period", new { @class = "col-form-label", @for = "DropDownListPolicyPeriod" })
-                            @Html.DropDownList("DropDownListPolicyPeriod", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListPolicyPeriod" })
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-6">
-                        <div class="form-group">
-                            @Html.Label("Challan Method", new { @class = "col-form-label", @for = "DropDownListChallanMethod" })
-                            @Html.DropDownList("DropDownListChallanMethod", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListChallanMethod" })
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-6">
-                        <div class="form-group">
-                            @Html.Label("Roll Call System", new { @class = "col-form-label", @for = "DropDownListRollCallSystem" })
-                            @Html.DropDownList("DropDownListRollCallSystem", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListRollCallSystem" })
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-6">
-                        <div class="form-group">
-                            @Html.Label("Billing Method", new { @class = "col-form-label", @for = "DropDownListBillingMethod" })
-                            @Html.DropDownList("DropDownListBillingMethod", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListBillingMethod" })
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-6">
-                        <div class="form-group">
-                            @Html.Label("Study Levels", new { @class = "col-form-label", @for = "DropDownListStudyLevels" })
-                            @Html.DropDownList("DropDownListStudyLevels", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", multiple = "multiple", @data_toggle = "select2", id = "DropDownListStudyLevels" })
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-6">
-                        <div class="form-group">
-                            @Html.Label("Study Groups", new { @class = "col-form-label", @for = "DropDownListStudyGroups" })
-                            @Html.DropDownList("DropDownListStudyGroups", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", multiple = "multiple", @data_toggle = "select2", id = "DropDownListStudyGroups" })
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+       
 
 
         <div class="card" style="margin-top:1%;width:100%">
