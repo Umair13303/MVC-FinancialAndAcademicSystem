@@ -503,6 +503,9 @@
     <Compile Include="Models\EDMX\URM_UserRight.cs">
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EDMX\URM_UserRight_GetListByParam_Result.cs">
+      <DependentUpon>SESModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EDMX\URM_UserRight_GetListBySearch_Result.cs">
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>

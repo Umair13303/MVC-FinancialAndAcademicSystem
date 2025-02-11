@@ -414,7 +414,7 @@ function GET_UM_USER_INFOBYGUID() {
                 $('#DropDownListCompany').val(data[0].CompanyId).change();
                 setTimeout(function () {
                     $('#DropDownListAllowedCampus').val(data[0].AllowedCampusIds.split(',')).change();
-                }, 1000);
+                }, 1500);
                 setTimeout(function () {
                     $('#DropDownListBranch').val(data[0].BranchId).change();
                 }, 1000);

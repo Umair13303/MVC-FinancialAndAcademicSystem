@@ -16,9 +16,10 @@ namespace office360.Models.EDMX
     {
         public int Id { get; set; }
         public Nullable<System.Guid> GuID { get; set; }
+        public string Code { get; set; }
         public string CompanyName { get; set; }
-        public Nullable<int> CityId { get; set; }
         public Nullable<int> CountryId { get; set; }
+        public Nullable<int> CityId { get; set; }
         public string AddressLine { get; set; }
         public string PhoneNumber { get; set; }
         public string EmailAddress { get; set; }

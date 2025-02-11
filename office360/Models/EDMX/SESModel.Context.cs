@@ -812,6 +812,31 @@ namespace office360.Models.EDMX
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UM_User_Upsert", dB_OperationTypeParameter, guIDParameter, nameParameter, userNameParameter, passwordParameter, emailAddressParameter, mobileNumberParameter, employeeIdParameter, roleIdParameter, allowedCampusIdsParameter, isLogInParameter, isDeveloperParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, remarksParameter, response);
         }
     
+        public virtual ObjectResult<URM_UserRight_GetListByParam_Result> URM_UserRight_GetListByParam(string dB_IF_PARAM, Nullable<int> sessionCompanyId, Nullable<int> sessionBranchId, string searchParameter, Nullable<int> companyId)
+        {
+            var dB_IF_PARAMParameter = dB_IF_PARAM != null ?
+                new ObjectParameter("DB_IF_PARAM", dB_IF_PARAM) :
+                new ObjectParameter("DB_IF_PARAM", typeof(string));
+    
+            var sessionCompanyIdParameter = sessionCompanyId.HasValue ?
+                new ObjectParameter("SessionCompanyId", sessionCompanyId) :
+                new ObjectParameter("SessionCompanyId", typeof(int));
+    
+            var sessionBranchIdParameter = sessionBranchId.HasValue ?
+                new ObjectParameter("SessionBranchId", sessionBranchId) :
+                new ObjectParameter("SessionBranchId", typeof(int));
+    
+            var searchParameterParameter = searchParameter != null ?
+                new ObjectParameter("SearchParameter", searchParameter) :
+                new ObjectParameter("SearchParameter", typeof(string));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<URM_UserRight_GetListByParam_Result>("URM_UserRight_GetListByParam", dB_IF_PARAMParameter, sessionCompanyIdParameter, sessionBranchIdParameter, searchParameterParameter, companyIdParameter);
+        }
+    
         public virtual ObjectResult<URM_UserRight_GetListBySearch_Result> URM_UserRight_GetListBySearch(Nullable<int> companyId, Nullable<int> branchId, Nullable<System.Guid> userId, Nullable<int> inputTypeId, string inputText)
         {
             var companyIdParameter = companyId.HasValue ?

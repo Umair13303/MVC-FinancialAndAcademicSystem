@@ -31,9 +31,9 @@ namespace office360.Areas.ABranch.HelperCode
                         case nameof(DB_OperationType.INSERT_DATA_INTO_DB):
 
 
-                            var DATA = db.BM_Branch
+                            var DATA = db.BM_BranchSetting
                                 .Where(x =>
-                                    x.Id == PostedData.CampusId &&
+                                    x.CampusId == PostedData.CampusId &&
                                     x.DocumentStatus == (int?)DocStatus.ACTIVE_BRANCH_SETTING &&
                                     x.Status == true
                                 )

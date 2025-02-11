@@ -16,6 +16,7 @@ namespace office360.Models.EDMX
     {
         public int Id { get; set; }
         public Nullable<System.Guid> GuID { get; set; }
+        public string Code { get; set; }
         public Nullable<int> CampusId { get; set; }
         public Nullable<int> RollCallSystemId { get; set; }
         public Nullable<int> BillingMethodId { get; set; }

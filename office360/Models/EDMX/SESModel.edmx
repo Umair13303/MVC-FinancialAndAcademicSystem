@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SESModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="SESModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BM_Branch">
           <Key>
             <PropertyRef Name="Id" />
@@ -38,6 +38,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GuID" Type="uniqueidentifier" />
+          <Property Name="Code" Type="nvarchar(max)" />
           <Property Name="CampusId" Type="int" />
           <Property Name="RollCallSystemId" Type="int" />
           <Property Name="BillingMethodId" Type="int" />
@@ -62,9 +63,10 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GuID" Type="uniqueidentifier" />
+          <Property Name="Code" Type="nvarchar(max)" />
           <Property Name="CompanyName" Type="nvarchar(max)" />
-          <Property Name="CityId" Type="int" />
           <Property Name="CountryId" Type="int" />
+          <Property Name="CityId" Type="int" />
           <Property Name="AddressLine" Type="nvarchar(max)" />
           <Property Name="PhoneNumber" Type="nvarchar(max)" />
           <Property Name="EmailAddress" Type="nvarchar(max)" />
@@ -87,6 +89,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GuID" Type="uniqueidentifier" />
+          <Property Name="Code" Type="nvarchar(max)" />
           <Property Name="RightId" Type="int" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="URLTypeId" Type="int" />
@@ -107,6 +110,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GuID" Type="uniqueidentifier" />
+          <Property Name="Code" Type="nvarchar(max)" />
           <Property Name="Name" Type="nvarchar(max)" />
           <Property Name="UserName" Type="nvarchar(max)" />
           <Property Name="Password" Type="nvarchar(max)" />
@@ -134,6 +138,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GuID" Type="uniqueidentifier" />
+          <Property Name="Code" Type="nvarchar(max)" />
           <Property Name="UserId" Type="int" />
           <Property Name="RightId" Type="int" />
           <Property Name="CreatedOn" Type="datetime" />
@@ -728,6 +733,13 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Response" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="URM_UserRight_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SessionCompanyId" Type="int" Mode="In" />
+          <Parameter Name="SessionBranchId" Type="int" Mode="In" />
+          <Parameter Name="SearchParameter" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+        </Function>
         <Function Name="URM_UserRight_GetListBySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CompanyId" Type="int" Mode="In" />
           <Parameter Name="BranchId" Type="int" Mode="In" />
@@ -1001,7 +1013,8 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
     FROM [dbo].[WorkingShift] AS [WorkingShift]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SESModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1056,6 +1069,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GuID" Type="Guid" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CampusId" Type="Int32" />
           <Property Name="RollCallSystemId" Type="Int32" />
           <Property Name="BillingMethodId" Type="Int32" />
@@ -1080,9 +1094,10 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GuID" Type="Guid" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CityId" Type="Int32" />
           <Property Name="CountryId" Type="Int32" />
+          <Property Name="CityId" Type="Int32" />
           <Property Name="AddressLine" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -1105,6 +1120,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GuID" Type="Guid" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="RightId" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="URLTypeId" Type="Int32" />
@@ -1125,6 +1141,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GuID" Type="Guid" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -1152,6 +1169,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GuID" Type="Guid" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="Int32" />
           <Property Name="RightId" Type="Int32" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
@@ -1478,16 +1496,16 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <EntitySet Name="WHTaxPolicy" EntityType="Self.WHTaxPolicy" />
           <EntitySet Name="WorkingShift" EntityType="Self.WorkingShift" />
           <FunctionImport Name="fn_CodeSplitByCommaAsINT" IsComposable="true" ReturnType="Collection(SESModel.fn_CodeSplitByCommaAsINT_Result)">
-          <Parameter Name="psCSString" Mode="In" Type="String" />
+            <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_CodeSplitByCommaAsUniqueIdentifier" IsComposable="true" ReturnType="Collection(SESModel.fn_CodeSplitByCommaAsUniqueIdentifier_Result)">
-          <Parameter Name="psCSString" Mode="In" Type="String" />
+            <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_GetCommaSepratedValuesInList" IsComposable="true" ReturnType="Collection(SESModel.fn_GetCommaSepratedValuesInList_Result)">
-          <Parameter Name="psCSString" Mode="In" Type="String" />
+            <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_GetGeneralBranchSettingForCampus" IsComposable="true" ReturnType="Collection(SESModel.fn_GetGeneralBranchSettingForCampus_Result)">
-          <Parameter Name="CampusId" Mode="In" Type="Int32" />
+            <Parameter Name="CampusId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="BM_Branch_GetListByParam" ReturnType="Collection(SESModel.BM_Branch_GetListByParam_Result)">
             <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
@@ -1684,6 +1702,13 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <Parameter Name="Remarks" Mode="In" Type="String" />
             <Parameter Name="Response" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="URM_UserRight_GetListByParam" ReturnType="Collection(SESModel.URM_UserRight_GetListByParam_Result)">
+            <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
+            <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="SessionBranchId" Mode="In" Type="Int32" />
+            <Parameter Name="SearchParameter" Mode="In" Type="String" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="URM_UserRight_GetListBySearch" ReturnType="Collection(SESModel.URM_UserRight_GetListBySearch_Result)">
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
             <Parameter Name="BranchId" Mode="In" Type="Int32" />
@@ -1833,6 +1858,11 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Property Type="String" Name="Company" Nullable="true" />
           <Property Type="String" Name="Remarks" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="URM_UserRight_GetListByParam_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GuID" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="URM_UserRight_GetListBySearch_Result">
           <Property Type="String" Name="FormName" Nullable="true" />
           <Property Type="String" Name="DisplayName" Nullable="true" />
@@ -1878,6 +1908,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               <MappingFragment StoreEntitySet="BM_BranchSetting">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="CampusId" ColumnName="CampusId" />
                 <ScalarProperty Name="RollCallSystemId" ColumnName="RollCallSystemId" />
                 <ScalarProperty Name="BillingMethodId" ColumnName="BillingMethodId" />
@@ -1903,9 +1934,10 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               <MappingFragment StoreEntitySet="CM_Company">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="CityId" ColumnName="CityId" />
                 <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
                 <ScalarProperty Name="AddressLine" ColumnName="AddressLine" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
@@ -1929,6 +1961,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               <MappingFragment StoreEntitySet="RSM_RightSetting">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="RightId" ColumnName="RightId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="URLTypeId" ColumnName="URLTypeId" />
@@ -1950,6 +1983,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               <MappingFragment StoreEntitySet="UM_User">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
@@ -1978,6 +2012,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               <MappingFragment StoreEntitySet="URM_UserRight">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="RightId" ColumnName="RightId" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -2513,6 +2548,15 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UM_User_Upsert" FunctionName="SESModel.Store.UM_User_Upsert" />
+          <FunctionImportMapping FunctionImportName="URM_UserRight_GetListByParam" FunctionName="SESModel.Store.URM_UserRight_GetListByParam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SESModel.URM_UserRight_GetListByParam_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="URM_UserRight_GetListBySearch" FunctionName="SESModel.Store.URM_UserRight_GetListBySearch">
             <ResultMapping>
               <ComplexTypeMapping TypeName="SESModel.URM_UserRight_GetListBySearch_Result">
