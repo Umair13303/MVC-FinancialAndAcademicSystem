@@ -35,21 +35,6 @@ namespace office360.Areas.AUser.HelperCode
                 return DATA;
             }
         }
-        public static List<UM_User_GetListBySearch_Result> GET_MT_UM_USER_LIST_BY_SEARCHQUERY(_SqlParameters PostedData)
-        {
-            List<UM_User_GetListBySearch_Result> List = new List<UM_User_GetListBySearch_Result>();
-            using (var db = new SESEntities())
-            {
-                List = db.UM_User_GetListBySearch(
-                                                        Session_Manager.CompanyId,
-                                                        Session_Manager.BranchId,
-                                                        PostedData.SearchById,
-                                                        PostedData.InputText
-                                                        ).ToList<UM_User_GetListBySearch_Result>();
-            }
-            return List;
-
-        }
         public static List<RSM_RightSetting_GetListByParam_Result> GET_MT_RSM_RIGHTSETTING_BYPARAM(_SqlParameters PostedData)
         {
 
@@ -67,7 +52,44 @@ namespace office360.Areas.AUser.HelperCode
                 return DATA;
             }
         }
-        public static List<URM_UserRight_GetListBySearch_Result> GET_MT_URM_USERRIGHT_LIST_BY_USERID_SEARCHPARAM(_SqlParameters PostedData)
+        public static List<URM_UserRight_GetListByParam_Result> GET_MT_URM_USERRIGHT_BYPARAM(_SqlParameters PostedData)
+        {
+
+            using (SESEntities db = new SESEntities())
+            {
+                List<URM_UserRight_GetListByParam_Result> DATA = new List<URM_UserRight_GetListByParam_Result>();
+
+                DATA = db.URM_UserRight_GetListByParam(
+                                                       PostedData.DB_IF_PARAM,
+                                                       Session_Manager.CompanyId,
+                                                       Session_Manager.BranchId,
+                                                       PostedData.SearchParameter,
+                                                       PostedData.CompanyId
+                                                       ).ToList();
+
+                return DATA;
+            }
+        }
+
+        #endregion
+
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB
+        public static List<UM_User_GetListBySearch_Result> GET_MT_UM_USER_LIST_BY_SEARCHQUERY(_SqlParameters PostedData)
+        {
+            List<UM_User_GetListBySearch_Result> List = new List<UM_User_GetListBySearch_Result>();
+            using (var db = new SESEntities())
+            {
+                List = db.UM_User_GetListBySearch(
+                                                        Session_Manager.CompanyId,
+                                                        Session_Manager.BranchId,
+                                                        PostedData.SearchById,
+                                                        PostedData.InputText
+                                                        ).ToList<UM_User_GetListBySearch_Result>();
+            }
+            return List;
+
+        }
+        public static List<URM_UserRight_GetListBySearch_Result> GET_MT_URM_USERRIGHT_LIST_BY_USERID_SEARCHQUERY(_SqlParameters PostedData)
         {
 
             using (SESEntities db = new SESEntities())
@@ -85,7 +107,6 @@ namespace office360.Areas.AUser.HelperCode
                 return DATA;
             }
         }
-
         #endregion
 
     }

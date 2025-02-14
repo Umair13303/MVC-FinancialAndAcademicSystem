@@ -97,6 +97,26 @@ namespace office360.Areas.AUser.Controllers
         }
         #endregion
 
+        /*---------------------- ** ACTION RESULTS FOR :: EDIT (LOAD DOCUMENT OF UM_USER) ** ------------------------ */
+
+        #region ACTION RESULT FOR :: SEARCH DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
+        public ActionResult GET_MT_URM_USERRIGHT_BYPARAMETER_SEARCH(_SqlParameters PostedData)
+        {
+            var DATA = AUser.HelperCode.DATA_FROM_SP.GET_MT_URM_USERRIGHT_BYPARAM(PostedData).ToList();
+            return Json(new { data = DATA }, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+        #region ACTION RESULT FOR :: GET DOCUMENT DETAIL (DBO.UM_USERRIGHT) -- LINQ-QUERY
+        public ActionResult GET_MT_URM_USERRIGHT_INFOBYGUID(_SqlParameters PostedData)
+        {
+            var DATA = AUser.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_URM_USERRIGHT_INFO_BY_GUID(PostedData).ToList();
+            return Json(DATA, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
         /*---------------------- ** ACTION RESULTS FOR :: DATA TABLE (LOAD TABLE OF USER BY INPUT TYPE & TEXT) ** ---------------------------- */
 
         #region ACTION RESULT FOR :: GET LIST BY SEARCH PARAMETER FOR DATA-TABLE (DBO.UM_USER & URM_USERRIGHT)-- STORED PROCEDURE
@@ -107,7 +127,7 @@ namespace office360.Areas.AUser.Controllers
         }
         public ActionResult GET_MT_URM_USERRIGHT_LIST_BY_USERID_SEARCHQUERY_FORDATATABLE(_SqlParameters PostedData)
         {
-            var DATA = AUser.HelperCode.DATA_FROM_SP.GET_MT_URM_USERRIGHT_LIST_BY_USERID_SEARCHPARAM(PostedData).ToList();
+            var DATA = AUser.HelperCode.DATA_FROM_SP.GET_MT_URM_USERRIGHT_LIST_BY_USERID_SEARCHQUERY(PostedData).ToList();
             return Json( DATA, JsonRequestBehavior.AllowGet);
         }
 

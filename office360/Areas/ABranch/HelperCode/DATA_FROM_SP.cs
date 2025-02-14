@@ -38,6 +38,10 @@ namespace office360.Areas.ABranch.HelperCode
                 return DATA;
             }
         }
+        #endregion
+
+
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB
 
         public static List<BM_Branch_GetListBySearch_Result> GET_MT_BM_BRANCH_LIST_BY_SEARCHQUERY(_SqlParameters PostedData)
         {

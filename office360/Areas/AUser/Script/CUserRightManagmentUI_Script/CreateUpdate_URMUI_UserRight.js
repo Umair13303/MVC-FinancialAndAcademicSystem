@@ -14,7 +14,7 @@ $(document).ready(function () {
             $('#DivButtonUpdateDown').hide();
             break;
         case DBOperation.UPDATE:
-            GET_UM_USER_LISTBYPARAM();
+            GET_URM_USERRIGHT_LISTBYPARAM();
             $('#DivButtonSubmitDown').hide();
             $('#DivButtonUpdateDown').show();
             break;
@@ -222,3 +222,86 @@ function ClearInputFields() {
     $('.select2').not('#DropDownListRightSetting').val('-1').change();
     $('form').removeClass('Is-Valid');
 }
+
+
+/*----------------------------------** FUNCTION FOR:: UPDATE COMPANY (LOAD DROPDOWN,DATA FOR USERID) **-----------------------------------------------*/
+$('#ButtonSubmitGetInfoForEdit').click(function () {
+    if ($('#DropDownListUserRight').RequiredDropdown() == false) {
+        return false;
+    }
+    else {
+        GET_URM_USERRIGHT_INFOBYGUID();
+    }
+});
+function GET_URM_USERRIGHT_LISTBYPARAM() {
+    $('#DropDownListUserRight').empty();
+    $('#DropDownListUserRight').select2({
+        placeholder: 'Search By Right Name / Setting Code / User Name',
+        minimumInputLength: 3,
+        ajax: {
+            url: BasePath + "/AUser/CUserRightManagmentUI/GET_MT_URM_USERRIGHT_BYPARAMETER_SEARCH",
+            type: "POST",
+            delay: 250,
+            data: function (params) {
+                return {
+                    PostedData: {
+                        SearchParameter: params.term,
+                        DB_IF_PARAM: DOCUMENT_LIST_CONDITION.URM_USERRIGHT_BY_SEARCH_PARAMETER_UPDATEUSERRIGHT,
+                    }
+                };
+            },
+            beforeSend: function () {
+                startLoading();
+            },
+            processResults: function (data) {
+                return {
+                    results: data.data.map(function (item) {
+                        return {
+                            id: item.GuID,
+                            text: item.Description,
+                            ClassDecor: item.Description,
+                        };
+                    })
+                };
+            },
+            complete: function () {
+                stopLoading();
+            },
+        },
+    });
+}
+function GET_URM_USERRIGHT_INFOBYGUID() {
+    var UserRightId = $('#DropDownListUserRight :selected').val();
+    if (UserRightId != null && UserRightId != undefined && UserRightId != "" && UserRightId != "-1") {
+
+        var JsonArg = {
+            GuID: UserRightId,
+        }
+        $.ajax({
+            type: "POST",
+            url: BasePath + "/AUser/CUserRightManagmentUI/GET_MT_URM_USERRIGHT_INFOBYGUID",
+            dataType: 'json',
+            data: { 'PostedData': (JsonArg) },
+            beforeSend: function () {
+                startLoading();
+            },
+            success: function (data) {
+                $('#DropDownListCompany').val(data[0].CompanyId).change();
+                $('#DropDownListRight').val(data[0].RightId).change();
+
+                $('#TextBoxRemarks').val(data[0].Remarks);
+                $('#HiddenFieldUserRightGuID').val(data[0].GuID);
+            },
+            complete: function () {
+
+                stopLoading();
+            },
+        });
+
+
+    }
+    else {
+        GetMessageBox("Please Select A User Right", 505);
+        return;
+    }
+};
