@@ -40,6 +40,16 @@ namespace office360.Areas.AAcademic.Controllers
         }
         #endregion
 
+        /*---------------------- ** ACTION RESULTS FOR :: RENDER OF DROP DOWN LIST FROM DB_MAIN USING STOREDPROCEDURE ** ---------------------------- */
+        
+        #region ACTION RESULT FOR :: RENDER DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
+        public ActionResult GET_MT_BM_BRANCH_BYPARAMTER(_SqlParameters PostedData)
+        {
+            var DATA = ABranch.HelperCode.DATA_FROM_SP.GET_MT_BM_BRANCH_BYPARAM(PostedData).ToList();
+            return Json(DATA, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
         /*---------------------- ** ACTION RESULTS FOR :: RENDER DATA FOR DROP DOWN LIST FROM DB_LOOKUP USING LINQUERY ** --------------------------- */
 
         #region ACTION RESULT FOR :: RENDER DATA FOR DROP DOWN FROM DB_LOOKUP -- LINQ-QUERY
@@ -51,11 +61,6 @@ namespace office360.Areas.AAcademic.Controllers
         public ActionResult GET_LK1_STUDYGROUP(_SqlParameters PostedData)
         {
             var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_StudyGroup(PostedData).ToList();
-            return Json(DATA, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult GET_LK1_CHALLANMETHOD(_SqlParameters PostedData)
-        {
-            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_ChallanMethod(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
         #endregion

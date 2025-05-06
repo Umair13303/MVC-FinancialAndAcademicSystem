@@ -338,6 +338,9 @@
     <Compile Include="Models\DBF\DBContextClass.cs" />
     <Compile Include="Models\DBF\DBFModel.cs" />
     <Compile Include="Models\DBF\DBFStoredProcedure.cs" />
+    <Compile Include="Models\EDMX\ACM_Class.cs">
+      <DependentUpon>SESModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EDMX\AdmissionCatagory.cs">
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
@@ -417,18 +420,6 @@
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\Gender.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EDMX\LK_ChallanMethod_GetListByParam_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EDMX\LK_StudyGroup_GetListByParam_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EDMX\LK_StudyLevel_GetListByParam_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EDMX\LK_WHTaxPolicy_GetListByParam_Result.cs">
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\MartialStatus.cs">
@@ -1980,13 +1971,13 @@
     <Content Include="Areas\AUser\Views\web.config" />
     <Content Include="Areas\AUser\Views\CUserManagmentUI\CreateUpdate_UMUI_User.cshtml" />
     <Content Include="Areas\AUser\Views\CUserManagmentUI\View_List_UMUI_User.cshtml" />
-    <Content Include="DB_BackUp\SESFINAL BACKUP.bak" />
-    <Content Include="DB_BackUp\XLookUp BACKUP.bak" />
     <Content Include="Areas\ACompany\Views\CRightSettingManagmentUI\CreateUpdate_RSMUI_RightSetting.cshtml" />
     <Content Include="Areas\AUser\Views\CUserRightManagmentUI\CreateUpdate_URMUI_UserRight.cshtml" />
     <Content Include="Areas\AUser\Views\CUserRightManagmentUI\View_List_URMUI_UserRight.cshtml" />
     <Content Include="Areas\AAcademic\Views\web.config" />
     <Content Include="Areas\AAcademic\Views\CAcademicClassManagmentUI\CreateUpdate_ACMUI_Class.cshtml" />
+    <Content Include="DB_BackUp\SESFINAL BACKUP.bak" />
+    <Content Include="DB_BackUp\XLookUp BACKUP.bak" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>

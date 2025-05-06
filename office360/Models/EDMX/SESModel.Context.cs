@@ -27,6 +27,7 @@ namespace office360.Models.EDMX
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<ACM_Class> ACM_Class { get; set; }
         public virtual DbSet<BM_Branch> BM_Branch { get; set; }
         public virtual DbSet<CM_Company> CM_Company { get; set; }
         public virtual DbSet<RSM_RightSetting> RSM_RightSetting { get; set; }
@@ -103,6 +104,75 @@ namespace office360.Models.EDMX
                 new ObjectParameter("CampusId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_GetGeneralBranchSettingForCampus_Result>("[SESEntities].[fn_GetGeneralBranchSettingForCampus](@CampusId)", campusIdParameter);
+        }
+    
+        public virtual int ACM_Class_Upsert(string dB_OperationType, Nullable<System.Guid> guID, Nullable<int> campusId, string description, Nullable<int> studyLevelId, Nullable<int> studyGroupId, Nullable<System.DateTime> createdOn, Nullable<int> createdBy, Nullable<System.DateTime> updatedOn, Nullable<int> updatedBy, Nullable<int> docType, Nullable<int> documentStatus, Nullable<bool> status, Nullable<int> branchId, Nullable<int> companyId, string remarks, ObjectParameter response)
+        {
+            var dB_OperationTypeParameter = dB_OperationType != null ?
+                new ObjectParameter("DB_OperationType", dB_OperationType) :
+                new ObjectParameter("DB_OperationType", typeof(string));
+    
+            var guIDParameter = guID.HasValue ?
+                new ObjectParameter("GuID", guID) :
+                new ObjectParameter("GuID", typeof(System.Guid));
+    
+            var campusIdParameter = campusId.HasValue ?
+                new ObjectParameter("CampusId", campusId) :
+                new ObjectParameter("CampusId", typeof(int));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var studyLevelIdParameter = studyLevelId.HasValue ?
+                new ObjectParameter("StudyLevelId", studyLevelId) :
+                new ObjectParameter("StudyLevelId", typeof(int));
+    
+            var studyGroupIdParameter = studyGroupId.HasValue ?
+                new ObjectParameter("StudyGroupId", studyGroupId) :
+                new ObjectParameter("StudyGroupId", typeof(int));
+    
+            var createdOnParameter = createdOn.HasValue ?
+                new ObjectParameter("CreatedOn", createdOn) :
+                new ObjectParameter("CreatedOn", typeof(System.DateTime));
+    
+            var createdByParameter = createdBy.HasValue ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
+    
+            var updatedOnParameter = updatedOn.HasValue ?
+                new ObjectParameter("UpdatedOn", updatedOn) :
+                new ObjectParameter("UpdatedOn", typeof(System.DateTime));
+    
+            var updatedByParameter = updatedBy.HasValue ?
+                new ObjectParameter("UpdatedBy", updatedBy) :
+                new ObjectParameter("UpdatedBy", typeof(int));
+    
+            var docTypeParameter = docType.HasValue ?
+                new ObjectParameter("DocType", docType) :
+                new ObjectParameter("DocType", typeof(int));
+    
+            var documentStatusParameter = documentStatus.HasValue ?
+                new ObjectParameter("DocumentStatus", documentStatus) :
+                new ObjectParameter("DocumentStatus", typeof(int));
+    
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(bool));
+    
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(int));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var remarksParameter = remarks != null ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ACM_Class_Upsert", dB_OperationTypeParameter, guIDParameter, campusIdParameter, descriptionParameter, studyLevelIdParameter, studyGroupIdParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, remarksParameter, response);
         }
     
         public virtual ObjectResult<BM_Branch_GetListByParam_Result> BM_Branch_GetListByParam(string dB_IF_PARAM, Nullable<int> sessionCompanyId, Nullable<int> sessionBranchId, string allowedCampusIds, string searchParameter, Nullable<int> companyId)
@@ -369,74 +439,6 @@ namespace office360.Models.EDMX
                 new ObjectParameter("Remarks", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CM_Company_Upsert", dB_OperationTypeParameter, guIDParameter, companyNameParameter, cityIdParameter, countryIdParameter, addressLineParameter, phoneNumberParameter, emailAddressParameter, companyWebsiteParameter, uploadLogoParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, remarksParameter, response);
-        }
-    
-        public virtual ObjectResult<LK_ChallanMethod_GetListByParam_Result> LK_ChallanMethod_GetListByParam(string dB_IF_PARAM, Nullable<int> id)
-        {
-            var dB_IF_PARAMParameter = dB_IF_PARAM != null ?
-                new ObjectParameter("DB_IF_PARAM", dB_IF_PARAM) :
-                new ObjectParameter("DB_IF_PARAM", typeof(string));
-    
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LK_ChallanMethod_GetListByParam_Result>("LK_ChallanMethod_GetListByParam", dB_IF_PARAMParameter, idParameter);
-        }
-    
-        public virtual ObjectResult<LK_StudyGroup_GetListByParam_Result> LK_StudyGroup_GetListByParam(string dB_IF_PARAM, Nullable<int> companyId, Nullable<int> campusId)
-        {
-            var dB_IF_PARAMParameter = dB_IF_PARAM != null ?
-                new ObjectParameter("DB_IF_PARAM", dB_IF_PARAM) :
-                new ObjectParameter("DB_IF_PARAM", typeof(string));
-    
-            var companyIdParameter = companyId.HasValue ?
-                new ObjectParameter("CompanyId", companyId) :
-                new ObjectParameter("CompanyId", typeof(int));
-    
-            var campusIdParameter = campusId.HasValue ?
-                new ObjectParameter("CampusId", campusId) :
-                new ObjectParameter("CampusId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LK_StudyGroup_GetListByParam_Result>("LK_StudyGroup_GetListByParam", dB_IF_PARAMParameter, companyIdParameter, campusIdParameter);
-        }
-    
-        public virtual ObjectResult<LK_StudyLevel_GetListByParam_Result> LK_StudyLevel_GetListByParam(string dB_IF_PARAM, Nullable<int> companyId, Nullable<int> campusId)
-        {
-            var dB_IF_PARAMParameter = dB_IF_PARAM != null ?
-                new ObjectParameter("DB_IF_PARAM", dB_IF_PARAM) :
-                new ObjectParameter("DB_IF_PARAM", typeof(string));
-    
-            var companyIdParameter = companyId.HasValue ?
-                new ObjectParameter("CompanyId", companyId) :
-                new ObjectParameter("CompanyId", typeof(int));
-    
-            var campusIdParameter = campusId.HasValue ?
-                new ObjectParameter("CampusId", campusId) :
-                new ObjectParameter("CampusId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LK_StudyLevel_GetListByParam_Result>("LK_StudyLevel_GetListByParam", dB_IF_PARAMParameter, companyIdParameter, campusIdParameter);
-        }
-    
-        public virtual ObjectResult<LK_WHTaxPolicy_GetListByParam_Result> LK_WHTaxPolicy_GetListByParam(string dB_IF_PARAM, Nullable<int> companyId, Nullable<int> branchId, Nullable<int> accFeeStructureId)
-        {
-            var dB_IF_PARAMParameter = dB_IF_PARAM != null ?
-                new ObjectParameter("DB_IF_PARAM", dB_IF_PARAM) :
-                new ObjectParameter("DB_IF_PARAM", typeof(string));
-    
-            var companyIdParameter = companyId.HasValue ?
-                new ObjectParameter("CompanyId", companyId) :
-                new ObjectParameter("CompanyId", typeof(int));
-    
-            var branchIdParameter = branchId.HasValue ?
-                new ObjectParameter("BranchId", branchId) :
-                new ObjectParameter("BranchId", typeof(int));
-    
-            var accFeeStructureIdParameter = accFeeStructureId.HasValue ?
-                new ObjectParameter("AccFeeStructureId", accFeeStructureId) :
-                new ObjectParameter("AccFeeStructureId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LK_WHTaxPolicy_GetListByParam_Result>("LK_WHTaxPolicy_GetListByParam", dB_IF_PARAMParameter, companyIdParameter, branchIdParameter, accFeeStructureIdParameter);
         }
     
         public virtual ObjectResult<RSM_RightSetting_GetDetailByParam_Result> RSM_RightSetting_GetDetailByParam(string dB_IF_PARAM, string allowedCampusIds, Nullable<int> userId, Nullable<int> companyId, Nullable<int> uRLTypeId, Nullable<bool> status, string menu, Nullable<int> rightId, string rightPath)

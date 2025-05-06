@@ -5,6 +5,28 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="SESModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ACM_Class">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuID" Type="uniqueidentifier" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="CampusId" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="StudyLevelId" Type="int" />
+          <Property Name="StudyGroupId" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="DocType" Type="int" />
+          <Property Name="DocumentStatus" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="BranchId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="BM_Branch">
           <Key>
             <PropertyRef Name="Id" />
@@ -464,6 +486,25 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Property Name="Status" Type="bit" />
           <Property Name="CreatedOn" Type="smalldatetime" />
         </EntityType>
+        <Function Name="ACM_Class_Upsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_OperationType" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="GuID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="CampusId" Type="int" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="StudyLevelId" Type="int" Mode="In" />
+          <Parameter Name="StudyGroupId" Type="int" Mode="In" />
+          <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+          <Parameter Name="UpdatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="UpdatedBy" Type="int" Mode="In" />
+          <Parameter Name="DocType" Type="int" Mode="In" />
+          <Parameter Name="DocumentStatus" Type="int" Mode="In" />
+          <Parameter Name="Status" Type="bit" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Response" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="BM_Branch_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="SessionCompanyId" Type="int" Mode="In" />
@@ -586,26 +627,6 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </CollectionType>
           </ReturnType>
         </Function>
-        <Function Name="LK_ChallanMethod_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="Id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="LK_StudyGroup_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="CompanyId" Type="int" Mode="In" />
-          <Parameter Name="CampusId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="LK_StudyLevel_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="CompanyId" Type="int" Mode="In" />
-          <Parameter Name="CampusId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="LK_WHTaxPolicy_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="CompanyId" Type="int" Mode="In" />
-          <Parameter Name="BranchId" Type="int" Mode="In" />
-          <Parameter Name="AccFeeStructureId" Type="int" Mode="In" />
-        </Function>
         <Function Name="RSM_RightSetting_GetDetailByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="AllowedCampusIds" Type="nvarchar(max)" Mode="In" />
@@ -718,6 +739,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Parameter Name="Response" Type="int" Mode="InOut" />
         </Function>
         <EntityContainer Name="SESModelStoreContainer">
+          <EntitySet Name="ACM_Class" EntityType="Self.ACM_Class" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BM_Branch" EntityType="Self.BM_Branch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CM_Company" EntityType="Self.CM_Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RSM_RightSetting" EntityType="Self.RSM_RightSetting" Schema="dbo" store:Type="Tables" />
@@ -988,6 +1010,28 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Property Name="ChallanMethod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="AllowedChallanNo" Type="Int32" />
         </ComplexType>
+        <EntityType Name="ACM_Class">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuID" Type="Guid" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CampusId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StudyLevelId" Type="Int32" />
+          <Property Name="StudyGroupId" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="DocType" Type="Int32" />
+          <Property Name="DocumentStatus" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="BranchId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="BM_Branch">
           <Key>
             <PropertyRef Name="Id" />
@@ -1384,6 +1428,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Property Name="CreatedOn" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityContainer Name="SESEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ACM_Class" EntityType="Self.ACM_Class" />
           <EntitySet Name="BM_Branch" EntityType="Self.BM_Branch" />
           <EntitySet Name="CM_Company" EntityType="Self.CM_Company" />
           <EntitySet Name="RSM_RightSetting" EntityType="Self.RSM_RightSetting" />
@@ -1432,6 +1477,25 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           </FunctionImport>
           <FunctionImport Name="fn_GetGeneralBranchSettingForCampus" IsComposable="true" ReturnType="Collection(SESModel.fn_GetGeneralBranchSettingForCampus_Result)">
             <Parameter Name="CampusId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ACM_Class_Upsert">
+            <Parameter Name="DB_OperationType" Mode="In" Type="String" />
+            <Parameter Name="GuID" Mode="In" Type="Guid" />
+            <Parameter Name="CampusId" Mode="In" Type="Int32" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="StudyLevelId" Mode="In" Type="Int32" />
+            <Parameter Name="StudyGroupId" Mode="In" Type="Int32" />
+            <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="DocType" Mode="In" Type="Int32" />
+            <Parameter Name="DocumentStatus" Mode="In" Type="Int32" />
+            <Parameter Name="Status" Mode="In" Type="Boolean" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="Remarks" Mode="In" Type="String" />
+            <Parameter Name="Response" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="BM_Branch_GetListByParam" ReturnType="Collection(SESModel.BM_Branch_GetListByParam_Result)">
             <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
@@ -1505,26 +1569,6 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
             <Parameter Name="Remarks" Mode="In" Type="String" />
             <Parameter Name="Response" Mode="InOut" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="LK_ChallanMethod_GetListByParam" ReturnType="Collection(SESModel.LK_ChallanMethod_GetListByParam_Result)">
-            <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
-            <Parameter Name="Id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="LK_StudyGroup_GetListByParam" ReturnType="Collection(SESModel.LK_StudyGroup_GetListByParam_Result)">
-            <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
-            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
-            <Parameter Name="CampusId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="LK_StudyLevel_GetListByParam" ReturnType="Collection(SESModel.LK_StudyLevel_GetListByParam_Result)">
-            <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
-            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
-            <Parameter Name="CampusId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="LK_WHTaxPolicy_GetListByParam" ReturnType="Collection(SESModel.LK_WHTaxPolicy_GetListByParam_Result)">
-            <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
-            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
-            <Parameter Name="BranchId" Mode="In" Type="Int32" />
-            <Parameter Name="AccFeeStructureId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="RSM_RightSetting_GetDetailByParam" ReturnType="Collection(SESModel.RSM_RightSetting_GetDetailByParam_Result)">
             <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
@@ -1679,28 +1723,6 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Property Type="Guid" Name="GuID" Nullable="true" />
           <Property Type="String" Name="Description" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="LK_ChallanMethod_GetListByParam_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="String" Name="Description" Nullable="true" />
-          <Property Type="Int32" Name="MonthsNo" Nullable="true" />
-          <Property Type="Int32" Name="ChallanNo" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="LK_StudyGroup_GetListByParam_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="String" Name="Description" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="LK_StudyLevel_GetListByParam_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="String" Name="Description" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="LK_WHTaxPolicy_GetListByParam_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="String" Name="Description" Nullable="true" />
-          <Property Type="Decimal" Name="SlabAmount" Nullable="true" Precision="18" Scale="4" />
-          <Property Type="Decimal" Name="FixedCharges" Nullable="true" Precision="18" Scale="4" />
-          <Property Type="Decimal" Name="Percentage" Nullable="true" Precision="18" Scale="4" />
-          <Property Type="Boolean" Name="IsOnExceedingAmount" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="RSM_RightSetting_GetDetailByParam_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="FormName" Nullable="true" />
@@ -1779,6 +1801,29 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SESModelStoreContainer" CdmEntityContainer="SESEntities">
+          <EntitySetMapping Name="ACM_Class">
+            <EntityTypeMapping TypeName="SESModel.ACM_Class">
+              <MappingFragment StoreEntitySet="ACM_Class">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="CampusId" ColumnName="CampusId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StudyLevelId" ColumnName="StudyLevelId" />
+                <ScalarProperty Name="StudyGroupId" ColumnName="StudyGroupId" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="DocType" ColumnName="DocType" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="BM_Branch">
             <EntityTypeMapping TypeName="SESModel.BM_Branch">
               <MappingFragment StoreEntitySet="BM_Branch">
@@ -2245,6 +2290,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ACM_Class_Upsert" FunctionName="SESModel.Store.ACM_Class_Upsert" />
           <FunctionImportMapping FunctionImportName="BM_Branch_GetListByParam" FunctionName="SESModel.Store.BM_Branch_GetListByParam">
             <ResultMapping>
               <ComplexTypeMapping TypeName="SESModel.BM_Branch_GetListByParam_Result">
@@ -2304,44 +2350,6 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CM_Company_Upsert" FunctionName="SESModel.Store.CM_Company_Upsert" />
-          <FunctionImportMapping FunctionImportName="LK_ChallanMethod_GetListByParam" FunctionName="SESModel.Store.LK_ChallanMethod_GetListByParam">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SESModel.LK_ChallanMethod_GetListByParam_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="MonthsNo" ColumnName="MonthsNo" />
-                <ScalarProperty Name="ChallanNo" ColumnName="ChallanNo" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="LK_StudyGroup_GetListByParam" FunctionName="SESModel.Store.LK_StudyGroup_GetListByParam">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SESModel.LK_StudyGroup_GetListByParam_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="LK_StudyLevel_GetListByParam" FunctionName="SESModel.Store.LK_StudyLevel_GetListByParam">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SESModel.LK_StudyLevel_GetListByParam_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="LK_WHTaxPolicy_GetListByParam" FunctionName="SESModel.Store.LK_WHTaxPolicy_GetListByParam">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SESModel.LK_WHTaxPolicy_GetListByParam_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="SlabAmount" ColumnName="SlabAmount" />
-                <ScalarProperty Name="FixedCharges" ColumnName="FixedCharges" />
-                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
-                <ScalarProperty Name="IsOnExceedingAmount" ColumnName="IsOnExceedingAmount" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="RSM_RightSetting_GetDetailByParam" FunctionName="SESModel.Store.RSM_RightSetting_GetDetailByParam">
             <ResultMapping>
               <ComplexTypeMapping TypeName="SESModel.RSM_RightSetting_GetDetailByParam_Result">

@@ -147,7 +147,7 @@ function ValidateInputFields() {
     if ($('#DropDownListRight').RequiredDropdown() == false) {
         return false;
     }
-    if ($('#TextBoxRemarks').RequiredDropdown() == false) {
+    if ($('#TextBoxRemarks').RequiredTextBoxInputGroup() == false) {
         return false;
     }
 
