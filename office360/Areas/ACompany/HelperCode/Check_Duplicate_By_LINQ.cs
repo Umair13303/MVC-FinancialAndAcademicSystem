@@ -11,14 +11,14 @@ using office360.Common.CommonHelper;
 using System.Data.Entity.Core.Objects;
 using office360.Extensions;
 using System;
-
-
-namespace office360.Areas.ABranch.HelperCode
+namespace office360.Areas.ACompany.HelperCode
 {
     public class Check_Duplicate_By_LINQ
     {
-        #region HELPER FOR :: CHECK IF Branch(ACTIVE_BRANCH) ALREADY EXIST
-        public static int? IS_EXIST_BM_BRANCH_BY_DESCRIPTION(_SqlParameters PostedData)
+
+
+        #region HELPER FOR :: CHECK IF Company(ACTIVE_COMPANY) ALREADY EXIST
+        public static int? IS_EXIST_CM_COMPANY_BY_COMPANYNAME(_SqlParameters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
@@ -31,11 +31,10 @@ namespace office360.Areas.ABranch.HelperCode
                         case nameof(DB_OperationType.INSERT_DATA_INTO_DB):
 
 
-                            var DATA = db.BM_Branch
+                            var DATA = db.CM_Company
                                 .Where(x =>
-                                    x.Description == PostedData.Description &&
-                                    x.CompanyId == PostedData.CompanyId &&
-                                    x.DocumentStatus == (int?)DocStatus.ACTIVE_BRANCH &&
+                                    x.CompanyName == PostedData.CompanyName &&
+                                    x.DocumentStatus == (int?)DocStatus.ACTIVE_COMPANY &&
                                     x.Status == true
                                 )
                                 .Select(x => new _SqlParameters { Id = x.Id }).ToList();
@@ -73,8 +72,9 @@ namespace office360.Areas.ABranch.HelperCode
         }
         #endregion
 
-        #region HELPER FOR :: CHECK IF BranchSetting(ACTIVE_BRANCH_SETTING) ALREADY EXIST
-        public static int? IS_EXIST_BM_BRANCHSETTING_BY_BRANCHID(_SqlParameters PostedData)
+        #region HELPER FOR :: CHECK IF RightSetting(ACTIVE_RIGHTSETTING) ALREADY EXIST
+
+        public static int? IS_EXIST_RSM_RIGHTSETTING_BY_COMPANYID(_SqlParameters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
@@ -87,10 +87,11 @@ namespace office360.Areas.ABranch.HelperCode
                         case nameof(DB_OperationType.INSERT_DATA_INTO_DB):
 
 
-                            var DATA = db.BM_BranchSetting
+                            var DATA = db.RSM_RightSetting
                                 .Where(x =>
-                                    x.CampusId == PostedData.CampusId &&
-                                    x.DocumentStatus == (int?)DocStatus.ACTIVE_BRANCH_SETTING &&
+                                    x.RightId == PostedData.RightId &&
+                                    x.CompanyId == PostedData.CompanyId &&
+                                    x.DocumentStatus == (int?)DocStatus.ACTIVE_RIGHT_SETTING &&
                                     x.Status == true
                                 )
                                 .Select(x => new _SqlParameters { Id = x.Id }).ToList();

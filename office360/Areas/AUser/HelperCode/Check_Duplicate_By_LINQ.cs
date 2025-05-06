@@ -11,14 +11,14 @@ using office360.Common.CommonHelper;
 using System.Data.Entity.Core.Objects;
 using office360.Extensions;
 using System;
-
-
-namespace office360.Areas.ABranch.HelperCode
+namespace office360.Areas.AUser.HelperCode
 {
     public class Check_Duplicate_By_LINQ
     {
-        #region HELPER FOR :: CHECK IF Branch(ACTIVE_BRANCH) ALREADY EXIST
-        public static int? IS_EXIST_BM_BRANCH_BY_DESCRIPTION(_SqlParameters PostedData)
+
+
+        #region HELPER FOR :: CHECK IF User(ACTIVE_USER) ALREADY EXIST
+        public static int? IS_EXIST_UM_USER_BY_USERNAME(_SqlParameters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
@@ -31,11 +31,10 @@ namespace office360.Areas.ABranch.HelperCode
                         case nameof(DB_OperationType.INSERT_DATA_INTO_DB):
 
 
-                            var DATA = db.BM_Branch
+                            var DATA = db.UM_User
                                 .Where(x =>
-                                    x.Description == PostedData.Description &&
-                                    x.CompanyId == PostedData.CompanyId &&
-                                    x.DocumentStatus == (int?)DocStatus.ACTIVE_BRANCH &&
+                                    x.UserName == PostedData.UserName &&
+                                    x.DocumentStatus == (int?)DocStatus.ACTIVE_USER &&
                                     x.Status == true
                                 )
                                 .Select(x => new _SqlParameters { Id = x.Id }).ToList();
@@ -72,9 +71,8 @@ namespace office360.Areas.ABranch.HelperCode
             }
         }
         #endregion
-
-        #region HELPER FOR :: CHECK IF BranchSetting(ACTIVE_BRANCH_SETTING) ALREADY EXIST
-        public static int? IS_EXIST_BM_BRANCHSETTING_BY_BRANCHID(_SqlParameters PostedData)
+        #region HELPER FOR :: CHECK IF UserRight(ACTIVE_USER_RIGHT) ALREADY EXIST
+        public static int? IS_EXIST_URM_USERRIGHT_BY_USERID(_SqlParameters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
@@ -87,10 +85,11 @@ namespace office360.Areas.ABranch.HelperCode
                         case nameof(DB_OperationType.INSERT_DATA_INTO_DB):
 
 
-                            var DATA = db.BM_BranchSetting
+                            var DATA = db.URM_UserRight
                                 .Where(x =>
-                                    x.CampusId == PostedData.CampusId &&
-                                    x.DocumentStatus == (int?)DocStatus.ACTIVE_BRANCH_SETTING &&
+                                    x.UserId == PostedData.UserId &&
+                                    x.RightId == PostedData.RightId &&
+                                    x.DocumentStatus == (int?)DocStatus.ACTIVE_USER_RIGHT &&
                                     x.Status == true
                                 )
                                 .Select(x => new _SqlParameters { Id = x.Id }).ToList();

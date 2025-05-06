@@ -41,5 +41,35 @@ namespace office360.Areas.ACompany.HelperCode
 
         #endregion
 
+        #region HELPER FOR :: GET DATA USING LINQ (RSM_RIGHTSETTING) ::-- MAIN DB
+        public static List<_SqlParameters> GET_MT_RSM_RIGHTSETTING_INFO_BY_GUID(_SqlParameters PostedData)
+        {
+            List<_SqlParameters> DATA = new List<_SqlParameters>();
+
+            using (SESEntities db = new SESEntities())
+            {
+                DATA = ((List<_SqlParameters>)
+                       (from RU in db.RSM_RightSetting
+                        where
+                        RU.GuID == PostedData.GuID
+                        select new _SqlParameters
+                        {
+                            Id = RU.Id,
+                            GuID = RU.GuID,
+                            RightId = RU.RightId,
+                            Description = RU.Description,
+                            URLTypeId = RU.URLTypeId,
+                            BranchId = RU.BranchId,
+                            CompanyId = RU.CompanyId,
+                            Remarks = RU.Remarks,
+
+                        }).ToList());
+
+                return DATA;
+            }
+        }
+
+        #endregion
+
     }
 }

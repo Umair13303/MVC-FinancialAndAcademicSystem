@@ -37,7 +37,26 @@ namespace office360.Areas.ACompany.HelperCode
             }
         }
 
+        public static List<RSM_RightSetting_GetListByParam_Result> GET_MT_RSM_RIGHTSETTING_BYPARAM(_SqlParameters PostedData)
+        {
+
+            using (SESEntities db = new SESEntities())
+            {
+                List<RSM_RightSetting_GetListByParam_Result> DATA = new List<RSM_RightSetting_GetListByParam_Result>();
+
+                DATA = db.RSM_RightSetting_GetListByParam(
+                                                       PostedData.DB_IF_PARAM,
+                                                       Session_Manager.CompanyId,
+                                                       PostedData.SearchParameter,
+                                                       PostedData.CompanyId
+                                                       ).ToList();
+
+                return DATA;
+            }
+        }
         #endregion
+
+
 
     }
 }

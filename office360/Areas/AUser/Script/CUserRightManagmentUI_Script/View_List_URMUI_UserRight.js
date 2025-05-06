@@ -62,14 +62,14 @@ function InitDataTable() {
 
         ],
         columnDefs: [
-            { visible: false, targets: [6,5,4] },
+            //{ visible: false, targets: [6,5,4] },
             { "orderable": false, targets: [0, 1, 2, 3, 4, 5, 6,7,8] },
         ],
         "createdRow": function (row, data, index) {
         },
         order: [[ParentGroupColumn, 'asc']],
         drawCallback: function (settings) {
-            //DT_GroupBy(this, settings, '#MainTableURM_UserRight', ['Company', 'Branch',]);
+            DT_GroupBy(this, settings, '#MainTableURM_UserRight', ['Company', 'Branch',]);
         }
 
     });
@@ -92,43 +92,45 @@ function InitDataTable() {
             if (!row.child.isShown()) {
                 row.child('<div class="slider" style="display: none;"></div>', 'no-padding').show();
                 tr.addClass('shown');
-                DrawDetailDataTable(row.data(), row.child().find('.slider'));
+                Init_DetailDataTable(row.data(), row.child().find('.slider'));
             }
 
             $('div.slider', row.child()).slideDown(300);
         }
     });
-
-    function DrawDetailDataTable(Data, container) {
-        $.ajax({
-            type: "POST",
-            url: BasePath + "/AUser/CUserRightManagmentUI/GET_MT_URM_USERRIGHT_LIST_BY_USERID_SEARCHQUERY_FORDATATABLE",
-            data: { 'PostedData': Data },
-            beforeSend: function () {
-                startLoading();
-            },
-            success: function (response) {
-                let tableRows = '';
-                if (response.length > 0) {
-                    response.forEach((item, index) => {
-                        tableRows += `
+}
+function Init_DetailDataTable(Data, container) {
+    $.ajax({
+        type: "POST",
+        url: BasePath + "/AUser/CUserRightManagmentUI/GET_MT_URM_USERRIGHT_LIST_BY_USERID_SEARCHQUERY_FORDATATABLE",
+        data: { 'PostedData': Data },
+        beforeSend: function () {
+            startLoading();
+        },
+        success: function (response) {
+            let tableRows = '';
+            if (response.length > 0) {
+                response.forEach((item, index) => {
+                    tableRows += `
                         <tr>
                             <td>${index + 1}</td>
                             <td>${item.DisplayName}</td>
                             <td>${item.FormName}</td>
+                            <td>${GetStatus(item.DocumentStatus)}</td>
                         </tr>`;
-                    });
-                } else {
-                    tableRows = `<tr><td colspan="4" class="text-center">No rights assigned.</td></tr>`;
-                }
+                });
+            } else {
+                tableRows = `<tr><td colspan="4" class="text-center">No rights assigned.</td></tr>`;
+            }
 
-                const tableHtml = `
+            const tableHtml = `
                 <table width="100%" class="table  table-sm ">
                     <thead>
                         <tr class="info">
                             <th>#</th>
                             <th>Right Name</th>
                             <th>Server Side Form</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -136,19 +138,18 @@ function InitDataTable() {
                     </tbody>
                 </table>`;
 
-                container.html(tableHtml);
-            },
-            complete: function () {
-                stopLoading();
-            },
-            error: function () {
-                container.html('<p class="text-danger">Failed to load user rights.</p>');
-                stopLoading();
-            }
-        });
-    }
-
+            container.html(tableHtml);
+        },
+        complete: function () {
+            stopLoading();
+        },
+        error: function () {
+            container.html('<p class="text-danger">Failed to load user rights.</p>');
+            stopLoading();
+        }
+    });
 }
+
 
 
 /*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER **-----------------------------------------------------------------------*/

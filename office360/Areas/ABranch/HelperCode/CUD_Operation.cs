@@ -26,60 +26,72 @@ namespace office360.Areas.ABranch.HelperCode
                 {
                     try
                     {
-                        #region DB SETTING
-                        if (PostedData.OperationType == nameof(DB_OperationType.INSERT_DATA_INTO_DB))
+
+                        #region CHECK DUPLICATE :: NO-OPERATION IF ACTIVE BRANCH EXIST
+                        int? DB_OPERATION_STATUS = ABranch.HelperCode.Check_Duplicate_By_LINQ.IS_EXIST_BM_BRANCHSETTING_BY_BRANCHID(PostedData);
+                        switch (DB_OPERATION_STATUS)
                         {
-                            PostedData.GuID = Uttility.fn_GetHashGuid();
+                            case (int?)Http_DB_Response.CODE_AUTHORIZED:
+                                #region DB SETTING
+                                if (PostedData.OperationType == nameof(DB_OperationType.INSERT_DATA_INTO_DB))
+                                {
+                                    PostedData.GuID = Uttility.fn_GetHashGuid();
+                                }
+                                #endregion
+                                #region OUTPUT VARAIBLE
+                                var ResponseParameter = new ObjectParameter("Response", typeof(int));
+                                #endregion
+                                #region EXECUTE STORE PROCEDURE
+                                var BM_Branch = db.BM_Branch_Upsert(
+                                                                     PostedData.OperationType,
+                                                                     PostedData.GuID,
+                                                                     PostedData.Description?.Trim(),
+                                                                     PostedData.CampusTypeId,
+                                                                     PostedData.OrganizationTypeId,
+                                                                     PostedData.CountryId,
+                                                                     PostedData.CityId,
+                                                                     PostedData.Address?.Trim().ToSafeString(),
+                                                                     PostedData.ContactNo?.Trim().ToSafeString(),
+                                                                     PostedData.EmailAddress?.Trim().ToSafeString(),
+                                                                     PostedData.NTNNo?.Trim().ToSafeString(),
+                                                                     PostedData.Remarks?.Trim().ToSafeString(),
+                                                                     DateTime.Now,
+                                                                     Session_Manager.UserId,
+                                                                     DateTime.Now,
+                                                                     Session_Manager.UserId,
+                                                                     (int?)DocumentStatus.DocStatus.ACTIVE_BRANCH,
+                                                                     (int?)DocumentStatus.DocType.BRANCH,
+                                                                     true,
+                                                                     Session_Manager.BranchId,
+                                                                     Session_Manager.CompanyId,
+                                                                     ResponseParameter
+                                    );
+
+                                #endregion
+                                #region RESPONSE VALUES IN VARIABLE
+                                int? Response = (int)ResponseParameter.Value;
+                                #endregion
+                                #region TRANSACTION HANDLING DETAIL
+                                switch (Response)
+                                {
+                                    case (int?)Http_DB_Response.CODE_SUCCESS:
+                                    case (int?)Http_DB_Response.CODE_DATA_UPDATED:
+
+                                        dbTran.Commit();
+                                        break;
+
+                                    case (int?)Http_DB_Response.CODE_BAD_REQUEST:
+                                        dbTran.Rollback();
+                                        break;
+                                }
+                                #endregion
+                                return Http_Server_Status.Http_DB_ResponseByReturnValue(Response);
+
+                            default:
+                                return Http_Server_Status.Http_DB_ResponseByReturnValue(DB_OPERATION_STATUS);
                         }
                         #endregion
-                        #region OUTPUT VARAIBLE
-                        var ResponseParameter = new ObjectParameter("Response", typeof(int));
-                        #endregion
-                        #region EXECUTE STORE PROCEDURE
-                        var BM_Branch = db.BM_Branch_Upsert(
-                                                             PostedData.OperationType,
-                                                             PostedData.GuID,
-                                                             PostedData.Description,
-                                                             PostedData.CampusTypeId,
-                                                             PostedData.OrganizationTypeId,
-                                                             PostedData.CountryId,
-                                                             PostedData.CityId,
-                                                             PostedData.Address.ToSafeString(),
-                                                             PostedData.ContactNo.ToSafeString(),
-                                                             PostedData.EmailAddress.ToSafeString(),
-                                                             PostedData.NTNNo.ToSafeString(),
-                                                             PostedData.Remarks.ToSafeString(),
-                                                             DateTime.Now,
-                                                             Session_Manager.UserId,
-                                                             DateTime.Now,
-                                                             Session_Manager.UserId,
-                                                             (int?)DocumentStatus.DocStatus.ACTIVE_BRANCH,
-                                                             (int?)DocumentStatus.DocType.BRANCH,
-                                                             true,
-                                                             Session_Manager.BranchId,
-                                                             Session_Manager.CompanyId,
-                                                             ResponseParameter
-                            );                     
 
-                        #endregion
-                        #region RESPONSE VALUES IN VARIABLE
-                        int? Response = (int)ResponseParameter.Value;
-                        #endregion
-                        #region TRANSACTION HANDLING DETAIL
-                        switch (Response)
-                        {
-                            case (int?)Http_DB_Response.CODE_SUCCESS:
-                            case (int?)Http_DB_Response.CODE_DATA_UPDATED:
-
-                                dbTran.Commit();
-                                break;
-
-                            case (int?)Http_DB_Response.CODE_BAD_REQUEST:
-                                dbTran.Rollback();
-                                break;
-                        }
-                        #endregion
-                        return Http_Server_Status.Http_DB_ResponseByReturnValue(Response);
 
                     }
                     catch (Exception Ex)
@@ -104,8 +116,7 @@ namespace office360.Areas.ABranch.HelperCode
                     try
                     {
                         #region CHECK DUPLICATE :: NO-OPERATION IF ACTIVE BRANCH SETTING EXIST
-                        int? DB_OPERATION_STATUS = ABranch.HelperCode.Check_Duplicate_By_LINQ.IS_EXIST_BM_BRANCHSETTING_BYBRANCHID(PostedData);
-
+                        int? DB_OPERATION_STATUS = ABranch.HelperCode.Check_Duplicate_By_LINQ.IS_EXIST_BM_BRANCHSETTING_BY_BRANCHID(PostedData);
 
                         switch (DB_OPERATION_STATUS)
                         {
@@ -126,11 +137,11 @@ namespace office360.Areas.ABranch.HelperCode
                                                                                             PostedData.CampusId,
                                                                                             PostedData.RollCallSystemId,
                                                                                             PostedData.BillingMethodId,
-                                                                                            PostedData.StudyLevelIds,
-                                                                                            PostedData.StudyGroupIds,
+                                                                                            PostedData.StudyLevelIds?.Trim().ToSafeString(),
+                                                                                            PostedData.StudyGroupIds?.Trim().ToSafeString(),
                                                                                             PostedData.PolicyPeriodId,
                                                                                             PostedData.ChallanMethodId,
-                                                                                            PostedData.Remarks,
+                                                                                            PostedData.Remarks?.Trim().ToSafeString(),
                                                                                             DateTime.Now,
                                                                                             Session_Manager.UserId,
                                                                                             DateTime.Now,
@@ -167,8 +178,6 @@ namespace office360.Areas.ABranch.HelperCode
                                 return Http_Server_Status.Http_DB_ResponseByReturnValue(DB_OPERATION_STATUS);
                         }
                         #endregion
-
-
                     }
                     catch (Exception Ex)
                     {

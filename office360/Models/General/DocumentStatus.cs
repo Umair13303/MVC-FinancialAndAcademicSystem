@@ -7,7 +7,6 @@ namespace office360.Models.General
 {
     public class DocumentStatus
     {
-
         public enum DocType
         {
             COMPANY = 1,
@@ -15,31 +14,40 @@ namespace office360.Models.General
             RIGHT_SETTING = 3,
             USER_RIGHT = 4,
             BRANCH = 5,
-            BRANCH_SETTING = 6
+            BRANCH_SETTING = 6,
+            ACADEMIC_CLASS = 7,
+            ACADEMIC_CLASS_SUBJECT = 8,
+            ACADEMIC_ADMISSION_SESSION = 9,
         }
-
         public enum DocStatus
         {
-            ACTIVE_COMPANY=1,
-            INACTIVE_COMPANY=2,
-            DELETED_COMPANY=3,
-            ACTIVE_USER=4,
-            INACTIVE_USER=5,
-            DELETED_USER=6,
-            ACTIVE_RIGHT_SETTING=7,
-            INACTIVE_RIGHT_SETTING=8,
-            ACTIVE_USER_RIGHT=9,
-            INACTIVE_USER_RIGHT=10,
-            ACTIVE_BRANCH=11,
-            INACTIVE_BRANCH=12,
-            DELETED_BRANCH=13,
-            ACTIVE_BRANCH_SETTING=14,
-            INACTIVE_BRANCH_SETTING=15,
-            EXPIRED_BRANCH_SETTING=16,
-
-
+            ACTIVE_COMPANY = 1,
+            INACTIVE_COMPANY = 2,
+            DELETED_COMPANY = 3,
+            ACTIVE_USER = 4,
+            INACTIVE_USER = 5,
+            DELETED_USER = 6,
+            ACTIVE_RIGHT_SETTING = 7,
+            INACTIVE_RIGHT_SETTING = 8,
+            ACTIVE_USER_RIGHT = 9,
+            INACTIVE_USER_RIGHT = 10,
+            ACTIVE_BRANCH = 11,
+            INACTIVE_BRANCH = 12,
+            DELETED_BRANCH = 13,
+            ACTIVE_BRANCH_SETTING = 14,
+            INACTIVE_BRANCH_SETTING = 15,
+            EXPIRED_BRANCH_SETTING = 16,
+            DELETED_BRANCH_SETTING = 17,
+            ACTIVE_ACADEMIC_CLASS = 18,
+            INACTIVE_ACADEMIC_CLASS = 19,
+            DELETED_ACADEMIC_CLASS = 20,
+            ACTIVE_ACADEMIC_CLASS_SUBJECT = 21,
+            INACTIVE_ACADEMIC_CLASS_SUBJECT = 22,
+            DELETED_ACADEMIC_CLASS_SUBJECT = 23,
+            ACTIVE_ACADEMIC_ADMISSION_SESSION = 24,
+            INACTIVE_ACADEMIC_ADMISSION_SESSION = 25,
+            DELETED_ACADEMIC_ADMISSION_SESSION = 26,
         }
-
         public enum ChallanMethod
         {
             Trimester = 4,
