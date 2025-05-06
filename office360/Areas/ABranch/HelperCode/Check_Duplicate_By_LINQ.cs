@@ -73,60 +73,6 @@ namespace office360.Areas.ABranch.HelperCode
         }
         #endregion
 
-        #region HELPER FOR :: CHECK IF BranchSetting(ACTIVE_BRANCH_SETTING) ALREADY EXIST
-        public static int? IS_EXIST_BM_BRANCHSETTING_BY_BRANCHID(_SqlParameters PostedData)
-        {
-            using (SESEntities db = new SESEntities())
-            {
-                int? Response = (int?)Http_DB_Response.CODE_DATA_ALREADY_EXIST;
-                try
-                {
-                    switch (PostedData.OperationType)
-                    {
-
-                        case nameof(DB_OperationType.INSERT_DATA_INTO_DB):
-
-
-                            var DATA = db.BM_BranchSetting
-                                .Where(x =>
-                                    x.CampusId == PostedData.CampusId &&
-                                    x.DocumentStatus == (int?)DocStatus.ACTIVE_BRANCH_SETTING &&
-                                    x.Status == true
-                                )
-                                .Select(x => new _SqlParameters { Id = x.Id }).ToList();
-
-                            if (DATA.Count == 0)
-                            {
-                                Response = (int?)Http_DB_Response.CODE_AUTHORIZED;
-
-                            }
-                            else
-                            {
-                                Response = (int?)Http_DB_Response.CODE_DATA_ALREADY_EXIST;
-                            }
-                            break;
-
-                        case nameof(DB_OperationType.UPDATE_DATA_INTO_DB):
-                            Response = (int?)Http_DB_Response.CODE_AUTHORIZED;
-                            break;
-
-                        default:
-                            Response = (int?)Http_DB_Response.CODE_DATA_ALREADY_EXIST;
-                            break;
-
-
-                    }
-                    return Response;
-                }
-                catch (Exception Ex)
-                {
-                    return Http_Server_Status.Http_DB_Response.CODE_UN_KNOWN_ACTIVITY.ToInt();
-
-                }
-
-            }
-        }
-        #endregion
 
     }
 }

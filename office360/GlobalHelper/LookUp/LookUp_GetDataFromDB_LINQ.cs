@@ -307,6 +307,56 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
+        public static List<_SqlParameters> GET_LK1_StudyLevel(_SqlParameters PostedData)
+        {
+            using (SESEntities db = new SESEntities())
+            {
+                var DATA = db.StudyLevel
+                        .Where(x => x.Status == true)
+                         .Select(x => new _SqlParameters
+                         {
+                             Id = x.Id,
+                             Description = x.Description,
+                         })
+                         .ToList();
+
+                return DATA;
+            }
+        }
+        public static List<_SqlParameters> GET_LK1_StudyGroup(_SqlParameters PostedData)
+        {
+            using (SESEntities db = new SESEntities())
+            {
+                var DATA = db.StudyGroup
+                        .Where(x => x.Status == true)
+                         .Select(x => new _SqlParameters
+                         {
+                             Id = x.Id,
+                             Description = x.Description,
+                         })
+                         .ToList();
+
+                return DATA;
+            }
+        }
+        public static List<_SqlParameters> GET_LK1_ChallanMethod(_SqlParameters PostedData)
+        {
+            using (SESEntities db = new SESEntities())
+            {
+                var DATA = db.ChallanMethod
+                        .Where(x => x.Status == true)
+                         .Select(x => new _SqlParameters
+                         {
+                             Id = x.Id,
+                             Description = x.Description,
+                             ChallanNo = x.ChallanNo,
+                             MonthsNo = x.MonthsNo,
+                         })
+                         .ToList();
+
+                return DATA;
+            }
+        }
         #endregion
 
     }

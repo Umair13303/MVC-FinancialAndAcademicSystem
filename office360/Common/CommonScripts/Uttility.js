@@ -1,35 +1,30 @@
-﻿//------------ until all function in document.ready are fully loaded and render
+﻿/*----------------------------------** FUNCTION FOR::GLOBAL VARIABLE **-------------------------------------------------------------------------------------*/
+var DropDownListSelect2Class = '.select2';
+var PhoneClass = '.PhoneNumber';
+var MobileClass = '.MobileNumber';
+var EmailAddressClass = '.EmailAddress';
+var CNICClass = '.CNICNumber';
+var NTNClass = '.NTNNumber';
+/*----------------------------------** FUNCTION FOR::INITIALIZER CLASSES **-------------------------------------------------------------------------------------*/
+InitializeSelect2(DropDownListSelect2Class);
+InitializeInputMask(PhoneClass, AppliedMasking.Phone_Number);
+InitializeInputMask(MobileClass, AppliedMasking.Mobile_Number);
+InitializeInputMask(EmailAddressClass, AppliedMasking.Email_Address);
+InitializeInputMask(CNICClass, AppliedMasking.CNIC_Number);
+InitializeInputMask(NTNClass, AppliedMasking.NTN_Number);
 
-
-
-//------------ BEFORE DOM LOADS
-var select2Class = '.select2';
-var phoneNumberClass = '.PhoneNumber';
-var mobileNumberClass = '.MobileNumber';
-var emailAddressClass = '.EmailAddress';
-var cnicNumberClass = '.CNICNumber';
-var ntnNumberClass = '.NTNNumber';
-
-// Initialize Select2 and Input Masks
-initializeSelect2(select2Class);
-initializeInputMask(phoneNumberClass, AppliedMasking.Phone_Number);
-initializeInputMask(mobileNumberClass, AppliedMasking.Mobile_Number);
-initializeInputMask(emailAddressClass, AppliedMasking.Email_Address);
-initializeInputMask(cnicNumberClass, AppliedMasking.CNIC_Number);
-initializeInputMask(ntnNumberClass, AppliedMasking.NTN_Number);
-
-// Initialize Select2 for a given class selector
-function initializeSelect2(selector) {
+/*----------------------------------** FUNCTION FOR::SELECT2 DROPDOWN **-------------------------------------------------------------------------------------*/
+function InitializeSelect2(selector) {
     $(selector).select2();
 }
 
-// Initialize InputMask for a given class selector and mask pattern
+/*----------------------------------** FUNCTION FOR::MASKING **---------------------------------------------------------------------------------------------*/
 
-function initializeInputMask(selector, maskPattern) {
+function InitializeInputMask(selector, maskPattern) {
     $(selector).inputmask(maskPattern);
 }
 
-//------------ VALIDATION METHOD :: WITH MESSAGE
+/*----------------------------------** FUNCTION FOR::INPUT FIELD VALIDATION **------------------------------------------------------------------------------*/
 $.fn.RequiredTextBoxInputGroup = function () {
     $(this).removeClass('is-invalid is-valid');
     $(this).css('border', ''); // Reset the border
@@ -71,7 +66,6 @@ $.fn.RequiredTextBoxInputGroup = function () {
         return true;
     }
 };
-
 $.fn.RequiredDropdown = function () {
     // Remove any existing validation messages and icons
     $(this).removeClass('is-invalid is-valid');
@@ -129,10 +123,7 @@ function AjaxDropDownListFormat_PLAIN(item, fields = []) {
 }
 
 
-
-
-
-//------------ UTTILITY BUTTON :: DATA TABLE
+/*----------------------------------** FUNCTION FOR::UTTILITY FOR DATA TABLES **----------------------------------------------------------------------------*/
 function GetStatus(Status) {
     var Badge = ""; // Initialize Badge variable to an empty string
     switch (Status) {
@@ -241,7 +232,6 @@ function DT_CaculateColumn(TableId, ColumnIndex) {
     });
     return TotalSum;
 }
-
 function DT_DropDownList(DataTableId, ListCondition, HTMLAttribute) {
     var Table = $('#' + DataTableId).DataTable();
     var DATA = [];
@@ -296,43 +286,39 @@ function DT_CalculationFooter_New(table, columnSpan, footerId, headerText, order
         footer.append(
             '<tr data-order-id="' + orderId + '">' +
             '<th>' + headerText + '</th>' +
-            '<td colspan="' + columnSpan + '" class="Headings"></td>' +
+            '<td class="Headings" colspan="' + columnSpan + '"></td>' +
             '<td id="' + footerId + '"></td>' +
             '<td colspan="6"></td>' +
             '</tr>'
         );
 
-        // Sort footer rows by order ID for consistent ordering
-        footer.find('tr').sort(function (a, b) {
-            return $(a).data('order-id') - $(b).data('order-id');
-        }).appendTo(footer);
+        // Optional: Sort rows based on order-id (if multiple rows are appended at different times)
+        let rows = footer.find('tr').get();
+        rows.sort((a, b) => {
+            return parseInt($(a).attr('data-order-id')) - parseInt($(b).attr('data-order-id'));
+        });
+        footer.empty().append(rows);
 
-        resolve(); // Resolve to proceed with the next footer
+        resolve();
     });
 }
-
-
-
 function DT_GroupBy(TableAPI, Rows, TableId, ColumnNames, options = {}) {
     var LastGroupValues = new Array(ColumnNames.length).fill(null);
     var api = TableAPI.api();
     var rows = api.rows({ page: 'current' }).nodes();
     var columnCount = $(TableId).find('thead th').length;
-
     rows.each(function (row, index) {
         var data = api.row(row).data();
         var groupKey = ColumnNames.map(function (col) {
             return data[col];
         });
-
         var groupChanged = groupKey.some(function (value, idx) {
             return value !== LastGroupValues[idx];
         });
-
         if (groupChanged) {
             var groupRows = '';
             ColumnNames.forEach(function (col, idx) {
-                var groupStyles = getColorForSequence(idx);
+                var groupStyles = GetColorForTableGroup(idx);
                 var indent = idx === 0 ? '' : 'padding-left: 20px;';
                 groupRows += `<tr class="${idx === 0 ? 'group' : 'subgroup'}">
                     <td colspan="${columnCount}" style="background-color: ${groupStyles.backgroundColor}; color: ${groupStyles.color}; border-color: ${groupStyles.borderColor}; ${indent}">
@@ -340,30 +326,58 @@ function DT_GroupBy(TableAPI, Rows, TableId, ColumnNames, options = {}) {
                     </td>
                 </tr>`;
             });
-
             $(row).before(groupRows);
             LastGroupValues = groupKey;
         }
     });
-    function getColorForSequence(index) {
-        const colors = [
-            { backgroundColor: '#003366', color: '#FFFFFF', borderColor: '#F7DC6F' }, // Soft Yellow
-            { backgroundColor: '#ADD8E6', color: '#000000', borderColor: '#48C9B0' }, // Soft Teal
-            { backgroundColor: '#FAD7A0', color: '#000000', borderColor: '#F39C12' }, // Soft Peach
+}
+function DT_GroupBy_ForTableWithSubDetail(TableAPI, Rows, TableId, ColumnNames, options = {}) {
+    var LastGroupValues = new Array(ColumnNames.length).fill(null);
+    var api = TableAPI.api();
+    var rows = api.rows({ page: 'current' }).nodes();
+    var columnCount = api.columns(':visible').count(); // safer colspan detection
+    rows.each(function (row, index) {
+        var data = api.row(row).data();
+        if (!data) return; // skip null rows (possibly child rows)
 
-            // Add more color sets here for additional columns
-        ];
+        var groupKey = ColumnNames.map(function (col) {
+            return data[col];
+        });
+        var groupChanged = groupKey.some(function (value, idx) {
+            return value !== LastGroupValues[idx];
+        });
+        if (groupChanged) {
+            var groupRows = '';
+            ColumnNames.forEach(function (col, idx) {
+                var groupStyles = GetColorForTableGroup(idx);
+                var indent = idx === 0 ? '' : 'padding-left: 20px;';
+                groupRows += `<tr class="${idx === 0 ? 'group' : 'subgroup'} group-header-row">
+                    <td colspan="${columnCount}" 
+                        style="background-color: ${groupStyles.backgroundColor}; 
+                               color: ${groupStyles.color}; 
+                               border-color: ${groupStyles.borderColor}; 
+                               ${indent}">
+                        <b>${col}: </b>${groupKey[idx]}
+                    </td>
+                </tr>`;
+            });
+            $(row).closest('tr').before(groupRows); // ensures grouping row goes before full parent row
+            LastGroupValues = groupKey;
+        }
+    });
+}
+function GetColorForTableGroup(index) {
+    const colors = [
+        { backgroundColor: '#4A235A', color: '#FFFFFF', borderColor: '#BB8FCE' }, // Group 1
+        { backgroundColor: '#1F618D', color: '#FFFFFF', borderColor: '#85C1E9' }, // Group 2
+        { backgroundColor: '#117A65', color: '#FFFFFF', borderColor: '#76D7C4' }, // Group 3
+        // Add more if needed
+    ];
 
-        return colors[index] || { backgroundColor: '#BDC3C7', color: '#2C3E50', borderColor: '#95A5A6' }; // Default color
-    }
+    return colors[index] || { backgroundColor: '#D5D8DC', color: '#2C3E50', borderColor: '#AAB7B8' }; // Default
 }
 
-
-
-
-
-
-//------------ BLOB OBJECT RESPONSER
+/*----------------------------------** FUNCTION FOR::BLOB OBJECT RESPONSE **------------------------------------------------------------------------------*/
 function OpenReport(response, status, xhr) {
     var filename = "";
     var disposition = xhr.getResponseHeader('Content-Disposition');
@@ -405,7 +419,8 @@ function OpenReport(response, status, xhr) {
     }
 }
 
-//------------ UI ELEMENTS
+/*----------------------------------** FUNCTION FOR::UI ELEMENTS **--------------------------------------------------------------------------------------*/
+let messageBoxActive = false;
 function stopLoading() {
     setTimeout(function () {
         $.unblockUI();
@@ -429,8 +444,6 @@ function startLoading() {
         }
     });
 }
-let messageBoxActive = false;
-
 function GetMessageBox(message, status) {
     // Prevent showing a new message box if one is already shown
     if (messageBoxActive) {
@@ -494,36 +507,20 @@ function ErrorMessage(Message) {
         }
     });
 }
-
-
-//function NetDateToDTFormat(dotNetDate) {
-//    if (!NetDateToDTFormat) {
-//        return '';
-//    }
-//    var timestamp = parseInt(NetDateToDTFormat.substr(6));
-//    var date = new Date(timestamp);
-//    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-//    var day = ("0" + date.getDate()).slice(-2);
-//    var month = months[date.getMonth()]; 
-//    var year = date.getFullYear();
-//    return day + '-' + month + '-' + year;
-//}
 function GetDecimalValue(number) {
     return number.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-//------------ DATE PICKER
+
+/*----------------------------------** FUNCTION FOR::DATE & DATE PICKER **------------------------------------------------------------------------------*/
 const INITIALIZE_DATE_PICKER = (selector, options = {}) => {
     flatpickr(selector, options);
 };
-
-// Date pickers with custom options
 INITIALIZE_DATE_PICKER('.DatePickerRange', { mode: "range", dateFormat: "Y-m-d" });
 INITIALIZE_DATE_PICKER('.DatePickerSimple', { dateFormat: "Y-m-d", enableTime: false, noCalendar: false });
 INITIALIZE_DATE_PICKER('.DatePickerSimple_Range', { dateFormat: "Y-m-d", enableTime: false, noCalendar: false });
 INITIALIZE_DATE_PICKER('.DatePickerMonthYear', { dateFormat: "Y-m", enableTime: false, noCalendar: false });
 INITIALIZE_DATE_PICKER('.DatePickerYear', { dateFormat: "Y", enableTime: false, noCalendar: false });
 INITIALIZE_DATE_PICKER('.DatePickerTimer', { enableTime: true, noCalendar: true, dateFormat: "H:i", defaultDate: "13:45" });
-
 function GET_DATEPICKER_FORUPDATE_INPUTFIELD(ServerDate, DateFormat, InputFieldId) {
     const ParseDate = new Date(parseInt(ServerDate.replace('/Date(', '').replace(')/', '')));
     const picker = flatpickr('#' + InputFieldId, {
@@ -557,7 +554,6 @@ function GET_DATEPICKER_FORUPDATE_INTOLIST(ServerDate, DateFormat, InputFieldId,
 
     return INPUT_ELEMENT;
 }
-
 function GET_FORMATED_DATE(date, format) {
     return flatpickr.formatDate(date, format);
 }

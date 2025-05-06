@@ -69,7 +69,7 @@ function InitDataTable() {
         },
         order: [[ParentGroupColumn, 'asc']],
         drawCallback: function (settings) {
-            DT_GroupBy(this, settings, '#MainTableURM_UserRight', ['Company', 'Branch',]);
+            DT_GroupBy_ForTableWithSubDetail(this, settings, '#MainTableURM_UserRight', ['Company', 'Branch',]);
         }
 
     });
@@ -192,13 +192,3 @@ function DrawDataTable() {
     var queryString = $.param(JsonArg);
     table.ajax.url((BasePath + "/AUser/CUserRightManagmentUI/GET_MT_UM_USER_LIST_BY_SEARCHQUERY_FORDATATABLE?" + queryString)).load();
 }
-
-
-
-
-
-
-
-
-
-

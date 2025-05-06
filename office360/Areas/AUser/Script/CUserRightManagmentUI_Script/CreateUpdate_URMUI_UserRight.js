@@ -288,6 +288,7 @@ function GET_URM_USERRIGHT_INFOBYGUID() {
             success: function (data) {
                 $('#DropDownListCompany').val(data[0].CompanyId).change();
                 $('#DropDownListRight').val(data[0].RightId).change();
+                $('#DropDownListUser').val(data[0].UserId).change();
 
                 $('#TextBoxRemarks').val(data[0].Remarks);
                 $('#HiddenFieldUserRightGuID').val(data[0].GuID);

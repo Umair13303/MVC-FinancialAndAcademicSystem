@@ -32,31 +32,6 @@
           <Property Name="CompanyId" Type="int" />
           <Property Name="Remarks" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="BM_BranchSetting">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="GuID" Type="uniqueidentifier" />
-          <Property Name="Code" Type="nvarchar(max)" />
-          <Property Name="CampusId" Type="int" />
-          <Property Name="RollCallSystemId" Type="int" />
-          <Property Name="BillingMethodId" Type="int" />
-          <Property Name="StudyLevelIds" Type="nvarchar(max)" />
-          <Property Name="StudyGroupIds" Type="nvarchar(max)" />
-          <Property Name="PolicyPeriodId" Type="int" />
-          <Property Name="ChallanMethodId" Type="int" />
-          <Property Name="CreatedOn" Type="datetime" />
-          <Property Name="CreatedBy" Type="int" />
-          <Property Name="UpdatedOn" Type="datetime" />
-          <Property Name="UpdatedBy" Type="int" />
-          <Property Name="DocType" Type="int" />
-          <Property Name="DocumentStatus" Type="int" />
-          <Property Name="Status" Type="bit" />
-          <Property Name="BranchId" Type="int" />
-          <Property Name="CompanyId" Type="int" />
-          <Property Name="Remarks" Type="nvarchar(max)" />
-        </EntityType>
         <EntityType Name="CM_Company">
           <Key>
             <PropertyRef Name="Id" />
@@ -527,28 +502,6 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Parameter Name="CompanyId" Type="int" Mode="In" />
           <Parameter Name="Response" Type="int" Mode="InOut" />
         </Function>
-        <Function Name="BM_BranchSetting_Upsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="DB_OperationType" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="GuID" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="CampusId" Type="int" Mode="In" />
-          <Parameter Name="RollCallSystemId" Type="int" Mode="In" />
-          <Parameter Name="BillingMethodId" Type="int" Mode="In" />
-          <Parameter Name="StudyLevelIds" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="StudyGroupIds" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="PolicyPeriodId" Type="int" Mode="In" />
-          <Parameter Name="ChallanMethodId" Type="int" Mode="In" />
-          <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
-          <Parameter Name="CreatedBy" Type="int" Mode="In" />
-          <Parameter Name="UpdatedOn" Type="datetime" Mode="In" />
-          <Parameter Name="UpdatedBy" Type="int" Mode="In" />
-          <Parameter Name="DocType" Type="int" Mode="In" />
-          <Parameter Name="DocumentStatus" Type="int" Mode="In" />
-          <Parameter Name="Status" Type="bit" Mode="In" />
-          <Parameter Name="BranchId" Type="int" Mode="In" />
-          <Parameter Name="CompanyId" Type="int" Mode="In" />
-          <Parameter Name="Response" Type="int" Mode="InOut" />
-        </Function>
         <Function Name="CM_Company_GetDetailByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="CompanyId" Type="int" Mode="In" />
@@ -766,7 +719,6 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
         </Function>
         <EntityContainer Name="SESModelStoreContainer">
           <EntitySet Name="BM_Branch" EntityType="Self.BM_Branch" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BM_BranchSetting" EntityType="Self.BM_BranchSetting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CM_Company" EntityType="Self.CM_Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RSM_RightSetting" EntityType="Self.RSM_RightSetting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UM_User" EntityType="Self.UM_User" Schema="dbo" store:Type="Tables" />
@@ -1052,31 +1004,6 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Property Name="ContactNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NTNNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Int32" />
-          <Property Name="DocType" Type="Int32" />
-          <Property Name="DocumentStatus" Type="Int32" />
-          <Property Name="Status" Type="Boolean" />
-          <Property Name="BranchId" Type="Int32" />
-          <Property Name="CompanyId" Type="Int32" />
-          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="BM_BranchSetting">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GuID" Type="Guid" />
-          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CampusId" Type="Int32" />
-          <Property Name="RollCallSystemId" Type="Int32" />
-          <Property Name="BillingMethodId" Type="Int32" />
-          <Property Name="StudyLevelIds" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="StudyGroupIds" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PolicyPeriodId" Type="Int32" />
-          <Property Name="ChallanMethodId" Type="Int32" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
@@ -1458,7 +1385,6 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
         </EntityType>
         <EntityContainer Name="SESEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BM_Branch" EntityType="Self.BM_Branch" />
-          <EntitySet Name="BM_BranchSetting" EntityType="Self.BM_BranchSetting" />
           <EntitySet Name="CM_Company" EntityType="Self.CM_Company" />
           <EntitySet Name="RSM_RightSetting" EntityType="Self.RSM_RightSetting" />
           <EntitySet Name="UM_User" EntityType="Self.UM_User" />
@@ -1540,28 +1466,6 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <Parameter Name="UpdatedBy" Mode="In" Type="Int32" />
             <Parameter Name="DocumentStatus" Mode="In" Type="Int32" />
             <Parameter Name="DocType" Mode="In" Type="Int32" />
-            <Parameter Name="Status" Mode="In" Type="Boolean" />
-            <Parameter Name="BranchId" Mode="In" Type="Int32" />
-            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
-            <Parameter Name="Response" Mode="InOut" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="BM_BranchSetting_Upsert">
-            <Parameter Name="DB_OperationType" Mode="In" Type="String" />
-            <Parameter Name="GuID" Mode="In" Type="Guid" />
-            <Parameter Name="CampusId" Mode="In" Type="Int32" />
-            <Parameter Name="RollCallSystemId" Mode="In" Type="Int32" />
-            <Parameter Name="BillingMethodId" Mode="In" Type="Int32" />
-            <Parameter Name="StudyLevelIds" Mode="In" Type="String" />
-            <Parameter Name="StudyGroupIds" Mode="In" Type="String" />
-            <Parameter Name="PolicyPeriodId" Mode="In" Type="Int32" />
-            <Parameter Name="ChallanMethodId" Mode="In" Type="Int32" />
-            <Parameter Name="Remarks" Mode="In" Type="String" />
-            <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
-            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
-            <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
-            <Parameter Name="UpdatedBy" Mode="In" Type="Int32" />
-            <Parameter Name="DocType" Mode="In" Type="Int32" />
-            <Parameter Name="DocumentStatus" Mode="In" Type="Int32" />
             <Parameter Name="Status" Mode="In" Type="Boolean" />
             <Parameter Name="BranchId" Mode="In" Type="Int32" />
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
@@ -1890,32 +1794,6 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
                 <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="NTNNo" ColumnName="NTNNo" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="DocType" ColumnName="DocType" />
-                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BM_BranchSetting">
-            <EntityTypeMapping TypeName="SESModel.BM_BranchSetting">
-              <MappingFragment StoreEntitySet="BM_BranchSetting">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="GuID" ColumnName="GuID" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="CampusId" ColumnName="CampusId" />
-                <ScalarProperty Name="RollCallSystemId" ColumnName="RollCallSystemId" />
-                <ScalarProperty Name="BillingMethodId" ColumnName="BillingMethodId" />
-                <ScalarProperty Name="StudyLevelIds" ColumnName="StudyLevelIds" />
-                <ScalarProperty Name="StudyGroupIds" ColumnName="StudyGroupIds" />
-                <ScalarProperty Name="PolicyPeriodId" ColumnName="PolicyPeriodId" />
-                <ScalarProperty Name="ChallanMethodId" ColumnName="ChallanMethodId" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
@@ -2396,7 +2274,6 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="BM_Branch_Upsert" FunctionName="SESModel.Store.BM_Branch_Upsert" />
-          <FunctionImportMapping FunctionImportName="BM_BranchSetting_Upsert" FunctionName="SESModel.Store.BM_BranchSetting_Upsert" />
           <FunctionImportMapping FunctionImportName="CM_Company_GetDetailByParam" FunctionName="SESModel.Store.CM_Company_GetDetailByParam">
             <ResultMapping>
               <ComplexTypeMapping TypeName="SESModel.CM_Company_GetDetailByParam_Result">

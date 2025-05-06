@@ -17,6 +17,7 @@ namespace office360.Models.General
         public bool? IsOnExceedingAmount { get; set; }
         public bool? IsLogIn { get; set; }
         public bool? IsDeveloper { get; set; }
+        public bool? IsFatherAlive { get; set; }
 
         public DateTime? DateofBirth { get; set; }
         public DateTime? ClassEndDate { get; set; }
@@ -107,6 +108,8 @@ namespace office360.Models.General
         public int? EmployeeId { get; set; }
         public int? RoleId { get; set; }
         public int? URLTypeId { get; set; }
+        public int? RegisteredPeriodId { get; set; }
+        public int? AdmissionCatagoryId { get; set; }
 
         public string ActionCondition { get; set; }
         public string Address { get; set; }
@@ -161,8 +164,6 @@ namespace office360.Models.General
         public string StudyGroupIds { get; set; }
         public string StudyLevel { get; set; }
         public string StudyLevelIds { get; set; }
-        public int? RegisteredPeriodId { get; set; }
-        public int? AdmissionCatagoryId { get; set; }
         public string RegistrationNo { get; set; }
         public string StudentName { get; set; }
         public string StudentCNIC { get; set; }
@@ -170,7 +171,6 @@ namespace office360.Models.General
         public string DomicileDistrict { get; set; }
         public string FatherName { get; set; }
         public string FatherCNIC { get; set; }
-        public bool? IsFatherAlive { get; set; }
         public string GuardianName { get; set; }
         public string GuardianCNIC { get; set; }
         public string StudentMobile { get; set; }
@@ -185,7 +185,7 @@ namespace office360.Models.General
         public string Name { get; set; } 
         public string UserName { get; set; } 
         public string Password { get; set; } 
-        public string AllowedCampusIds { get; set; } 
+        public string AllowedCampusIds { get; set; }
 
 
         public static explicit operator List<object>(_SqlParameters v)

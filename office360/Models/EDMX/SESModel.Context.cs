@@ -28,7 +28,6 @@ namespace office360.Models.EDMX
         }
     
         public virtual DbSet<BM_Branch> BM_Branch { get; set; }
-        public virtual DbSet<BM_BranchSetting> BM_BranchSetting { get; set; }
         public virtual DbSet<CM_Company> CM_Company { get; set; }
         public virtual DbSet<RSM_RightSetting> RSM_RightSetting { get; set; }
         public virtual DbSet<UM_User> UM_User { get; set; }
@@ -243,87 +242,6 @@ namespace office360.Models.EDMX
                 new ObjectParameter("CompanyId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BM_Branch_Upsert", dB_OperationTypeParameter, guIDParameter, descriptionParameter, campusTypeIdParameter, organizationTypeIdParameter, countryIdParameter, cityIdParameter, addressParameter, contactNoParameter, emailAddressParameter, nTNNoParameter, remarksParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, documentStatusParameter, docTypeParameter, statusParameter, branchIdParameter, companyIdParameter, response);
-        }
-    
-        public virtual int BM_BranchSetting_Upsert(string dB_OperationType, Nullable<System.Guid> guID, Nullable<int> campusId, Nullable<int> rollCallSystemId, Nullable<int> billingMethodId, string studyLevelIds, string studyGroupIds, Nullable<int> policyPeriodId, Nullable<int> challanMethodId, string remarks, Nullable<System.DateTime> createdOn, Nullable<int> createdBy, Nullable<System.DateTime> updatedOn, Nullable<int> updatedBy, Nullable<int> docType, Nullable<int> documentStatus, Nullable<bool> status, Nullable<int> branchId, Nullable<int> companyId, ObjectParameter response)
-        {
-            var dB_OperationTypeParameter = dB_OperationType != null ?
-                new ObjectParameter("DB_OperationType", dB_OperationType) :
-                new ObjectParameter("DB_OperationType", typeof(string));
-    
-            var guIDParameter = guID.HasValue ?
-                new ObjectParameter("GuID", guID) :
-                new ObjectParameter("GuID", typeof(System.Guid));
-    
-            var campusIdParameter = campusId.HasValue ?
-                new ObjectParameter("CampusId", campusId) :
-                new ObjectParameter("CampusId", typeof(int));
-    
-            var rollCallSystemIdParameter = rollCallSystemId.HasValue ?
-                new ObjectParameter("RollCallSystemId", rollCallSystemId) :
-                new ObjectParameter("RollCallSystemId", typeof(int));
-    
-            var billingMethodIdParameter = billingMethodId.HasValue ?
-                new ObjectParameter("BillingMethodId", billingMethodId) :
-                new ObjectParameter("BillingMethodId", typeof(int));
-    
-            var studyLevelIdsParameter = studyLevelIds != null ?
-                new ObjectParameter("StudyLevelIds", studyLevelIds) :
-                new ObjectParameter("StudyLevelIds", typeof(string));
-    
-            var studyGroupIdsParameter = studyGroupIds != null ?
-                new ObjectParameter("StudyGroupIds", studyGroupIds) :
-                new ObjectParameter("StudyGroupIds", typeof(string));
-    
-            var policyPeriodIdParameter = policyPeriodId.HasValue ?
-                new ObjectParameter("PolicyPeriodId", policyPeriodId) :
-                new ObjectParameter("PolicyPeriodId", typeof(int));
-    
-            var challanMethodIdParameter = challanMethodId.HasValue ?
-                new ObjectParameter("ChallanMethodId", challanMethodId) :
-                new ObjectParameter("ChallanMethodId", typeof(int));
-    
-            var remarksParameter = remarks != null ?
-                new ObjectParameter("Remarks", remarks) :
-                new ObjectParameter("Remarks", typeof(string));
-    
-            var createdOnParameter = createdOn.HasValue ?
-                new ObjectParameter("CreatedOn", createdOn) :
-                new ObjectParameter("CreatedOn", typeof(System.DateTime));
-    
-            var createdByParameter = createdBy.HasValue ?
-                new ObjectParameter("CreatedBy", createdBy) :
-                new ObjectParameter("CreatedBy", typeof(int));
-    
-            var updatedOnParameter = updatedOn.HasValue ?
-                new ObjectParameter("UpdatedOn", updatedOn) :
-                new ObjectParameter("UpdatedOn", typeof(System.DateTime));
-    
-            var updatedByParameter = updatedBy.HasValue ?
-                new ObjectParameter("UpdatedBy", updatedBy) :
-                new ObjectParameter("UpdatedBy", typeof(int));
-    
-            var docTypeParameter = docType.HasValue ?
-                new ObjectParameter("DocType", docType) :
-                new ObjectParameter("DocType", typeof(int));
-    
-            var documentStatusParameter = documentStatus.HasValue ?
-                new ObjectParameter("DocumentStatus", documentStatus) :
-                new ObjectParameter("DocumentStatus", typeof(int));
-    
-            var statusParameter = status.HasValue ?
-                new ObjectParameter("Status", status) :
-                new ObjectParameter("Status", typeof(bool));
-    
-            var branchIdParameter = branchId.HasValue ?
-                new ObjectParameter("BranchId", branchId) :
-                new ObjectParameter("BranchId", typeof(int));
-    
-            var companyIdParameter = companyId.HasValue ?
-                new ObjectParameter("CompanyId", companyId) :
-                new ObjectParameter("CompanyId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BM_BranchSetting_Upsert", dB_OperationTypeParameter, guIDParameter, campusIdParameter, rollCallSystemIdParameter, billingMethodIdParameter, studyLevelIdsParameter, studyGroupIdsParameter, policyPeriodIdParameter, challanMethodIdParameter, remarksParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, response);
         }
     
         public virtual ObjectResult<CM_Company_GetDetailByParam_Result> CM_Company_GetDetailByParam(string dB_IF_PARAM, Nullable<int> companyId, string searchParameter)

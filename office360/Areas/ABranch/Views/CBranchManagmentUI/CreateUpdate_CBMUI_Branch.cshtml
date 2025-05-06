@@ -49,15 +49,14 @@
                 </div>
             </div>
         }
-
         <div class="card" style="margin-top:1%;width:100%">
             <div class="card-body">
                 <h3 style="font-family: 'Bahnschrift'; font-weight: bolder; color: navy">Campus Detail</h3>
                 <div class="row mb-0">
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
-                            @Html.Label("Campus Name", new { @class = "col-form-label", @for = "TextBoxDescription" })
-                            @Html.TextBox("TextBoxDescription", null, new { @class = "form-control", placeholder = "Please Enter Campus Name Here!", @id = "TextBoxDescription" })
+                            @Html.Label("Description", new { @class = "col-form-label", @for = "TextBoxDescription" })
+                            @Html.TextBox("TextBoxDescription", null, new { @class = "form-control", placeholder = "Please Enter Description Here!", @id = "TextBoxDescription" })
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-6">
@@ -69,7 +68,7 @@
 
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
-                            @Html.Label("Org Type", new { @class = "col-form-label", @for = "DropDownListOrganizationType" })
+                            @Html.Label("Organization Type", new { @class = "col-form-label", @for = "DropDownListOrganizationType" })
                             @Html.DropDownList("DropDownListOrganizationType", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListOrganizationType" })
                         </div>
                     </div>
@@ -77,8 +76,6 @@
                 </div>
             </div>
         </div>
-
-
         <div class="card" style="margin-top:1%;width:100%">
             <div class="card-body">
                 <h3 style="font-family: 'Bahnschrift'; font-weight: bolder; color: navy">Address Detail</h3>
@@ -105,7 +102,6 @@
                 </div>
             </div>
         </div>
-
         <div class="card" style="margin-top:1%;width:100%">
             <div class="card-body">
                 <h3 style="font-family: 'Bahnschrift'; font-weight: bolder; color: navy">Contact Detail</h3>
@@ -113,26 +109,20 @@
                 <div class="row mb-0">
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
-                            @Html.Label("Contact", new { @class = "col-form-label", @for = "TextBoxContactNo" })
-                            @Html.TextBox("TextBoxContactNo", null, new { @class = "form-control PhoneNumber", placeholder = "Please Enter Contact Here!", @id = "TextBoxContactNo" })
+                            @Html.Label("Contact No", new { @class = "col-form-label", @for = "TextBoxContactNo" })
+                            @Html.TextBox("TextBoxContactNo", null, new { @class = "form-control PhoneNumber", placeholder = "Please Enter Contact No Here!", @id = "TextBoxContactNo" })
                         </div>
                     </div>
 
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
-                            @Html.Label("Email", new { @class = "col-form-label", @for = "TextBoxEmailAddress" })
-                            @Html.TextBox("TextBoxEmailAddress", null, new { @class = "form-control EmailAddress", placeholder = "Please Enter Email Here!", @id = "TextBoxEmailAddress" })
+                            @Html.Label("Email Address", new { @class = "col-form-label", @for = "TextBoxEmailAddress" })
+                            @Html.TextBox("TextBoxEmailAddress", null, new { @class = "form-control EmailAddress", placeholder = "Please Enter Email Address Here!", @id = "TextBoxEmailAddress" })
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-       
-
-
         <div class="card" style="margin-top:1%;width:100%">
             <div class="card-body">
                 <h3 style="font-family: 'Bahnschrift'; font-weight: bolder; color: navy">Misc</h3>
@@ -140,7 +130,7 @@
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
                             @Html.Label("NTN Number", new { @class = "col-form-label", @for = "TextBoxNTNNo" })
-                            @Html.TextBox("TextBoxNTNNo", null, new { @class = "form-control NTNNumber", placeholder = "Please Enter NTN Here!", @id = "TextBoxNTNNo" })
+                            @Html.TextBox("TextBoxNTNNo", null, new { @class = "form-control NTNNumber", placeholder = "Please Enter NTN No Here!", @id = "TextBoxNTNNo" })
                         </div>
                     </div>
 

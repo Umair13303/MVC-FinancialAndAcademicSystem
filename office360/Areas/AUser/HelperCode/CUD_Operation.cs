@@ -102,9 +102,6 @@ namespace office360.Areas.AUser.HelperCode
         }
         #endregion
 
-
-
-
         #region HELPER FOR :: INSERT/UPDATE DATA USING STORED PROCEDURE (DBO.URM_UserRight) ::-- MAIN DB
         public static int? Update_Insert_URM_UserRight(_SqlParameters PostedData)
         {

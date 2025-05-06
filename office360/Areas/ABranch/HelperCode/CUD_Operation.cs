@@ -28,7 +28,7 @@ namespace office360.Areas.ABranch.HelperCode
                     {
 
                         #region CHECK DUPLICATE :: NO-OPERATION IF ACTIVE BRANCH EXIST
-                        int? DB_OPERATION_STATUS = ABranch.HelperCode.Check_Duplicate_By_LINQ.IS_EXIST_BM_BRANCHSETTING_BY_BRANCHID(PostedData);
+                        int? DB_OPERATION_STATUS = ABranch.HelperCode.Check_Duplicate_By_LINQ.IS_EXIST_BM_BRANCH_BY_DESCRIPTION(PostedData);
                         switch (DB_OPERATION_STATUS)
                         {
                             case (int?)Http_DB_Response.CODE_AUTHORIZED:
@@ -105,89 +105,5 @@ namespace office360.Areas.ABranch.HelperCode
 
         #endregion
 
-        #region HELPER FOR :: INSERT/UPDATE DATA USING STORED PROCEDURE (DBO.BM_BRANCH_SETTING) ::-- MAIN DB
-
-        public static int? Update_Insert_BM_BranchSetting(_SqlParameters PostedData)
-        {
-            using (var db = new SESEntities())
-            {
-                using (System.Data.Entity.DbContextTransaction dbTran = db.Database.BeginTransaction())
-                {
-                    try
-                    {
-                        #region CHECK DUPLICATE :: NO-OPERATION IF ACTIVE BRANCH SETTING EXIST
-                        int? DB_OPERATION_STATUS = ABranch.HelperCode.Check_Duplicate_By_LINQ.IS_EXIST_BM_BRANCHSETTING_BY_BRANCHID(PostedData);
-
-                        switch (DB_OPERATION_STATUS)
-                        {
-                            case (int?)Http_DB_Response.CODE_AUTHORIZED:
-                                #region DB SETTING
-                                if (PostedData.OperationType == nameof(DB_OperationType.INSERT_DATA_INTO_DB))
-                                {
-                                    PostedData.GuID = Uttility.fn_GetHashGuid();
-                                }
-                                #endregion
-                                #region OUTPUT VARAIBLE
-                                var ResponseParameter = new ObjectParameter("Response", typeof(int));
-                                #endregion
-                                #region EXECUTE STORE PROCEDURE
-                                var BM_BranchSetting = db.BM_BranchSetting_Upsert(
-                                                                                            PostedData.OperationType,
-                                                                                            PostedData.GuID,
-                                                                                            PostedData.CampusId,
-                                                                                            PostedData.RollCallSystemId,
-                                                                                            PostedData.BillingMethodId,
-                                                                                            PostedData.StudyLevelIds?.Trim().ToSafeString(),
-                                                                                            PostedData.StudyGroupIds?.Trim().ToSafeString(),
-                                                                                            PostedData.PolicyPeriodId,
-                                                                                            PostedData.ChallanMethodId,
-                                                                                            PostedData.Remarks?.Trim().ToSafeString(),
-                                                                                            DateTime.Now,
-                                                                                            Session_Manager.UserId,
-                                                                                            DateTime.Now,
-                                                                                            Session_Manager.UserId,
-                                                                                            (int?)DocumentStatus.DocType.BRANCH_SETTING,
-                                                                                            (int?)DocumentStatus.DocStatus.ACTIVE_BRANCH_SETTING,
-                                                                                            true,
-                                                                                            Session_Manager.BranchId,
-                                                                                            Session_Manager.CompanyId,
-                                                                                            ResponseParameter
-                                                                                            );
-
-                                #endregion
-                                #region RESPONSE VALUES IN VARIABLE
-                                int? Response = (int)ResponseParameter.Value;
-                                #endregion
-                                #region TRANSACTION HANDLING DETAIL
-                                switch (Response)
-                                {
-                                    case (int?)Http_DB_Response.CODE_SUCCESS:
-                                    case (int?)Http_DB_Response.CODE_DATA_UPDATED:
-
-                                        dbTran.Commit();
-                                        break;
-
-                                    case (int?)Http_DB_Response.CODE_BAD_REQUEST:
-                                        dbTran.Rollback();
-                                        break;
-                                }
-                                #endregion
-                                return Http_Server_Status.Http_DB_ResponseByReturnValue(Response);
-
-                            default:
-                                return Http_Server_Status.Http_DB_ResponseByReturnValue(DB_OPERATION_STATUS);
-                        }
-                        #endregion
-                    }
-                    catch (Exception Ex)
-                    {
-                        dbTran.Rollback();
-                        return Http_Server_Status.Http_DB_Response.CODE_INTERNAL_SERVER_ERROR.ToInt();
-                    }
-                }
-            }
-        }
-
-        #endregion
     }
 }

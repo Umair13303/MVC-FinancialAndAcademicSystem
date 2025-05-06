@@ -287,9 +287,16 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\AAcademic\AAcademicAreaRegistration.cs" />
+    <Compile Include="Areas\AAcademic\Controllers\CAcademicClassManagmentUIController.cs" />
+    <Compile Include="Areas\AAcademic\HelperCode\Check_Duplicate_By_LINQ.cs" />
+    <Compile Include="Areas\AAcademic\HelperCode\CUD_Operation.cs" />
+    <Compile Include="Areas\AAcademic\HelperCode\DATA_FROM_LINQ.cs" />
+    <Compile Include="Areas\AAcademic\HelperCode\DATA_FROM_SP.cs" />
+    <Compile Include="Areas\AAcademic\HelperCode\Document_Detail_By_GUID_LINQ.cs" />
+    <Compile Include="Areas\AAcademic\HelperCode\Document_Detail_By_Id_DBO_FN.cs" />
     <Compile Include="Areas\ABranch\ABranchAreaRegistration.cs" />
     <Compile Include="Areas\ABranch\Controllers\CBranchManagmentUIController.cs" />
-    <Compile Include="Areas\ABranch\Controllers\CBranchSettingManagmentUIController.cs" />
     <Compile Include="Areas\ABranch\HelperCode\Check_Duplicate_By_LINQ.cs" />
     <Compile Include="Areas\ABranch\HelperCode\CUD_Operation.cs" />
     <Compile Include="Areas\ABranch\HelperCode\DATA_FROM_LINQ.cs" />
@@ -338,9 +345,6 @@
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\BM_Branch.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EDMX\BM_BranchSetting.cs">
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\BM_Branch_GetListByParam_Result.cs">
@@ -533,6 +537,7 @@
     <Compile Include="SqlServerTypes\Loader.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\AAcademic\Script\CAcademicClassManagmentUI_Script\CreateUpdate_ACMUI_Class.js" />
     <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\CreateUpdate_CBMUI_Branch.js" />
     <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\View_List_CBMUI_Branch.js" />
     <Content Include="Areas\ACompany\Script\CCompanyManagmentUI_Script\CreateUpdate_CMUI_Company.js" />
@@ -1911,6 +1916,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\AAcademic\Data\" />
+    <Folder Include="Areas\AAcademic\Views\Shared\" />
     <Folder Include="Areas\ABranch\Data\" />
     <Folder Include="Areas\ABranch\Views\Shared\" />
     <Folder Include="Areas\ACompany\Data\" />
@@ -1978,7 +1985,8 @@
     <Content Include="Areas\ACompany\Views\CRightSettingManagmentUI\CreateUpdate_RSMUI_RightSetting.cshtml" />
     <Content Include="Areas\AUser\Views\CUserRightManagmentUI\CreateUpdate_URMUI_UserRight.cshtml" />
     <Content Include="Areas\AUser\Views\CUserRightManagmentUI\View_List_URMUI_UserRight.cshtml" />
-    <Content Include="Areas\ABranch\Views\CBranchSettingManagmentUI\CreateUpdate_CBSMUI_BranchSetting.cshtml" />
+    <Content Include="Areas\AAcademic\Views\web.config" />
+    <Content Include="Areas\AAcademic\Views\CAcademicClassManagmentUI\CreateUpdate_ACMUI_Class.cshtml" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>

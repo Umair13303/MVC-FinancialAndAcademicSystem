@@ -24,7 +24,6 @@
     <form>
         @if (ViewBag.DB_OperationType == nameof(office360.Models.General.DBListCondition.DB_OperationType.UPDATE_DATA_INTO_DB))
         {
-
             <div class="card" style="margin-top:1%;width:100%">
                 <div class="card-body">
                     <div class="row mb-0">
@@ -51,9 +50,7 @@
                             @Html.DropDownList("DropDownListCompany", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListCompany" })
                         </div>
                     </div>
-
                 </div>
-
                 <div class="row mb-0">
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
@@ -68,7 +65,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row mb-0">
 
                     <div class="col-sm-12 col-md-6">
