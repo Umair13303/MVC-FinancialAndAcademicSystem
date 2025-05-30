@@ -21,11 +21,9 @@ namespace office360.Areas.ABranch.HelperCode
 
         public static List<BM_Branch_GetListByParam_Result> GET_MT_BM_BRANCH_BYPARAM(_SqlParameters PostedData)
         {
-
+            List<BM_Branch_GetListByParam_Result> DATA = new List<BM_Branch_GetListByParam_Result>();
             using (SESEntities db = new SESEntities())
             {
-                List<BM_Branch_GetListByParam_Result> DATA = new List<BM_Branch_GetListByParam_Result>();
-
                 DATA = db.BM_Branch_GetListByParam(
                                                        PostedData.DB_IF_PARAM,
                                                        Session_Manager.CompanyId,
@@ -34,7 +32,6 @@ namespace office360.Areas.ABranch.HelperCode
                                                        PostedData.SearchParameter,
                                                        PostedData.CompanyId
                                                        ).ToList();
-
                 return DATA;
             }
         }
@@ -45,18 +42,17 @@ namespace office360.Areas.ABranch.HelperCode
 
         public static List<BM_Branch_GetListBySearch_Result> GET_MT_BM_BRANCH_LIST_BY_SEARCHQUERY(_SqlParameters PostedData)
         {
-            List<BM_Branch_GetListBySearch_Result> List = new List<BM_Branch_GetListBySearch_Result>();
+            List<BM_Branch_GetListBySearch_Result> DATA = new List<BM_Branch_GetListBySearch_Result>();
             using (var db = new SESEntities())
             {
-                List = db.BM_Branch_GetListBySearch(
+                DATA = db.BM_Branch_GetListBySearch(
                                                         Session_Manager.CompanyId,
                                                         Session_Manager.BranchId,
                                                         PostedData.SearchById,
                                                         PostedData.InputText
-                                                        ).ToList<BM_Branch_GetListBySearch_Result>();
+                                                        ).ToList();
             }
-            return List;
-
+            return DATA;
         }
         #endregion
 

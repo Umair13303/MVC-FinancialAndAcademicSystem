@@ -20,28 +20,23 @@ namespace office360.Areas.AUser.HelperCode
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB
         public static List<UM_User_GetListByParam_Result> GET_MT_UM_USER_BYPARAM(_SqlParameters PostedData)
         {
-
+            List<UM_User_GetListByParam_Result> DATA = new List<UM_User_GetListByParam_Result>();
             using (SESEntities db = new SESEntities())
             {
-                List<UM_User_GetListByParam_Result> DATA = new List<UM_User_GetListByParam_Result>();
-
                 DATA = db.UM_User_GetListByParam(
                                                        PostedData.DB_IF_PARAM,
                                                        Session_Manager.CompanyId,
                                                        PostedData.SearchParameter,
                                                        PostedData.CompanyId
                                                        ).ToList();
-
                 return DATA;
             }
         }
         public static List<URM_UserRight_GetListByParam_Result> GET_MT_URM_USERRIGHT_BYPARAM(_SqlParameters PostedData)
         {
-
+            List<URM_UserRight_GetListByParam_Result> DATA = new List<URM_UserRight_GetListByParam_Result>();
             using (SESEntities db = new SESEntities())
             {
-                List<URM_UserRight_GetListByParam_Result> DATA = new List<URM_UserRight_GetListByParam_Result>();
-
                 DATA = db.URM_UserRight_GetListByParam(
                                                        PostedData.DB_IF_PARAM,
                                                        Session_Manager.CompanyId,
@@ -49,7 +44,6 @@ namespace office360.Areas.AUser.HelperCode
                                                        PostedData.SearchParameter,
                                                        PostedData.CompanyId
                                                        ).ToList();
-
                 return DATA;
             }
         }
@@ -59,26 +53,24 @@ namespace office360.Areas.AUser.HelperCode
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB
         public static List<UM_User_GetListBySearch_Result> GET_MT_UM_USER_LIST_BY_SEARCHQUERY(_SqlParameters PostedData)
         {
-            List<UM_User_GetListBySearch_Result> List = new List<UM_User_GetListBySearch_Result>();
+            List<UM_User_GetListBySearch_Result> DATA = new List<UM_User_GetListBySearch_Result>();
             using (var db = new SESEntities())
             {
-                List = db.UM_User_GetListBySearch(
+                DATA = db.UM_User_GetListBySearch(
                                                         Session_Manager.CompanyId,
                                                         Session_Manager.BranchId,
                                                         PostedData.SearchById,
                                                         PostedData.InputText
-                                                        ).ToList<UM_User_GetListBySearch_Result>();
+                                                        ).ToList();
             }
-            return List;
+            return DATA;
 
         }
         public static List<URM_UserRight_GetListBySearch_Result> GET_MT_URM_USERRIGHT_LIST_BY_USERID_SEARCHQUERY(_SqlParameters PostedData)
         {
-
+            List<URM_UserRight_GetListBySearch_Result> DATA = new List<URM_UserRight_GetListBySearch_Result>();
             using (SESEntities db = new SESEntities())
             {
-                List<URM_UserRight_GetListBySearch_Result> DATA = new List<URM_UserRight_GetListBySearch_Result>();
-
                 DATA = db.URM_UserRight_GetListBySearch(
                                                         Session_Manager.CompanyId,
                                                         Session_Manager.BranchId,
@@ -86,7 +78,6 @@ namespace office360.Areas.AUser.HelperCode
                                                         PostedData.SearchById,
                                                         PostedData.InputText
                                                        ).ToList();
-
                 return DATA;
             }
         }

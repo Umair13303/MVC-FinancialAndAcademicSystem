@@ -341,6 +341,12 @@
     <Compile Include="Models\EDMX\ACM_Class.cs">
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EDMX\ACM_Class_GetListByParam_Result.cs">
+      <DependentUpon>SESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDMX\ACM_Class_GetListBySearch_Result.cs">
+      <DependentUpon>SESModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EDMX\AdmissionCatagory.cs">
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
@@ -528,6 +534,7 @@
     <Compile Include="SqlServerTypes\Loader.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\AAcademic\Script\CAcademicClassManagmentUI_Script\View_List_ACMUI_Class.js" />
     <Content Include="Areas\AAcademic\Script\CAcademicClassManagmentUI_Script\CreateUpdate_ACMUI_Class.js" />
     <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\CreateUpdate_CBMUI_Branch.js" />
     <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\View_List_CBMUI_Branch.js" />
@@ -1978,6 +1985,7 @@
     <Content Include="Areas\AAcademic\Views\CAcademicClassManagmentUI\CreateUpdate_ACMUI_Class.cshtml" />
     <Content Include="DB_BackUp\SESFINAL BACKUP.bak" />
     <Content Include="DB_BackUp\XLookUp BACKUP.bak" />
+    <Content Include="Areas\AAcademic\Views\CAcademicClassManagmentUI\View_List_ACMUI_Class.cshtml" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>

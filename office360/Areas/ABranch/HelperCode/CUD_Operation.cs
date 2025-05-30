@@ -28,7 +28,7 @@ namespace office360.Areas.ABranch.HelperCode
                     {
 
                         #region CHECK DUPLICATE :: NO-OPERATION IF ACTIVE BRANCH EXIST
-                        int? DB_OPERATION_STATUS = ABranch.HelperCode.Check_Duplicate_By_LINQ.IS_EXIST_BM_BRANCH_BY_DESCRIPTION(PostedData);
+                        int? DB_OPERATION_STATUS = ABranch.HelperCode.Check_Duplicate_By_LINQ.IS_EXIST_BM_BRANCH_BY_PARAMETER(PostedData);
                         switch (DB_OPERATION_STATUS)
                         {
                             case (int?)Http_DB_Response.CODE_AUTHORIZED:
@@ -54,16 +54,16 @@ namespace office360.Areas.ABranch.HelperCode
                                                                      PostedData.ContactNo?.Trim().ToSafeString(),
                                                                      PostedData.EmailAddress?.Trim().ToSafeString(),
                                                                      PostedData.NTNNo?.Trim().ToSafeString(),
-                                                                     PostedData.Remarks?.Trim().ToSafeString(),
                                                                      DateTime.Now,
                                                                      Session_Manager.UserId,
                                                                      DateTime.Now,
                                                                      Session_Manager.UserId,
-                                                                     (int?)DocumentStatus.DocStatus.ACTIVE_BRANCH,
                                                                      (int?)DocumentStatus.DocType.BRANCH,
+                                                                     (int?)DocumentStatus.DocStatus.ACTIVE_BRANCH,
                                                                      true,
                                                                      Session_Manager.BranchId,
                                                                      Session_Manager.CompanyId,
+                                                                     PostedData.Remarks?.Trim().ToSafeString(),
                                                                      ResponseParameter
                                     );
 

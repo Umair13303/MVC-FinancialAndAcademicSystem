@@ -27,7 +27,7 @@ namespace office360.Areas.AUser.HelperCode
                     try
                     {
                         #region CHECK DUPLICATE :: NO-OPERATION ACTIVE IF USER EXIST
-                        int? DB_OPERATION_STATUS = AUser.HelperCode.Check_Duplicate_By_LINQ.IS_EXIST_UM_USER_BY_USERNAME(PostedData);
+                        int? DB_OPERATION_STATUS = AUser.HelperCode.Check_Duplicate_By_LINQ.IS_EXIST_UM_USER_BY_PARAMETER(PostedData);
 
                         switch (DB_OPERATION_STATUS)
                         {
@@ -112,7 +112,7 @@ namespace office360.Areas.AUser.HelperCode
                     try
                     {
                         #region CHECK DUPLICATE :: NO-OPERATION IF ACTIVE USER_RIGHT EXIST
-                        int? DB_OPERATION_STATUS = AUser.HelperCode.Check_Duplicate_By_LINQ.IS_EXIST_URM_USERRIGHT_BY_USERID(PostedData);
+                        int? DB_OPERATION_STATUS = AUser.HelperCode.Check_Duplicate_By_LINQ.IS_EXIST_URM_USERRIGHT_BY_PARAMETER(PostedData);
                         switch (DB_OPERATION_STATUS)
                         {
                             case (int?)Http_DB_Response.CODE_AUTHORIZED:

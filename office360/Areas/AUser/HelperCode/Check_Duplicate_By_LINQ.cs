@@ -18,7 +18,7 @@ namespace office360.Areas.AUser.HelperCode
 
 
         #region HELPER FOR :: CHECK IF User(ACTIVE_USER) ALREADY EXIST
-        public static int? IS_EXIST_UM_USER_BY_USERNAME(_SqlParameters PostedData)
+        public static int? IS_EXIST_UM_USER_BY_PARAMETER(_SqlParameters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
@@ -72,7 +72,7 @@ namespace office360.Areas.AUser.HelperCode
         }
         #endregion
         #region HELPER FOR :: CHECK IF UserRight(ACTIVE_USER_RIGHT) ALREADY EXIST
-        public static int? IS_EXIST_URM_USERRIGHT_BY_USERID(_SqlParameters PostedData)
+        public static int? IS_EXIST_URM_USERRIGHT_BY_PARAMETER(_SqlParameters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {

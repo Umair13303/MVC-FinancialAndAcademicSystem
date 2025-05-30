@@ -6,16 +6,15 @@ var table = "";
 
 $(document).ready(function () {
     InitDataTable();
-    PopulateDropDownLists();
     ChangeCase();
 });
 
 /*----------------------------------** FUNCTION FOR::DATA TABLE & OPERATION **------------------------------------------------------------------------------*/
 
 function InitDataTable() {
-    table = $('#MainTableBM_Branch').DataTable({
-         dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
-         buttons: {
+    table = $('#MainTableACM_Class').DataTable({
+        dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
+        buttons: {
             buttons: [
                 { extend: 'copy', className: 'btn' },
                 { extend: 'csv', className: 'btn' },
@@ -37,18 +36,20 @@ function InitDataTable() {
         "ordering": true,
         "processing": true,
         "columns": [
-            { "data": null,             "title": "#"            },
-            { "data": "GuID",           "title": "GuID"         },
-            { "data": "Country",        "title": "Country"      },
-            { "data": "City",           "title": "City"         },
-            { "data": "Code",           "title": "Code"         },
-            { "data": "Description",    "title": "Name"         },
-            { "data": "CampusType",     "title": "Branch Type"  },
+            { "data": null, "title": "#" },
+            { "data": "Description", "title": "Description" },
+            { "data": "StudyLevel", "title": "Study Level" },
+            { "data": "StudyGroup", "title": "Study Group" },
+            {
+                "data": null, "title": "Status", "defaultContent": "",
+                "render": function (data, type, full, meta) {
+                    return GetStatus(data["DocumentStatus"]);
+                }
+            },
+            { "data": "GuID", "title": "GuID" },
         ],
         columnDefs: [
             { visible: false, targets: 1 },
-            { "orderable": false, targets: [0, 1, 2, 3, 4, 5, 6] },
-            { className: Css_Class.DynamicGroupBy, targets:[2,3,6] }
         ],
     });
     table.on('order.dt search.dt', function () {
@@ -57,13 +58,6 @@ function InitDataTable() {
         });
 
     }).draw();
-}
-
-
-/*----------------------------------** FUNCTION FOR::DROP DOWN LIST (DATA TABLE COLUMNS) **------------------------------------------------------------------------------*/
-
-function PopulateDropDownLists() {
-    DT_DropDownList('MainTableBM_Branch', Css_Class.DynamicGroupBy, 'DropDownListGroupBy');
 }
 
 /*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER **-----------------------------------------------------------------------*/
@@ -104,5 +98,5 @@ function DrawDataTable() {
         InputText: InputText,
     };
     var queryString = $.param(JsonArg);
-    table.ajax.url((BasePath + "/ABranch/CBranchManagmentUI/GET_MT_BM_BRANCH_LIST_BY_SEARCHQUERY_FORDATATABLE?" + queryString)).load();
+    table.ajax.url((BasePath + "/AAcademic/CAcademicClassManagmentUI/GET_MT_ACM_CLASS_LIST_BY_SEARCHQUERY_FORDATATABLE?" + queryString)).load();
 }

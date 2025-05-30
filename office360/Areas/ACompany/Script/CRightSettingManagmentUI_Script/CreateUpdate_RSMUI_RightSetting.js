@@ -230,7 +230,7 @@ function GET_RSM_RIGHTSETTING_LISTBYPARAM() {
         placeholder: 'Search By Right Name / URL Path',
         minimumInputLength: 3,
         templateResult: function (item) {
-            return AjaxDropDownListFormat_PLAIN(item, ['Company','Right']);
+            return QueryDropDownListContainer_Plain(item, ['Company','Right']);
         },
         templateSelection: function (item) {
             return item.text;

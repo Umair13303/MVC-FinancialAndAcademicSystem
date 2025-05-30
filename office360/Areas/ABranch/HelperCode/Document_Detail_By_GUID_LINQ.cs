@@ -18,23 +18,23 @@ namespace office360.Areas.ABranch.HelperCode
             using (SESEntities db = new SESEntities())
             {
                 DATA = ((List<_SqlParameters>)
-                       (from GB in db.BM_Branch
-                        where GB.CompanyId == Session_Manager.CompanyId && GB.GuID == PostedData.GuID
+                       (from B in db.BM_Branch
+                        where B.CompanyId == Session_Manager.CompanyId && B.GuID == PostedData.GuID
                         select new _SqlParameters
                         {
-                            Id = GB.Id,
-                            GuID = GB.GuID,
-                            Code = GB.Code,
-                            Description = GB.Description,
-                            CampusTypeId = GB.CampusTypeId,
-                            OrganizationTypeId = GB.OrganizationTypeId,
-                            CountryId = GB.CountryId,
-                            CityId = GB.CityId,
-                            Address = GB.Address,
-                            ContactNo = GB.ContactNo,
-                            EmailAddress = GB.EmailAddress,
-                            NTNNo = GB.NTNNo,
-                            Remarks = GB.Remarks,
+                            Id = B.Id,
+                            GuID = B.GuID,
+                            Code = B.Code,
+                            Description = B.Description,
+                            CampusTypeId = B.CampusTypeId,
+                            OrganizationTypeId = B.OrganizationTypeId,
+                            CountryId = B.CountryId,
+                            CityId = B.CityId,
+                            Address = B.Address,
+                            ContactNo = B.ContactNo,
+                            EmailAddress = B.EmailAddress,
+                            NTNNo = B.NTNNo,
+                            Remarks = B.Remarks,
 
                         }).ToList());
 

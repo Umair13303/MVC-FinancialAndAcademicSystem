@@ -108,7 +108,7 @@ $.fn.RequiredDropdown = function () {
         return true;
     }
 };
-function AjaxDropDownListFormat_PLAIN(item, fields = []) {
+function QueryDropDownListContainer_Plain(item, fields = []) {
     if (!item.id) return item.text;
 
     let template = '<div style="padding: 5px; border-bottom: 0px solid #ddd;">';

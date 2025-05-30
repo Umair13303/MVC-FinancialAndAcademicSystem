@@ -486,6 +486,22 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Property Name="Status" Type="bit" />
           <Property Name="CreatedOn" Type="smalldatetime" />
         </EntityType>
+        <Function Name="ACM_Class_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SessionCompanyId" Type="int" Mode="In" />
+          <Parameter Name="SessionBranchId" Type="int" Mode="In" />
+          <Parameter Name="AllowedCampusIds" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SearchParameter" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CampusId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ACM_Class_GetListBySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="AllowedCampusId" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="InputTypeId" Type="int" Mode="In" />
+          <Parameter Name="InputText" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="ACM_Class_Upsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DB_OperationType" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="GuID" Type="uniqueidentifier" Mode="In" />
@@ -531,16 +547,16 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Parameter Name="ContactNo" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="EmailAddress" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="NTNNo" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
           <Parameter Name="CreatedBy" Type="int" Mode="In" />
           <Parameter Name="UpdatedOn" Type="datetime" Mode="In" />
           <Parameter Name="UpdatedBy" Type="int" Mode="In" />
-          <Parameter Name="DocumentStatus" Type="int" Mode="In" />
           <Parameter Name="DocType" Type="int" Mode="In" />
+          <Parameter Name="DocumentStatus" Type="int" Mode="In" />
           <Parameter Name="Status" Type="bit" Mode="In" />
           <Parameter Name="BranchId" Type="int" Mode="In" />
           <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Response" Type="int" Mode="InOut" />
         </Function>
         <Function Name="CM_Company_GetDetailByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1478,6 +1494,22 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <FunctionImport Name="fn_GetGeneralBranchSettingForCampus" IsComposable="true" ReturnType="Collection(SESModel.fn_GetGeneralBranchSettingForCampus_Result)">
             <Parameter Name="CampusId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="ACM_Class_GetListByParam" ReturnType="Collection(SESModel.ACM_Class_GetListByParam_Result)">
+            <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
+            <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="SessionBranchId" Mode="In" Type="Int32" />
+            <Parameter Name="AllowedCampusIds" Mode="In" Type="String" />
+            <Parameter Name="SearchParameter" Mode="In" Type="String" />
+            <Parameter Name="CampusId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ACM_Class_GetListBySearch" ReturnType="Collection(SESModel.ACM_Class_GetListBySearch_Result)">
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="AllowedCampusId" Mode="In" Type="String" />
+            <Parameter Name="InputTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="InputText" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="ACM_Class_Upsert">
             <Parameter Name="DB_OperationType" Mode="In" Type="String" />
             <Parameter Name="GuID" Mode="In" Type="Guid" />
@@ -1523,16 +1555,16 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <Parameter Name="ContactNo" Mode="In" Type="String" />
             <Parameter Name="EmailAddress" Mode="In" Type="String" />
             <Parameter Name="NTNNo" Mode="In" Type="String" />
-            <Parameter Name="Remarks" Mode="In" Type="String" />
             <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
             <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
             <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
             <Parameter Name="UpdatedBy" Mode="In" Type="Int32" />
-            <Parameter Name="DocumentStatus" Mode="In" Type="Int32" />
             <Parameter Name="DocType" Mode="In" Type="Int32" />
+            <Parameter Name="DocumentStatus" Mode="In" Type="Int32" />
             <Parameter Name="Status" Mode="In" Type="Boolean" />
             <Parameter Name="BranchId" Mode="In" Type="Int32" />
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="Remarks" Mode="In" Type="String" />
             <Parameter Name="Response" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CM_Company_GetDetailByParam" ReturnType="Collection(SESModel.CM_Company_GetDetailByParam_Result)">
@@ -1682,6 +1714,20 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <Parameter Name="Response" Mode="InOut" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="ACM_Class_GetListByParam_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GuID" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ACM_Class_GetListBySearch_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GuID" Nullable="true" />
+          <Property Type="String" Name="Code" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="StudyLevel" Nullable="true" />
+          <Property Type="String" Name="StudyGroup" Nullable="true" />
+          <Property Type="Int32" Name="DocumentStatus" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="BM_Branch_GetListByParam_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="Guid" Name="GuID" Nullable="true" />
@@ -2287,6 +2333,28 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
                 <ScalarProperty Name="PolicyPeriod" ColumnName="PolicyPeriod" />
                 <ScalarProperty Name="ChallanMethod" ColumnName="ChallanMethod" />
                 <ScalarProperty Name="AllowedChallanNo" ColumnName="AllowedChallanNo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ACM_Class_GetListByParam" FunctionName="SESModel.Store.ACM_Class_GetListByParam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SESModel.ACM_Class_GetListByParam_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ACM_Class_GetListBySearch" FunctionName="SESModel.Store.ACM_Class_GetListBySearch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SESModel.ACM_Class_GetListBySearch_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StudyLevel" ColumnName="StudyLevel" />
+                <ScalarProperty Name="StudyGroup" ColumnName="StudyGroup" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

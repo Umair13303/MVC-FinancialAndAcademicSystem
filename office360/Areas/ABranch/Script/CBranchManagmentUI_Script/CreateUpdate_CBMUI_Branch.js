@@ -337,19 +337,25 @@ function GET_BM_BRANCH_INFOBYGUID() {
                 startLoading();
             },
             success: function (data) {
-                $('#TextBoxDescription').val(data[0].Description);
-                $('#DropDownListCampusType').val(data[0].CampusTypeId).change();
-                $('#DropDownListOrganizationType').val(data[0].OrganizationTypeId).change();
-                $('#DropDownListCountry').val(data[0].CountryId).change();
-                setTimeout(function () {
-                    $('#DropDownListCity').val(data[0].CityId).change();
-                }, 500);
-                $('#TextBoxAddress').val(data[0].Address);
-                $('#TextBoxContactNo').val(data[0].ContactNo);
-                $('#TextBoxEmailAddress').val(data[0].EmailAddress);
-                $('#TextBoxNTNNo').val(data[0].NTNNo);
-                $('#TextBoxRemarks').val(data[0].Remarks).prop('disabled', true);
-                $('#HiddenFieldCampusGuID').val(data[0].GuID);
+
+                if (data.length > 0) {
+                    $('#TextBoxDescription').val(data[0].Description);
+                    $('#DropDownListCampusType').val(data[0].CampusTypeId).change();
+                    $('#DropDownListOrganizationType').val(data[0].OrganizationTypeId).change();
+                    $('#DropDownListCountry').val(data[0].CountryId).change();
+                    setTimeout(function () {
+                        $('#DropDownListCity').val(data[0].CityId).change();
+                    }, 500);
+                    $('#TextBoxAddress').val(data[0].Address);
+                    $('#TextBoxContactNo').val(data[0].ContactNo);
+                    $('#TextBoxEmailAddress').val(data[0].EmailAddress);
+                    $('#TextBoxNTNNo').val(data[0].NTNNo);
+                    $('#TextBoxRemarks').val(data[0].Remarks).prop('disabled', true);
+                    $('#HiddenFieldCampusGuID').val(data[0].GuID);
+                }
+                else {
+                    GetMessageBox("ERROR FETCHING RECORD FROM SERVER FOR SELECTED BRANCH/CAMPUS.... CONTACT DEVELOPER TEAM", 505);
+                }
 
             },
             complete: function () {

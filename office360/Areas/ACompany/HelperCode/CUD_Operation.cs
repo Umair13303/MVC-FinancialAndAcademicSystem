@@ -27,7 +27,7 @@ namespace office360.Areas.ACompany.HelperCode
                     try
                     {
                         #region CHECK DUPLICATE :: NO-OPERATION IF ACTIVE COMPANY EXIST
-                        int? DB_OPERATION_STATUS = ACompany.HelperCode.Check_Duplicate_By_LINQ.IS_EXIST_CM_COMPANY_BY_COMPANYNAME(PostedData);
+                        int? DB_OPERATION_STATUS = ACompany.HelperCode.Check_Duplicate_By_LINQ.IS_EXIST_CM_COMPANY_BY_PARAMETER(PostedData);
 
                         switch (DB_OPERATION_STATUS)
                         {
@@ -112,7 +112,7 @@ namespace office360.Areas.ACompany.HelperCode
                     try
                     {
                         #region CHECK DUPLICATE :: NO-OPERATION IF ACTIVE COMPANY EXIST
-                        int? DB_OPERATION_STATUS = ACompany.HelperCode.Check_Duplicate_By_LINQ.IS_EXIST_RSM_RIGHTSETTING_BY_COMPANYID(PostedData);
+                        int? DB_OPERATION_STATUS = ACompany.HelperCode.Check_Duplicate_By_LINQ.IS_EXIST_RSM_RIGHTSETTING_BY_PARAMETER(PostedData);
 
                         switch (DB_OPERATION_STATUS)
                         {

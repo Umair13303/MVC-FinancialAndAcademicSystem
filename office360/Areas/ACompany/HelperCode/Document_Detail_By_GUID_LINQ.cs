@@ -49,19 +49,19 @@ namespace office360.Areas.ACompany.HelperCode
             using (SESEntities db = new SESEntities())
             {
                 DATA = ((List<_SqlParameters>)
-                       (from RU in db.RSM_RightSetting
+                       (from RS in db.RSM_RightSetting
                         where
-                        RU.GuID == PostedData.GuID
+                        RS.GuID == PostedData.GuID
                         select new _SqlParameters
                         {
-                            Id = RU.Id,
-                            GuID = RU.GuID,
-                            RightId = RU.RightId,
-                            Description = RU.Description,
-                            URLTypeId = RU.URLTypeId,
-                            BranchId = RU.BranchId,
-                            CompanyId = RU.CompanyId,
-                            Remarks = RU.Remarks,
+                            Id = RS.Id,
+                            GuID = RS.GuID,
+                            RightId = RS.RightId,
+                            Description = RS.Description,
+                            URLTypeId = RS.URLTypeId,
+                            BranchId = RS.BranchId,
+                            CompanyId = RS.CompanyId,
+                            Remarks = RS.Remarks,
 
                         }).ToList());
 

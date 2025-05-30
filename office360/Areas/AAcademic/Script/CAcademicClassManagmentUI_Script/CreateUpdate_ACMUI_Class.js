@@ -15,7 +15,7 @@ $(document).ready(function () {
             $('#DivButtonUpdateDown').hide();
             break;
         case DBOperation.UPDATE:
-            GET_BM_BRANCH_LISTBYPARAM();
+            GET_ACM_CLASS_LISTBYPARAM();
             $('#DivButtonSubmitDown').hide();
             $('#DivButtonUpdateDown').show();
             break;
@@ -33,7 +33,7 @@ function PopulateDropDownLists() {
 /*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER **-----------------------------------------------------------------------*/
 function ChangeCase() {
     //-----------FOR ::EDIT CASE
-    $('#DropDownListCampus').change(function () {
+    $('#DropDownListClass').change(function () {
         if (!IsFieldClear) {
             IsFieldClear = true;
             ClearInputFields();
@@ -136,7 +136,6 @@ function ValidateInputFields() {
     }
     return true;
 }
-
 $('#ButtonSubmitDown').click(function (event) {
     event.preventDefault();
     var IS_VALID = ValidateInputFields();
@@ -181,10 +180,126 @@ function UpSertDataIntoDB() {
         StudyGroupId: StudyGroupId,
         Remarks: Remarks,
     }
+    $.ajax({
+        type: "POST",
+        url: BasePath + "/AAcademic/CAcademicClassManagmentUI/UpSert_Into_ACM_Class",
+        dataType: 'json',
+        data: { 'PostedData': (JsonArg) },
+        beforeSend: function () {
+            startLoading();
+        },
+        success: function (data) {
+            GetMessageBox(data.Message, data.StatusCode);
+        },
+        complete: function () {
+            stopLoading();
+            ClearInputFields();
+        },
+        error: function (jqXHR, error, errorThrown) {
+            GetMessageBox("The Transaction Can Not Be Performed Due To Serve Activity", 500);
+        },
+    });
+
 }
 function ClearInputFields() {
     //-----------NOT CLEARING REQUIRED FIELD
-    $('.form-control').not('#DropDownListCampus').val('');
-    $('.select2').not('#DropDownListCampus').val('-1').change();
+    $('.form-control').not('#DropDownListClass').val('');
+    $('.select2').not('#DropDownListClass').val('-1').change();
     $('form').removeClass('Is-Valid');
 }
+
+/*----------------------------------** FUNCTION FOR:: UPDATE BRANCH (LOAD DROPDOWN,DATA FOR BRANCHID) **-----------------------------------------*/
+$('#ButtonSubmitGetInfoForEdit').click(function () {
+    if ($('#DropDownListClass').RequiredDropdown() == false) {
+        return false;
+    }
+    else {
+        GET_ACM_CLASS_INFOBYGUID();
+    }
+});
+function GET_ACM_CLASS_LISTBYPARAM() {
+    $('#DropDownListClass').empty();
+    $('#DropDownListClass').select2({
+        placeholder: 'Search By Class Name / Class Code/ Campus Name',
+        minimumInputLength: 3,
+        templateResult: function (item) {
+            return QueryDropDownListContainer_Plain(item, ['ClassName']);
+        },
+        templateSelection: function (item) {
+            return item.text;
+        },
+        ajax: {
+            url: BasePath + "/AAcademic/CAcademicClassManagmentUI/GET_MT_ACM_CLASS_BYPARAMETER_SEARCH",
+            type: "POST",
+            delay: 250,
+            data: function (params) {
+                return {
+                    PostedData: {
+                        SearchParameter: params.term,
+                        DB_IF_PARAM: DOCUMENT_LIST_CONDITION.ACM_CLASS_BY_ALLOWEDBRANCHIDS_SEARCH_PARAMETER_UPDATECLASS,
+                    }
+                };
+            },
+            beforeSend: function () {
+                startLoading();
+            },
+            processResults: function (data) {
+                return {
+                    results: data.data.map(function (item) {
+                        return {
+                            id: item.GuID,
+                            text: item.Description,
+                            ClassName: item.Description,
+                        };
+                    })
+                };
+            },
+            complete: function () {
+                stopLoading();
+            },
+        },
+    });
+}
+function GET_ACM_CLASS_INFOBYGUID() {
+    var ClassId = $('#DropDownListClass :selected').val();
+    if (ClassId != null && ClassId != undefined && ClassId != "" && ClassId != "-1") {
+
+        var JsonArg = {
+            GuID: ClassId,
+        }
+        $.ajax({
+            type: "POST",
+            url: BasePath + "/AAcademic/CAcademicClassManagmentUI/GET_MT_ACM_CLASS_INFOBYGUID",
+            dataType: 'json',
+            data: { 'PostedData': (JsonArg) },
+            beforeSend: function () {
+                startLoading();
+            },
+            success: function (data) {
+                if (data.length > 0) {
+                    $('#DropDownListCampus').val(data[0].CampusId).change();
+                    $('#TextBoxDescription').val(data[0].Description);
+                    $('#DropDownListStudyLevel').val(data[0].StudyLevelId).change();
+                    $('#DropDownListStudyGroup').val(data[0].StudyGroupId).change();
+                    $('#TextBoxRemarks').val(data[0].Remarks).prop('disabled', true);
+                    $('#HiddenFieldClassGuID').val(data[0].GuID);
+                }
+                else {
+                    GetMessageBox("ERROR FETCHING RECORD FROM SERVER FOR SELECTED CLASS.... CONTACT DEVELOPER TEAM", 505);
+                }
+
+
+            },
+            complete: function () {
+
+                stopLoading();
+            },
+        });
+
+
+    }
+    else {
+        GetMessageBox("Please Select A Branch", 505);
+        return;
+    }
+};
