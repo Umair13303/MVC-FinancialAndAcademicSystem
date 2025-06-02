@@ -208,7 +208,7 @@ function ClearInputFields() {
     $('form').removeClass('Is-Valid');
 }
 
-/*----------------------------------** FUNCTION FOR:: UPDATE BRANCH (LOAD DROPDOWN,DATA FOR BRANCHID) **-----------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: UPDATE BRANCH (LOAD DROPDOWN,DATA FOR CLASSID) **-----------------------------------------*/
 $('#ButtonSubmitGetInfoForEdit').click(function () {
     if ($('#DropDownListClass').RequiredDropdown() == false) {
         return false;

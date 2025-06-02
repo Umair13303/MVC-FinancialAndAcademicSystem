@@ -1727,6 +1727,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Property Type="String" Name="StudyLevel" Nullable="true" />
           <Property Type="String" Name="StudyGroup" Nullable="true" />
           <Property Type="Int32" Name="DocumentStatus" Nullable="true" />
+          <Property Type="String" Name="Branch" Nullable="true" />
         </ComplexType>
         <ComplexType Name="BM_Branch_GetListByParam_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -2355,6 +2356,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
                 <ScalarProperty Name="StudyLevel" ColumnName="StudyLevel" />
                 <ScalarProperty Name="StudyGroup" ColumnName="StudyGroup" />
                 <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
+                <ScalarProperty Name="Branch" ColumnName="Branch" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

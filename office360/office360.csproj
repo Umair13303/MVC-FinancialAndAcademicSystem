@@ -288,6 +288,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\AAcademic\AAcademicAreaRegistration.cs" />
+    <Compile Include="Areas\AAcademic\Controllers\CAcademicAdmissionSessionManagmentUIController.cs" />
     <Compile Include="Areas\AAcademic\Controllers\CAcademicClassManagmentUIController.cs" />
     <Compile Include="Areas\AAcademic\HelperCode\Check_Duplicate_By_LINQ.cs" />
     <Compile Include="Areas\AAcademic\HelperCode\CUD_Operation.cs" />
@@ -534,6 +535,7 @@
     <Compile Include="SqlServerTypes\Loader.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\AAcademic\Script\CAcademicAdmissionSessionManagmentUI_Script\CreateUpdate_AASMUI_AdmissionSession.js" />
     <Content Include="Areas\AAcademic\Script\CAcademicClassManagmentUI_Script\View_List_ACMUI_Class.js" />
     <Content Include="Areas\AAcademic\Script\CAcademicClassManagmentUI_Script\CreateUpdate_ACMUI_Class.js" />
     <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\CreateUpdate_CBMUI_Branch.js" />
@@ -1986,6 +1988,7 @@
     <Content Include="DB_BackUp\SESFINAL BACKUP.bak" />
     <Content Include="DB_BackUp\XLookUp BACKUP.bak" />
     <Content Include="Areas\AAcademic\Views\CAcademicClassManagmentUI\View_List_ACMUI_Class.cshtml" />
+    <Content Include="Areas\AAcademic\Views\CAcademicAdmissionSessionManagmentUI\CreateUpdate_AASMUI_AdmissionSession.cshtml" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>

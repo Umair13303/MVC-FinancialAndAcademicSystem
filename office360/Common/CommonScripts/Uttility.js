@@ -128,71 +128,137 @@ function GetStatus(Status) {
     var Badge = ""; // Initialize Badge variable to an empty string
     switch (Status) {
         case 1:
-            BadgeColor = "primary"; // Bootstrap badge color
+            BadgeColor = "primary";
             Display = "Active Company";
             break;
+
         case 2:
-            BadgeColor = "secondary"; // Bootstrap badge color
+            BadgeColor = "secondary";
             Display = "Inactive Company";
             break;
+
         case 3:
-            BadgeColor = "danger"; // Bootstrap badge color
+            BadgeColor = "danger";
             Display = "Deleted Company";
             break;
+
         case 4:
-            BadgeColor = "primary"; // Bootstrap badge color
+            BadgeColor = "primary";
             Display = "Active User";
             break;
+
         case 5:
-            BadgeColor = "secondary"; // Bootstrap badge color
+            BadgeColor = "secondary";
             Display = "Inactive User";
             break;
+
         case 6:
-            BadgeColor = "danger"; // Bootstrap badge color
+            BadgeColor = "danger";
             Display = "Deleted User";
             break;
+
         case 7:
-            BadgeColor = "primary"; // Bootstrap badge color
+            BadgeColor = "primary";
             Display = "Active Right Setting";
             break;
+
         case 8:
-            BadgeColor = "secondary"; // Bootstrap badge color
+            BadgeColor = "secondary";
             Display = "Inactive Right Setting";
             break;
+
         case 9:
-            BadgeColor = "primary"; // Bootstrap badge color
+            BadgeColor = "primary";
             Display = "Active User Right";
             break;
+
         case 10:
-            BadgeColor = "secondary"; // Bootstrap badge color
+            BadgeColor = "secondary";
             Display = "Inactive User Right";
             break;
+
         case 11:
-            BadgeColor = "primary"; // Bootstrap badge color
+            BadgeColor = "primary";
             Display = "Active Branch";
             break;
+
         case 12:
-            BadgeColor = "secondary"; // Bootstrap badge color
+            BadgeColor = "secondary";
             Display = "Inactive Branch";
             break;
+
         case 13:
-            BadgeColor = "danger"; // Bootstrap badge color
+            BadgeColor = "danger";
             Display = "Deleted Branch";
             break;
+
         case 14:
-            BadgeColor = "primary"; // Bootstrap badge color
+            BadgeColor = "primary";
             Display = "Active Branch Setting";
             break;
+
         case 15:
-            BadgeColor = "secondary"; // Bootstrap badge color
+            BadgeColor = "secondary";
             Display = "Inactive Branch Setting";
             break;
+
         case 16:
-            BadgeColor = "warning"; // Bootstrap badge color
+            BadgeColor = "warning";
             Display = "Expired Branch Setting";
             break;
+
+        case 17:
+            BadgeColor = "danger";
+            Display = "Deleted Branch Setting";
+            break;
+
+        case 18:
+            BadgeColor = "primary";
+            Display = "Active Academic Class";
+            break;
+
+        case 19:
+            BadgeColor = "secondary";
+            Display = "Inactive Academic Class";
+            break;
+
+        case 20:
+            BadgeColor = "danger";
+            Display = "Deleted Academic Class";
+            break;
+
+        case 21:
+            BadgeColor = "primary";
+            Display = "Active Academic Admission Session";
+            break;
+
+        case 22:
+            BadgeColor = "secondary";
+            Display = "Inactive Academic Admission Session";
+            break;
+
+        case 23:
+            BadgeColor = "danger";
+            Display = "Deleted Academic Admission Session";
+            break;
+
+        case 24:
+            BadgeColor = "primary";
+            Display = "Active Academic Class Subject";
+            break;
+
+        case 25:
+            BadgeColor = "secondary";
+            Display = "Inactive Academic Class Subject";
+            break;
+
+        case 26:
+            BadgeColor = "danger";
+            Display = "Deleted Academic Class Subject";
+            break;
+
         default:
-            BadgeColor = "light"; // Default badge color
+            BadgeColor = "light";
             Display = "Unknown Status";
             break;
     }

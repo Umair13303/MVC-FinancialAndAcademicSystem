@@ -38,6 +38,7 @@ function InitDataTable() {
         "columns": [
             { "data": null, "title": "#" },
             { "data": "Description", "title": "Description" },
+            { "data": "Code", "title": "Code" },
             { "data": "StudyLevel", "title": "Study Level" },
             { "data": "StudyGroup", "title": "Study Group" },
             {
@@ -46,11 +47,14 @@ function InitDataTable() {
                     return GetStatus(data["DocumentStatus"]);
                 }
             },
+            { "data": "Branch", "title": "Branch" },
             { "data": "GuID", "title": "GuID" },
         ],
         columnDefs: [
-            { visible: false, targets: 1 },
         ],
+        drawCallback: function (settings) {
+            DT_GroupBy_ForTableWithSubDetail(this, settings, '#MainTableACM_Class', ['Branch']);
+        }
     });
     table.on('order.dt search.dt', function () {
         table.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {

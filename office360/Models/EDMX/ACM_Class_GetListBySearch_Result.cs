@@ -20,5 +20,6 @@ namespace office360.Models.EDMX
         public string StudyLevel { get; set; }
         public string StudyGroup { get; set; }
         public Nullable<int> DocumentStatus { get; set; }
+        public string Branch { get; set; }
     }
 }

@@ -16,8 +16,9 @@ namespace office360.Models.General
             BRANCH = 5,
             BRANCH_SETTING = 6,
             ACADEMIC_CLASS = 7,
-            ACADEMIC_CLASS_SUBJECT = 8,
-            ACADEMIC_ADMISSION_SESSION = 9,
+            ACADEMIC_ADMISSION_SESSION = 8,
+
+            ACADEMIC_CLASS_SUBJECT = 9,
         }
         public enum DocStatus
         {
@@ -41,12 +42,12 @@ namespace office360.Models.General
             ACTIVE_ACADEMIC_CLASS = 18,
             INACTIVE_ACADEMIC_CLASS = 19,
             DELETED_ACADEMIC_CLASS = 20,
-            ACTIVE_ACADEMIC_CLASS_SUBJECT = 21,
-            INACTIVE_ACADEMIC_CLASS_SUBJECT = 22,
-            DELETED_ACADEMIC_CLASS_SUBJECT = 23,
-            ACTIVE_ACADEMIC_ADMISSION_SESSION = 24,
-            INACTIVE_ACADEMIC_ADMISSION_SESSION = 25,
-            DELETED_ACADEMIC_ADMISSION_SESSION = 26,
+            ACTIVE_ACADEMIC_ADMISSION_SESSION = 21,
+            INACTIVE_ACADEMIC_ADMISSION_SESSION = 22,
+            DELETED_ACADEMIC_ADMISSION_SESSION = 23,
+            ACTIVE_ACADEMIC_CLASS_SUBJECT = 24,
+            INACTIVE_ACADEMIC_CLASS_SUBJECT = 25,
+            DELETED_ACADEMIC_CLASS_SUBJECT = 26,
         }
         public enum ChallanMethod
         {
