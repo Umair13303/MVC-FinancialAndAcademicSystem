@@ -5,6 +5,34 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="SESModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AASM_AdmissionSession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuID" Type="uniqueidentifier" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="CampusId" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="SessionStartDate" Type="datetime" />
+          <Property Name="SessionEndDate" Type="datetime" />
+          <Property Name="AdmissionStartDate" Type="datetime" />
+          <Property Name="AdmissionEndDate" Type="datetime" />
+          <Property Name="AcademicYearId" Type="int" />
+          <Property Name="IsEnteryTestRequired" Type="bit" />
+          <Property Name="IsInterviewRequired" Type="bit" />
+          <Property Name="ClassIds" Type="nvarchar(max)" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="DocType" Type="int" />
+          <Property Name="DocumentStatus" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="BranchId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="ACM_Class">
           <Key>
             <PropertyRef Name="Id" />
@@ -148,6 +176,16 @@
           <Property Name="BranchId" Type="int" />
           <Property Name="CompanyId" Type="int" />
           <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SESFINAL.dbo.AcademicYear' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AcademicYear">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SESFINAL.dbo.AdmissionCatagory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -486,6 +524,31 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Property Name="Status" Type="bit" />
           <Property Name="CreatedOn" Type="smalldatetime" />
         </EntityType>
+        <Function Name="AASM_AdmissionSession_Upsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_OperationType" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="GuID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="CampusId" Type="int" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SessionStartDate" Type="datetime" Mode="In" />
+          <Parameter Name="SessionEndDate" Type="datetime" Mode="In" />
+          <Parameter Name="AdmissionStartDate" Type="datetime" Mode="In" />
+          <Parameter Name="AdmissionEndDate" Type="datetime" Mode="In" />
+          <Parameter Name="AcademicYearId" Type="int" Mode="In" />
+          <Parameter Name="IsEnteryTestRequired" Type="bit" Mode="In" />
+          <Parameter Name="IsInterviewRequired" Type="bit" Mode="In" />
+          <Parameter Name="ClassIds" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+          <Parameter Name="UpdatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="UpdatedBy" Type="int" Mode="In" />
+          <Parameter Name="DocType" Type="int" Mode="In" />
+          <Parameter Name="DocumentStatus" Type="int" Mode="In" />
+          <Parameter Name="Status" Type="bit" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Response" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="ACM_Class_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="SessionCompanyId" Type="int" Mode="In" />
@@ -755,12 +818,20 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Parameter Name="Response" Type="int" Mode="InOut" />
         </Function>
         <EntityContainer Name="SESModelStoreContainer">
+          <EntitySet Name="AASM_AdmissionSession" EntityType="Self.AASM_AdmissionSession" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ACM_Class" EntityType="Self.ACM_Class" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BM_Branch" EntityType="Self.BM_Branch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CM_Company" EntityType="Self.CM_Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RSM_RightSetting" EntityType="Self.RSM_RightSetting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UM_User" EntityType="Self.UM_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="URM_UserRight" EntityType="Self.URM_UserRight" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AcademicYear" EntityType="Self.AcademicYear" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AcademicYear].[Id] AS [Id], 
+    [AcademicYear].[Description] AS [Description], 
+    [AcademicYear].[Status] AS [Status]
+    FROM [dbo].[AcademicYear] AS [AcademicYear]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="AdmissionCatagory" EntityType="Self.AdmissionCatagory" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [AdmissionCatagory].[Id] AS [Id], 
@@ -1026,6 +1097,34 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Property Name="ChallanMethod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="AllowedChallanNo" Type="Int32" />
         </ComplexType>
+        <EntityType Name="AASM_AdmissionSession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuID" Type="Guid" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CampusId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SessionStartDate" Type="DateTime" Precision="3" />
+          <Property Name="SessionEndDate" Type="DateTime" Precision="3" />
+          <Property Name="AdmissionStartDate" Type="DateTime" Precision="3" />
+          <Property Name="AdmissionEndDate" Type="DateTime" Precision="3" />
+          <Property Name="AcademicYearId" Type="Int32" />
+          <Property Name="IsEnteryTestRequired" Type="Boolean" />
+          <Property Name="IsInterviewRequired" Type="Boolean" />
+          <Property Name="ClassIds" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="DocType" Type="Int32" />
+          <Property Name="DocumentStatus" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="BranchId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="ACM_Class">
           <Key>
             <PropertyRef Name="Id" />
@@ -1169,6 +1268,14 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Property Name="BranchId" Type="Int32" />
           <Property Name="CompanyId" Type="Int32" />
           <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AcademicYear">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
         </EntityType>
         <EntityType Name="AdmissionCatagory">
           <Key>
@@ -1444,12 +1551,14 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Property Name="CreatedOn" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityContainer Name="SESEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AASM_AdmissionSession" EntityType="Self.AASM_AdmissionSession" />
           <EntitySet Name="ACM_Class" EntityType="Self.ACM_Class" />
           <EntitySet Name="BM_Branch" EntityType="Self.BM_Branch" />
           <EntitySet Name="CM_Company" EntityType="Self.CM_Company" />
           <EntitySet Name="RSM_RightSetting" EntityType="Self.RSM_RightSetting" />
           <EntitySet Name="UM_User" EntityType="Self.UM_User" />
           <EntitySet Name="URM_UserRight" EntityType="Self.URM_UserRight" />
+          <EntitySet Name="AcademicYear" EntityType="Self.AcademicYear" />
           <EntitySet Name="AdmissionCatagory" EntityType="Self.AdmissionCatagory" />
           <EntitySet Name="BillingMethod" EntityType="Self.BillingMethod" />
           <EntitySet Name="CampusType" EntityType="Self.CampusType" />
@@ -1493,6 +1602,31 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           </FunctionImport>
           <FunctionImport Name="fn_GetGeneralBranchSettingForCampus" IsComposable="true" ReturnType="Collection(SESModel.fn_GetGeneralBranchSettingForCampus_Result)">
             <Parameter Name="CampusId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AASM_AdmissionSession_Upsert">
+            <Parameter Name="DB_OperationType" Mode="In" Type="String" />
+            <Parameter Name="GuID" Mode="In" Type="Guid" />
+            <Parameter Name="CampusId" Mode="In" Type="Int32" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="SessionStartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="SessionEndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="AdmissionStartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="AdmissionEndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="AcademicYearId" Mode="In" Type="Int32" />
+            <Parameter Name="IsEnteryTestRequired" Mode="In" Type="Boolean" />
+            <Parameter Name="IsInterviewRequired" Mode="In" Type="Boolean" />
+            <Parameter Name="ClassIds" Mode="In" Type="String" />
+            <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="DocType" Mode="In" Type="Int32" />
+            <Parameter Name="DocumentStatus" Mode="In" Type="Int32" />
+            <Parameter Name="Status" Mode="In" Type="Boolean" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="Remarks" Mode="In" Type="String" />
+            <Parameter Name="Response" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ACM_Class_GetListByParam" ReturnType="Collection(SESModel.ACM_Class_GetListByParam_Result)">
             <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
@@ -1848,6 +1982,35 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SESModelStoreContainer" CdmEntityContainer="SESEntities">
+          <EntitySetMapping Name="AASM_AdmissionSession">
+            <EntityTypeMapping TypeName="SESModel.AASM_AdmissionSession">
+              <MappingFragment StoreEntitySet="AASM_AdmissionSession">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="CampusId" ColumnName="CampusId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SessionStartDate" ColumnName="SessionStartDate" />
+                <ScalarProperty Name="SessionEndDate" ColumnName="SessionEndDate" />
+                <ScalarProperty Name="AdmissionStartDate" ColumnName="AdmissionStartDate" />
+                <ScalarProperty Name="AdmissionEndDate" ColumnName="AdmissionEndDate" />
+                <ScalarProperty Name="AcademicYearId" ColumnName="AcademicYearId" />
+                <ScalarProperty Name="IsEnteryTestRequired" ColumnName="IsEnteryTestRequired" />
+                <ScalarProperty Name="IsInterviewRequired" ColumnName="IsInterviewRequired" />
+                <ScalarProperty Name="ClassIds" ColumnName="ClassIds" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="DocType" ColumnName="DocType" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ACM_Class">
             <EntityTypeMapping TypeName="SESModel.ACM_Class">
               <MappingFragment StoreEntitySet="ACM_Class">
@@ -1995,6 +2158,15 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
                 <ScalarProperty Name="BranchId" ColumnName="BranchId" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AcademicYear">
+            <EntityTypeMapping TypeName="SESModel.AcademicYear">
+              <MappingFragment StoreEntitySet="AcademicYear">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2337,6 +2509,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AASM_AdmissionSession_Upsert" FunctionName="SESModel.Store.AASM_AdmissionSession_Upsert" />
           <FunctionImportMapping FunctionImportName="ACM_Class_GetListByParam" FunctionName="SESModel.Store.ACM_Class_GetListByParam">
             <ResultMapping>
               <ComplexTypeMapping TypeName="SESModel.ACM_Class_GetListByParam_Result">
@@ -2538,7 +2711,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

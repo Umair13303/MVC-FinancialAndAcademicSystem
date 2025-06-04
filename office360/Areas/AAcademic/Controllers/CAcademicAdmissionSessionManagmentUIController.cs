@@ -22,6 +22,8 @@ namespace office360.Areas.AAcademic.Controllers
 
         /*---------------------- ** ACTION RESULTS FOR :: RENDER OF VIEW ** ------------------------------------------------------------------- */
         #region ACTION RESULT FOR :: RENDER VIEW
+        [UsersSessionCheck]
+        [CompanySessionCheck]
         public ActionResult CreateUpdate_AASMUI_AdmissionSession(_SqlParameters PostedData)
         {
             #region PASS VIEW
@@ -50,11 +52,21 @@ namespace office360.Areas.AAcademic.Controllers
             var DATA = ABranch.HelperCode.DATA_FROM_SP.GET_MT_BM_BRANCH_BYPARAM(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GET_MT_ACM_CLASS_BYPARAMTER(_SqlParameters PostedData)
+        {
+            var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_ACM_CLASS_BYPARAM(PostedData).ToList();
+            return Json(DATA, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         /*---------------------- ** ACTION RESULTS FOR :: RENDER DATA FOR DROP DOWN LIST FROM DB_LOOKUP USING LINQUERY ** --------------------------- */
 
         #region ACTION RESULT FOR :: RENDER DATA FOR DROP DOWN FROM DB_LOOKUP -- LINQ-QUERY
+        public ActionResult GET_LK1_ACADEMICYEAR(_SqlParameters PostedData)
+        {
+            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_AcademicYear(PostedData).ToList();
+            return Json(DATA, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         /*---------------------- ** ACTION RESULTS FOR :: DATABASE OPERATION BY USER (INSERT/UPDATE/DELETE OF ADMISSION_SESSION) ** ---------------------------- */
@@ -63,7 +75,7 @@ namespace office360.Areas.AAcademic.Controllers
         [HttpPost]
         public ActionResult UpSert_Into_AASM_AdmissionSession(_SqlParameters PostedData)
         {
-            _Exe = AAcademic.HelperCode.CUD_Operation.Update_Insert_ACM_Class(PostedData);
+            _Exe = AAcademic.HelperCode.CUD_Operation.Update_Insert_AASM_AdmissionSession(PostedData);
             var data = new { Message = Http_Server_Status.HTTP_DB_TransactionMessagByStatusCode(_Exe), StatusCode = _Exe };
             return Json(data, JsonRequestBehavior.AllowGet);
         }

@@ -67,44 +67,44 @@ $.fn.RequiredTextBoxInputGroup = function () {
     }
 };
 $.fn.RequiredDropdown = function () {
-    // Remove any existing validation messages and icons
+    // Remove any existing validation classes and reset styling
     $(this).removeClass('is-invalid is-valid');
-    $(this).css('border', ''); // Reset the border
+    $(this).css('border', '');
 
     var labelText = '';
-    // Find the label associated with this dropdown
     var inputId = $(this).attr('id');
     var labelForInput = $('label[for="' + inputId + '"]');
+
     if (labelForInput.length) {
         labelText = labelForInput.text();
     }
 
-    if (!$(this).val() || $(this).val() == '-1') {
-        // Create and display an error message dynamically
-        var errorMessage = 'Please select a ' + labelText;
-        var $errorDiv = $('<div class="col-sm-12 error text-danger">' + errorMessage + '</div>');
+    var $formGroup = $(this).closest('.form-group');
+    var $existingError = $formGroup.next('.error'); // Check for existing error message
 
-        // Insert the error message after the parent div of the dropdown
-        $(this).closest('.form-group').after($errorDiv);
+    if (!$(this).val() || $(this).val() === '-1') {
+        var errorMessage = 'Please select a ' + labelText;
+
+        if ($existingError.length === 0) {
+            var $errorDiv = $('<div class="col-sm-12 error text-danger">' + errorMessage + '</div>');
+            $formGroup.after($errorDiv);
+
+            $(this)[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            setTimeout(function () {
+                $errorDiv.remove();
+            }, 5000);
+        }
 
         $(this).addClass('is-invalid');
-
-        // Scroll to the dropdown field
-        $(this)[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-        // Remove the error message after 5 seconds
-        setTimeout(function () {
-            $errorDiv.remove();
-        }, 5000);
-
         return false;
     } else {
-        // Add success class
+        // Remove the error if valid
+        if ($existingError.length) {
+            $existingError.remove();
+        }
+
         $(this).addClass('is-valid');
-
-        // Remove any existing error messages after success
-        $(this).closest('.form-group').next('.error').remove();
-
         return true;
     }
 };
@@ -623,4 +623,25 @@ function GET_DATEPICKER_FORUPDATE_INTOLIST(ServerDate, DateFormat, InputFieldId,
 function GET_FORMATED_DATE(date, format) {
     return flatpickr.formatDate(date, format);
 }
+function GET_INCREMENT_DATEPICKER_SIMPLE(InputSelector, StartDate, IncrementNoOfDays)
+{
+    // CONVERT THE START DATE(STRING FORMAT) INTO SYSTEM DATE FORMAT
+    var StartDate_Formated = new Date(StartDate);
+    if (isNaN(StartDate_Formated)) {
+        console.error("Invalid date:", StartDate);
+        return;
+    }
 
+    // INCREASE THE DATE BY IncrementNoOfDays PROVIDED
+    StartDate_Formated.setDate(StartDate_Formated.getDate() + IncrementNoOfDays);
+
+    // FORMATE THE DATE FORMAT FOR DatePickerSimple "Y-m-d"
+    var Year = StartDate_Formated.getFullYear();
+    var Month = ("0" + (StartDate_Formated.getMonth() + 1)).slice(-2);
+    var Day = ("0" + StartDate_Formated.getDate()).slice(-2);
+    var TriggerDate_Formated = `${Year}-${Month}-${Day}`;
+
+    // SET VALUE TO INPUT FIELD
+    $(InputSelector).val(TriggerDate_Formated);
+    return;
+}

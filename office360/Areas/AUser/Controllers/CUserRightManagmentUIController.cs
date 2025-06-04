@@ -40,6 +40,9 @@ namespace office360.Areas.AUser.Controllers
                 return RedirectToAction(_ActionsURL.LogIn, _Controller.Home, new { area = "" });
             }
         }
+
+        [UsersSessionCheck]
+        [CompanySessionCheck]
         public ActionResult View_List_URMUI_UserRight(_SqlParameters PostedData)
         {
             #region PASS VIEW

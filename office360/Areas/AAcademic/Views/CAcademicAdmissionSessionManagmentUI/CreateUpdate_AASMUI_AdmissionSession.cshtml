@@ -49,6 +49,7 @@
         <div class="card" style="margin-top:1%;width:100%">
             <div class="card-body">
                 <h3 style="font-family: 'Bahnschrift'; font-weight: bolder; color: navy">Admission Session Detail</h3>
+
                 <div class="row mb-0">
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
@@ -66,7 +67,73 @@
                         </div>
                     </div>
                 </div>
-                
+
+                <div class="row mb-0">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Session Start Date", new { @class = "col-form-label", @for = "TextBoxSessionStartDate" })
+                            @Html.TextBox("TextBoxSessionStartDate", null, new { @class = "form-control DatePickerSimple", placeholder = "Please Enter Session Start Date Here!", @id = "TextBoxSessionStartDate" })
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Session End Date", new { @class = "col-form-label", @for = "TextBoxSessionEndDate" })
+                            @Html.TextBox("TextBoxSessionEndDate", null, new { @class = "form-control DatePickerSimple", placeholder = "Please Enter Session End Date Here!", @id = "TextBoxSessionEndDate" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-0">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Admission Start Date", new { @class = "col-form-label", @for = "TextBoxAdmissionStartDate" })
+                            @Html.TextBox("TextBoxAdmissionStartDate", null, new { @class = "form-control DatePickerSimple", placeholder = "Please Enter Admission Start Date Here!", @id = "TextBoxAdmissionStartDate" })
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Admission End Date", new { @class = "col-form-label", @for = "TextBoxAdmissionEndDate" })
+                            @Html.TextBox("TextBoxAdmissionEndDate", null, new { @class = "form-control DatePickerSimple", placeholder = "Please Enter Admission End Date Here!", @id = "TextBoxAdmissionEndDate" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-0">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Academic Year", new { @class = "col-form-label", @for = "DropDownListAcademicYear" })
+                            @Html.DropDownList("DropDownListAcademicYear", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListAcademicYear" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-0">
+                    <div class="col-sm-12 col-md-10">
+                        <div class="form-group">
+                            @Html.Label("Class", new { @class = "col-form-label", @for = "DropDownListClasses" })
+                            @Html.DropDownList("DropDownListClasses", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", multiple = "multiple", @data_toggle = "select2", id = "DropDownListClasses" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-0">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            <div class="form-check form-switch">
+                                @Html.CheckBox("CheckBoxIsEnteryTestRequired", false, new { @class = "form-check-input", @role = "switch", id = "CheckBoxIsEnteryTestRequired" })
+                                @Html.Label("Is Entery Test Required", new { @class = "form-check-label", @for = "CheckBoxIsEnteryTestRequired" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            <div class="form-check form-switch">
+                                @Html.CheckBox("CheckBoxIsInterviewRequired", false, new { @class = "form-check-input", @role = "switch", id = "CheckBoxIsInterviewRequired" })
+                                @Html.Label("Is Interview Required", new { @class = "form-check-label", @for = "CheckBoxIsInterviewRequired" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row mb-0">
                     <div class="col-sm-12 col-md-6">
@@ -76,6 +143,8 @@
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
 

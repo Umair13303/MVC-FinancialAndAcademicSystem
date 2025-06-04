@@ -339,6 +339,12 @@
     <Compile Include="Models\DBF\DBContextClass.cs" />
     <Compile Include="Models\DBF\DBFModel.cs" />
     <Compile Include="Models\DBF\DBFStoredProcedure.cs" />
+    <Compile Include="Models\EDMX\AASM_AdmissionSession.cs">
+      <DependentUpon>SESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDMX\AcademicYear.cs">
+      <DependentUpon>SESModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EDMX\ACM_Class.cs">
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>

@@ -18,7 +18,11 @@ namespace office360.Models.General
         public bool? IsLogIn { get; set; }
         public bool? IsDeveloper { get; set; }
         public bool? IsFatherAlive { get; set; }
+        public bool? IsEnteryTestRequired { get; set; }
+        public bool? IsInterviewRequired { get; set; }
 
+        public DateTime? AdmissionStartDate { get; set; }
+        public DateTime? AdmissionEndDate { get; set; }
         public DateTime? DateofBirth { get; set; }
         public DateTime? ClassEndDate { get; set; }
         public DateTime? PeriodEndOn { get; set; }
@@ -51,6 +55,7 @@ namespace office360.Models.General
 
         public Guid? GuID { get; set; }
 
+        public int? AcademicYearId { get; set; }
         public int? AdmissionId { get; set; }
         public int? AppSessionId { get; set; }
         public int? AllowedChallanNo { get; set; }

@@ -151,6 +151,22 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
+        
+        public static List<_SqlParameters> GET_LK1_AcademicYear(_SqlParameters PostedData)
+        {
+            using (SESEntities db = new SESEntities())
+            {
+                var DATA = db.AcademicYear.Where(x => x.Status == true)
+                         .Select(x => new _SqlParameters
+                         {
+                             Id = x.Id,
+                             Description = x.Description,
+                         })
+                         .ToList();
+
+                return DATA;
+            }
+        }
         public static List<_SqlParameters> GET_LK1_OrganizationType(_SqlParameters PostedData)
         {
             using (SESEntities db = new SESEntities())

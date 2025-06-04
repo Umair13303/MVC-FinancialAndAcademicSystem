@@ -22,6 +22,8 @@ namespace office360.Areas.AAcademic.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: RENDER OF VIEW ** ------------------------------------------------------------------- */
 
         #region ACTION RESULT FOR :: RENDER VIEW
+        [UsersSessionCheck]
+        [CompanySessionCheck]
         public ActionResult CreateUpdate_ACMUI_Class(_SqlParameters PostedData)
         {
             #region PASS VIEW
@@ -39,6 +41,8 @@ namespace office360.Areas.AAcademic.Controllers
             }
         }
 
+        [UsersSessionCheck]
+        [CompanySessionCheck]
         public ActionResult View_List_ACMUI_Class(_SqlParameters PostedData)
         {
             #region PASS VIEW

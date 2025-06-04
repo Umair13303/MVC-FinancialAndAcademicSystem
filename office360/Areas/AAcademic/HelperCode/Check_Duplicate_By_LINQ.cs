@@ -15,7 +15,7 @@ namespace office360.Areas.AAcademic.HelperCode
 {
     public class Check_Duplicate_By_LINQ
     {
-        #region HELPER FOR :: CHECK IF Branch(ACTIVE_BRANCH) ALREADY EXIST
+        #region HELPER FOR :: CHECK IF CLASS(ACTIVE_CLASS) ALREADY EXIST
         public static int? IS_EXIST_ACM_CLASS_BY_PARAMETER(_SqlParameters PostedData)
         {
             using (SESEntities db = new SESEntities())

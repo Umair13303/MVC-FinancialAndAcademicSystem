@@ -17,7 +17,6 @@ namespace office360.Models.General
             BRANCH_SETTING = 6,
             ACADEMIC_CLASS = 7,
             ACADEMIC_ADMISSION_SESSION = 8,
-
             ACADEMIC_CLASS_SUBJECT = 9,
         }
         public enum DocStatus
@@ -68,6 +67,11 @@ namespace office360.Models.General
             ROLE_DEVELOPER = 2,
             ROLE_MANAGER = 3,
             ROLE_DEO = 4,
+        }
+        public enum DATEPICKER_INCREMENT
+        {
+            FOR_ADMISSION_SESSION_ROUTINE = 365,
+            FOR_ADMISSION_OPENING_ROUTINE = 20,
         }
     }
 }
