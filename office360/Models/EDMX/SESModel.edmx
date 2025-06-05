@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SESModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SESModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AASM_AdmissionSession">
           <Key>
             <PropertyRef Name="Id" />
@@ -19,9 +19,9 @@
           <Property Name="AdmissionStartDate" Type="datetime" />
           <Property Name="AdmissionEndDate" Type="datetime" />
           <Property Name="AcademicYearId" Type="int" />
+          <Property Name="ClassIds" Type="nvarchar(max)" />
           <Property Name="IsEnteryTestRequired" Type="bit" />
           <Property Name="IsInterviewRequired" Type="bit" />
-          <Property Name="ClassIds" Type="nvarchar(max)" />
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="UpdatedOn" Type="datetime" />
@@ -534,9 +534,9 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Parameter Name="AdmissionStartDate" Type="datetime" Mode="In" />
           <Parameter Name="AdmissionEndDate" Type="datetime" Mode="In" />
           <Parameter Name="AcademicYearId" Type="int" Mode="In" />
+          <Parameter Name="ClassIds" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="IsEnteryTestRequired" Type="bit" Mode="In" />
           <Parameter Name="IsInterviewRequired" Type="bit" Mode="In" />
-          <Parameter Name="ClassIds" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
           <Parameter Name="CreatedBy" Type="int" Mode="In" />
           <Parameter Name="UpdatedOn" Type="datetime" Mode="In" />
@@ -1074,8 +1074,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
     FROM [dbo].[WorkingShift] AS [WorkingShift]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SESModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1592,16 +1591,16 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <EntitySet Name="WHTaxPolicy" EntityType="Self.WHTaxPolicy" />
           <EntitySet Name="WorkingShift" EntityType="Self.WorkingShift" />
           <FunctionImport Name="fn_CodeSplitByCommaAsINT" IsComposable="true" ReturnType="Collection(SESModel.fn_CodeSplitByCommaAsINT_Result)">
-            <Parameter Name="psCSString" Mode="In" Type="String" />
+          <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_CodeSplitByCommaAsUniqueIdentifier" IsComposable="true" ReturnType="Collection(SESModel.fn_CodeSplitByCommaAsUniqueIdentifier_Result)">
-            <Parameter Name="psCSString" Mode="In" Type="String" />
+          <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_GetCommaSepratedValuesInList" IsComposable="true" ReturnType="Collection(SESModel.fn_GetCommaSepratedValuesInList_Result)">
-            <Parameter Name="psCSString" Mode="In" Type="String" />
+          <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_GetGeneralBranchSettingForCampus" IsComposable="true" ReturnType="Collection(SESModel.fn_GetGeneralBranchSettingForCampus_Result)">
-            <Parameter Name="CampusId" Mode="In" Type="Int32" />
+          <Parameter Name="CampusId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AASM_AdmissionSession_Upsert">
             <Parameter Name="DB_OperationType" Mode="In" Type="String" />
@@ -1613,9 +1612,9 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <Parameter Name="AdmissionStartDate" Mode="In" Type="DateTime" />
             <Parameter Name="AdmissionEndDate" Mode="In" Type="DateTime" />
             <Parameter Name="AcademicYearId" Mode="In" Type="Int32" />
+            <Parameter Name="ClassIds" Mode="In" Type="String" />
             <Parameter Name="IsEnteryTestRequired" Mode="In" Type="Boolean" />
             <Parameter Name="IsInterviewRequired" Mode="In" Type="Boolean" />
-            <Parameter Name="ClassIds" Mode="In" Type="String" />
             <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
             <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
             <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />

@@ -198,7 +198,6 @@ function UpSertDataIntoDB() {
     var AdmissionEndDate = $("#TextBoxAdmissionEndDate").val();
     var AcademicYearId = $("#DropDownListAcademicYear :selected").val();
     var ClassIds = $("#DropDownListClasses").val();
-    var AcademicYearId = $("#DropDownListAcademicYear :selected").val();
     var IsEnteryTestRequired = $('#CheckBoxIsEnteryTestRequired').prop('checked');
     var IsInterviewRequired = $('#CheckBoxIsInterviewRequired').prop('checked');
     var Remarks = $('#TextBoxRemarks').val();
@@ -232,11 +231,12 @@ function UpSertDataIntoDB() {
             startLoading();
         },
         success: function (data) {
-            GetMessageBox(data.Message, data.StatusCode);
+            this.complete(data.Message, data.StatusCode)
         },
-        complete: function () {
+        complete: function (Message, StatusCode) {
             stopLoading();
             ClearInputFields();
+            GetMessageBox(Message, StatusCode);
         },
         error: function (jqXHR, error, errorThrown) {
             GetMessageBox("The Transaction Can Not Be Performed Due To Serve Activity", 500);
