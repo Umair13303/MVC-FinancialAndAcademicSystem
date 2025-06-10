@@ -22,6 +22,7 @@ namespace office360.Areas.ACompany.HelperCode
         {
             using (SESEntities db = new SESEntities())
             {
+                bool IsRecordExist = false;
                 int? Response = (int?)Http_DB_Response.CODE_DATA_ALREADY_EXIST;
                 try
                 {
@@ -30,28 +31,28 @@ namespace office360.Areas.ACompany.HelperCode
 
                         case nameof(DB_OperationType.INSERT_DATA_INTO_DB):
 
-
-                            var DATA = db.CM_Company
-                                .Where(x =>
+                            #region IN CASE OF INSERT :: CHECK IF ENTERY RECORD EXIST , BASED ON DATA ENTERED
+                            IsRecordExist = db.CM_Company
+                                .Any(x =>
                                     x.CompanyName == PostedData.CompanyName &&
                                     x.DocumentStatus == (int?)DocStatus.ACTIVE_COMPANY &&
                                     x.Status == true
-                                )
-                                .Select(x => new _SqlParameters { Id = x.Id }).ToList();
-
-                            if (DATA.Count == 0)
-                            {
+                                );
+                            #endregion
+                            if (!IsRecordExist)
                                 Response = (int?)Http_DB_Response.CODE_AUTHORIZED;
-
-                            }
                             else
-                            {
                                 Response = (int?)Http_DB_Response.CODE_DATA_ALREADY_EXIST;
-                            }
                             break;
 
                         case nameof(DB_OperationType.UPDATE_DATA_INTO_DB):
-                            Response = (int?)Http_DB_Response.CODE_AUTHORIZED;
+                            #region IN CASE OF UPDATE :: CHECK IF ENTERY RECORD EXIST , BASED ON SYSTEM GUID
+                            IsRecordExist = db.CM_Company.Any(x => x.GuID == PostedData.GuID);
+                            #endregion
+                            if (!IsRecordExist)
+                                Response = (int?)Http_DB_Response.CODE_DATA_DOES_NOT_EXIST;
+                            else
+                                Response = (int?)Http_DB_Response.CODE_AUTHORIZED;
                             break;
 
                         default:
