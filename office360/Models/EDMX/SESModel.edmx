@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SESModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="SESModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AASM_AdmissionSession">
           <Key>
             <PropertyRef Name="Id" />
@@ -524,6 +524,15 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Property Name="Status" Type="bit" />
           <Property Name="CreatedOn" Type="smalldatetime" />
         </EntityType>
+        <Function Name="AASM_AdmissionSession_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SessionCompanyId" Type="int" Mode="In" />
+          <Parameter Name="SessionBranchId" Type="int" Mode="In" />
+          <Parameter Name="AllowedCampusIds" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SearchParameter" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CampusId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+        </Function>
         <Function Name="AASM_AdmissionSession_Upsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DB_OperationType" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="GuID" Type="uniqueidentifier" Mode="In" />
@@ -1074,7 +1083,8 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
     FROM [dbo].[WorkingShift] AS [WorkingShift]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SESModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1110,9 +1120,9 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Property Name="AdmissionStartDate" Type="DateTime" Precision="3" />
           <Property Name="AdmissionEndDate" Type="DateTime" Precision="3" />
           <Property Name="AcademicYearId" Type="Int32" />
+          <Property Name="ClassIds" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsEnteryTestRequired" Type="Boolean" />
           <Property Name="IsInterviewRequired" Type="Boolean" />
-          <Property Name="ClassIds" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
@@ -1591,16 +1601,25 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <EntitySet Name="WHTaxPolicy" EntityType="Self.WHTaxPolicy" />
           <EntitySet Name="WorkingShift" EntityType="Self.WorkingShift" />
           <FunctionImport Name="fn_CodeSplitByCommaAsINT" IsComposable="true" ReturnType="Collection(SESModel.fn_CodeSplitByCommaAsINT_Result)">
-          <Parameter Name="psCSString" Mode="In" Type="String" />
+            <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_CodeSplitByCommaAsUniqueIdentifier" IsComposable="true" ReturnType="Collection(SESModel.fn_CodeSplitByCommaAsUniqueIdentifier_Result)">
-          <Parameter Name="psCSString" Mode="In" Type="String" />
+            <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_GetCommaSepratedValuesInList" IsComposable="true" ReturnType="Collection(SESModel.fn_GetCommaSepratedValuesInList_Result)">
-          <Parameter Name="psCSString" Mode="In" Type="String" />
+            <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_GetGeneralBranchSettingForCampus" IsComposable="true" ReturnType="Collection(SESModel.fn_GetGeneralBranchSettingForCampus_Result)">
-          <Parameter Name="CampusId" Mode="In" Type="Int32" />
+            <Parameter Name="CampusId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AASM_AdmissionSession_GetListByParam" ReturnType="Collection(SESModel.AASM_AdmissionSession_GetListByParam_Result)">
+            <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
+            <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="SessionBranchId" Mode="In" Type="Int32" />
+            <Parameter Name="AllowedCampusIds" Mode="In" Type="String" />
+            <Parameter Name="SearchParameter" Mode="In" Type="String" />
+            <Parameter Name="CampusId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AASM_AdmissionSession_Upsert">
             <Parameter Name="DB_OperationType" Mode="In" Type="String" />
@@ -1847,6 +1866,11 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <Parameter Name="Response" Mode="InOut" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="AASM_AdmissionSession_GetListByParam_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GuID" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="ACM_Class_GetListByParam_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="Guid" Name="GuID" Nullable="true" />
@@ -1994,9 +2018,9 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
                 <ScalarProperty Name="AdmissionStartDate" ColumnName="AdmissionStartDate" />
                 <ScalarProperty Name="AdmissionEndDate" ColumnName="AdmissionEndDate" />
                 <ScalarProperty Name="AcademicYearId" ColumnName="AcademicYearId" />
+                <ScalarProperty Name="ClassIds" ColumnName="ClassIds" />
                 <ScalarProperty Name="IsEnteryTestRequired" ColumnName="IsEnteryTestRequired" />
                 <ScalarProperty Name="IsInterviewRequired" ColumnName="IsInterviewRequired" />
-                <ScalarProperty Name="ClassIds" ColumnName="ClassIds" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
@@ -2508,6 +2532,15 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AASM_AdmissionSession_GetListByParam" FunctionName="SESModel.Store.AASM_AdmissionSession_GetListByParam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SESModel.AASM_AdmissionSession_GetListByParam_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="AASM_AdmissionSession_Upsert" FunctionName="SESModel.Store.AASM_AdmissionSession_Upsert" />
           <FunctionImportMapping FunctionImportName="ACM_Class_GetListByParam" FunctionName="SESModel.Store.ACM_Class_GetListByParam">
             <ResultMapping>
@@ -2710,7 +2743,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

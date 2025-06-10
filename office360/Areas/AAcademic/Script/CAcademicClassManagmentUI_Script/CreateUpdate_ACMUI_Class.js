@@ -285,21 +285,19 @@ function GET_ACM_CLASS_INFOBYGUID() {
                     $('#HiddenFieldClassGuID').val(data[0].GuID);
                 }
                 else {
-                    GetMessageBox("ERROR FETCHING RECORD FROM SERVER FOR SELECTED CLASS.... CONTACT DEVELOPER TEAM", 505);
+                    GetMessageBox("NO RECORD FOUND FOR SELECTED CLASS.... CONTACT DEVELOPER TEAM", 505);
                 }
-
-
             },
             complete: function () {
-
                 stopLoading();
             },
+            error: function (jqXHR, error, errorThrown) {
+                GetMessageBox("ERROR FETCHING RECORD FROM SERVER FOR SELECTED CLASS.... CONTACT DEVELOPER TEAM", 505);
+            },
         });
-
-
     }
     else {
-        GetMessageBox("Please Select A Branch", 505);
+        GetMessageBox("Please Select A Class", 505);
         return;
     }
 };

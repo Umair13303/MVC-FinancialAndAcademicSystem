@@ -272,7 +272,6 @@ function GET_RSM_RIGHTSETTING_LISTBYPARAM() {
 function GET_RSM_RIGHTSETTING_INFOBYGUID() {
     var RightSettingId = $('#DropDownListRightSetting :selected').val();
     if (RightSettingId != null && RightSettingId != undefined && RightSettingId != "" && RightSettingId != "-1") {
-
         var JsonArg = {
             GuID: RightSettingId,
         }
@@ -285,16 +284,23 @@ function GET_RSM_RIGHTSETTING_INFOBYGUID() {
                 startLoading();
             },
             success: function (data) {
-                $('#DropDownListRight').val(data[0].RightId).change();
-                $('#TextBoxDescription').val(data[0].Description);
-                $('#DropDownListURLType').val(data[0].URLTypeId).change();
-                $('#DropDownListCompany').val(data[0].CompanyId).change();
-                $('#TextBoxRemarks').val(data[0].Remarks);
-                $('#HiddenFieldRightSettingGuID').val(data[0].GuID);
+                if (data.length > 0) {
+                    $('#DropDownListRight').val(data[0].RightId).change();
+                    $('#TextBoxDescription').val(data[0].Description);
+                    $('#DropDownListURLType').val(data[0].URLTypeId).change();
+                    $('#DropDownListCompany').val(data[0].CompanyId).change();
+                    $('#TextBoxRemarks').val(data[0].Remarks);
+                    $('#HiddenFieldRightSettingGuID').val(data[0].GuID);
+                }
+                else {
+                    GetMessageBox("NO RECORD FOUND FOR FOR SELECTED RIGHT SETTING.... CONTACT DEVELOPER TEAM", 505);
+                }
             },
             complete: function () {
-
                 stopLoading();
+            },
+            error: function (jqXHR, error, errorThrown) {
+                GetMessageBox("ERROR FETCHING RECORD FROM SERVER FOR SELECTED RIGHT SETTING.... CONTACT DEVELOPER TEAM", 505);
             },
         });
     }

@@ -17,7 +17,7 @@ namespace office360.Areas.AUser.HelperCode
 {
     public class DATA_FROM_SP
     {
-        #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB -- DBO:- UM_USER
         public static List<UM_User_GetListByParam_Result> GET_MT_UM_USER_BYPARAM(_SqlParameters PostedData)
         {
             List<UM_User_GetListByParam_Result> DATA = new List<UM_User_GetListByParam_Result>();
@@ -32,6 +32,9 @@ namespace office360.Areas.AUser.HelperCode
                 return DATA;
             }
         }
+
+        #endregion
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB -- DBO:- URM_USERRIGHT
         public static List<URM_UserRight_GetListByParam_Result> GET_MT_URM_USERRIGHT_BYPARAM(_SqlParameters PostedData)
         {
             List<URM_UserRight_GetListByParam_Result> DATA = new List<URM_UserRight_GetListByParam_Result>();
@@ -47,10 +50,9 @@ namespace office360.Areas.AUser.HelperCode
                 return DATA;
             }
         }
-
         #endregion
 
-        #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB-- DBO:- UM_USER
         public static List<UM_User_GetListBySearch_Result> GET_MT_UM_USER_LIST_BY_SEARCHQUERY(_SqlParameters PostedData)
         {
             List<UM_User_GetListBySearch_Result> DATA = new List<UM_User_GetListBySearch_Result>();
@@ -64,8 +66,9 @@ namespace office360.Areas.AUser.HelperCode
                                                         ).ToList();
             }
             return DATA;
-
         }
+        #endregion
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB-- DBO:- URM_USERRIGHT
         public static List<URM_UserRight_GetListBySearch_Result> GET_MT_URM_USERRIGHT_LIST_BY_USERID_SEARCHQUERY(_SqlParameters PostedData)
         {
             List<URM_UserRight_GetListBySearch_Result> DATA = new List<URM_UserRight_GetListBySearch_Result>();

@@ -24,9 +24,9 @@ namespace office360.Models.EDMX
         public Nullable<System.DateTime> AdmissionStartDate { get; set; }
         public Nullable<System.DateTime> AdmissionEndDate { get; set; }
         public Nullable<int> AcademicYearId { get; set; }
+        public string ClassIds { get; set; }
         public Nullable<bool> IsEnteryTestRequired { get; set; }
         public Nullable<bool> IsInterviewRequired { get; set; }
-        public string ClassIds { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedOn { get; set; }

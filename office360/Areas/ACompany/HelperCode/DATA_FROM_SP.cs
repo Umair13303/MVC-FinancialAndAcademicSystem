@@ -17,7 +17,7 @@ namespace office360.Areas.ACompany.HelperCode
 {
     public class DATA_FROM_SP
     {
-        #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB -- DBO:- CM_COMPANY
         public static List<CM_Company_GetListByParam_Result> GET_MT_CM_COMPANY_BYPARAM(_SqlParameters PostedData)
         {
             List<CM_Company_GetListByParam_Result> DATA = new List<CM_Company_GetListByParam_Result>();
@@ -34,7 +34,9 @@ namespace office360.Areas.ACompany.HelperCode
                 return DATA;
             }
         }
+        #endregion
 
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB -- DBO:- RSM_RIGHTSETTING
         public static List<RSM_RightSetting_GetListByParam_Result> GET_MT_RSM_RIGHTSETTING_BYPARAM(_SqlParameters PostedData)
         {
             List<RSM_RightSetting_GetListByParam_Result> DATA = new List<RSM_RightSetting_GetListByParam_Result>();

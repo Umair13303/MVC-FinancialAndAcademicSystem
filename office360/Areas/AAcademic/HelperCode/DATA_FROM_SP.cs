@@ -17,8 +17,7 @@ namespace office360.Areas.AAcademic.HelperCode
 {
     public class DATA_FROM_SP
     {
-        #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB
-
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB -- DBO:- ACM_CLASS
         public static List<ACM_Class_GetListByParam_Result> GET_MT_ACM_CLASS_BYPARAM(_SqlParameters PostedData)
         {
             List<ACM_Class_GetListByParam_Result> DATA = new List<ACM_Class_GetListByParam_Result>();
@@ -58,5 +57,27 @@ namespace office360.Areas.AAcademic.HelperCode
         }
         #endregion
 
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB -- DBO:- AASM_ADMISSIONSESSION
+        public static List<AASM_AdmissionSession_GetListByParam_Result> GET_MT_AASM_ADMISSIONSESSION_BYPARAM(_SqlParameters PostedData)
+        {
+            List<AASM_AdmissionSession_GetListByParam_Result> DATA = new List<AASM_AdmissionSession_GetListByParam_Result>();
+            using (SESEntities db = new SESEntities())
+            {
+                DATA = db.AASM_AdmissionSession_GetListByParam(
+                                                       PostedData.DB_IF_PARAM,
+                                                       Session_Manager.CompanyId,
+                                                       Session_Manager.BranchId,
+                                                       Session_Manager.AllowedCampusIds,
+                                                       PostedData.SearchParameter,
+                                                       PostedData.CampusId,
+                                                       PostedData.CompanyId
+                                                       ).ToList();
+                return DATA;
+            }
+        }
+        #endregion
+
+
     }
+
 }

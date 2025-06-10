@@ -15,7 +15,7 @@ $(document).ready(function () {
             $('#DivButtonUpdateDown').hide();
             break;
         case DBOperation.UPDATE:
-           // GET_ACM_CLASS_LISTBYPARAM();
+            GET_AASM_ADMISSIONSESSION_LISTBYPARAM();
             $('#DivButtonSubmitDown').hide();
             $('#DivButtonUpdateDown').show();
             break;
@@ -220,7 +220,6 @@ function UpSertDataIntoDB() {
         IsInterviewRequired: IsInterviewRequired,
         Remarks: Remarks,
     }
-
    
     $.ajax({
         type: "POST",
@@ -252,3 +251,97 @@ function ClearInputFields() {
 }
 
 /*----------------------------------** FUNCTION FOR:: UPDATE BRANCH (LOAD DROPDOWN,DATA FOR ADMISSIONSESSIONID) **-----------------------------------------*/
+$('#ButtonSubmitGetInfoForEdit').click(function () {
+    if ($('#DropDownListAdmissionSession').RequiredDropdown() == false) {
+        return false;
+    }
+    else {
+        GET_AASM_ADMISSIONSESSION_INFOBYGUID();
+    }
+});
+function GET_AASM_ADMISSIONSESSION_LISTBYPARAM() {
+    $('#DropDownListAdmissionSession').empty();
+    $('#DropDownListAdmissionSession').select2({
+        placeholder: 'Search By Session Description / Session Code / Branch Name',
+        minimumInputLength: 3,
+        ajax: {
+            url: BasePath + "/AAcademic/CAcademicAdmissionSessionManagmentUI/GET_MT_AASM_ADMISSIONSESSION_BYPARAMETER_SEARCH",
+            type: "POST",
+            delay: 250,
+            data: function (params) {
+                return {
+                    PostedData: {
+                        SearchParameter: params.term,
+                        DB_IF_PARAM: DOCUMENT_LIST_CONDITION.AASM_ADMISSIONSESSION_BY_ALLOWEDBRANCHIDS_SEARCH_PARAMETER_UPDATEADMISSIONSESSION,
+                    }
+                };
+            },
+            beforeSend: function () {
+                startLoading();
+            },
+            processResults: function (data) {
+                return {
+                    results: data.data.map(function (item) {
+                        return {
+                            id: item.GuID,
+                            text: item.Description,
+                            ClassDecor: item.Description,
+                        };
+                    })
+                };
+            },
+            complete: function () {
+                stopLoading();
+            },
+        },
+    });
+}
+function GET_AASM_ADMISSIONSESSION_INFOBYGUID() {
+    var AdmissionSessionId = $('#DropDownListAdmissionSession :selected').val();
+    if (AdmissionSessionId != null && AdmissionSessionId != undefined && AdmissionSessionId != "" && AdmissionSessionId != "-1") {
+
+        var JsonArg = {
+            GuID: AdmissionSessionId,
+        }
+        $.ajax({
+            type: "POST",
+            url: BasePath + "/AAcademic/CAcademicAdmissionSessionManagmentUI/GET_MT_AASM_ADMISSIONSESSION_INFOBYGUID",
+            dataType: 'json',
+            data: { 'PostedData': (JsonArg) },
+            beforeSend: function () {
+                startLoading();
+            },
+            success: function (data) {
+                if (data.length > 0) {
+                    $('#DropDownListCampus').val(data[0].CampusId).change();
+                    $('#TextBoxDescription').val(data[0].Description);
+                    GET_TRIGGER_DATEPICKER_SIMPLE(data[0].SessionStartDate, '#TextBoxSessionStartDate');
+                    GET_TRIGGER_DATEPICKER_SIMPLE(data[0].SessionEndDate, '#TextBoxSessionEndDate');
+                    GET_TRIGGER_DATEPICKER_SIMPLE(data[0].AdmissionStartDate, '#TextBoxAdmissionStartDate');
+                    GET_TRIGGER_DATEPICKER_SIMPLE(data[0].AdmissionEndDate, '#TextBoxAdmissionEndDate');
+                    $('#DropDownListAcademicYear').val(data[0].AcademicYearId).change();
+                    setTimeout(function () {
+                        $('#DropDownListClasses').val(data[0].ClassIds.split(',')).change();
+                    }, 1500);
+                    $('#CheckBoxIsEnteryTestRequired').prop('checked', (data[0].IsEnteryTestRequired)).change();
+                    $('#CheckBoxIsInterviewRequired').prop('checked', (data[0].IsInterviewRequired)).change();
+                    $('#TextBoxRemarks').val(data[0].Remarks).prop('disabled', true);
+                    $('#HiddenFieldAdmissionSessionGuID').val(data[0].GuID);
+                }
+                else {
+                    GetMessageBox("NO RECORD FOUND FOR SELECTED ADMISSION SESSION.... CONTACT DEVELOPER TEAM", 505);
+                }
+            },
+            complete: function () {
+                stopLoading();
+            },
+            error: function (jqXHR, error, errorThrown) {
+                GetMessageBox("ERROR FETCHING RECORD FROM SERVER FOR SELECTED ADMISSION SESSION.... CONTACT DEVELOPER TEAM", 505);
+            },
+        });
+    }
+    else {
+        GetMessageBox("Please Select An Admission Session", 505);
+        return;
+    }
+};

@@ -337,7 +337,6 @@ function GET_BM_BRANCH_INFOBYGUID() {
                 startLoading();
             },
             success: function (data) {
-
                 if (data.length > 0) {
                     $('#TextBoxDescription').val(data[0].Description);
                     $('#DropDownListCampusType').val(data[0].CampusTypeId).change();
@@ -354,20 +353,19 @@ function GET_BM_BRANCH_INFOBYGUID() {
                     $('#HiddenFieldCampusGuID').val(data[0].GuID);
                 }
                 else {
-                    GetMessageBox("ERROR FETCHING RECORD FROM SERVER FOR SELECTED BRANCH/CAMPUS.... CONTACT DEVELOPER TEAM", 505);
+                    GetMessageBox("NO RECORD FOUND FOR FOR SELECTED BRANCH/CAMPUS.... CONTACT DEVELOPER TEAM", 505);
                 }
-
             },
             complete: function () {
-
                 stopLoading();
             },
+            error: function (jqXHR, error, errorThrown) {
+                GetMessageBox("ERROR FETCHING RECORD FROM SERVER FOR SELECTED BRANCH/CAMPUS.... CONTACT DEVELOPER TEAM", 505);
+            },
         });
-
-
     }
     else {
-        GetMessageBox("Please Select A Branch", 505);
+        GetMessageBox("Please Select A Branch / Campus", 505);
         return;
     }
 };

@@ -108,6 +108,39 @@ namespace office360.Models.EDMX
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_GetGeneralBranchSettingForCampus_Result>("[SESEntities].[fn_GetGeneralBranchSettingForCampus](@CampusId)", campusIdParameter);
         }
     
+        public virtual ObjectResult<AASM_AdmissionSession_GetListByParam_Result> AASM_AdmissionSession_GetListByParam(string dB_IF_PARAM, Nullable<int> sessionCompanyId, Nullable<int> sessionBranchId, string allowedCampusIds, string searchParameter, Nullable<int> campusId, Nullable<int> companyId)
+        {
+            var dB_IF_PARAMParameter = dB_IF_PARAM != null ?
+                new ObjectParameter("DB_IF_PARAM", dB_IF_PARAM) :
+                new ObjectParameter("DB_IF_PARAM", typeof(string));
+    
+            var sessionCompanyIdParameter = sessionCompanyId.HasValue ?
+                new ObjectParameter("SessionCompanyId", sessionCompanyId) :
+                new ObjectParameter("SessionCompanyId", typeof(int));
+    
+            var sessionBranchIdParameter = sessionBranchId.HasValue ?
+                new ObjectParameter("SessionBranchId", sessionBranchId) :
+                new ObjectParameter("SessionBranchId", typeof(int));
+    
+            var allowedCampusIdsParameter = allowedCampusIds != null ?
+                new ObjectParameter("AllowedCampusIds", allowedCampusIds) :
+                new ObjectParameter("AllowedCampusIds", typeof(string));
+    
+            var searchParameterParameter = searchParameter != null ?
+                new ObjectParameter("SearchParameter", searchParameter) :
+                new ObjectParameter("SearchParameter", typeof(string));
+    
+            var campusIdParameter = campusId.HasValue ?
+                new ObjectParameter("CampusId", campusId) :
+                new ObjectParameter("CampusId", typeof(int));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AASM_AdmissionSession_GetListByParam_Result>("AASM_AdmissionSession_GetListByParam", dB_IF_PARAMParameter, sessionCompanyIdParameter, sessionBranchIdParameter, allowedCampusIdsParameter, searchParameterParameter, campusIdParameter, companyIdParameter);
+        }
+    
         public virtual int AASM_AdmissionSession_Upsert(string dB_OperationType, Nullable<System.Guid> guID, Nullable<int> campusId, string description, Nullable<System.DateTime> sessionStartDate, Nullable<System.DateTime> sessionEndDate, Nullable<System.DateTime> admissionStartDate, Nullable<System.DateTime> admissionEndDate, Nullable<int> academicYearId, string classIds, Nullable<bool> isEnteryTestRequired, Nullable<bool> isInterviewRequired, Nullable<System.DateTime> createdOn, Nullable<int> createdBy, Nullable<System.DateTime> updatedOn, Nullable<int> updatedBy, Nullable<int> docType, Nullable<int> documentStatus, Nullable<bool> status, Nullable<int> branchId, Nullable<int> companyId, string remarks, ObjectParameter response)
         {
             var dB_OperationTypeParameter = dB_OperationType != null ?

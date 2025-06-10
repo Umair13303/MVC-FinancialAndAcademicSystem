@@ -84,10 +84,19 @@ namespace office360.Areas.AAcademic.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: EDIT (LOAD DOCUMENT OF ADMISSIONSESSION & GET DETAIL BY ADMISSIONSESSION_GUID) ** ------------------------ */
 
         #region ACTION RESULT FOR :: SEARCH DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
-
+        public ActionResult GET_MT_AASM_ADMISSIONSESSION_BYPARAMETER_SEARCH(_SqlParameters PostedData)
+        {
+            var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_AASM_ADMISSIONSESSION_BYPARAM(PostedData).ToList();
+            return Json(new { data = DATA }, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region ACTION RESULT FOR :: GET DOCUMENT DETAIL (DBO.AASM_ADMISSIONSESSION) -- LINQ-QUERY
+        public ActionResult GET_MT_AASM_ADMISSIONSESSION_INFOBYGUID(_SqlParameters PostedData)
+        {
+            var DATA = AAcademic.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_AASM_ADMISSIONSESSION_INFO_BY_GUID(PostedData).ToList();
+            return Json(DATA, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         /*---------------------- ** ACTION RESULTS FOR :: DATA TABLE (LOAD TABLE OF CLASS BY INPUT TYPE & TEXT) ** ---------------------------- */

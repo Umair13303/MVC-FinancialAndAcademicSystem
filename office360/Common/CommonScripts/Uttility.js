@@ -587,6 +587,7 @@ INITIALIZE_DATE_PICKER('.DatePickerSimple_Range', { dateFormat: "Y-m-d", enableT
 INITIALIZE_DATE_PICKER('.DatePickerMonthYear', { dateFormat: "Y-m", enableTime: false, noCalendar: false });
 INITIALIZE_DATE_PICKER('.DatePickerYear', { dateFormat: "Y", enableTime: false, noCalendar: false });
 INITIALIZE_DATE_PICKER('.DatePickerTimer', { enableTime: true, noCalendar: true, dateFormat: "H:i", defaultDate: "13:45" });
+
 function GET_DATEPICKER_FORUPDATE_INPUTFIELD(ServerDate, DateFormat, InputFieldId) {
     const ParseDate = new Date(parseInt(ServerDate.replace('/Date(', '').replace(')/', '')));
     const picker = flatpickr('#' + InputFieldId, {
@@ -598,7 +599,7 @@ function GET_DATEPICKER_FORUPDATE_INPUTFIELD(ServerDate, DateFormat, InputFieldI
 }
 function GET_DATEPICKER_FORUPDATE_INTOLIST(ServerDate, DateFormat, InputFieldId, CSSClass) {
     const ParseDate = new Date(parseInt(ServerDate.replace('/Date(', '').replace(')/', '')));
-    const FormattedDate = GET_FORMATED_DATE(ParseDate, DateFormat);
+    const FormattedDate = GET_FORMATED_DATE_FOR_LIST(ParseDate, DateFormat);
     const INPUT_ELEMENT = `<input id="${InputFieldId}" type="text" class="form-control form-control-sm ${CSSClass}" placeholder="${DateFormat}" value="${FormattedDate}" />`;
     const observer = new MutationObserver(() => {
         const inputField = document.getElementById(InputFieldId);
@@ -620,7 +621,7 @@ function GET_DATEPICKER_FORUPDATE_INTOLIST(ServerDate, DateFormat, InputFieldId,
 
     return INPUT_ELEMENT;
 }
-function GET_FORMATED_DATE(date, format) {
+function GET_FORMATED_DATE_FOR_LIST(date, format) {
     return flatpickr.formatDate(date, format);
 }
 function GET_INCREMENT_DATEPICKER_SIMPLE(InputSelector, StartDate, IncrementNoOfDays)
@@ -631,17 +632,36 @@ function GET_INCREMENT_DATEPICKER_SIMPLE(InputSelector, StartDate, IncrementNoOf
         console.error("Invalid date:", StartDate);
         return;
     }
-
     // INCREASE THE DATE BY IncrementNoOfDays PROVIDED
     StartDate_Formated.setDate(StartDate_Formated.getDate() + IncrementNoOfDays);
-
     // FORMATE THE DATE FORMAT FOR DatePickerSimple "Y-m-d"
     var Year = StartDate_Formated.getFullYear();
     var Month = ("0" + (StartDate_Formated.getMonth() + 1)).slice(-2);
     var Day = ("0" + StartDate_Formated.getDate()).slice(-2);
     var TriggerDate_Formated = `${Year}-${Month}-${Day}`;
-
     // SET VALUE TO INPUT FIELD
     $(InputSelector).val(TriggerDate_Formated);
     return;
 }
+function GET_TRIGGER_DATEPICKER_SIMPLE_INTERNATIONAL_TIME(ServerDate, selector) {
+    let Parsed_Formated = new Date(parseInt(ServerDate.match(/\d+/)[0]));
+    let Date_Formated = Parsed_Formated.toISOString().split('T')[0];
+    $(selector).val(Date_Formated).trigger('change');
+    if ($(selector)[0]._flatpickr) {
+        $(selector)[0]._flatpickr.setDate(Date_Formated, true);
+    }
+}
+function GET_TRIGGER_DATEPICKER_SIMPLE(ServerDate, selector) {
+    const Parsed_Date = parseInt(ServerDate.match(/\d+/)[0]);
+    const StandardDate = new Date(Parsed_Date);
+    const Year = StandardDate.getFullYear();
+    const Month = String(StandardDate.getMonth() + 1).padStart(2, '0');
+    const Day = String(StandardDate.getDate()).padStart(2, '0');
+    const Date_Formated = `${Year}-${Month}-${Day}`;
+
+    $(selector).val(Date_Formated).trigger('change');
+    if ($(selector)[0]._flatpickr) {
+        $(selector)[0]._flatpickr.setDate(Date_Formated, true);
+    }
+}
+

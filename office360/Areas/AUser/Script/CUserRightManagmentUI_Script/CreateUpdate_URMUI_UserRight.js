@@ -286,20 +286,24 @@ function GET_URM_USERRIGHT_INFOBYGUID() {
                 startLoading();
             },
             success: function (data) {
-                $('#DropDownListCompany').val(data[0].CompanyId).change();
-                $('#DropDownListRight').val(data[0].RightId).change();
-                $('#DropDownListUser').val(data[0].UserId).change();
-
-                $('#TextBoxRemarks').val(data[0].Remarks);
-                $('#HiddenFieldUserRightGuID').val(data[0].GuID);
+                if (data.length > 0) {
+                    $('#DropDownListCompany').val(data[0].CompanyId).change();
+                    $('#DropDownListRight').val(data[0].RightId).change();
+                    $('#DropDownListUser').val(data[0].UserId).change();
+                    $('#TextBoxRemarks').val(data[0].Remarks);
+                    $('#HiddenFieldUserRightGuID').val(data[0].GuID);
+                }
+                else {
+                    GetMessageBox("NO RECORD FOUND FOR FOR SELECTED USER RIGHT.... CONTACT DEVELOPER TEAM", 505);
+                }
             },
             complete: function () {
-
                 stopLoading();
             },
+            error: function (jqXHR, error, errorThrown) {
+                GetMessageBox("ERROR FETCHING RECORD FROM SERVER FOR SELECTED USER.... CONTACT DEVELOPER TEAM", 505);
+            },
         });
-
-
     }
     else {
         GetMessageBox("Please Select A User Right", 505);

@@ -405,34 +405,37 @@ function GET_UM_USER_INFOBYGUID() {
                 startLoading();
             },
             success: function (data) {
-
-                $('#TextBoxName').val(data[0].Name);
-                $('#TextBoxUserName').val(data[0].UserName);
-                $('#TextBoxPassword').val(data[0].Password);
-                $('#TextBoxEmailAddress').val(data[0].EmailAddress);
-                $('#TextBoxMobileNumber').val(data[0].MobileNumber);
-                $('#DropDownListCompany').val(data[0].CompanyId).change();
-                setTimeout(function () {
-                    $('#DropDownListAllowedCampus').val(data[0].AllowedCampusIds.split(',')).change();
-                }, 1500);
-                setTimeout(function () {
-                    $('#DropDownListBranch').val(data[0].BranchId).change();
-                }, 1000);
-                setTimeout(function () {
-                    $('#DropDownListEmployee').val(data[0].EmployeeId).change();
-                }, 1000);
-
-                $('#DropDownListRole').val(data[0].RoleId).change();
-                $('#TextBoxRemarks').val(data[0].Remarks);
-                $('#HiddenFieldUserGuID').val(data[0].GuID);
+                if (data.length > 0) {
+                    $('#TextBoxName').val(data[0].Name);
+                    $('#TextBoxUserName').val(data[0].UserName);
+                    $('#TextBoxPassword').val(data[0].Password);
+                    $('#TextBoxEmailAddress').val(data[0].EmailAddress);
+                    $('#TextBoxMobileNumber').val(data[0].MobileNumber);
+                    $('#DropDownListCompany').val(data[0].CompanyId).change();
+                    setTimeout(function () {
+                        $('#DropDownListAllowedCampus').val(data[0].AllowedCampusIds.split(',')).change();
+                    }, 1500);
+                    setTimeout(function () {
+                        $('#DropDownListBranch').val(data[0].BranchId).change();
+                    }, 1000);
+                    setTimeout(function () {
+                        $('#DropDownListEmployee').val(data[0].EmployeeId).change();
+                    }, 1000);
+                    $('#DropDownListRole').val(data[0].RoleId).change();
+                    $('#TextBoxRemarks').val(data[0].Remarks);
+                    $('#HiddenFieldUserGuID').val(data[0].GuID);
+                }
+                else {
+                    GetMessageBox("NO RECORD FOUND FOR FOR SELECTED USER.... CONTACT DEVELOPER TEAM", 505);
+                }
             },
             complete: function () {
-
                 stopLoading();
             },
+            error: function (jqXHR, error, errorThrown) {
+                GetMessageBox("ERROR FETCHING RECORD FROM SERVER FOR SELECTED USER.... CONTACT DEVELOPER TEAM", 505);
+            },
         });
-
-
     }
     else {
         GetMessageBox("Please Select A User", 505);

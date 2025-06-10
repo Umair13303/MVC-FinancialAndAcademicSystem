@@ -270,26 +270,30 @@ function GET_CM_COMPANY_INFOBYGUID() {
                 startLoading();
             },
             success: function (data) {
-                $('#TextBoxCompanyName').val(data[0].CompanyName);
-                $('#DropDownListCountry').val(data[0].CountryId).change();
-                setTimeout(function () {
-                    $('#DropDownListCity').val(data[0].CityId).change();
-                }, 500);
-                $('#TextBoxAddress').val(data[0].Address);
-                $('#TextBoxPhoneNumber').val(data[0].PhoneNumber);
-                $('#TextBoxEmailAddress').val(data[0].EmailAddress);
-                $('#TextBoxCompanyWebsite').val(data[0].CompanyWebsite);
-                $('#TextBoxRemarks').val(data[0].Remarks).prop('disabled', true);
-                $('#HiddenFieldCompanyGuID').val(data[0].GuID);
-
+                if (data.length > 0) {
+                    $('#TextBoxCompanyName').val(data[0].CompanyName);
+                    $('#DropDownListCountry').val(data[0].CountryId).change();
+                    setTimeout(function () {
+                        $('#DropDownListCity').val(data[0].CityId).change();
+                    }, 500);
+                    $('#TextBoxAddress').val(data[0].Address);
+                    $('#TextBoxPhoneNumber').val(data[0].PhoneNumber);
+                    $('#TextBoxEmailAddress').val(data[0].EmailAddress);
+                    $('#TextBoxCompanyWebsite').val(data[0].CompanyWebsite);
+                    $('#TextBoxRemarks').val(data[0].Remarks).prop('disabled', true);
+                    $('#HiddenFieldCompanyGuID').val(data[0].GuID);
+                }
+                else {
+                    GetMessageBox("NO RECORD FOUND FOR FOR SELECTED COMPANY.... CONTACT DEVELOPER TEAM", 505);
+                }
             },
             complete: function () {
-
                 stopLoading();
             },
+            error: function (jqXHR, error, errorThrown) {
+                GetMessageBox("ERROR FETCHING RECORD FROM SERVER FOR SELECTED COMPANY.... CONTACT DEVELOPER TEAM", 505);
+            },
         });
-
-
     }
     else {
         GetMessageBox("Please Select A Company", 505);

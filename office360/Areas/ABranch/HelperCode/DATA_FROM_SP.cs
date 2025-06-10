@@ -17,8 +17,7 @@ namespace office360.Areas.ABranch.HelperCode
 {
     public class DATA_FROM_SP
     {
-        #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB
-
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB -- DBO:- BM_BRANCH
         public static List<BM_Branch_GetListByParam_Result> GET_MT_BM_BRANCH_BYPARAM(_SqlParameters PostedData)
         {
             List<BM_Branch_GetListByParam_Result> DATA = new List<BM_Branch_GetListByParam_Result>();
@@ -38,8 +37,7 @@ namespace office360.Areas.ABranch.HelperCode
         #endregion
 
 
-        #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB
-
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB -- DBO:- BM_BRANCH
         public static List<BM_Branch_GetListBySearch_Result> GET_MT_BM_BRANCH_LIST_BY_SEARCHQUERY(_SqlParameters PostedData)
         {
             List<BM_Branch_GetListBySearch_Result> DATA = new List<BM_Branch_GetListBySearch_Result>();
