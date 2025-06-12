@@ -17,7 +17,8 @@ namespace office360.Areas.AUser.HelperCode
 {
     public class DATA_FROM_SP
     {
-        #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB -- DBO:- UM_USER
+        #region DBO:- UM_USER
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB
         public static List<UM_User_GetListByParam_Result> GET_MT_UM_USER_BYPARAM(_SqlParameters PostedData)
         {
             List<UM_User_GetListByParam_Result> DATA = new List<UM_User_GetListByParam_Result>();
@@ -32,9 +33,29 @@ namespace office360.Areas.AUser.HelperCode
                 return DATA;
             }
         }
+        #endregion
+
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB
+        public static List<UM_User_GetListBySearch_Result> GET_MT_UM_USER_LIST_BY_SEARCHQUERY(_SqlParameters PostedData)
+        {
+            List<UM_User_GetListBySearch_Result> DATA = new List<UM_User_GetListBySearch_Result>();
+            using (var db = new SESEntities())
+            {
+                DATA = db.UM_User_GetListBySearch(
+                                                        Session_Manager.CompanyId,
+                                                        Session_Manager.BranchId,
+                                                        PostedData.SearchById,
+                                                        PostedData.InputText
+                                                        ).ToList();
+            }
+            return DATA;
+        }
+        #endregion
 
         #endregion
-        #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB -- DBO:- URM_USERRIGHT
+
+        #region DBO:- URM_USERRIGHT
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB
         public static List<URM_UserRight_GetListByParam_Result> GET_MT_URM_USERRIGHT_BYPARAM(_SqlParameters PostedData)
         {
             List<URM_UserRight_GetListByParam_Result> DATA = new List<URM_UserRight_GetListByParam_Result>();
@@ -52,23 +73,7 @@ namespace office360.Areas.AUser.HelperCode
         }
         #endregion
 
-        #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB-- DBO:- UM_USER
-        public static List<UM_User_GetListBySearch_Result> GET_MT_UM_USER_LIST_BY_SEARCHQUERY(_SqlParameters PostedData)
-        {
-            List<UM_User_GetListBySearch_Result> DATA = new List<UM_User_GetListBySearch_Result>();
-            using (var db = new SESEntities())
-            {
-                DATA = db.UM_User_GetListBySearch(
-                                                        Session_Manager.CompanyId,
-                                                        Session_Manager.BranchId,
-                                                        PostedData.SearchById,
-                                                        PostedData.InputText
-                                                        ).ToList();
-            }
-            return DATA;
-        }
-        #endregion
-        #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB-- DBO:- URM_USERRIGHT
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB
         public static List<URM_UserRight_GetListBySearch_Result> GET_MT_URM_USERRIGHT_LIST_BY_USERID_SEARCHQUERY(_SqlParameters PostedData)
         {
             List<URM_UserRight_GetListBySearch_Result> DATA = new List<URM_UserRight_GetListBySearch_Result>();
@@ -85,6 +90,9 @@ namespace office360.Areas.AUser.HelperCode
             }
         }
         #endregion
+
+        #endregion
+
 
     }
 }

@@ -46,8 +46,9 @@ function InitDataTable() {
                 }
             },
             { "data": null, "title": "#" },
-            { "data": "Branch", "title": "Branch" },
+            { "data": "GuID", "title": "GuID" },
             { "data": "Company", "title": "Company" },
+            { "data": "Branch", "title": "Branch" },
             { "data": "Name", "title": "Name" },
             { "data": "UserName", "title": "User Name" },
             { "data": "EmailAddress", "title": "Email" },
@@ -58,12 +59,11 @@ function InitDataTable() {
                     return GetStatus(data["DocumentStatus"]);
                 }
             }, 
-            { "data": "GuID", "title": "GuID" },
 
         ],
         columnDefs: [
-            //{ visible: false, targets: [6,5,4] },
-            { "orderable": false, targets: [0, 1, 2, 3, 4, 5, 6,7,8] },
+            { visible: false, targets: 1 },
+            { "orderable": false, targets: [0, 1, 3, 4, 5, 6] },
         ],
         "createdRow": function (row, data, index) {
         },

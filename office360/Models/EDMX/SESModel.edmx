@@ -533,6 +533,13 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Parameter Name="CampusId" Type="int" Mode="In" />
           <Parameter Name="CompanyId" Type="int" Mode="In" />
         </Function>
+        <Function Name="AASM_AdmissionSession_GetListBySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="AllowedCampusId" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="InputTypeId" Type="int" Mode="In" />
+          <Parameter Name="InputText" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="AASM_AdmissionSession_Upsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DB_OperationType" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="GuID" Type="uniqueidentifier" Mode="In" />
@@ -1621,6 +1628,13 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <Parameter Name="CampusId" Mode="In" Type="Int32" />
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="AASM_AdmissionSession_GetListBySearch" ReturnType="Collection(SESModel.AASM_AdmissionSession_GetListBySearch_Result)">
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="AllowedCampusId" Mode="In" Type="String" />
+            <Parameter Name="InputTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="InputText" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="AASM_AdmissionSession_Upsert">
             <Parameter Name="DB_OperationType" Mode="In" Type="String" />
             <Parameter Name="GuID" Mode="In" Type="Guid" />
@@ -1870,6 +1884,22 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="Guid" Name="GuID" Nullable="true" />
           <Property Type="String" Name="Description" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="AASM_AdmissionSession_GetListBySearch_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GuID" Nullable="true" />
+          <Property Type="String" Name="Code" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="DateTime" Name="SessionStartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="SessionEndDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="AdmissionStartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="AdmissionEndDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="AcademicYear" Nullable="true" />
+          <Property Type="String" Name="Classes" Nullable="true" />
+          <Property Type="Boolean" Name="IsEnteryTestRequired" Nullable="true" />
+          <Property Type="Boolean" Name="IsInterviewRequired" Nullable="true" />
+          <Property Type="Int32" Name="DocumentStatus" Nullable="true" />
+          <Property Type="String" Name="Branch" Nullable="true" />
         </ComplexType>
         <ComplexType Name="ACM_Class_GetListByParam_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -2538,6 +2568,26 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AASM_AdmissionSession_GetListBySearch" FunctionName="SESModel.Store.AASM_AdmissionSession_GetListBySearch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SESModel.AASM_AdmissionSession_GetListBySearch_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SessionStartDate" ColumnName="SessionStartDate" />
+                <ScalarProperty Name="SessionEndDate" ColumnName="SessionEndDate" />
+                <ScalarProperty Name="AdmissionStartDate" ColumnName="AdmissionStartDate" />
+                <ScalarProperty Name="AdmissionEndDate" ColumnName="AdmissionEndDate" />
+                <ScalarProperty Name="AcademicYear" ColumnName="AcademicYear" />
+                <ScalarProperty Name="Classes" ColumnName="Classes" />
+                <ScalarProperty Name="IsEnteryTestRequired" ColumnName="IsEnteryTestRequired" />
+                <ScalarProperty Name="IsInterviewRequired" ColumnName="IsInterviewRequired" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
+                <ScalarProperty Name="Branch" ColumnName="Branch" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

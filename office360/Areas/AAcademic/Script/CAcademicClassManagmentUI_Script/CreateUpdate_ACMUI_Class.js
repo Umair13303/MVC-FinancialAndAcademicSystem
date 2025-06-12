@@ -1,4 +1,4 @@
-﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE BM_BRANCH **-----------------------------------------------*/
+﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE ACM_CLASS                       **----------------------------------------------*/
 var OperationType = "";
 var DDL_Condition = "";
 var DB_OperationType = $('#HiddenFieldDB_OperationType').val();
@@ -6,7 +6,7 @@ var IsFieldClear = false;
 
 
 
-/*----------------------------------** FUNCTION FOR::PAGE LOADER **------------------------------------------------------------------------------*/
+/*----------------------------------** FUNCTION FOR::PAGE LOADER                                                 **----------------------------------------------*/
 $(document).ready(function () {
     DB_OperationType = $('#HiddenFieldDB_OperationType').val();
     switch (DB_OperationType) {
@@ -30,7 +30,7 @@ function PopulateDropDownLists() {
     PopulateLK_StudyLevel_List();
     PopulateLK_StudyGroup_List();
 }
-/*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER **-----------------------------------------------------------------------*/
+/*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                                          **----------------------------------------------*/
 function ChangeCase() {
     //-----------FOR ::EDIT CASE
     $('#DropDownListClass').change(function () {
@@ -42,7 +42,7 @@ function ChangeCase() {
     });
 }
 
-/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE **----------------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON LOAD) **----------------------------------------------*/
 function PopulateMT_BM_Branch_ListByParam() {
     switch (DB_OperationType) {
         case DBOperation.INSERT:
@@ -75,8 +75,7 @@ function PopulateMT_BM_Branch_ListByParam() {
     });
 }
 
-
-/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_LOOKUP-- LINQUERY **----------------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_LOOKUP-- LINQUERY (ON LOAD)       **----------------------------------------------*/
 function PopulateLK_StudyLevel_List() {
     $.ajax({
         type: "POST",
@@ -118,8 +117,7 @@ function PopulateLK_StudyGroup_List() {
     });
 }
 
-
-/*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,UPSERT,CLEAR) **----------------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,UPSERT,CLEAR)                 **----------------------------------------------*/
 function ValidateInputFields() {
 
     if ($('#DropDownListCampus').RequiredDropdown() == false) {
@@ -208,7 +206,7 @@ function ClearInputFields() {
     $('form').removeClass('Is-Valid');
 }
 
-/*----------------------------------** FUNCTION FOR:: UPDATE BRANCH (LOAD DROPDOWN,DATA FOR CLASSID) **-----------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: UPDATE BRANCH (LOAD DROPDOWN,DATA FOR CLASSID)             **----------------------------------------------*/
 $('#ButtonSubmitGetInfoForEdit').click(function () {
     if ($('#DropDownListClass').RequiredDropdown() == false) {
         return false;
@@ -277,6 +275,7 @@ function GET_ACM_CLASS_INFOBYGUID() {
             },
             success: function (data) {
                 if (data.length > 0) {
+                    /*-- LOAD DATA FOR FIELDS RENDERED :: ON LOAD/STATIC --*/
                     $('#DropDownListCampus').val(data[0].CampusId).change();
                     $('#TextBoxDescription').val(data[0].Description);
                     $('#DropDownListStudyLevel').val(data[0].StudyLevelId).change();

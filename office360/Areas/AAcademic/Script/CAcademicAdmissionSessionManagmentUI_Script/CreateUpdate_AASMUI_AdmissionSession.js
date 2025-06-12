@@ -1,4 +1,4 @@
-﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE BM_BRANCH **-----------------------------------------------*/
+﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE AASM_ADMISSIONSESSION                       **----------------------------------------------*/
 var OperationType = "";
 var DDL_Condition = "";
 var DB_OperationType = $('#HiddenFieldDB_OperationType').val();
@@ -6,7 +6,7 @@ var IsFieldClear = false;
 
 
 
-/*----------------------------------** FUNCTION FOR::PAGE LOADER **------------------------------------------------------------------------------*/
+/*----------------------------------** FUNCTION FOR::PAGE LOADER                                                             **----------------------------------------------*/
 $(document).ready(function () {
     DB_OperationType = $('#HiddenFieldDB_OperationType').val();
     switch (DB_OperationType) {
@@ -30,10 +30,12 @@ function PopulateDropDownLists() {
     PopulateLK_AcademicYear_List();
 }
 
-/*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER **-----------------------------------------------------------------------*/
+/*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                                                      **----------------------------------------------*/
 function ChangeCase() {
     $('#DropDownListCampus').change(function () {
-        PopulateMT_ACM_Class_ListByParam();
+        var CampusId = $("#DropDownListCampus :selected").val();
+        /*--var ClassIds = null;  NOT PROVIDED ON LOAD --*/
+        PopulateMT_ACM_Class_ListByParam(CampusId,null);
     });
     $('#TextBoxSessionStartDate').change(function () {
         var SessionStartDate = $('#TextBoxSessionStartDate').val();
@@ -51,10 +53,9 @@ function ChangeCase() {
             IsFieldClear = false;
         }
     });
-   
 }
 
-/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE **----------------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON LOAD)             **----------------------------------------------*/
 function PopulateMT_BM_Branch_ListByParam() {
     switch (DB_OperationType) {
         case DBOperation.INSERT:
@@ -86,7 +87,9 @@ function PopulateMT_BM_Branch_ListByParam() {
         },
     });
 }
-function PopulateMT_ACM_Class_ListByParam() {
+
+/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON CHANGE)           **----------------------------------------------*/
+function PopulateMT_ACM_Class_ListByParam(CampusId, ClassIds) {
     switch (DB_OperationType) {
         case DBOperation.INSERT:
             DDL_Condition = MDB_LIST_CONDITION.ACM_CLASS_BY_CAMPUSID_FORNEWINSERT;
@@ -95,8 +98,6 @@ function PopulateMT_ACM_Class_ListByParam() {
             DDL_Condition = MDB_LIST_CONDITION.ACM_CLASS_BY_CAMPUSID_FORUPDATERECORD;
             break;
     }
-    var CampusId = $("#DropDownListCampus :selected").val();
-
     var JsonArg = {
         DB_IF_PARAM: DDL_Condition,
         CampusId: CampusId,
@@ -116,13 +117,15 @@ function PopulateMT_ACM_Class_ListByParam() {
             $("#DropDownListClasses").html(s);
         },
         complete: function () {
+            if (ClassIds != null && ClassIds != undefined && ClassIds != "" && ClassIds != "-1") {
+                $('#DropDownListClasses').val(ClassIds.split(',')).change();
+            }
             stopLoading();
         },
     });
 }
 
-
-/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_LOOKUP-- LINQUERY **----------------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_LOOKUP-- LINQUERY (ON LOAD)                   **----------------------------------------------*/
 function PopulateLK_AcademicYear_List() {
     $.ajax({
         type: "POST",
@@ -144,8 +147,7 @@ function PopulateLK_AcademicYear_List() {
     });
 }
 
-
-/*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,UPSERT,CLEAR) **----------------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,UPSERT,CLEAR)                             **----------------------------------------------*/
 function ValidateInputFields() {
     if ($('#DropDownListCampus').RequiredDropdown() == false) {
         return false;
@@ -182,6 +184,19 @@ $('#ButtonSubmitDown').click(function (event) {
     if (IS_VALID) {
         try {
             OperationType = DBOperation.INSERT;
+            UpSertDataIntoDB();
+        }
+        catch {
+            GetMessageBox(err, 505);
+        }
+    }
+});
+$('#ButtonUpdateDown').click(function (event) {
+    event.preventDefault();
+    var IS_VALID = ValidateInputFields();
+    if (IS_VALID) {
+        try {
+            OperationType = DBOperation.UPDATE;
             UpSertDataIntoDB();
         }
         catch {
@@ -242,7 +257,6 @@ function UpSertDataIntoDB() {
         },
     });
 }
-
 function ClearInputFields() {
     //-----------NOT CLEARING REQUIRED FIELD
     $('.form-control').not('#DropDownListAdmissionSession').val('');
@@ -250,7 +264,7 @@ function ClearInputFields() {
     $('form').removeClass('Is-Valid');
 }
 
-/*----------------------------------** FUNCTION FOR:: UPDATE BRANCH (LOAD DROPDOWN,DATA FOR ADMISSIONSESSIONID) **-----------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: UPDATE ADMISSIONSESSION (LOAD DROPDOWN,DATA FOR ADMISSIONSESSIONID)    **----------------------------------------------*/
 $('#ButtonSubmitGetInfoForEdit').click(function () {
     if ($('#DropDownListAdmissionSession').RequiredDropdown() == false) {
         return false;
@@ -299,7 +313,6 @@ function GET_AASM_ADMISSIONSESSION_LISTBYPARAM() {
 function GET_AASM_ADMISSIONSESSION_INFOBYGUID() {
     var AdmissionSessionId = $('#DropDownListAdmissionSession :selected').val();
     if (AdmissionSessionId != null && AdmissionSessionId != undefined && AdmissionSessionId != "" && AdmissionSessionId != "-1") {
-
         var JsonArg = {
             GuID: AdmissionSessionId,
         }
@@ -313,6 +326,7 @@ function GET_AASM_ADMISSIONSESSION_INFOBYGUID() {
             },
             success: function (data) {
                 if (data.length > 0) {
+                    /*-- LOAD DATA FOR FIELDS RENDERED :: ON LOAD/STATIC --*/
                     $('#DropDownListCampus').val(data[0].CampusId).change();
                     $('#TextBoxDescription').val(data[0].Description);
                     GET_TRIGGER_DATEPICKER_SIMPLE(data[0].SessionStartDate, '#TextBoxSessionStartDate');
@@ -320,13 +334,13 @@ function GET_AASM_ADMISSIONSESSION_INFOBYGUID() {
                     GET_TRIGGER_DATEPICKER_SIMPLE(data[0].AdmissionStartDate, '#TextBoxAdmissionStartDate');
                     GET_TRIGGER_DATEPICKER_SIMPLE(data[0].AdmissionEndDate, '#TextBoxAdmissionEndDate');
                     $('#DropDownListAcademicYear').val(data[0].AcademicYearId).change();
-                    setTimeout(function () {
-                        $('#DropDownListClasses').val(data[0].ClassIds.split(',')).change();
-                    }, 1500);
                     $('#CheckBoxIsEnteryTestRequired').prop('checked', (data[0].IsEnteryTestRequired)).change();
                     $('#CheckBoxIsInterviewRequired').prop('checked', (data[0].IsInterviewRequired)).change();
                     $('#TextBoxRemarks').val(data[0].Remarks).prop('disabled', true);
                     $('#HiddenFieldAdmissionSessionGuID').val(data[0].GuID);
+
+                    /*-- LOAD DATA FOR FIELDS RENDERED :: ON CHANGE --*/
+                    PopulateMT_ACM_Class_ListByParam(data[0].CampusId, data[0].ClassIds);
                 }
                 else {
                     GetMessageBox("NO RECORD FOUND FOR SELECTED ADMISSION SESSION.... CONTACT DEVELOPER TEAM", 505);

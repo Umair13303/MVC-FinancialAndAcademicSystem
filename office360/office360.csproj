@@ -290,6 +290,7 @@
     <Compile Include="Areas\AAcademic\AAcademicAreaRegistration.cs" />
     <Compile Include="Areas\AAcademic\Controllers\CAcademicAdmissionSessionManagmentUIController.cs" />
     <Compile Include="Areas\AAcademic\Controllers\CAcademicClassManagmentUIController.cs" />
+    <Compile Include="Areas\AAcademic\Controllers\CAcademicClassCurriculumManagmentUIController.cs" />
     <Compile Include="Areas\AAcademic\HelperCode\Check_Duplicate_By_LINQ.cs" />
     <Compile Include="Areas\AAcademic\HelperCode\CUD_Operation.cs" />
     <Compile Include="Areas\AAcademic\HelperCode\DATA_FROM_LINQ.cs" />
@@ -343,6 +344,9 @@
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\AASM_AdmissionSession_GetListByParam_Result.cs">
+      <DependentUpon>SESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDMX\AASM_AdmissionSession_GetListBySearch_Result.cs">
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\AcademicYear.cs">
@@ -545,6 +549,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AAcademic\Script\CAcademicAdmissionSessionManagmentUI_Script\CreateUpdate_AASMUI_AdmissionSession.js" />
+    <Content Include="Areas\AAcademic\Script\CAcademicAdmissionSessionManagmentUI_Script\View_List_AASMUI_AdmissionSession.js" />
+    <Content Include="Areas\AAcademic\Script\CAcademicClassCurriculumManagmentUI_Script\CreateUpdate_ACCMUI_ClassCurriculum.js" />
     <Content Include="Areas\AAcademic\Script\CAcademicClassManagmentUI_Script\View_List_ACMUI_Class.js" />
     <Content Include="Areas\AAcademic\Script\CAcademicClassManagmentUI_Script\CreateUpdate_ACMUI_Class.js" />
     <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\CreateUpdate_CBMUI_Branch.js" />
@@ -1926,6 +1932,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\AAcademic\Data\" />
+    <Folder Include="Areas\AAcademic\Views\CAcademicClassCurriculumManagmentUIController\" />
     <Folder Include="Areas\AAcademic\Views\Shared\" />
     <Folder Include="Areas\ABranch\Data\" />
     <Folder Include="Areas\ABranch\Views\Shared\" />
@@ -1998,6 +2005,8 @@
     <Content Include="DB_BackUp\XLookUp BACKUP.bak" />
     <Content Include="Areas\AAcademic\Views\CAcademicClassManagmentUI\View_List_ACMUI_Class.cshtml" />
     <Content Include="Areas\AAcademic\Views\CAcademicAdmissionSessionManagmentUI\CreateUpdate_AASMUI_AdmissionSession.cshtml" />
+    <Content Include="Areas\AAcademic\Views\CAcademicAdmissionSessionManagmentUI\View_List_AASMUI_AdmissionSession.cshtml" />
+    <Content Include="Areas\AAcademic\Views\CAcademicClassCurriculumManagmentUI\CreateUpdate_ACCMUI_ClassCurriculum.cshtml" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>

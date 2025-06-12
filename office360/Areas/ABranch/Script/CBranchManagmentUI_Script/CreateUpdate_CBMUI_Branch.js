@@ -1,12 +1,10 @@
-﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE BM_BRANCH **-----------------------------------------------*/
+﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE BM_BRANCH                       **----------------------------------------------*/
 var OperationType = "";
 var DDL_Condition = "";
 var DB_OperationType = $('#HiddenFieldDB_OperationType').val();
 var IsFieldClear = false;
 
-
-
-/*----------------------------------** FUNCTION FOR::PAGE LOADER **------------------------------------------------------------------------------*/
+/*----------------------------------** FUNCTION FOR::PAGE LOADER                                                 **----------------------------------------------*/
 $(document).ready(function () {
     DB_OperationType = $('#HiddenFieldDB_OperationType').val();
     switch (DB_OperationType) {
@@ -25,37 +23,21 @@ $(document).ready(function () {
 
 });
 
-
 function PopulateDropDownLists() {
     PopulateLK_CampusType_List();
     PopulateLK_OrganizationType_List();
     PopulateLK_Country_List();
 }
-/*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER **-----------------------------------------------------------------------*/
+
+/*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                                          **----------------------------------------------*/
 function ChangeCase() {
-
-    $('#DropDownListCountry').change(function () {
-        PopulateLK_City_ListByParam();
+    $('#DropDownListCountry').change(function() {
+        var CountryId = $("#DropDownListCountry :selected").val();
+        //var CityId = null; NOT PROVIDED ON LOAD
+        PopulateLK_City_ListByParam(CountryId, null);
     });
-    $("#DropDownListStudyLevels").attr('data-width', '100%').select2({
-        placeholder: 'Select an Option',
-        multiple: true,
-    }).change(function (event) {
-        if (event.target == this) {
-            StudyLevelIds = $(this).val();
-        }
-    });
-    $("#DropDownListStudyGroups").attr('data-width', '100%').select2({
-        placeholder: 'Select an Option',
-        multiple: true,
-    }).change(function (event) {
-        if (event.target == this) {
-            StudyGroupIds = $(this).val();
-        }
-    });
-
+   
     //-----------FOR ::EDIT CASE
-
     $('#DropDownListCampus').change(function () {
         if (!IsFieldClear) {
             IsFieldClear = true;
@@ -65,7 +47,7 @@ function ChangeCase() {
     });
 }
 
-/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_LOOKUP-- LINQUERY **----------------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_LOOKUP-- LINQUERY (ON LOAD)       **----------------------------------------------*/
 function PopulateLK_CampusType_List() {
     $.ajax({
         type: "POST",
@@ -127,13 +109,13 @@ function PopulateLK_Country_List() {
         },
     });
 }
-function PopulateLK_City_ListByParam() {
-    var CountryId = $("#DropDownListCountry :selected").val();
+
+/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_LOOKUP-- LINQUERY (ON CHANGE)     **----------------------------------------------*/
+function PopulateLK_City_ListByParam(CountryId, CityId) {
     var JsonArg = {
         CountryId: CountryId,
     }
     $.ajax({
-
         type: "POST",
         url: BasePath + "/ABranch/CBranchManagmentUI/GET_LK1_CITY_BYPARAMETER",
         data: { 'PostedData': (JsonArg) },
@@ -143,7 +125,7 @@ function PopulateLK_City_ListByParam() {
         success: function (data) {
             var s = '<option  value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+                s += '<option ' + (data[i].Id == CityId ? 'selected' : '') + ' value="' + data[i].Id + '">' + data[i].Description + '</option>';
             }
             $("#DropDownListCity").html(s);
         },
@@ -151,12 +133,9 @@ function PopulateLK_City_ListByParam() {
             stopLoading();
         },
     });
-
 }
 
-
-
-/*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,UPSERT,CLEAR) **----------------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,UPSERT,CLEAR)                 **----------------------------------------------*/
 function ValidateInputFields() {
 
     if ($('#TextBoxDescription').RequiredTextBoxInputGroup() == false) {
@@ -273,9 +252,7 @@ function ClearInputFields() {
     $('form').removeClass('Is-Valid');
 }
 
-
-
-/*----------------------------------** FUNCTION FOR:: UPDATE BRANCH (LOAD DROPDOWN,DATA FOR BRANCHID) **-----------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: UPDATE BRANCH (LOAD DROPDOWN,DATA FOR BRANCHID)             **----------------------------------------------*/
 $('#ButtonSubmitGetInfoForEdit').click(function () {
     if ($('#DropDownListCampus').RequiredDropdown() == false) {
         return false;
@@ -337,20 +314,21 @@ function GET_BM_BRANCH_INFOBYGUID() {
                 startLoading();
             },
             success: function (data) {
+                /*-- LOAD DATA FOR FIELDS RENDERED :: ON LOAD/STATIC --*/
                 if (data.length > 0) {
                     $('#TextBoxDescription').val(data[0].Description);
                     $('#DropDownListCampusType').val(data[0].CampusTypeId).change();
                     $('#DropDownListOrganizationType').val(data[0].OrganizationTypeId).change();
-                    $('#DropDownListCountry').val(data[0].CountryId).change();
-                    setTimeout(function () {
-                        $('#DropDownListCity').val(data[0].CityId).change();
-                    }, 500);
+                    $('#DropDownListCountry').val(data[0].CountryId).trigger('change.select2');
                     $('#TextBoxAddress').val(data[0].Address);
                     $('#TextBoxContactNo').val(data[0].ContactNo);
                     $('#TextBoxEmailAddress').val(data[0].EmailAddress);
                     $('#TextBoxNTNNo').val(data[0].NTNNo);
                     $('#TextBoxRemarks').val(data[0].Remarks).prop('disabled', true);
                     $('#HiddenFieldCampusGuID').val(data[0].GuID);
+
+                    /*-- LOAD DATA FOR FIELDS RENDERED :: ON CHANGE --*/
+                    PopulateLK_City_ListByParam(data[0].CountryId, data[0].CityId);
                 }
                 else {
                     GetMessageBox("NO RECORD FOUND FOR FOR SELECTED BRANCH/CAMPUS.... CONTACT DEVELOPER TEAM", 505);

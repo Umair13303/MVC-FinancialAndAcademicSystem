@@ -41,6 +41,24 @@ namespace office360.Areas.AAcademic.Controllers
             }
         }
 
+        [UsersSessionCheck]
+        [CompanySessionCheck]
+        public ActionResult View_List_AASMUI_AdmissionSession(_SqlParameters PostedData)
+        {
+            #region PASS VIEW
+            _Exe = GetAllListFromDB.GetAllowedUsersRightsByParameter(PostedData.RightId);
+            #endregion
+            if (_Exe == (int?)Http_DB_Response.CODE_SUCCESS)
+            {
+                ViewBag.Title = PostedData.DisplayName.ToSafeString();
+                ViewBag.DB_OperationType = PostedData.OperationType.ToSafeString();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction(_ActionsURL.LogIn, _Controller.Home, new { area = "" });
+            }
+        }
         #endregion
 
 
@@ -102,6 +120,11 @@ namespace office360.Areas.AAcademic.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: DATA TABLE (LOAD TABLE OF CLASS BY INPUT TYPE & TEXT) ** ---------------------------- */
 
         #region ACTION RESULT FOR :: GET LIST BY SEARCH PARAMETER FOR DATA-TABLE (DBO.AASM_ADMISSIONSESSION)-- STORED PROCEDURE
+        public ActionResult GET_MT_AASM_ADMISSIONSESSION_LIST_BY_SEARCHQUERY_FORDATATABLE(_SqlParameters PostedData)
+        {
+            var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_AASM_ADMISSIONSESSION_LIST_BY_SEARCHQUERY(PostedData).ToList();
+            return Json(new { success = true, data = DATA }, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
 

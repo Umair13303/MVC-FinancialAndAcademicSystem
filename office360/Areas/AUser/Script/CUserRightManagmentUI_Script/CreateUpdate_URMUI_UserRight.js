@@ -1,11 +1,11 @@
-﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE RSM_RIGHTSETTING **-----------------------------------------------*/
+﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE RSM_RIGHTSETTING                       **----------------------------------------------*/
+
 var OperationType = "";
 var DDL_Condition = "";
 var DB_OperationType = $('#HiddenFieldDB_OperationType').val();
 var IsFieldClear = false;
 
-
-/*----------------------------------** FUNCTION FOR::PAGE LOADER **------------------------------------------------------------------------------------*/
+/*----------------------------------** FUNCTION FOR::PAGE LOADER                                                        **----------------------------------------------*/
 $(document).ready(function () {
     DB_OperationType = $('#HiddenFieldDB_OperationType').val();
     switch (DB_OperationType) {
@@ -23,15 +23,17 @@ $(document).ready(function () {
     ChangeCase();
 });
 
-
 function PopulateDropDownLists() {
     PopulateLK_Right_List();
     PopulateMT_CM_Company_ListByParam();
 }
-function ChangeCase() {
 
+/*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                                                 **----------------------------------------------*/
+function ChangeCase() {
     $('#DropDownListCompany').change(function () {
-        PopulateMT_UM_User_ListByParam();
+        var CompanyId = $('#DropDownListCompany :selected').val();
+        /*-- var UserId = null; NOT PROVIDED ON LOAD --*/
+        PopulateMT_UM_User_ListByParam(CompanyId,null);
     });
     //-----------FOR ::EDIT CASE
     $('#DropDownListRightSetting').change(function () {
@@ -43,31 +45,7 @@ function ChangeCase() {
     });
 }
 
-/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_LOOKUP-- LINQUERY **----------------------------------------------------*/
-
-function PopulateLK_Right_List() {
-    $.ajax({
-        type: "POST",
-        url: BasePath + "/AUser/CUserRightManagmentUI/GET_LK1_RIGHT",
-        data: {},
-        beforeSend: function () {
-            startLoading();
-        },
-        success: function (data) {
-            var s = '<option  value="-1">Select an option</option>';
-            for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '</option>';
-            }
-            $("#DropDownListRight").html(s);
-        },
-        complete: function () {
-            stopLoading();
-        },
-    });
-}
-
-/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE **----------------------------------------------*/
-
+/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON LOAD)        **----------------------------------------------*/
 function PopulateMT_CM_Company_ListByParam() {
     switch (DB_OperationType) {
         case DBOperation.INSERT:
@@ -90,7 +68,7 @@ function PopulateMT_CM_Company_ListByParam() {
         success: function (data) {
             var s = '<option value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '</option>';
+                s += '<option value="' + data[i].Id + '">' + data[i].Description + '</option>';
             }
             $("#DropDownListCompany").html(s);
         },
@@ -100,8 +78,9 @@ function PopulateMT_CM_Company_ListByParam() {
     });
 
 }
-function PopulateMT_UM_User_ListByParam() {
-    var CompanyId = $('#DropDownListCompany :selected').val();
+
+/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON CHANGE)      **----------------------------------------------*/
+function PopulateMT_UM_User_ListByParam(CompanyId,UserId) {
     switch (DB_OperationType) {
         case DBOperation.INSERT:
             DDL_Condition = MDB_LIST_CONDITION.UM_USER_BY_COMPANYID_FORNEWINSERT;
@@ -124,7 +103,7 @@ function PopulateMT_UM_User_ListByParam() {
         success: function (data) {
             var s = '<option value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '</option>';
+                s += '<option ' + (data[i].Id == UserId ? 'selected' : '') + ' value="' + data[i].Id + '">' + data[i].Description + '</option>';
             }
             $("#DropDownListUser").html(s);
         },
@@ -135,8 +114,29 @@ function PopulateMT_UM_User_ListByParam() {
 
 }
 
+/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_LOOKUP-- LINQUERY (ON LOAD)              **----------------------------------------------*/
+function PopulateLK_Right_List() {
+    $.ajax({
+        type: "POST",
+        url: BasePath + "/AUser/CUserRightManagmentUI/GET_LK1_RIGHT",
+        data: {},
+        beforeSend: function () {
+            startLoading();
+        },
+        success: function (data) {
+            var s = '<option  value="-1">Select an option</option>';
+            for (var i = 0; i < data.length; i++) {
+                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '</option>';
+            }
+            $("#DropDownListRight").html(s);
+        },
+        complete: function () {
+            stopLoading();
+        },
+    });
+}
 
-/*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,UPSERT,CLEAR) **---------------------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,UPSERT,CLEAR)                        **----------------------------------------------*/
 function ValidateInputFields() {
     if ($('#DropDownListCompany').RequiredDropdown() == false) {
         return false;
@@ -150,7 +150,6 @@ function ValidateInputFields() {
     if ($('#TextBoxRemarks').RequiredTextBoxInputGroup() == false) {
         return false;
     }
-
     return true;
 }
 $('#ButtonSubmitDown').click(function (event) {
@@ -223,8 +222,7 @@ function ClearInputFields() {
     $('form').removeClass('Is-Valid');
 }
 
-
-/*----------------------------------** FUNCTION FOR:: UPDATE COMPANY (LOAD DROPDOWN,DATA FOR USERID) **-----------------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: UPDATE ADMISSIONSESSION (LOAD DROPDOWN,DATA FOR USERRIGHTID)      **----------------------------------------------*/
 $('#ButtonSubmitGetInfoForEdit').click(function () {
     if ($('#DropDownListUserRight').RequiredDropdown() == false) {
         return false;
@@ -273,7 +271,6 @@ function GET_URM_USERRIGHT_LISTBYPARAM() {
 function GET_URM_USERRIGHT_INFOBYGUID() {
     var UserRightId = $('#DropDownListUserRight :selected').val();
     if (UserRightId != null && UserRightId != undefined && UserRightId != "" && UserRightId != "-1") {
-
         var JsonArg = {
             GuID: UserRightId,
         }
@@ -287,11 +284,14 @@ function GET_URM_USERRIGHT_INFOBYGUID() {
             },
             success: function (data) {
                 if (data.length > 0) {
-                    $('#DropDownListCompany').val(data[0].CompanyId).change();
+                    /*-- LOAD DATA FOR FIELDS RENDERED :: ON LOAD/STATIC --*/
+                    $('#DropDownListCompany').val(data[0].CompanyId).trigger('change.select2');
                     $('#DropDownListRight').val(data[0].RightId).change();
-                    $('#DropDownListUser').val(data[0].UserId).change();
                     $('#TextBoxRemarks').val(data[0].Remarks);
                     $('#HiddenFieldUserRightGuID').val(data[0].GuID);
+
+                    /*-- LOAD DATA FOR FIELDS RENDERED :: ON CHANGE --*/
+                    PopulateMT_UM_User_ListByParam(data[0].CompanyId, data[0].UserId);
                 }
                 else {
                     GetMessageBox("NO RECORD FOUND FOR FOR SELECTED USER RIGHT.... CONTACT DEVELOPER TEAM", 505);

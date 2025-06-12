@@ -37,6 +37,8 @@ function InitDataTable() {
         "processing": true,
         "columns": [
             { "data": null, "title": "#" },
+            { "data": "GuID", "title": "GuID" },
+            { "data": "Branch", "title": "Branch" },
             { "data": "Description", "title": "Description" },
             { "data": "Code", "title": "Code" },
             { "data": "StudyLevel", "title": "Study Level" },
@@ -47,10 +49,11 @@ function InitDataTable() {
                     return GetStatus(data["DocumentStatus"]);
                 }
             },
-            { "data": "Branch", "title": "Branch" },
-            { "data": "GuID", "title": "GuID" },
         ],
         columnDefs: [
+
+            { visible: false, targets: 1 },
+            { "orderable": false, targets: [0, 1, 3, 4, 5, 6] },
         ],
         drawCallback: function (settings) {
             DT_GroupBy_ForTableWithSubDetail(this, settings, '#MainTableACM_Class', ['Branch']);

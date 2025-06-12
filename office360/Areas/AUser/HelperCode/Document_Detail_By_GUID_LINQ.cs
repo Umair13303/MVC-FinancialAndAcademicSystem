@@ -56,13 +56,13 @@ namespace office360.Areas.AUser.HelperCode
             {
                 DATA = ((List<_SqlParameters>)
                        (from UR in db.URM_UserRight
-                        where
-                        UR.GuID == PostedData.GuID
+                        join UM in db.UM_User on UR.UserId equals UM.Id
+                        where UR.GuID == PostedData.GuID 
                         select new _SqlParameters
                         {
                             Id = UR.Id,
                             GuID = UR.GuID,
-                            CompanyId = UR.CompanyId,
+                            CompanyId = UM.CompanyId,
                             UserId = UR.UserId,
                             RightId = UR.RightId,
                             Remarks = UR.Remarks,

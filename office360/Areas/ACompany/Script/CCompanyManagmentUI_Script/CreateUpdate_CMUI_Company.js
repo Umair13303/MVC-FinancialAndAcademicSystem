@@ -1,10 +1,10 @@
-﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE CM_COMPANY **-----------------------------------------------*/
+﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE CM_COMPANY                       **----------------------------------------------*/
 var OperationType = "";
 var DDL_Condition = "";
 var DB_OperationType = $('#HiddenFieldDB_OperationType').val();
 var IsFieldClear = false;
 
-/*----------------------------------** FUNCTION FOR::PAGE LOADER **------------------------------------------------------------------------------*/
+/*----------------------------------** FUNCTION FOR::PAGE LOADER                                                  **----------------------------------------------*/
 $(document).ready(function () {
     DB_OperationType = $('#HiddenFieldDB_OperationType').val();
     switch (DB_OperationType) {
@@ -27,13 +27,13 @@ function PopulateDropDownLists() {
     PopulateLK_Country_List();
 }
 
-/*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER **-----------------------------------------------------------------------*/
+/*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                                           **----------------------------------------------*/
 function ChangeCase() {
-
     $('#DropDownListCountry').change(function () {
-        PopulateLK_City_ListByParam();
+        var CountryId = $("#DropDownListCountry :selected").val();
+        var CityId = null; /*-- NOT PROVIDED ON LOAD --*/
+        PopulateLK_City_ListByParam(CountryId, CityId);
     });
-
 
     //-----------FOR ::EDIT CASE
     $('#DropDownListCompany').change(function () {
@@ -45,10 +45,7 @@ function ChangeCase() {
     });
 }
 
-
-
-/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_LOOKUP-- LINQUERY **----------------------------------------------*/
-
+/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_LOOKUP-- LINQUERY (ON LOAD)        **----------------------------------------------*/
 function PopulateLK_Country_List() {
     $.ajax({
         type: "POST",
@@ -69,13 +66,13 @@ function PopulateLK_Country_List() {
         },
     });
 }
-function PopulateLK_City_ListByParam() {
-    var CountryId = $("#DropDownListCountry :selected").val();
+
+/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_LOOKUP-- LINQUERY (ON CHANGE)      **----------------------------------------------*/
+function PopulateLK_City_ListByParam(CountryId, CityId) {
     var JsonArg = {
         CountryId: CountryId,
     }
     $.ajax({
-
         type: "POST",
         url: BasePath + "/ACompany/CCompanyManagmentUI/GET_LK1_CITY_BYPARAMETER",
         data: { 'PostedData': (JsonArg) },
@@ -90,15 +87,15 @@ function PopulateLK_City_ListByParam() {
             $("#DropDownListCity").html(s);
         },
         complete: function () {
+            if (CityId != null && CityId != undefined && CityId != "" && CityId != "-1") {
+                $('#DropDownListCity').val(CityId).change();
+            }
             stopLoading();
         },
     });
-
 }
 
-
-/*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,UPSERT,CLEAR) **----------------------------------------------*/
-
+/*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,UPSERT,CLEAR)                  **----------------------------------------------*/
 function ValidateInputFields() {
 
     if ($('#TextBoxCompanyName').RequiredTextBoxInputGroup() == false) {
@@ -207,8 +204,7 @@ function ClearInputFields() {
     $('form').removeClass('Is-Valid');
 }
 
-
-/*----------------------------------** FUNCTION FOR:: UPDATE COMPANY (LOAD DROPDOWN,DATA FOR COMPANYID) **-----------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: UPDATE COMPANY (LOAD DROPDOWN,DATA FOR COMPANYID)           **----------------------------------------------*/
 $('#ButtonSubmitGetInfoForEdit').click(function () {
     if ($('#DropDownListCompany').RequiredDropdown() == false) {
         return false;
@@ -257,7 +253,6 @@ function GET_CM_COMPANY_LISTBYPARAM() {
 function GET_CM_COMPANY_INFOBYGUID() {
     var CompanyId = $('#DropDownListCompany :selected').val();
     if (CompanyId != null && CompanyId != undefined && CompanyId != "" && CompanyId != "-1") {
-
         var JsonArg = {
             GuID: CompanyId,
         }
@@ -270,18 +265,19 @@ function GET_CM_COMPANY_INFOBYGUID() {
                 startLoading();
             },
             success: function (data) {
+                /*-- LOAD DATA FOR FIELDS RENDERED :: ON LOAD/STATIC --*/
                 if (data.length > 0) {
                     $('#TextBoxCompanyName').val(data[0].CompanyName);
                     $('#DropDownListCountry').val(data[0].CountryId).change();
-                    setTimeout(function () {
-                        $('#DropDownListCity').val(data[0].CityId).change();
-                    }, 500);
                     $('#TextBoxAddress').val(data[0].Address);
                     $('#TextBoxPhoneNumber').val(data[0].PhoneNumber);
                     $('#TextBoxEmailAddress').val(data[0].EmailAddress);
                     $('#TextBoxCompanyWebsite').val(data[0].CompanyWebsite);
                     $('#TextBoxRemarks').val(data[0].Remarks).prop('disabled', true);
                     $('#HiddenFieldCompanyGuID').val(data[0].GuID);
+
+                    /*-- LOAD DATA FOR FIELDS RENDERED :: ON CHANGE --*/
+                    PopulateLK_City_ListByParam(data[0].CountryId, data[0].CityId);
                 }
                 else {
                     GetMessageBox("NO RECORD FOUND FOR FOR SELECTED COMPANY.... CONTACT DEVELOPER TEAM", 505);

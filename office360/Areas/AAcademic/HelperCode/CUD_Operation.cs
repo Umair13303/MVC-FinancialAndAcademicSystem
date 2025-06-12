@@ -107,7 +107,7 @@ namespace office360.Areas.AAcademic.HelperCode
                     try
                     {
                         #region CHECK DUPLICATE :: NO-OPERATION IF ACTIVE ADMISSION SESSION EXIST
-                        int? DB_OPERATION_STATUS = AAcademic.HelperCode.Check_Duplicate_By_LINQ.IS_EXIST_ACM_CLASS_BY_PARAMETER(PostedData);
+                        int? DB_OPERATION_STATUS = AAcademic.HelperCode.Check_Duplicate_By_LINQ.IS_EXIST_AASM_ADMISSIONSESSION_BY_PARAMETER(PostedData);
                         switch (DB_OPERATION_STATUS)
                         {
                             case (int?)Http_DB_Response.CODE_AUTHORIZED:

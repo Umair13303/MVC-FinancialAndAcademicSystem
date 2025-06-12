@@ -109,9 +109,9 @@ namespace office360.Areas.AAcademic.HelperCode
                             IsRecordExist = db.AASM_AdmissionSession.Any(x => x.GuID == PostedData.GuID);
                             #endregion
                             if (!IsRecordExist)
-                                Response = (int?)Http_DB_Response.CODE_AUTHORIZED;
+                                Response = (int?)Http_DB_Response.CODE_DATA_DOES_NOT_EXIST;
                             else
-                                Response = (int?)Http_DB_Response.CODE_DATA_ALREADY_EXIST;
+                                Response = (int?)Http_DB_Response.CODE_AUTHORIZED;
                             break;
 
                         default:
