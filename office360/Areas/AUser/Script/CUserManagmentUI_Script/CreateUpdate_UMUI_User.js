@@ -32,7 +32,6 @@ function ChangeCase() {
 
     $('#DropDownListCompany').change(function () {
         var CompanyId = $('#DropDownListCompany :selected').val();
-        alert()
         /*-- var AllowedCampusIds = null; NOT PROVIDED ON LOAD --*/
         /*-- var BranchId = null;  NOT PROVIDED ON LOAD --*/
         /*-- var EmployeeId = null;  NOT PROVIDED ON LOAD --*/
@@ -389,7 +388,6 @@ function GET_UM_USER_LISTBYPARAM() {
 function GET_UM_USER_INFOBYGUID() {
     var UserId = $('#DropDownListUser :selected').val();
     if (UserId != null && UserId != undefined && UserId != "" && UserId != "-1") {
-
         var JsonArg = {
             GuID: UserId,
         }

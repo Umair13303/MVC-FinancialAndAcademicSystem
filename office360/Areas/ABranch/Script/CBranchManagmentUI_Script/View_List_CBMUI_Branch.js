@@ -1,17 +1,14 @@
-﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: TABLE BM_BRANCH **-----------------------------------------------*/
-
+﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: TABLE BM_BRANCH                  **----------------------------------------------*/
 var table = "";
 
-/*----------------------------------** FUNCTION FOR::PAGE LOADER **------------------------------------------------------------------------------*/
-
+/*----------------------------------** FUNCTION FOR::PAGE LOADER                                    **----------------------------------------------*/
 $(document).ready(function () {
     InitDataTable();
     PopulateDropDownLists();
     ChangeCase();
 });
 
-/*----------------------------------** FUNCTION FOR::DATA TABLE & OPERATION **------------------------------------------------------------------------------*/
-
+/*----------------------------------** FUNCTION FOR::DATA TABLE & OPERATION                         **----------------------------------------------*/
 function InitDataTable() {
     table = $('#MainTableBM_Branch').DataTable({
          dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
@@ -60,14 +57,12 @@ function InitDataTable() {
 }
 
 
-/*----------------------------------** FUNCTION FOR::DROP DOWN LIST (DATA TABLE COLUMNS) **------------------------------------------------------------------------------*/
-
+/*----------------------------------** FUNCTION FOR::DROP DOWN LIST (DATA TABLE COLUMNS)            **----------------------------------------------*/
 function PopulateDropDownLists() {
     DT_DropDownList('MainTableBM_Branch', Css_Class.DynamicGroupBy, 'DropDownListGroupBy');
 }
 
-/*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER **-----------------------------------------------------------------------*/
-
+/*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                             **----------------------------------------------*/
 function ChangeCase() {
     $('#DropDownListSearchBy').change(function (event) {
         event.preventDefault();
@@ -81,8 +76,7 @@ function ChangeCase() {
     });
 }
 
-
-/*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,LOAD) **----------------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,LOAD)            **----------------------------------------------*/
 $('#ButtonSearch').click(function (event) {
     event.preventDefault();
     var IsValid = true;

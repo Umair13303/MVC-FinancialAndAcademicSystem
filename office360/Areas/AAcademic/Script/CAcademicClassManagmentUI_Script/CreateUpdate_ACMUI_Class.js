@@ -261,7 +261,6 @@ function GET_ACM_CLASS_LISTBYPARAM() {
 function GET_ACM_CLASS_INFOBYGUID() {
     var ClassId = $('#DropDownListClass :selected').val();
     if (ClassId != null && ClassId != undefined && ClassId != "" && ClassId != "-1") {
-
         var JsonArg = {
             GuID: ClassId,
         }
@@ -276,10 +275,10 @@ function GET_ACM_CLASS_INFOBYGUID() {
             success: function (data) {
                 if (data.length > 0) {
                     /*-- LOAD DATA FOR FIELDS RENDERED :: ON LOAD/STATIC --*/
-                    $('#DropDownListCampus').val(data[0].CampusId).change();
+                    $('#DropDownListCampus').val(data[0].CampusId).trigger('change.select2');
                     $('#TextBoxDescription').val(data[0].Description);
-                    $('#DropDownListStudyLevel').val(data[0].StudyLevelId).change();
-                    $('#DropDownListStudyGroup').val(data[0].StudyGroupId).change();
+                    $('#DropDownListStudyLevel').val(data[0].StudyLevelId).trigger('change.select2');
+                    $('#DropDownListStudyGroup').val(data[0].StudyGroupId).trigger('change.select2');
                     $('#TextBoxRemarks').val(data[0].Remarks).prop('disabled', true);
                     $('#HiddenFieldClassGuID').val(data[0].GuID);
                 }

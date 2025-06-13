@@ -286,7 +286,7 @@ function GET_URM_USERRIGHT_INFOBYGUID() {
                 if (data.length > 0) {
                     /*-- LOAD DATA FOR FIELDS RENDERED :: ON LOAD/STATIC --*/
                     $('#DropDownListCompany').val(data[0].CompanyId).trigger('change.select2');
-                    $('#DropDownListRight').val(data[0].RightId).change();
+                    $('#DropDownListRight').val(data[0].RightId).trigger('change.select2');
                     $('#TextBoxRemarks').val(data[0].Remarks);
                     $('#HiddenFieldUserRightGuID').val(data[0].GuID);
 

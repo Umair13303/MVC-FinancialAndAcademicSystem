@@ -327,7 +327,7 @@ function GET_AASM_ADMISSIONSESSION_INFOBYGUID() {
             success: function (data) {
                 if (data.length > 0) {
                     /*-- LOAD DATA FOR FIELDS RENDERED :: ON LOAD/STATIC --*/
-                    $('#DropDownListCampus').val(data[0].CampusId).change();
+                    $('#DropDownListCampus').val(data[0].CampusId).trigger('change.select2');
                     $('#TextBoxDescription').val(data[0].Description);
                     GET_TRIGGER_DATEPICKER_SIMPLE(data[0].SessionStartDate, '#TextBoxSessionStartDate');
                     GET_TRIGGER_DATEPICKER_SIMPLE(data[0].SessionEndDate, '#TextBoxSessionEndDate');

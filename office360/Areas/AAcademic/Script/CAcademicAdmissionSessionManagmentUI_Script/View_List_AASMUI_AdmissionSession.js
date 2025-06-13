@@ -1,16 +1,13 @@
-﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: TABLE BM_BRANCH **-----------------------------------------------*/
-
+﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: TABLE AASM_AdmissionSession              **----------------------------------------------*/
 var table = "";
 
-/*----------------------------------** FUNCTION FOR::PAGE LOADER **------------------------------------------------------------------------------*/
-
+/*----------------------------------** FUNCTION FOR::PAGE LOADER                                            **----------------------------------------------*/
 $(document).ready(function () {
     InitDataTable();
     ChangeCase();
 });
 
-/*----------------------------------** FUNCTION FOR::DATA TABLE & OPERATION **------------------------------------------------------------------------------*/
-
+/*----------------------------------** FUNCTION FOR::DATA TABLE & OPERATION                                 **----------------------------------------------*/
 function InitDataTable() {
     table = $('#MainTableAASMUI_AdmissionSession').DataTable({
         dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
@@ -38,7 +35,7 @@ function InitDataTable() {
         "columns": [
             { "data": null, "title": "#" },
             { "data": "GuID", "title": "GuID" },
-            { "data": "Branch", "title": "Branch" },
+            { "data": "Campus", "title": "Campus" },
             { "data": "Description", "title": "Description" },
             { "data": "Code", "title": "Code" },
             { "data": "AcademicYear", "title": "Academic Year" },
@@ -55,7 +52,7 @@ function InitDataTable() {
             { "orderable": false, targets: [0, 1, 3, 4, 5, 6] },
         ],
         drawCallback: function (settings) {
-            DT_GroupBy_ForTableWithSubDetail(this, settings, '#MainTableACM_Class', ['Branch']);
+            DT_GroupBy_ForTableWithSubDetail(this, settings, '#MainTableACM_Class', ['Campus']);
         }
     });
     table.on('order.dt search.dt', function () {
@@ -66,8 +63,7 @@ function InitDataTable() {
     }).draw();
 }
 
-/*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER **-----------------------------------------------------------------------*/
-
+/*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                                     **----------------------------------------------*/
 function ChangeCase() {
     $('#DropDownListSearchBy').change(function (event) {
         event.preventDefault();
@@ -81,8 +77,7 @@ function ChangeCase() {
     });
 }
 
-
-/*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,LOAD) **----------------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,LOAD)                    **----------------------------------------------*/
 $('#ButtonSearch').click(function (event) {
     event.preventDefault();
     var IsValid = true;

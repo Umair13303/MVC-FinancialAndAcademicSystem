@@ -41,40 +41,6 @@ function ChangeCase() {
     });
 }
 
-/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON LOAD)        **----------------------------------------------*/
-function PopulateMT_CM_Company_ListByParam() {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.CM_COMPANY_BY_SOLUTION_DEVELOPER_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.CM_COMPANY_BY_SOLUTION_DEVELOPER_FORUPDATERECORD;
-            break;
-    }
-    var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
-    }
-    $.ajax({
-        type: "POST",
-        url: BasePath + "/ACompany/CRightSettingManagmentUI/GET_MT_CM_COMPANY_BYPARAMTER",
-        data: { 'PostedData': (JsonArg) },
-        beforeSend: function () {
-            startLoading();
-        },
-        success: function (data) {
-            var s = '<option value="-1">Select an option</option>';
-            for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '</option>';
-            }
-            $("#DropDownListCompany").html(s);
-        },
-        complete: function () {
-            stopLoading();
-        },
-    });
-
-}
-
 /*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_LOOKUP-- LINQUERY (ON LOAD)              **----------------------------------------------*/
 function PopulateLK_Right_List() {
     $.ajax({
@@ -115,6 +81,40 @@ function PopulateLK_URLType_List() {
             stopLoading();
         },
     });
+}
+
+/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON LOAD)        **----------------------------------------------*/
+function PopulateMT_CM_Company_ListByParam() {
+    switch (DB_OperationType) {
+        case DBOperation.INSERT:
+            DDL_Condition = MDB_LIST_CONDITION.CM_COMPANY_BY_SOLUTION_DEVELOPER_FORNEWINSERT;
+            break;
+        case DBOperation.UPDATE:
+            DDL_Condition = MDB_LIST_CONDITION.CM_COMPANY_BY_SOLUTION_DEVELOPER_FORUPDATERECORD;
+            break;
+    }
+    var JsonArg = {
+        DB_IF_PARAM: DDL_Condition,
+    }
+    $.ajax({
+        type: "POST",
+        url: BasePath + "/ACompany/CRightSettingManagmentUI/GET_MT_CM_COMPANY_BYPARAMTER",
+        data: { 'PostedData': (JsonArg) },
+        beforeSend: function () {
+            startLoading();
+        },
+        success: function (data) {
+            var s = '<option value="-1">Select an option</option>';
+            for (var i = 0; i < data.length; i++) {
+                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '</option>';
+            }
+            $("#DropDownListCompany").html(s);
+        },
+        complete: function () {
+            stopLoading();
+        },
+    });
+
 }
 
 /*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,UPSERT,CLEAR)                        **----------------------------------------------*/
@@ -211,7 +211,7 @@ function ClearInputFields() {
     $('form').removeClass('Is-Valid');
 }
 
-/*----------------------------------** FUNCTION FOR:: UPDATE COMPANY (LOAD DROPDOWN,DATA FOR RIGHTSETTINGID)            **-----------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: UPDATE COMPANY (LOAD DROPDOWN,DATA FOR RIGHTSETTINGID)            **----------------------------------------------*/
 $('#ButtonSubmitGetInfoForEdit').click(function () {
     if ($('#DropDownListRightSetting').RequiredDropdown() == false) {
         return false;
@@ -284,8 +284,8 @@ function GET_RSM_RIGHTSETTING_INFOBYGUID() {
                 if (data.length > 0) {
                     $('#DropDownListRight').val(data[0].RightId).change();
                     $('#TextBoxDescription').val(data[0].Description);
-                    $('#DropDownListURLType').val(data[0].URLTypeId).change();
-                    $('#DropDownListCompany').val(data[0].CompanyId).change();
+                    $('#DropDownListURLType').val(data[0].URLTypeId).trigger('change.select2');
+                    $('#DropDownListCompany').val(data[0].CompanyId).trigger('change.select2');
                     $('#TextBoxRemarks').val(data[0].Remarks);
                     $('#HiddenFieldRightSettingGuID').val(data[0].GuID);
                 }

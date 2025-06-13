@@ -268,7 +268,7 @@ function GET_CM_COMPANY_INFOBYGUID() {
                 /*-- LOAD DATA FOR FIELDS RENDERED :: ON LOAD/STATIC --*/
                 if (data.length > 0) {
                     $('#TextBoxCompanyName').val(data[0].CompanyName);
-                    $('#DropDownListCountry').val(data[0].CountryId).change();
+                    $('#DropDownListCountry').val(data[0].CountryId).trigger('change.select2');
                     $('#TextBoxAddress').val(data[0].Address);
                     $('#TextBoxPhoneNumber').val(data[0].PhoneNumber);
                     $('#TextBoxEmailAddress').val(data[0].EmailAddress);

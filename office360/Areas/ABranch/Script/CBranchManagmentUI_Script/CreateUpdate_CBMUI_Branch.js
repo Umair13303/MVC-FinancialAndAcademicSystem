@@ -317,8 +317,8 @@ function GET_BM_BRANCH_INFOBYGUID() {
                 /*-- LOAD DATA FOR FIELDS RENDERED :: ON LOAD/STATIC --*/
                 if (data.length > 0) {
                     $('#TextBoxDescription').val(data[0].Description);
-                    $('#DropDownListCampusType').val(data[0].CampusTypeId).change();
-                    $('#DropDownListOrganizationType').val(data[0].OrganizationTypeId).change();
+                    $('#DropDownListCampusType').val(data[0].CampusTypeId).trigger('change.select2');
+                    $('#DropDownListOrganizationType').val(data[0].OrganizationTypeId).trigger('change.select2');
                     $('#DropDownListCountry').val(data[0].CountryId).trigger('change.select2');
                     $('#TextBoxAddress').val(data[0].Address);
                     $('#TextBoxContactNo').val(data[0].ContactNo);

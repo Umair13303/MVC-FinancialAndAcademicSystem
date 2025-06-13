@@ -1,16 +1,13 @@
-﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: TABLE BM_BRANCH **-----------------------------------------------*/
-
+﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: TABLE UM_USER                    **----------------------------------------------*/
 var table = "";
 
-/*----------------------------------** FUNCTION FOR::PAGE LOADER **------------------------------------------------------------------------------*/
-
+/*----------------------------------** FUNCTION FOR::PAGE LOADER                                    **----------------------------------------------*/
 $(document).ready(function () {
     InitDataTable();
     ChangeCase();
 });
 
-/*----------------------------------** FUNCTION FOR::DATA TABLE & OPERATION **------------------------------------------------------------------------------*/
-
+/*----------------------------------** FUNCTION FOR::DATA TABLE & OPERATION                         **----------------------------------------------*/
 function InitDataTable() {
     var ParentGroupColumn = 1;
 
@@ -42,7 +39,7 @@ function InitDataTable() {
             { "data": null, "title": "#" },
             { "data": "GuID", "title": "GuID" },
             { "data": "Company", "title": "Company" },
-            { "data": "Branch", "title": "Branch" },
+            { "data": "Campus", "title": "Campus" },
             { "data": "Name", "title": "Name" },
             { "data": "UserName", "title": "User Name" },
             { "data": "EmailAddress", "title": "Email" },
@@ -61,7 +58,7 @@ function InitDataTable() {
         ],
         order: [[ParentGroupColumn, 'asc']],
         drawCallback: function (settings) {
-            DT_GroupBy_ForTableWithSubDetail(this, settings, '#MainTableUM_User', ['Company', 'Branch']);
+            DT_GroupBy_ForTableWithSubDetail(this, settings, '#MainTableUM_User', ['Company', 'Campus']);
         }
 
     });
@@ -74,8 +71,7 @@ function InitDataTable() {
 }
 
 
-/*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER **-----------------------------------------------------------------------*/
-
+/*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                             **----------------------------------------------*/
 function ChangeCase() {
     $('#DropDownListSearchBy').change(function (event) {
         event.preventDefault();
@@ -89,8 +85,7 @@ function ChangeCase() {
     });
 }
 
-
-/*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,LOAD) **----------------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,LOAD)            **----------------------------------------------*/
 $('#ButtonSearch').click(function (event) {
     event.preventDefault();
     var IsValid = true;
