@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -20,7 +21,7 @@
                         <a href="javascript:void(0);">Academic</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="javascript:void(0);">Curriculum</a>
+                        <a href="javascript:void(0);">Subjects</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
                         <span>@ViewBag.Title</span>
@@ -36,10 +37,10 @@
             <div class="card" style="margin-top:1%;width:100%">
                 <div class="card-body">
                     <div class="row mb-0">
-                        <div class="col-sm-12 col-md-8">
+                        <div class="col-sm-12 col-md-10">
                             <div class="form-group">
-                                @Html.Label("Class Curriculum ( For Edit )", new { @class = "col-form-label", @for = "DropDownListClassCurriculum" })
-                                @Html.DropDownList("DropDownListClassCurriculum", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListClassCurriculum" })
+                                @Html.Label("Subject ( For Edit )", new { @class = "col-form-label", @for = "DropDownListSubject" })
+                                @Html.DropDownList("DropDownListSubject", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListSubject" })
                                 <button type="button" class="btn btn-info" id="ButtonSubmitGetInfoForEdit">
                                     <i class="fa fa-sync-alt"></i> Load Information
                                 </button>
@@ -52,16 +53,7 @@
 
         <div class="card" style="margin-top:1%;width:100%">
             <div class="card-body">
-                <h3 style="font-family: 'Bahnschrift'; font-weight: bolder; color: navy">Class Curriculum Detail</h3>
-                <div class="row mb-0">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="form-group">
-                            @Html.Label("Campus", new { @class = "col-form-label", @for = "DropDownListCampus" })
-                            @Html.DropDownList("DropDownListCampus", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListCampus" })
-                        </div>
-                    </div>
-                </div>
-
+                <h3 style="font-family: 'Bahnschrift'; font-weight: bolder; color: navy">Subject Information</h3>
                 <div class="row mb-0">
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
@@ -69,33 +61,13 @@
                             @Html.TextBox("TextBoxDescription", null, new { @class = "form-control", placeholder = "Please Enter Description Here!", @id = "TextBoxDescription" })
                         </div>
                     </div>
-                </div>
-
-                <div class="row mb-0">
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
-                            @Html.Label("Class", new { @class = "col-form-label", @for = "DropDownListClass" })
-                            @Html.DropDownList("DropDownListClass", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListClass" })
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-3">
-                        <div class="form-group">
-                            @Html.Label("Study Scheme", new { @class = "col-form-label", @for = "DropDownListStudyScheme" })
-                            @Html.DropDownList("DropDownListStudyScheme", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListStudyScheme" })
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-3">
-                        <div class="form-group">
-                            @Html.Label("Semester", new { @class = "col-form-label", @for = "DropDownListSemester" })
-                            @Html.DropDownList("DropDownListSemester", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", disabled = true, @data_toggle = "select2", id = "DropDownListSemester" })
+                            @Html.Label("Short Description", new { @class = "col-form-label", @for = "TextBoxShortDescription" })
+                            @Html.TextBox("TextBoxShortDescription", null, new { @class = "form-control", placeholder = "Please Enter Short Description Here!", @id = "TextBoxShortDescription" })
                         </div>
                     </div>
                 </div>
-
-
-
                 <div class="row mb-0">
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
@@ -107,10 +79,8 @@
             </div>
         </div>
 
-
-        @Html.TextBox("HiddenFieldClassCurriculumGuID", null, new { @class = "form-control", Value = ViewBag.ClassCurriculumGuID, hidden = true, @id = "HiddenFieldClassCurriculumGuID" })
+        @Html.TextBox("HiddenFieldSubjectGuID", null, new { @class = "form-control", Value = ViewBag.SubjectGuID, hidden = true, @id = "HiddenFieldSubjectGuID" })
         @Html.TextBox("HiddenFieldDB_OperationType", null, new { @class = "form-control", Value = ViewBag.DB_OperationType, hidden = true, @id = "HiddenFieldDB_OperationType" })
-
     </form>
     <div class="card-footer">
         <div class="col-sm-12 form-group">
@@ -126,6 +96,4 @@
     </div>
 
 }
-
-
-<script src="~/Areas/AAcademic/Script/CAcademicClassCurriculumManagmentUI_Script/CreateUpdate_ACCMUI_ClassCurriculum.js"></script>
+<script src="~/Areas/AAcademic/Script/CAcademicSubjectManagmentUI_Script/CreateUpdate_ASMUI_Subject.js"></script>

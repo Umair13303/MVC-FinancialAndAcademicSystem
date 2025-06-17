@@ -1,10 +1,10 @@
-﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE CM_COMPANY                       **----------------------------------------------*/
+﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE CM_COMPANY                      **----------------------------------------------*/
 var OperationType = "";
 var DDL_Condition = "";
 var DB_OperationType = $('#HiddenFieldDB_OperationType').val();
 var IsFieldClear = false;
 
-/*----------------------------------** FUNCTION FOR::PAGE LOADER                                                  **----------------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: PAGE LOADER                                                 **----------------------------------------------*/
 $(document).ready(function () {
     DB_OperationType = $('#HiddenFieldDB_OperationType').val();
     switch (DB_OperationType) {
@@ -20,14 +20,13 @@ $(document).ready(function () {
     }
     PopulateDropDownLists();
     ChangeCase();
-
 });
 
 function PopulateDropDownLists() {
     PopulateLK_Country_List();
 }
 
-/*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                                           **----------------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: CHANGE CASE LOADER                                          **----------------------------------------------*/
 function ChangeCase() {
     $('#DropDownListCountry').change(function () {
         var CountryId = $("#DropDownListCountry :selected").val();

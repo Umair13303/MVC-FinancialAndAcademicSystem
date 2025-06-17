@@ -18,6 +18,7 @@ namespace office360.Areas.AAcademic.HelperCode
     public class DATA_FROM_SP
     {
         #region DBO:- ACM_CLASS
+
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB -- DBO:- ACM_CLASS
         public static List<ACM_Class_GetListByParam_Result> GET_MT_ACM_CLASS_BYPARAM(_SqlParameters PostedData)
         {
@@ -59,6 +60,31 @@ namespace office360.Areas.AAcademic.HelperCode
         #endregion
 
         #endregion
+
+        #region DBO:- ASM_SUBJECT
+
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB -- DBO:- ASM_SUBJECT
+        public static List<ASM_Subject_GetListByParam_Result> GET_MT_ASM_SUBJECT_BYPARAM(_SqlParameters PostedData)
+        {
+            List<ASM_Subject_GetListByParam_Result> DATA = new List<ASM_Subject_GetListByParam_Result>();
+            using (SESEntities db = new SESEntities())
+            {
+                DATA = db.ASM_Subject_GetListByParam(
+                                                       PostedData.DB_IF_PARAM,
+                                                       Session_Manager.CompanyId,
+                                                       Session_Manager.BranchId,
+                                                       PostedData.SearchParameter,
+                                                       PostedData.CompanyId
+                                                       ).ToList();
+
+                return DATA;
+            }
+        }
+        #endregion
+
+        #endregion
+
+
 
         #region DBO:- AASM_ADMISSIONSESSION
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB

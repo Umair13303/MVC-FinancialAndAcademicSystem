@@ -314,8 +314,8 @@ function GET_BM_BRANCH_INFOBYGUID() {
                 startLoading();
             },
             success: function (data) {
-                /*-- LOAD DATA FOR FIELDS RENDERED :: ON LOAD/STATIC --*/
                 if (data.length > 0) {
+                    /*-- LOAD DATA FOR FIELDS RENDERED :: ON LOAD/STATIC --*/
                     $('#TextBoxDescription').val(data[0].Description);
                     $('#DropDownListCampusType').val(data[0].CampusTypeId).trigger('change.select2');
                     $('#DropDownListOrganizationType').val(data[0].OrganizationTypeId).trigger('change.select2');

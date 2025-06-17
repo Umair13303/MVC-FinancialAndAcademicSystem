@@ -26,6 +26,6 @@ namespace office360.Models.EDMX
         public Nullable<bool> IsEnteryTestRequired { get; set; }
         public Nullable<bool> IsInterviewRequired { get; set; }
         public Nullable<int> DocumentStatus { get; set; }
-        public string Branch { get; set; }
+        public string Campus { get; set; }
     }
 }

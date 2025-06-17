@@ -291,6 +291,7 @@
     <Compile Include="Areas\AAcademic\Controllers\CAcademicAdmissionSessionManagmentUIController.cs" />
     <Compile Include="Areas\AAcademic\Controllers\CAcademicClassManagmentUIController.cs" />
     <Compile Include="Areas\AAcademic\Controllers\CAcademicClassCurriculumManagmentUIController.cs" />
+    <Compile Include="Areas\AAcademic\Controllers\CAcademicSubjectManagmentUIController.cs" />
     <Compile Include="Areas\AAcademic\HelperCode\Check_Duplicate_By_LINQ.cs" />
     <Compile Include="Areas\AAcademic\HelperCode\CUD_Operation.cs" />
     <Compile Include="Areas\AAcademic\HelperCode\DATA_FROM_LINQ.cs" />
@@ -352,6 +353,9 @@
     <Compile Include="Models\EDMX\AcademicYear.cs">
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EDMX\ACCM_ClassCurriculum.cs">
+      <DependentUpon>SESModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EDMX\ACM_Class.cs">
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
@@ -362,6 +366,12 @@
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\AdmissionCatagory.cs">
+      <DependentUpon>SESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDMX\ASM_Subject.cs">
+      <DependentUpon>SESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDMX\ASM_Subject_GetListByParam_Result.cs">
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\BillingMethod.cs">
@@ -481,6 +491,9 @@
     <Compile Include="Models\EDMX\RSM_RightSetting_GetListByParam_Result.cs">
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EDMX\Semester.cs">
+      <DependentUpon>SESModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EDMX\SESModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -500,6 +513,9 @@
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\StudyLevel.cs">
+      <DependentUpon>SESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDMX\StudyScheme.cs">
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\UM_User.cs">
@@ -553,6 +569,7 @@
     <Content Include="Areas\AAcademic\Script\CAcademicClassCurriculumManagmentUI_Script\CreateUpdate_ACCMUI_ClassCurriculum.js" />
     <Content Include="Areas\AAcademic\Script\CAcademicClassManagmentUI_Script\View_List_ACMUI_Class.js" />
     <Content Include="Areas\AAcademic\Script\CAcademicClassManagmentUI_Script\CreateUpdate_ACMUI_Class.js" />
+    <Content Include="Areas\AAcademic\Script\CAcademicSubjectManagmentUI_Script\CreateUpdate_ASMUI_Subject.js" />
     <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\CreateUpdate_CBMUI_Branch.js" />
     <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\View_List_CBMUI_Branch.js" />
     <Content Include="Areas\ACompany\Script\CCompanyManagmentUI_Script\CreateUpdate_CMUI_Company.js" />
@@ -1932,7 +1949,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\AAcademic\Data\" />
-    <Folder Include="Areas\AAcademic\Views\CAcademicClassCurriculumManagmentUIController\" />
     <Folder Include="Areas\AAcademic\Views\Shared\" />
     <Folder Include="Areas\ABranch\Data\" />
     <Folder Include="Areas\ABranch\Views\Shared\" />
@@ -1941,7 +1957,6 @@
     <Folder Include="Areas\ACompany\Views\Shared\" />
     <Folder Include="Areas\AUser\Data\" />
     <Folder Include="Areas\AUser\Views\Shared\" />
-    <Folder Include="SES_BIN\" />
     <Folder Include="Views\AReports\" />
     <Folder Include="Views\AStudent\" />
     <Folder Include="Views\HTML\" />
@@ -2007,6 +2022,7 @@
     <Content Include="Areas\AAcademic\Views\CAcademicAdmissionSessionManagmentUI\CreateUpdate_AASMUI_AdmissionSession.cshtml" />
     <Content Include="Areas\AAcademic\Views\CAcademicAdmissionSessionManagmentUI\View_List_AASMUI_AdmissionSession.cshtml" />
     <Content Include="Areas\AAcademic\Views\CAcademicClassCurriculumManagmentUI\CreateUpdate_ACCMUI_ClassCurriculum.cshtml" />
+    <Content Include="Areas\AAcademic\Views\CAcademicSubjectManagmentUI\CreateUpdate_ASMUI_Subject.cshtml" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>

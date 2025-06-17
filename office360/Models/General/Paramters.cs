@@ -20,6 +20,7 @@ namespace office360.Models.General
         public bool? IsFatherAlive { get; set; }
         public bool? IsEnteryTestRequired { get; set; }
         public bool? IsInterviewRequired { get; set; }
+        public bool? IsSemesterRequired { get; set; }
 
         public DateTime? AdmissionStartDate { get; set; }
         public DateTime? AdmissionEndDate { get; set; }
@@ -130,6 +131,7 @@ namespace office360.Models.General
         public string CompanyName { get; set; }
         public string ContactNo { get; set; }
         public string Description { get; set; }
+        public string ShortDescription { get; set; }
         public string DisplayName { get; set; }
         public string EmailAddress { get; set; }
         public string ExtraClass { get; set; }

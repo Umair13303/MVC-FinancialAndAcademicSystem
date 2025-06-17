@@ -37,6 +37,32 @@ namespace office360.Areas.AAcademic.HelperCode
             }
         }
         #endregion
+        #region HELPER FOR :: GET DATA USING LINQ (ASM_SUBJECT) ::-- MAIN DB
+        public static List<_SqlParameters> GET_MT_ASM_SUBJECT_INFO_BY_GUID(_SqlParameters PostedData)
+        {
+            List<_SqlParameters> DATA = new List<_SqlParameters>();
+
+            using (SESEntities db = new SESEntities())
+            {
+                DATA = ((List<_SqlParameters>)
+                       (from S in db.ASM_Subject
+                        where S.CompanyId == Session_Manager.CompanyId && S.GuID == PostedData.GuID
+                        select new _SqlParameters
+                        {
+                            Id = S.Id,
+                            GuID = S.GuID,
+                            Code = S.Code,
+                            Description = S.Description,
+                            ShortDescription = S.ShortDescription,
+                            Remarks = S.Remarks,
+
+                        }).ToList());
+
+                return DATA;
+            }
+        }
+        #endregion
+
         #region HELPER FOR :: GET DATA USING LINQ (AASM_ADMISSIONSESSION) ::-- MAIN DB
         public static List<_SqlParameters> GET_MT_AASM_ADMISSIONSESSION_INFO_BY_GUID(_SqlParameters PostedData)
         {

@@ -10,16 +10,24 @@
 namespace office360.Models.EDMX
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class ACM_Class_GetListBySearch_Result
+    public partial class ASM_Subject
     {
         public int Id { get; set; }
         public Nullable<System.Guid> GuID { get; set; }
         public string Code { get; set; }
         public string Description { get; set; }
-        public string StudyLevel { get; set; }
-        public string StudyGroup { get; set; }
+        public string ShortDescription { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<System.DateTime> UpdatedOn { get; set; }
+        public Nullable<int> UpdatedBy { get; set; }
+        public Nullable<int> DocType { get; set; }
         public Nullable<int> DocumentStatus { get; set; }
-        public string Campus { get; set; }
+        public Nullable<bool> Status { get; set; }
+        public Nullable<int> BranchId { get; set; }
+        public Nullable<int> CompanyId { get; set; }
+        public string Remarks { get; set; }
     }
 }

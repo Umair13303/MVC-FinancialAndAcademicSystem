@@ -45,7 +45,7 @@ function InitDataTable() {
             { "data": null, "title": "#" },
             { "data": "GuID", "title": "GuID" },
             { "data": "Company", "title": "Company" },
-            { "data": "Campus", "title": "Campus" },
+            { "data": "Branch", "title": "Branch" },
             { "data": "Name", "title": "Name" },
             { "data": "UserName", "title": "User Name" },
             { "data": "EmailAddress", "title": "Email" },
@@ -66,7 +66,7 @@ function InitDataTable() {
         },
         order: [[ParentGroupColumn, 'asc']],
         drawCallback: function (settings) {
-            DT_GroupBy_ForTableWithSubDetail(this, settings, '#MainTableURM_UserRight', ['Company', 'Campus',]);
+            DT_GroupBy_ForTableWithSubDetail(this, settings, '#MainTableURM_UserRight', ['Company', 'Branch',]);
         }
 
     });
@@ -168,7 +168,6 @@ $('#ButtonSearch').click(function (event) {
     if (IsValid) {
         try {
             DrawDataTable();
-
         }
         catch {
             GetMessageBox(err, 500);
