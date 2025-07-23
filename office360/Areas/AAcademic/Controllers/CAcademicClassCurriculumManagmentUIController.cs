@@ -60,11 +60,6 @@ namespace office360.Areas.AAcademic.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: RENDER DATA FOR DROP DOWN LIST FROM DB_LOOKUP USING LINQUERY ** --------------------- */
 
         #region ACTION RESULT FOR :: RENDER DATA FOR DROP DOWN FROM DB_LOOKUP -- LINQ-QUERY
-        public ActionResult GET_LK1_STUDYSCHEME(_SqlParameters PostedData)
-        {
-            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_StudyScheme(PostedData).ToList();
-            return Json(DATA, JsonRequestBehavior.AllowGet);
-        }
         public ActionResult GET_LK1_SEMESTER(_SqlParameters PostedData)
         {
             var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_Semester(PostedData).ToList();

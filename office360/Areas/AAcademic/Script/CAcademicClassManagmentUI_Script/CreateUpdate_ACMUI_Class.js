@@ -29,6 +29,7 @@ function PopulateDropDownLists() {
     PopulateMT_BM_Branch_ListByParam();
     PopulateLK_StudyLevel_List();
     PopulateLK_StudyGroup_List();
+    PopulateLK_StudyScheme_List();
 }
 /*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                                          **----------------------------------------------*/
 function ChangeCase() {
@@ -116,6 +117,26 @@ function PopulateLK_StudyGroup_List() {
         },
     });
 }
+function PopulateLK_StudyScheme_List() {
+    $.ajax({
+        type: "POST",
+        url: BasePath + "/AAcademic/CAcademicClassManagmentUI/GET_LK1_STUDYSCHEME",
+        data: {},
+        beforeSend: function () {
+            startLoading();
+        },
+        success: function (data) {
+            var s = '<option  value="-1">Select an option</option>';
+            for (var i = 0; i < data.length; i++) {
+                s += '<option value="' + data[i].Id + '">' + data[i].Description + '</option>';
+            }
+            $("#DropDownListStudyScheme").html(s);
+        },
+        complete: function () {
+            stopLoading();
+        },
+    });
+}
 
 /*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,UPSERT,CLEAR)                 **----------------------------------------------*/
 function ValidateInputFields() {
@@ -126,10 +147,16 @@ function ValidateInputFields() {
     if ($('#TextBoxDescription').RequiredTextBoxInputGroup() == false) {
         return false;
     }
-    if ($('#DropDownListStudyLevel').RequiredTextBoxInputGroup() == false) {
+    if ($('#DropDownListStudyLevel').RequiredDropdown() == false) {
         return false;
     }
-    if ($('#DropDownListStudyGroup').RequiredTextBoxInputGroup() == false) {
+    if ($('#DropDownListStudyGroup').RequiredDropdown() == false) {
+        return false;
+    }
+    if ($('#DropDownListStudyScheme').RequiredDropdown() == false) {
+        return false;
+    }
+    if ($('#TextBoxRemarks').RequiredTextBoxInputGroup() == false) {
         return false;
     }
     return true;
@@ -165,6 +192,7 @@ function UpSertDataIntoDB() {
     var Description = $('#TextBoxDescription').val();
     var StudyLevelId = $('#DropDownListStudyLevel :selected').val();
     var StudyGroupId = $('#DropDownListStudyGroup :selected').val();
+    var StudySchemeId = $('#DropDownListStudyScheme :selected').val();
     var Remarks = $('#TextBoxRemarks').val();
     var ClassGuID = $('#HiddenFieldClassGuID').val();
 
@@ -176,6 +204,7 @@ function UpSertDataIntoDB() {
         Description: Description,
         StudyLevelId: StudyLevelId,
         StudyGroupId: StudyGroupId,
+        StudySchemeId: StudySchemeId,
         Remarks: Remarks,
     }
     $.ajax({
@@ -209,7 +238,7 @@ function ClearInputFields() {
 /*----------------------------------** FUNCTION FOR:: UPDATE BRANCH (LOAD DROPDOWN,DATA FOR CLASSID)             **----------------------------------------------*/
 $('#ButtonSubmitGetInfoForEdit').click(function () {
     if ($('#DropDownListClass').RequiredDropdown() == false) {
-        return false;
+     //   return false;
     }
     else {
         GET_ACM_CLASS_INFOBYGUID();
@@ -279,6 +308,7 @@ function GET_ACM_CLASS_INFOBYGUID() {
                     $('#TextBoxDescription').val(data[0].Description);
                     $('#DropDownListStudyLevel').val(data[0].StudyLevelId).trigger('change.select2');
                     $('#DropDownListStudyGroup').val(data[0].StudyGroupId).trigger('change.select2');
+                    $('#DropDownListStudyScheme').val(data[0].StudySchemeId).trigger('change.select2');
                     $('#TextBoxRemarks').val(data[0].Remarks).prop('disabled', true);
                     $('#HiddenFieldClassGuID').val(data[0].GuID);
                 }

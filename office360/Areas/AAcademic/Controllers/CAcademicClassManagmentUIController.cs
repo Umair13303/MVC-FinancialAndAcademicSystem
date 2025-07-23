@@ -84,6 +84,11 @@ namespace office360.Areas.AAcademic.Controllers
             var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_StudyGroup(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GET_LK1_STUDYSCHEME(_SqlParameters PostedData)
+        {
+            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_StudyScheme(PostedData).ToList();
+            return Json(DATA, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         /*---------------------- ** ACTION RESULTS FOR :: DATABASE OPERATION BY USER (INSERT/UPDATE/DELETE OF CLASS) ** ---------------------------- */

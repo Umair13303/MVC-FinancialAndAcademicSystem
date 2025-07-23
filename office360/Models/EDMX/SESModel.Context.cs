@@ -321,7 +321,7 @@ namespace office360.Models.EDMX
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ACM_Class_GetListBySearch_Result>("ACM_Class_GetListBySearch", companyIdParameter, branchIdParameter, allowedCampusIdParameter, inputTypeIdParameter, inputTextParameter);
         }
     
-        public virtual int ACM_Class_Upsert(string dB_OperationType, Nullable<System.Guid> guID, Nullable<int> campusId, string description, Nullable<int> studyLevelId, Nullable<int> studyGroupId, Nullable<System.DateTime> createdOn, Nullable<int> createdBy, Nullable<System.DateTime> updatedOn, Nullable<int> updatedBy, Nullable<int> docType, Nullable<int> documentStatus, Nullable<bool> status, Nullable<int> branchId, Nullable<int> companyId, string remarks, ObjectParameter response)
+        public virtual int ACM_Class_Upsert(string dB_OperationType, Nullable<System.Guid> guID, Nullable<int> campusId, string description, Nullable<int> studyLevelId, Nullable<int> studyGroupId, Nullable<int> studySchemeId, Nullable<System.DateTime> createdOn, Nullable<int> createdBy, Nullable<System.DateTime> updatedOn, Nullable<int> updatedBy, Nullable<int> docType, Nullable<int> documentStatus, Nullable<bool> status, Nullable<int> branchId, Nullable<int> companyId, string remarks, ObjectParameter response)
         {
             var dB_OperationTypeParameter = dB_OperationType != null ?
                 new ObjectParameter("DB_OperationType", dB_OperationType) :
@@ -346,6 +346,10 @@ namespace office360.Models.EDMX
             var studyGroupIdParameter = studyGroupId.HasValue ?
                 new ObjectParameter("StudyGroupId", studyGroupId) :
                 new ObjectParameter("StudyGroupId", typeof(int));
+    
+            var studySchemeIdParameter = studySchemeId.HasValue ?
+                new ObjectParameter("StudySchemeId", studySchemeId) :
+                new ObjectParameter("StudySchemeId", typeof(int));
     
             var createdOnParameter = createdOn.HasValue ?
                 new ObjectParameter("CreatedOn", createdOn) :
@@ -387,7 +391,7 @@ namespace office360.Models.EDMX
                 new ObjectParameter("Remarks", remarks) :
                 new ObjectParameter("Remarks", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ACM_Class_Upsert", dB_OperationTypeParameter, guIDParameter, campusIdParameter, descriptionParameter, studyLevelIdParameter, studyGroupIdParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, remarksParameter, response);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ACM_Class_Upsert", dB_OperationTypeParameter, guIDParameter, campusIdParameter, descriptionParameter, studyLevelIdParameter, studyGroupIdParameter, studySchemeIdParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, remarksParameter, response);
         }
     
         public virtual ObjectResult<ASM_Subject_GetListByParam_Result> ASM_Subject_GetListByParam(string dB_IF_PARAM, Nullable<int> sessionCompanyId, Nullable<int> sessionBranchId, string searchParameter, Nullable<int> companyId)

@@ -29,6 +29,7 @@ namespace office360.Areas.AAcademic.HelperCode
                             Description = C.Description,
                             StudyLevelId = C.StudyLevelId,
                             StudyGroupId = C.StudyGroupId,
+                            StudySchemeId = C.StudySchemeId,
                             Remarks = C.Remarks,
 
                         }).ToList());

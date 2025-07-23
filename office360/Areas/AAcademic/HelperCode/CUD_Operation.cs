@@ -48,6 +48,7 @@ namespace office360.Areas.AAcademic.HelperCode
                                                                      PostedData.Description?.Trim().ToSafeString(),
                                                                      PostedData.StudyLevelId,
                                                                      PostedData.StudyGroupId,
+                                                                     PostedData.StudySchemeId,
                                                                      DateTime.Now,
                                                                      Session_Manager.UserId,
                                                                      DateTime.Now,

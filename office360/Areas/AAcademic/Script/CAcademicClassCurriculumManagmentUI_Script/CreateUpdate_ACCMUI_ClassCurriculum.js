@@ -24,8 +24,6 @@ $(document).ready(function () {
 
 function PopulateDropDownLists() {
     PopulateMT_BM_Branch_ListByParam();
-    PopulateLK_StudyScheme_List();
-    PopulateLK_Semester_List();
 }
 
 /*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                                                                         **----------------------------------------------*/
@@ -114,7 +112,7 @@ function PopulateMT_ACM_Class_ListByParam(CampusId, ClassId) {
         success: function (data) {
             var s = '<option  value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option ' + (data[i].Id == ClassId ? 'selected' : '') + ' value="' + data[i].Id + '">' + data[i].Description + '</option>';
+                s += '<option data-StudySchemeId="' + data[i].StudySchemeId+'"' + (data[i].Id == ClassId ? 'selected' : '') + ' value="' + data[i].Id + '">' + data[i].Description + '</option>';
             }
             $("#DropDownListClass").html(s);
         },
@@ -126,26 +124,6 @@ function PopulateMT_ACM_Class_ListByParam(CampusId, ClassId) {
 }
 
 /*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_LOOKUP-- LINQUERY (ON LOAD)                                      **----------------------------------------------*/
-function PopulateLK_StudyScheme_List() {
-    $.ajax({
-        type: "POST",
-        url: BasePath + "/AAcademic/CAcademicClassCurriculumManagmentUI/GET_LK1_STUDYSCHEME",
-        data: {},
-        beforeSend: function () {
-            startLoading();
-        },
-        success: function (data) {
-            var s = '<option  value="-1">Select an option</option>';
-            for (var i = 0; i < data.length; i++) {
-                s += '<option data-IsSemesterRequired="' + data[i].IsSemesterRequired + '"value="' + data[i].Id + '">' + data[i].Description + '</option>';
-            }
-            $("#DropDownListStudyScheme").html(s);
-        },
-        complete: function () {
-            stopLoading();
-        },
-    });
-}
 function PopulateLK_Semester_List() {
     $.ajax({
         type: "POST",
@@ -178,10 +156,7 @@ function ValidateInputFields() {
     if ($('#DropDownListClass').RequiredDropdown() == false) {
         return false;
     }
-    if ($('#DropDownListStudyScheme').RequiredDropdown() == false) {
-        return false;
-    }
-    var IsSemesterRequired = $('#DropDownListStudyScheme :selected').attr('data-IsSemesterRequired') == "true";
+    var IsSemesterRequired = $('#DropDownListClass :selected').attr('data-IsSemesterRequired') == "true";
     if (IsSemesterRequired) {
         if ($('#DropDownListSemester').RequiredDropdown() == false) {
             return false;

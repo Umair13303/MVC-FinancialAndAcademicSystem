@@ -31,5 +31,6 @@ namespace office360.Models.EDMX
         public Nullable<int> BranchId { get; set; }
         public Nullable<int> CompanyId { get; set; }
         public string Remarks { get; set; }
+        public Nullable<int> StudySchemeId { get; set; }
     }
 }

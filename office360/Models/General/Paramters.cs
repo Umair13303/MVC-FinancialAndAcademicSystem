@@ -107,6 +107,7 @@ namespace office360.Models.General
         public int? StructureId { get; set; }
         public int? StudyGroupId { get; set; }
         public int? StudyLevelId { get; set; }
+        public int? StudySchemeId { get; set; }
         public int? TransactionMonth { get; set; }
         public int? WHTaxPolicyId { get; set; }
         public int? UpdatedBy { get; set; }

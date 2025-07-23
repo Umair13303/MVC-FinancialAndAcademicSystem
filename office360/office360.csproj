@@ -866,9 +866,6 @@
       <DependentUpon>SESModel.edmx</DependentUpon>
       <LastGenOutput>SESModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Packages\bootstrap-datepicker.js" />
-    <Content Include="Packages\bootstrap-daterangepicker.js" />
-    <Content Include="Packages\bootstrap-datetimepicker.js" />
     <Content Include="Packages\FontAwsome.js" />
     <Content Include="Packages\SheetJS.js" />
     <Content Include="Packages\SweetAlert2.js" />
