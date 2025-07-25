@@ -16,5 +16,6 @@ namespace office360.Models.EDMX
         public int Id { get; set; }
         public Nullable<System.Guid> GuID { get; set; }
         public string Description { get; set; }
+        public Nullable<bool> IsSemesterRequired { get; set; }
     }
 }

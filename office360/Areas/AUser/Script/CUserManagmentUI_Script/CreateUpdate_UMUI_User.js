@@ -409,7 +409,7 @@ function GET_UM_USER_INFOBYGUID() {
                     $('#TextBoxMobileNumber').val(data[0].MobileNumber);
                     $('#DropDownListCompany').val(data[0].CompanyId).trigger('change.select2');
                     $('#DropDownListRole').val(data[0].RoleId).change();
-                    $('#TextBoxRemarks').val(data[0].Remarks);
+                    $('#TextBoxRemarks').val(data[0].Remarks).prop('disabled', true);
                     $('#HiddenFieldUserGuID').val(data[0].GuID);
 
                     /*-- LOAD DATA FOR FIELDS RENDERED :: ON CHANGE --*/

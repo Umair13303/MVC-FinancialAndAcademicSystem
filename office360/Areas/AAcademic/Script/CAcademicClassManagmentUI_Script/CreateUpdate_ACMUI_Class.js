@@ -4,8 +4,6 @@ var DDL_Condition = "";
 var DB_OperationType = $('#HiddenFieldDB_OperationType').val();
 var IsFieldClear = false;
 
-
-
 /*----------------------------------** FUNCTION FOR::PAGE LOADER                                                 **----------------------------------------------*/
 $(document).ready(function () {
     DB_OperationType = $('#HiddenFieldDB_OperationType').val();
@@ -22,7 +20,6 @@ $(document).ready(function () {
     }
     PopulateDropDownLists();
     ChangeCase();
-
 });
 
 function PopulateDropDownLists() {
@@ -64,11 +61,11 @@ function PopulateMT_BM_Branch_ListByParam() {
             startLoading();
         },
         success: function (data) {
-            var s = '<option value="-1">Select an option</option>';
+            var List = '<option value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
             }
-            $("#DropDownListCampus").html(s);
+            $("#DropDownListCampus").html(List);
         },
         complete: function () {
             stopLoading();
@@ -86,11 +83,11 @@ function PopulateLK_StudyLevel_List() {
             startLoading();
         },
         success: function (data) {
-            var s = '<option  value="-1">Select an option</option>';
+            var List = '<option  value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+                List  += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
             }
-            $("#DropDownListStudyLevel").html(s);
+            $("#DropDownListStudyLevel").html(List);
         },
         complete: function () {
             stopLoading();
@@ -106,11 +103,11 @@ function PopulateLK_StudyGroup_List() {
             startLoading();
         },
         success: function (data) {
-            var s = '<option  value="-1">Select an option</option>';
+            var List = '<option  value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
             }
-            $("#DropDownListStudyGroup").html(s);
+            $("#DropDownListStudyGroup").html(List);
         },
         complete: function () {
             stopLoading();
@@ -126,11 +123,11 @@ function PopulateLK_StudyScheme_List() {
             startLoading();
         },
         success: function (data) {
-            var s = '<option  value="-1">Select an option</option>';
+            var List = '<option  value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option value="' + data[i].Id + '">' + data[i].Description + '</option>';
+                List += '<option value="' + data[i].Id + '">' + data[i].Description + '</option>';
             }
-            $("#DropDownListStudyScheme").html(s);
+            $("#DropDownListStudyScheme").html(List);
         },
         complete: function () {
             stopLoading();

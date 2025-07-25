@@ -1,4 +1,4 @@
-﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: TABLE UM_USER                    **----------------------------------------------*/
+﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: TABLE ACM_CLASS                  **----------------------------------------------*/
 var table = "";
 
 /*----------------------------------** FUNCTION FOR::PAGE LOADER                                    **----------------------------------------------*/
@@ -9,16 +9,14 @@ $(document).ready(function () {
 
 /*----------------------------------** FUNCTION FOR::DATA TABLE & OPERATION                         **----------------------------------------------*/
 function InitDataTable() {
-    var ParentGroupColumn = 1;
-
-    table = $('#MainTableUM_User').DataTable({
+    table = $('#MainTableASM_Subject').DataTable({
         dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
         buttons: {
             buttons: [
                 { extend: 'copy', className: 'btn' },
                 { extend: 'csv', className: 'btn' },
                 { extend: 'excel', className: 'btn' },
-                { extend: 'print', className: 'btn' },
+                { extend: 'print', className: 'btn' }
             ]
         },
         "oLanguage": {
@@ -34,33 +32,24 @@ function InitDataTable() {
         "responsive": true,
         "ordering": true,
         "processing": true,
-        "lengthMenu": [5,10, 25, 50, 75, 100],
         "columns": [
             { "data": null, "title": "#" },
             { "data": "GuID", "title": "GuID" },
-            { "data": "Company", "title": "Company" },
-            { "data": "Branch", "title": "Branch" },
-            { "data": "Name", "title": "Name" },
-            { "data": "UserName", "title": "User Name" },
-            { "data": "EmailAddress", "title": "Email" },
-            { "data": "MobileNumber", "title": "Mobile" },
+            { "data": "Code", "title": "Code" },
+            { "data": "Description", "title": "Description" },
+            { "data": "ShortDescription", "title": "Short Desc" },
+
             {
                 "data": null, "title": "Status", "defaultContent": "",
                 "render": function (data, type, full, meta) {
                     return GetStatus(data["DocumentStatus"]);
                 }
             },
-
         ],
         columnDefs: [
             { visible: false, targets: 1 },
-            { "orderable": false, targets: [0, 1, 2, 4, 5, 6] },
+            { "orderable": false, targets: [0,5] },
         ],
-        order: [[ParentGroupColumn, 'asc']],
-        drawCallback: function (settings) {
-            DT_GroupBy_ForTableWithSubDetail(this, settings, '#MainTableUM_User', ['Company', 'Branch']);
-        }
-
     });
     table.on('order.dt search.dt', function () {
         table.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
@@ -69,9 +58,8 @@ function InitDataTable() {
 
     }).draw();
 }
-
-
 /*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                             **----------------------------------------------*/
+
 function ChangeCase() {
     $('#DropDownListSearchBy').change(function (event) {
         event.preventDefault();
@@ -84,7 +72,6 @@ function ChangeCase() {
         }
     });
 }
-
 /*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,LOAD)            **----------------------------------------------*/
 $('#ButtonSearch').click(function (event) {
     event.preventDefault();
@@ -107,15 +94,5 @@ function DrawDataTable() {
         InputText: InputText,
     };
     var queryString = $.param(JsonArg);
-    table.ajax.url((BasePath + "/AUser/CUserManagmentUI/GET_MT_UM_USER_LIST_BY_SEARCHQUERY_FORDATATABLE?" + queryString)).load();
+    table.ajax.url((BasePath + "/AAcademic/CAcademicSubjectManagmentUI/GET_MT_ASM_SUBJECT_LIST_BY_SEARCHQUERY_FORDATATABLE?" + queryString)).load();
 }
-
-
-
-
-
-
-
-
-
-

@@ -80,11 +80,27 @@ namespace office360.Areas.AAcademic.HelperCode
                 return DATA;
             }
         }
-        #endregion
 
         #endregion
 
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB
+        public static List<ASM_Subject_GetListBySearch_Result> GET_MT_ASM_SUBJECT_LIST_BY_SEARCHQUERY(_SqlParameters PostedData)
+        {
+            List<ASM_Subject_GetListBySearch_Result> DATA = new List<ASM_Subject_GetListBySearch_Result>();
+            using (SESEntities db = new SESEntities())
+            {
+                DATA = db.ASM_Subject_GetListBySearch(
+                                                       Session_Manager.CompanyId,
+                                                       Session_Manager.BranchId,
+                                                       PostedData.SearchById,
+                                                       PostedData.InputText
+                                                       ).ToList();
 
+                return DATA;
+            }
+        }
+        #endregion
+        #endregion
 
         #region DBO:- AASM_ADMISSIONSESSION
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB

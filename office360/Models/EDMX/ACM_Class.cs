@@ -21,6 +21,7 @@ namespace office360.Models.EDMX
         public string Description { get; set; }
         public Nullable<int> StudyLevelId { get; set; }
         public Nullable<int> StudyGroupId { get; set; }
+        public Nullable<int> StudySchemeId { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedOn { get; set; }
@@ -31,6 +32,5 @@ namespace office360.Models.EDMX
         public Nullable<int> BranchId { get; set; }
         public Nullable<int> CompanyId { get; set; }
         public string Remarks { get; set; }
-        public Nullable<int> StudySchemeId { get; set; }
     }
 }

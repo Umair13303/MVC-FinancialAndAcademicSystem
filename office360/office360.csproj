@@ -374,6 +374,9 @@
     <Compile Include="Models\EDMX\ASM_Subject_GetListByParam_Result.cs">
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EDMX\ASM_Subject_GetListBySearch_Result.cs">
+      <DependentUpon>SESModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EDMX\BillingMethod.cs">
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
@@ -570,6 +573,7 @@
     <Content Include="Areas\AAcademic\Script\CAcademicClassManagmentUI_Script\View_List_ACMUI_Class.js" />
     <Content Include="Areas\AAcademic\Script\CAcademicClassManagmentUI_Script\CreateUpdate_ACMUI_Class.js" />
     <Content Include="Areas\AAcademic\Script\CAcademicSubjectManagmentUI_Script\CreateUpdate_ASMUI_Subject.js" />
+    <Content Include="Areas\AAcademic\Script\CAcademicSubjectManagmentUI_Script\View_List_ASMUI_Subject.js" />
     <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\CreateUpdate_CBMUI_Branch.js" />
     <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\View_List_CBMUI_Branch.js" />
     <Content Include="Areas\ACompany\Script\CCompanyManagmentUI_Script\CreateUpdate_CMUI_Company.js" />
@@ -2020,6 +2024,7 @@
     <Content Include="Areas\AAcademic\Views\CAcademicAdmissionSessionManagmentUI\View_List_AASMUI_AdmissionSession.cshtml" />
     <Content Include="Areas\AAcademic\Views\CAcademicClassCurriculumManagmentUI\CreateUpdate_ACCMUI_ClassCurriculum.cshtml" />
     <Content Include="Areas\AAcademic\Views\CAcademicSubjectManagmentUI\CreateUpdate_ASMUI_Subject.cshtml" />
+    <Content Include="Areas\AAcademic\Views\CAcademicSubjectManagmentUI\View_List_ASMUI_Subject.cshtml" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>
