@@ -244,17 +244,17 @@ function GetStatus(Status) {
 
         case 24:
             BadgeColor = "primary";
-            Display = "Active Academic Class Subject";
+            Display = "Active Academic Subject";
             break;
 
         case 25:
             BadgeColor = "secondary";
-            Display = "Inactive Academic Class Subject";
+            Display = "Inactive Academic Subject";
             break;
 
         case 26:
             BadgeColor = "danger";
-            Display = "Deleted Academic Class Subject";
+            Display = "Deleted Academic Subject";
             break;
 
         default:

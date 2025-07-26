@@ -1,10 +1,10 @@
-﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE CM_COMPANY                       **----------------------------------------------*/
+﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE ASM_SUBJECT                     **----------------------------------------------*/
 var OperationType = "";
 var DDL_Condition = "";
 var DB_OperationType = $('#HiddenFieldDB_OperationType').val();
 var IsFieldClear = false;
 
-/*----------------------------------** FUNCTION FOR::PAGE LOADER                                                  **----------------------------------------------*/
+/*----------------------------------** FUNCTION FOR::PAGE LOADER                                                 **----------------------------------------------*/
 $(document).ready(function () {
     DB_OperationType = $('#HiddenFieldDB_OperationType').val();
     switch (DB_OperationType) {
@@ -20,7 +20,7 @@ $(document).ready(function () {
     }
 });
 
-/*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                                           **----------------------------------------------*/
+/*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                                          **----------------------------------------------*/
 function ChangeCase() {
     //-----------FOR ::EDIT CASE
     $('#DropDownListSubject').change(function () {
@@ -115,7 +115,7 @@ function ClearInputFields() {
     $('form').removeClass('Is-Valid');
 }
 
-/*----------------------------------** FUNCTION FOR:: UPDATE BRANCH (LOAD DROPDOWN,DATA FOR CLASSID)             **----------------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: UPDATE BRANCH (LOAD DROPDOWN,DATA FOR SUBJECTID)           **----------------------------------------------*/
 $('#ButtonSubmitGetInfoForEdit').click(function () {
     if ($('#DropDownListSubject').RequiredDropdown() == false) {
         return false;

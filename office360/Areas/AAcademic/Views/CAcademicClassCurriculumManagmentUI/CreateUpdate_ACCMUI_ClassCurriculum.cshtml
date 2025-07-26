@@ -49,7 +49,6 @@
                 </div>
             </div>
         }
-
         <div class="card" style="margin-top:1%;width:100%">
             <div class="card-body">
                 <h3 style="font-family: 'Bahnschrift'; font-weight: bolder; color: navy">Class Curriculum Detail</h3>
@@ -61,7 +60,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row mb-0">
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
@@ -70,32 +68,26 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row mb-0">
-                    <div class="col-sm-12 col-md-6">
+                    <div class="col-sm-12 col-md-4">
                         <div class="form-group">
                             @Html.Label("Class", new { @class = "col-form-label", @for = "DropDownListClass" })
                             @Html.DropDownList("DropDownListClass", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListClass" })
                         </div>
                     </div>
-
-                    <div class="col-sm-12 col-md-3">
-                        <div class="form-group">
-                            @Html.Label("Study Scheme", new { @class = "col-form-label", @for = "DropDownListStudyScheme" })
-                            @Html.DropDownList("DropDownListStudyScheme", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListStudyScheme" })
-                        </div>
-                    </div>
-
                     <div class="col-sm-12 col-md-3">
                         <div class="form-group">
                             @Html.Label("Semester", new { @class = "col-form-label", @for = "DropDownListSemester" })
                             @Html.DropDownList("DropDownListSemester", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", disabled = true, @data_toggle = "select2", id = "DropDownListSemester" })
                         </div>
                     </div>
+                    <div class="col-sm-12 col-md-4">
+                        <div class="form-group">
+                            @Html.Label("Subject", new { @class = "col-form-label", @for = "DropDownListSubject" })
+                            @Html.DropDownList("DropDownListSubject", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", disabled = true, @data_toggle = "select2", id = "DropDownListSubject" })
+                        </div>
+                    </div>
                 </div>
-
-
-
                 <div class="row mb-0">
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">

@@ -28,6 +28,7 @@ function PopulateDropDownLists() {
     PopulateLK_StudyGroup_List();
     PopulateLK_StudyScheme_List();
 }
+
 /*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                                          **----------------------------------------------*/
 function ChangeCase() {
     //-----------FOR ::EDIT CASE

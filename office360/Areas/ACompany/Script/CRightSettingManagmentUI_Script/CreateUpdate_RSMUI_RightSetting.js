@@ -280,8 +280,8 @@ function GET_RSM_RIGHTSETTING_INFOBYGUID() {
                 startLoading();
             },
             success: function (data) {
-                /*-- LOAD DATA FOR FIELDS RENDERED :: ON LOAD/STATIC --*/
                 if (data.length > 0) {
+                    /*-- LOAD DATA FOR FIELDS RENDERED :: ON LOAD/STATIC --*/
                     $('#DropDownListRight').val(data[0].RightId).change();
                     $('#TextBoxDescription').val(data[0].Description);
                     $('#DropDownListURLType').val(data[0].URLTypeId).trigger('change.select2');

@@ -1,4 +1,4 @@
-﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE CM_COMPANY                      **----------------------------------------------*/
+﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE CM_COMPANY                       **----------------------------------------------*/
 var OperationType = "";
 var DDL_Condition = "";
 var DB_OperationType = $('#HiddenFieldDB_OperationType').val();
@@ -264,8 +264,8 @@ function GET_CM_COMPANY_INFOBYGUID() {
                 startLoading();
             },
             success: function (data) {
-                /*-- LOAD DATA FOR FIELDS RENDERED :: ON LOAD/STATIC --*/
                 if (data.length > 0) {
+                    /*-- LOAD DATA FOR FIELDS RENDERED :: ON LOAD/STATIC --*/
                     $('#TextBoxCompanyName').val(data[0].CompanyName);
                     $('#DropDownListCountry').val(data[0].CountryId).trigger('change.select2');
                     $('#TextBoxAddress').val(data[0].Address);

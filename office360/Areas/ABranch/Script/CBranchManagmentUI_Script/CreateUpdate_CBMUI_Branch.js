@@ -301,7 +301,6 @@ function GET_BM_BRANCH_LISTBYPARAM() {
 function GET_BM_BRANCH_INFOBYGUID() {
     var CampusId = $('#DropDownListCampus :selected').val();
     if (CampusId != null && CampusId != undefined && CampusId != "" && CampusId != "-1") {
-
         var JsonArg = {
             GuID: CampusId,
         }

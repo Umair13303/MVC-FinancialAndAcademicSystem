@@ -24,12 +24,13 @@ $(document).ready(function () {
 
 function PopulateDropDownLists() {
     PopulateMT_BM_Branch_ListByParam();
+    PopulateLK_Semester_List();
 }
 
 /*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                                                                         **----------------------------------------------*/
 function ChangeCase() {
-    $('#DropDownListStudyScheme').change(function () {
-        var IsSemesterRequired = $('#DropDownListStudyScheme :selected').attr('data-IsSemesterRequired') == "true";
+    $('#DropDownListClass').change(function () {
+        var IsSemesterRequired = $('#DropDownListClass :selected').attr('data-IsSemesterRequired') == "true";
         $('#DropDownListSemester').val('-1').change();
         if (IsSemesterRequired) {
             $('#DropDownListSemester').prop('disabled', false);
@@ -37,7 +38,6 @@ function ChangeCase() {
         else {
             $('#DropDownListSemester').prop('disabled', true);
         }
-
     });
 
     $('#DropDownListCampus').change(function () {
@@ -112,7 +112,7 @@ function PopulateMT_ACM_Class_ListByParam(CampusId, ClassId) {
         success: function (data) {
             var s = '<option  value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option data-StudySchemeId="' + data[i].StudySchemeId+'"' + (data[i].Id == ClassId ? 'selected' : '') + ' value="' + data[i].Id + '">' + data[i].Description + '</option>';
+                s += '<option data-IsSemesterRequired="' + data[i].IsSemesterRequired+'"' + (data[i].Id == ClassId ? 'selected' : '') + ' value="' + data[i].Id + '">' + data[i].Description + '</option>';
             }
             $("#DropDownListClass").html(s);
         },
