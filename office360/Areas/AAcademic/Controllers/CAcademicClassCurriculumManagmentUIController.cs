@@ -75,6 +75,13 @@ namespace office360.Areas.AAcademic.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: DATABASE OPERATION BY USER (INSERT/UPDATE/DELETE OF CLASSCURRICULUM) ** ----------------------- */
 
         #region ACTION RESULT FOR :: INSERT/UPDATE/DELETE INTO DBO.ACCM_ClassCurriculum
+        [HttpPost]
+        public ActionResult UpSert_Into_ACCM_ClassCurriculum(_SqlParameters PostedData, List<TT_Curriculumn> PostedDataDetail)
+        {
+            _Exe = AAcademic.HelperCode.CUD_Operation.Update_Insert_AASM_AdmissionSession(PostedData);
+            var data = new { Message = Http_Server_Status.HTTP_DB_TransactionMessagByStatusCode(_Exe), StatusCode = _Exe };
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         /*---------------------- ** ACTION RESULTS FOR :: EDIT (LOAD DOCUMENT OF CLASSCURRICULUM & GET DETAIL BY CLASSCURRICULUM_GUID) ** --------------------- */

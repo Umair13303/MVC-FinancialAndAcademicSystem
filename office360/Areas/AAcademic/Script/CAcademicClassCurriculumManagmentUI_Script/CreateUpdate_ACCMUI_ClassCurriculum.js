@@ -56,44 +56,36 @@ function ChangeCase() {
 /*----------------------------------** FUNCTION FOR::INITIALIZING DATA TABLE's & RELATED OPERATION's                                            **----------------------------------------------*/
 function InitializeClassCurriculumDataTable() {
     CurriculumDetailTable = $('#MainTableACCM_ClassCurriculum').DataTable({
-        "responsive": true, "ordering": false,
-        "processing": true, "pagination": false,
-        "paging": false, "info": false,
+        "responsive": true,
+        "ordering": false,
+        "processing": true,
+        "paging": false,
+        "info": false,
         "columns": [
             { "title": "#", "orderable": false, },
-            { "title": null },
             { "title": "Semester" },
             { "title": "Subject" },
             { "title": "SemesterId" },
             { "title": "SubjectId" },
             { "title": "Action(s)" },
-
         ],
-        "columnDefs": [
-            { visible: false, targets: [4, 5] },
+        columnDefs: [
+            { visible: false, targets: [3,4] },
         ],
-        drawCallback: function (settings) {
-            const Api = this.api();
-            DataTableGroupBy_Index_Detail_InputLastGroup(
-                Api,
-                'MainTableACCM_ClassCurriculum',
-                [4, 5],
-                (groupValue) => {
-                    const InputId = 'CheckBoxGroupControl_' + groupValue;
-                    return InputHTML.Checkbox(InputId, InputId, 'Group_Control');
-                }
-            );
+        drawCallback: async function () {
+            $('.delete').off('click').on('click', function () {
+                $('#MainTableACCM_ClassCurriculum').DataTable().row($(this).closest('tr')).remove().draw();
+            });
         }
     });
     CurriculumDetailTable.on('order.dt search.dt', function () {
         CurriculumDetailTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
             cell.innerHTML = i + 1;
         });
-
     }).draw();
 }
 
-/*--Function For:Validate Data For Class Curriculum Detail*/
+/*----------------------------------** FUNCTION FOR::VALIDATE DATA & INSERT INTO DATATABLE                                                      **----------------------------------------------*/
 function ValidateInputFieldsClassCurriculumDetail() {
     if ($('#DropDownListSemester').RequiredDropdown() == false) {
         return false;
@@ -103,51 +95,62 @@ function ValidateInputFieldsClassCurriculumDetail() {
     }
     return true;
 }
-
-/*--Function For:Append Data Into Data Table For Class Curriculum Detail*/
-$('#ButtonAddRow').click(function (event) {
+$('#ButtonAddDataIntoTable').click(function (event) {
     event.preventDefault();
     var IS_VALID = ValidateInputFieldsClassCurriculumDetail();
     if (IS_VALID) {
         try {
             InsertDataIntoDataTable();
         }
-        catch {
-            GetMessageBox(err, 505);
+        catch (err) {
+            GetMessageBox(err.message , 505);
         }
     }
 });
 function InsertDataIntoDataTable() {
     var Semester = $('#DropDownListSemester :selected').text();
     var SemesterId = $('#DropDownListSemester :selected').val();
-    var SubjectId = $('#DropDownListSubject').val();
-    var Subject = $('#DropDownListSubject option:selected').map(function () { return $(this).text(); }).get();
-
-    for (var i = 0; i < SubjectId.length; i++) {
-        var Table_Row = [];
-
-        Table_Row[0] = "";
-        Table_Row[1] = "";
-        Table_Row[2] = Semester;
-        Table_Row[3] = Subject[i];
-        Table_Row[4] = SemesterId;
-        Table_Row[5] = SubjectId[i];
-        Table_Row[6] = GetDeletebtn();
-
+    var SubjectIds = $('#DropDownListSubject').val(); 
+    var Subjects = $('#DropDownListSubject option:selected').map(function () { return $(this).text(); }).get();
+    var DuplicateSubject = [];
+    for (var i = 0; i < SubjectIds.length; i++) {
+        var SubjectId = SubjectIds[i];
+        var Subject = Subjects[i];
         var IsRecordAlreadyInserted = false;
-        CurriculumDetailTable.column(4).data().each(function (existingId) {
-            if (existingId == SubjectId[i]) {
+
+        CurriculumDetailTable.column(4).data().each(function (ExistingId) {
+            if (ExistingId == SubjectId) {
                 IsRecordAlreadyInserted = true;
+                return false; 
             }
         });
 
         if (IsRecordAlreadyInserted) {
-            GetMessageBox("Subject already exists in table: " + Subject[i], 505);
-        }
-        else {
+            DuplicateSubject.push(Subject);
+        } else {
+            var Table_Row = [];
+            Table_Row[0] = "";
+            Table_Row[1] = Semester;
+            Table_Row[2] = Subject;
+            Table_Row[3] = SemesterId;
+            Table_Row[4] = SubjectId;
+            Table_Row[5] = GetDeletebtn();
+
             CurriculumDetailTable.row.add(Table_Row).draw();
         }
     }
+    if (DuplicateSubject.length > 0) {
+        var message = "The following subjects already exist in the table:\n\n";
+        message += DuplicateSubject.join(", ");
+        GetMessageBox(message, 505);
+    }
+    ClearInputFieldsDataTable();
+
+}
+function ClearInputFieldsDataTable() {
+    //-----------NOT CLEARING REQUIRED FIELD
+    $('#DropDownListSemester').val('-1').change();
+    $('#DropDownListSubject').val('').change();
 }
 
 
@@ -286,9 +289,7 @@ function ValidateInputFields() {
     if ($('#DropDownListClass').RequiredDropdown() == false) {
         return false;
     }
-    if ($('#DropDownListSemester').RequiredDropdown() == false) {
-        return false;
-    }
+    
     if ($('#TextBoxRemarks').RequiredTextBoxInputGroup() == false) {
         return false;
     }
@@ -300,7 +301,7 @@ $('#ButtonSubmitDown').click(function (event) {
     if (IS_VALID) {
         try {
             OperationType = DBOperation.INSERT;
-            //UpSertDataIntoDB();
+            UpSertDataIntoDB();
         }
         catch {
             GetMessageBox(err, 505);
@@ -315,11 +316,60 @@ $('#ButtonUpdateDown').click(function (event) {
             OperationType = DBOperation.UPDATE;
             //UpSertDataIntoDB();
         }
-        catch {
-            GetMessageBox(err, 505);
+        catch (err) {
+            GetMessageBox(err.message, 505);
         }
     }
 });
+function UpSertDataIntoDB() {
+    var CampusId = $('#DropDownListCampus :selected').val();
+    var Description = $('#TextBoxDescription').val();
+    var ClassId = $('#DropDownListClass :selected').val();
+    var Remarks = $('#TextBoxRemarks').val();
+    var ClassCurriculumGuID = $('#HiddenFieldClassCurriculumGuID').val();
+
+    var JsonArg = {
+        GuID: ClassCurriculumGuID,
+        OperationType: OperationType,
+
+        CampusId: CampusId,
+        Description: Description,
+        ClassId: ClassId,
+        Remarks: Remarks
+    };
+
+    var IncludedColumnMappings = {
+        3: 'SemesterId',
+        4: 'SubjectId'
+    };
+    var ClassCurriculumDetail = $('#MainTableACCM_ClassCurriculum').DataTable().rows().data().toArray().map(row => {
+        return Object.fromEntries(
+                Object.entries(IncludedColumnMappings).map(([index, key]) => [key, row[index]])
+            );
+    });
+
+
+    $.ajax({
+        type: "POST",
+        url: BasePath + "/AAcademic/CAcademicClassCurriculumManagmentUI/UpSert_Into_ACCM_ClassCurriculum",
+        dataType: 'json',
+        data: { 'PostedData': (JsonArg), 'PostedDataDetail': (ClassCurriculumDetail) },
+        beforeSend: function () {
+            startLoading();
+        },
+        success: function (data) {
+            GetMessageBox(data.Message, data.StatusCode);
+        },
+        complete: function () {
+            stopLoading();
+            ClearInputFields();
+        },
+        error: function (jqXHR, error, errorThrown) {
+            GetMessageBox("The Transaction Can Not Be Performed Due To Serve Activity", 500);
+        },
+    });
+
+}
 function ClearInputFields() {
     //-----------NOT CLEARING REQUIRED FIELD
     $('.form-control').not('#DropDownListClassCurriculum').val('');

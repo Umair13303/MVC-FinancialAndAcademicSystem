@@ -272,10 +272,10 @@ function GetEditbtn(url, title, text) {
     return "<td class='center'><a onclick=" + url + "  title='Click here to Edit " + title + "' class='btn btn-sm edit'><i class='far fa-edit'></i> " + '' + "</a></td>";
 }
 function GetDeletebtn(url, title, text) {
-    return "<td class='center'><a title='Click here to Delete " + title + "' class='btn btn-sm delete'><i class='far fa-trash-alt'></i> " + '' + "</a></td>";
+    return "<a title='Click here to Delete " + title + "' class='btn btn-sm delete'><i class='far fa-trash-alt'></i> " + '' + "</a>";
 }
-function GetCheckBox_row(Id) {
-    return '<td><div class="form-group"><div class="checkbox checbox-switch switch-success"><label><input type="checkbox" Id="' + Id + '" /><span></span></label></div></div></td>';
+function GetCheckBox(Id, Name, ClassName) {
+    return "<input type='checkbox' id='" + Id + "' name='" + Name + "' class='" + ClassName + "' />";
 }
 function GetDetailControlBtn(ClassName) {
     return "<td class='center " + ClassName + "'><a class='btn btn-sm  " + ClassName +" view'><i class='far fa-plus " + ClassName +"'></i> " + '' + "</a></td>";
@@ -321,7 +321,8 @@ function DataTable_Sum_Footer(table, columnSpan, footerId, headerText, orderId) 
         resolve();
     });
 }
-function DataTableDropDown_ColumnClass(TableId, ClassFilter, DropdownId) {
+function DataTableDropDown_ColumnClass(TableId, ClassFilter, DropdownId)
+{
     const Table = $('#' + TableId).DataTable();
     const FilteredColumns = Table.columns().indexes().toArray().filter(i =>
         $(Table.column(i).header()).hasClass(ClassFilter)
@@ -363,19 +364,25 @@ function DataTableGroupBy_Column_Detail(ApiWrapper,TableId, ColumnNames, Options
         LastGroupValues = CurrentGroupValues;
     });
 }
-function DataTableGroupBy_Index_Detail(ApiWrapper,TableId, ColumnIndexes, Options = {}) {
+function DataTableGroupBy_Universal(ApiWrapper,TableId, ColumnIndexes, Options = {}) {
     const Api = ApiWrapper.api();
     const VisibleColumnCount = Api.columns(':visible').count();
     const Rows = Api.rows({ page: 'current' }).nodes();
     let LastGroupValues = Array(ColumnIndexes.length).fill(null);
-
     Rows.each(Row => {
         const RowData = Api.row(Row).data();
         if (!RowData) return;
-
-        const CurrentGroupValues = ColumnIndexes.map(Index => RowData[Index]);
+        const CurrentGroupValues = ColumnIndexes.map(Index => {
+            const column = Api.column(Index);
+            const columnDataProp = column.settings()[0].aoColumns[Index].data;
+            if (columnDataProp === undefined || columnDataProp === null) {
+                return RowData[Index];
+            }
+            return typeof columnDataProp === "function"
+                ? columnDataProp(RowData)
+                : RowData[columnDataProp];
+        });
         if (!CurrentGroupValues.some((Val, Idx) => Val !== LastGroupValues[Idx])) return;
-
         const GroupHeaders = ColumnIndexes.map((ColIndex, Idx) => {
             const Style = GetColorForTableGroup(Idx);
             const Padding = Idx ? 'padding-left: 20px;' : '';
@@ -385,12 +392,12 @@ function DataTableGroupBy_Index_Detail(ApiWrapper,TableId, ColumnIndexes, Option
                     <b>${Label}: </b>${CurrentGroupValues[Idx]}
                 </td></tr>`;
         }).join('');
-
         $(Row).before(GroupHeaders);
         LastGroupValues = CurrentGroupValues;
     });
 }
-function DataTableGroupBy_Index_Detail_InputLastGroup(Api, TableId, ColumnIndexes, InputHTMLField, Options = {}) {
+function DataTableGroupBy_Index_Detail_InputLastGroup(ApiWrapper, TableId, ColumnIndexes, InputHTMLField, Options = {}) {
+    const Api = ApiWrapper.api();
     const VisibleColumnCount = Api.columns(':visible').count();
     const Rows = Api.rows({ page: 'current' }).nodes();
     let LastGroupValues = Array(ColumnIndexes.length).fill(null);
@@ -399,7 +406,17 @@ function DataTableGroupBy_Index_Detail_InputLastGroup(Api, TableId, ColumnIndexe
         const RowData = Api.row(Row).data();
         if (!RowData) return;
 
-        const CurrentGroupValues = ColumnIndexes.map(Index => RowData[Index]);
+        const CurrentGroupValues = ColumnIndexes.map(Index => {
+            const column = Api.column(Index);
+            const columnDataProp = column.settings()[0].aoColumns[Index].data;
+            if (columnDataProp === undefined || columnDataProp === null) {
+                return RowData[Index];
+            }
+            return typeof columnDataProp === "function"
+                ? columnDataProp(RowData)
+                : RowData[columnDataProp];
+        });
+
         if (!CurrentGroupValues.some((Val, Idx) => Val !== LastGroupValues[Idx])) return;
 
         const GroupHeaders = ColumnIndexes.map((ColIndex, Idx) => {
@@ -414,7 +431,7 @@ function DataTableGroupBy_Index_Detail_InputLastGroup(Api, TableId, ColumnIndexe
 
             return `<tr class="${Idx ? 'subgroup' : 'group'} group-header-row">
                 <td colspan="${VisibleColumnCount}" style="background:${Style.backgroundColor};color:${Style.color};border-color:${Style.borderColor};${Padding}">
-                    <b>${Label}: </b>${CurrentGroupValues[Idx]} ${ExtraField}
+                    ${ExtraField}<b>${Label}: </b>${CurrentGroupValues[Idx]}
                 </td></tr>`;
         }).join('');
 

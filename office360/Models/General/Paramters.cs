@@ -5,6 +5,12 @@ using System.Web;
 
 namespace office360.Models.General
 {
+    public class TT_Curriculumn
+    {
+        public int SemesterId { get; set; }
+        public int? SubjectId { get; set; }
+
+    }
     public class _SqlParameters
     {
         // Guid or Nullable<Guid>

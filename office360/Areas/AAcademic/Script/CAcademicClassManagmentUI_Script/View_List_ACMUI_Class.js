@@ -9,8 +9,11 @@ $(document).ready(function () {
 
 /*----------------------------------** FUNCTION FOR::DATA TABLE & OPERATION                         **----------------------------------------------*/
 function InitDataTable() {
+    var ParentGroupColumn = 2;
     table = $('#MainTableACM_Class').DataTable({
-        dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
+        dom: '<"row"<"col-md-12"<"row"<"col-md-4"l><"col-md-4"B><"col-md-4"f>>>>' +
+            '<"row"<"col-md-12"rt>>' +
+            '<"row"<"col-md-5"i><"col-md-7"p>>',
         buttons: {
             buttons: [
                 { extend: 'copy', className: 'btn' },
@@ -32,6 +35,7 @@ function InitDataTable() {
         "responsive": true,
         "ordering": true,
         "processing": true,
+        "lengthChange": true, 
         "columns": [
             { "data": null, "title": "#" },
             { "data": "GuID", "title": "GuID" },
@@ -48,10 +52,10 @@ function InitDataTable() {
             },
         ],
         columnDefs: [
-
             { visible: false, targets: 1 },
             { "orderable": false, targets: [0, 1, 3, 4, 5, 6] },
         ],
+        order: [[ParentGroupColumn, 'asc']],
         drawCallback: function (settings) {
             DataTableGroupBy_Column_Detail(this, 'MainTableACM_Class', ['Campus']);
         }

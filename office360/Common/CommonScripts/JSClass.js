@@ -146,17 +146,8 @@ class DynamicDTOperation {
     }
 }
 class InputHTML {
-    static TextField(Id, Name, ClassName = '') {
-        return `<input type="text" id="${Id}" name="${Name}" class="${ClassName} form-control" />`;
-    }
-
     static Checkbox(Id, Name, ClassName = '') {
-        return `<input type="checkbox" id="${Id}" name="${Name}" class="${ClassName}" />`;
-    }
-
-    static DropDown(Id, Name, Options = [], ClassName = '') {
-        const OptionTags = Options.map(opt => `<option value="${opt.value}">${opt.text}</option>`).join('');
-        return `<select id="${Id}" name="${Name}" class="${ClassName} form-control">${OptionTags}</select>`;
+        return "<input type='checkbox' id='" + Id + "' name='" + Name + "' class='" + ClassName+"' />";
     }
 }
 
