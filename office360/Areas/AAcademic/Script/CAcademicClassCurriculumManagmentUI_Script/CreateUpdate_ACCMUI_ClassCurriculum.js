@@ -4,6 +4,7 @@ var DDL_Condition = "";
 var DB_OperationType = $('#HiddenFieldDB_OperationType').val();
 var IsFieldClear = false;
 
+var CurriculumDetailTable = "";
 /*----------------------------------** FUNCTION FOR::PAGE LOADER                                                                                **----------------------------------------------*/
 $(document).ready(function () {
     DB_OperationType = $('#HiddenFieldDB_OperationType').val();
@@ -20,24 +21,21 @@ $(document).ready(function () {
     }
     PopulateDropDownLists();
     ChangeCase();
+    InitializeClassCurriculumDataTable();
 });
 
 function PopulateDropDownLists() {
     PopulateMT_BM_Branch_ListByParam();
+    PopulateMT_ASM_Subject_ListByParam();
     PopulateLK_Semester_List();
 }
 
 /*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                                                                         **----------------------------------------------*/
 function ChangeCase() {
     $('#DropDownListClass').change(function () {
-        var IsSemesterRequired = $('#DropDownListClass :selected').attr('data-IsSemesterRequired') == "true";
-        $('#DropDownListSemester').val('-1').change();
-        if (IsSemesterRequired) {
-            $('#DropDownListSemester').prop('disabled', false);
-        }
-        else {
-            $('#DropDownListSemester').prop('disabled', true);
-        }
+        var StudySchemeId = $('#DropDownListClass :selected').attr('data-StudySchemeId');
+        /*--var SemesterId = null;  NOT PROVIDED ON LOAD --*/
+        PopulateLK_Semester_List(StudySchemeId,null)
     });
 
     $('#DropDownListCampus').change(function () {
@@ -54,6 +52,104 @@ function ChangeCase() {
         }
     });
 }
+
+/*----------------------------------** FUNCTION FOR::INITIALIZING DATA TABLE's & RELATED OPERATION's                                            **----------------------------------------------*/
+function InitializeClassCurriculumDataTable() {
+    CurriculumDetailTable = $('#MainTableACCM_ClassCurriculum').DataTable({
+        "responsive": true, "ordering": false,
+        "processing": true, "pagination": false,
+        "paging": false, "info": false,
+        "columns": [
+            { "title": "#", "orderable": false, },
+            { "title": null },
+            { "title": "Semester" },
+            { "title": "Subject" },
+            { "title": "SemesterId" },
+            { "title": "SubjectId" },
+            { "title": "Action(s)" },
+
+        ],
+        "columnDefs": [
+            { visible: false, targets: [4, 5] },
+        ],
+        drawCallback: function (settings) {
+            const Api = this.api();
+            DataTableGroupBy_Index_Detail_InputLastGroup(
+                Api,
+                'MainTableACCM_ClassCurriculum',
+                [4, 5],
+                (groupValue) => {
+                    const InputId = 'CheckBoxGroupControl_' + groupValue;
+                    return InputHTML.Checkbox(InputId, InputId, 'Group_Control');
+                }
+            );
+        }
+    });
+    CurriculumDetailTable.on('order.dt search.dt', function () {
+        CurriculumDetailTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+        });
+
+    }).draw();
+}
+
+/*--Function For:Validate Data For Class Curriculum Detail*/
+function ValidateInputFieldsClassCurriculumDetail() {
+    if ($('#DropDownListSemester').RequiredDropdown() == false) {
+        return false;
+    }
+    if ($('#DropDownListSubject').RequiredDropdown() == false) {
+        return false;
+    }
+    return true;
+}
+
+/*--Function For:Append Data Into Data Table For Class Curriculum Detail*/
+$('#ButtonAddRow').click(function (event) {
+    event.preventDefault();
+    var IS_VALID = ValidateInputFieldsClassCurriculumDetail();
+    if (IS_VALID) {
+        try {
+            InsertDataIntoDataTable();
+        }
+        catch {
+            GetMessageBox(err, 505);
+        }
+    }
+});
+function InsertDataIntoDataTable() {
+    var Semester = $('#DropDownListSemester :selected').text();
+    var SemesterId = $('#DropDownListSemester :selected').val();
+    var SubjectId = $('#DropDownListSubject').val();
+    var Subject = $('#DropDownListSubject option:selected').map(function () { return $(this).text(); }).get();
+
+    for (var i = 0; i < SubjectId.length; i++) {
+        var Table_Row = [];
+
+        Table_Row[0] = "";
+        Table_Row[1] = "";
+        Table_Row[2] = Semester;
+        Table_Row[3] = Subject[i];
+        Table_Row[4] = SemesterId;
+        Table_Row[5] = SubjectId[i];
+        Table_Row[6] = GetDeletebtn();
+
+        var IsRecordAlreadyInserted = false;
+        CurriculumDetailTable.column(4).data().each(function (existingId) {
+            if (existingId == SubjectId[i]) {
+                IsRecordAlreadyInserted = true;
+            }
+        });
+
+        if (IsRecordAlreadyInserted) {
+            GetMessageBox("Subject already exists in table: " + Subject[i], 505);
+        }
+        else {
+            CurriculumDetailTable.row.add(Table_Row).draw();
+        }
+    }
+}
+
 
 /*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON LOAD)                                **----------------------------------------------*/
 function PopulateMT_BM_Branch_ListByParam() {
@@ -76,11 +172,42 @@ function PopulateMT_BM_Branch_ListByParam() {
             startLoading();
         },
         success: function (data) {
-            var s = '<option value="-1">Select an option</option>';
+            var List = '<option value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description+ '</option>';
+                List += '<option  value="' + data[i].Id + '">' + data[i].Description+ '</option>';
             }
-            $("#DropDownListCampus").html(s);
+            $("#DropDownListCampus").html(List);
+        },
+        complete: function () {
+            stopLoading();
+        },
+    });
+}
+function PopulateMT_ASM_Subject_ListByParam() {
+    switch (DB_OperationType) {
+        case DBOperation.INSERT:
+            DDL_Condition = MDB_LIST_CONDITION.ASM_SUBJECT_BY_COMPANYID_FORNEWINSERT;
+            break;
+        case DBOperation.UPDATE:
+            DDL_Condition = MDB_LIST_CONDITION.ASM_SUBJECT_BY_COMPANYID_FORUPDATERECORD;
+            break;
+    }
+    var JsonArg = {
+        DB_IF_PARAM: DDL_Condition,
+    }
+    $.ajax({
+        type: "POST",
+        url: BasePath + "/AAcademic/CAcademicClassCurriculumManagmentUI/GET_MT_ASM_SUBJECT_BYPARAMTER",
+        data: { 'PostedData': (JsonArg) },
+        beforeSend: function () {
+            startLoading();
+        },
+        success: function (data) {
+            var List = '<option value="-1">Select an option</option>';
+            for (var i = 0; i < data.length; i++) {
+                List += '<option  value="' + data[i].Id + '">' + data[i].Description+ '</option>';
+            }
+            $("#DropDownListSubject").html(List);
         },
         complete: function () {
             stopLoading();
@@ -110,11 +237,11 @@ function PopulateMT_ACM_Class_ListByParam(CampusId, ClassId) {
             startLoading();
         },
         success: function (data) {
-            var s = '<option  value="-1">Select an option</option>';
+            var List = '<option  value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option data-IsSemesterRequired="' + data[i].IsSemesterRequired+'"' + (data[i].Id == ClassId ? 'selected' : '') + ' value="' + data[i].Id + '">' + data[i].Description + '</option>';
+                List += '<option data-StudySchemeId="' + data[i].StudySchemeId+'"' + (data[i].Id == ClassId ? 'selected' : '') + ' value="' + data[i].Id + '">' + data[i].Description + '</option>';
             }
-            $("#DropDownListClass").html(s);
+            $("#DropDownListClass").html(List);
         },
         complete: function () {
            
@@ -123,21 +250,24 @@ function PopulateMT_ACM_Class_ListByParam(CampusId, ClassId) {
     });
 }
 
-/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_LOOKUP-- LINQUERY (ON LOAD)                                      **----------------------------------------------*/
-function PopulateLK_Semester_List() {
+/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_LOOKUP-- LINQUERY (ON CHANGE)                                    **----------------------------------------------*/
+function PopulateLK_Semester_List(StudySchemeId, SemesterId) {
+    var JsonArg = {
+        StudySchemeId: StudySchemeId,
+    }
     $.ajax({
         type: "POST",
         url: BasePath + "/AAcademic/CAcademicClassCurriculumManagmentUI/GET_LK1_SEMESTER",
-        data: {},
+        data: {'PostedData': (JsonArg)},
         beforeSend: function () {
             startLoading();
         },
         success: function (data) {
-            var s = '<option  value="-1">Select an option</option>';
+            var List = '<option  value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '</option>';
+                List += '<option ' + (data[i].Id == SemesterId ? 'selected' : '') + ' value="' + data[i].Id + '">' + data[i].Description + '</option>';
             }
-            $("#DropDownListSemester").html(s);
+            $("#DropDownListSemester").html(List);
         },
         complete: function () {
             stopLoading();
@@ -156,11 +286,8 @@ function ValidateInputFields() {
     if ($('#DropDownListClass').RequiredDropdown() == false) {
         return false;
     }
-    var IsSemesterRequired = $('#DropDownListClass :selected').attr('data-IsSemesterRequired') == "true";
-    if (IsSemesterRequired) {
-        if ($('#DropDownListSemester').RequiredDropdown() == false) {
-            return false;
-        }
+    if ($('#DropDownListSemester').RequiredDropdown() == false) {
+        return false;
     }
     if ($('#TextBoxRemarks').RequiredTextBoxInputGroup() == false) {
         return false;

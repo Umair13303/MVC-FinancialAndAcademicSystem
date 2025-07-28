@@ -69,25 +69,44 @@
                     </div>
                 </div>
                 <div class="row mb-0">
-                    <div class="col-sm-12 col-md-4">
+                    <div class="col-sm-12 col-md-8">
                         <div class="form-group">
                             @Html.Label("Class", new { @class = "col-form-label", @for = "DropDownListClass" })
                             @Html.DropDownList("DropDownListClass", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListClass" })
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card" style="margin-top:1%;width:100%">
+            <div class="card-body">
+                <div class="form-inline mb-0">
                     <div class="col-sm-12 col-md-3">
                         <div class="form-group">
                             @Html.Label("Semester", new { @class = "col-form-label", @for = "DropDownListSemester" })
-                            @Html.DropDownList("DropDownListSemester", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", disabled = true, @data_toggle = "select2", id = "DropDownListSemester" })
+                            @Html.DropDownList("DropDownListSemester", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListSemester" })
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-4">
+                    <div class="col-sm-12 col-md-6">
                         <div class="form-group">
                             @Html.Label("Subject", new { @class = "col-form-label", @for = "DropDownListSubject" })
-                            @Html.DropDownList("DropDownListSubject", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", disabled = true, @data_toggle = "select2", id = "DropDownListSubject" })
+                            @Html.DropDownList("DropDownListSubject", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListSubject", multiple = true })
                         </div>
                     </div>
+                    <input type="button" class="btn btn-danger" id="ButtonAddRow" value="+" />
                 </div>
+                <div class="bootstrap-admin-panel-content">
+                    <table class="table table-bordered table-sm order-column stripe table-hover" style="width: 100%" id="MainTableACCM_ClassCurriculum">
+                        <tbody id="MainTableACCM_ClassCurriculum"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top:1%;width:100%">
+            <div class="card-body">
                 <div class="row mb-0">
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
@@ -98,7 +117,6 @@
                 </div>
             </div>
         </div>
-
 
         @Html.TextBox("HiddenFieldClassCurriculumGuID", null, new { @class = "form-control", Value = ViewBag.ClassCurriculumGuID, hidden = true, @id = "HiddenFieldClassCurriculumGuID" })
         @Html.TextBox("HiddenFieldDB_OperationType", null, new { @class = "form-control", Value = ViewBag.DB_OperationType, hidden = true, @id = "HiddenFieldDB_OperationType" })

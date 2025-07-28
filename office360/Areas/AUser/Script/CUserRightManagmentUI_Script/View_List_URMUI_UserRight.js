@@ -66,7 +66,7 @@ function InitDataTable() {
         },
         order: [[ParentGroupColumn, 'asc']],
         drawCallback: function (settings) {
-            DT_GroupBy_ForTableWithSubDetail(this, settings, '#MainTableURM_UserRight', ['Company', 'Branch',]);
+            DataTableGroupBy_Column_Detail(this,'MainTableURM_UserRight', ['Company', 'Branch']);
         }
 
     });

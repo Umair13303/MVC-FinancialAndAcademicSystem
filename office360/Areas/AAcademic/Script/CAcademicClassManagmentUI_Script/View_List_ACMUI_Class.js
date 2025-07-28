@@ -53,7 +53,7 @@ function InitDataTable() {
             { "orderable": false, targets: [0, 1, 3, 4, 5, 6] },
         ],
         drawCallback: function (settings) {
-            DT_GroupBy(this, settings, '#MainTableACM_Class', ['Campus']);
+            DataTableGroupBy_Column_Detail(this, 'MainTableACM_Class', ['Campus']);
         }
     });
     table.on('order.dt search.dt', function () {

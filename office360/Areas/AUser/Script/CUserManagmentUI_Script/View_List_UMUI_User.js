@@ -58,7 +58,7 @@ function InitDataTable() {
         ],
         order: [[ParentGroupColumn, 'asc']],
         drawCallback: function (settings) {
-            DT_GroupBy_ForTableWithSubDetail(this, settings, '#MainTableUM_User', ['Company', 'Branch']);
+            DataTableGroupBy_Column_Detail(this,'MainTableUM_User', ['Company', 'Branch']);
         }
 
     });

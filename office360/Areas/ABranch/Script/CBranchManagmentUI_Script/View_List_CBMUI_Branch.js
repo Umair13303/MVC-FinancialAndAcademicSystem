@@ -59,7 +59,7 @@ function InitDataTable() {
 
 /*----------------------------------** FUNCTION FOR::DROP DOWN LIST (DATA TABLE COLUMNS)            **----------------------------------------------*/
 function PopulateDropDownLists() {
-    DT_DropDownList('MainTableBM_Branch', Css_Class.DynamicGroupBy, 'DropDownListGroupBy');
+    DataTableDropDown_ColumnClass('MainTableBM_Branch', Css_Class.DynamicGroupBy, 'DropDownListGroupBy');
 }
 
 /*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                             **----------------------------------------------*/

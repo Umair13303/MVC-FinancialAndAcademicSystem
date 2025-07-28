@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SESLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="SESModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AASM_AdmissionSession">
           <Key>
             <PropertyRef Name="Id" />
@@ -521,6 +521,7 @@ warning 6002: The table/view 'SESFINAL.dbo.Semester' does not have a primary key
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="StudySchemeId" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SESFINAL.dbo.StudyGroup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -927,7 +928,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Response" Type="int" Mode="InOut" />
         </Function>
-        <EntityContainer Name="SESLModelStoreContainer">
+        <EntityContainer Name="SESModelStoreContainer">
           <EntitySet Name="AASM_AdmissionSession" EntityType="Self.AASM_AdmissionSession" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ACCM_ClassCurriculum" EntityType="Self.ACCM_ClassCurriculum" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ACM_Class" EntityType="Self.ACM_Class" Schema="dbo" store:Type="Tables" />
@@ -1148,7 +1149,8 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <EntitySet Name="Semester" EntityType="Self.Semester" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Semester].[Id] AS [Id], 
-    [Semester].[Description] AS [Description]
+    [Semester].[Description] AS [Description], 
+    [Semester].[StudySchemeId] AS [StudySchemeId]
     FROM [dbo].[Semester] AS [Semester]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="StudyGroup" EntityType="Self.StudyGroup" store:Type="Views" store:Schema="dbo">
@@ -1203,7 +1205,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="SESLModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="SESModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <ComplexType Name="fn_CodeSplitByCommaAsINT_Result">
           <Property Name="sID" Type="Int32" />
         </ComplexType>
@@ -1680,6 +1682,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StudySchemeId" Type="Int32" />
         </EntityType>
         <EntityType Name="StudyGroup">
           <Key>
@@ -1779,19 +1782,19 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <EntitySet Name="URLType" EntityType="Self.URLType" />
           <EntitySet Name="WHTaxPolicy" EntityType="Self.WHTaxPolicy" />
           <EntitySet Name="WorkingShift" EntityType="Self.WorkingShift" />
-          <FunctionImport Name="fn_CodeSplitByCommaAsINT" IsComposable="true" ReturnType="Collection(SESLModel.fn_CodeSplitByCommaAsINT_Result)">
+          <FunctionImport Name="fn_CodeSplitByCommaAsINT" IsComposable="true" ReturnType="Collection(SESModel.fn_CodeSplitByCommaAsINT_Result)">
             <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="fn_CodeSplitByCommaAsUniqueIdentifier" IsComposable="true" ReturnType="Collection(SESLModel.fn_CodeSplitByCommaAsUniqueIdentifier_Result)">
+          <FunctionImport Name="fn_CodeSplitByCommaAsUniqueIdentifier" IsComposable="true" ReturnType="Collection(SESModel.fn_CodeSplitByCommaAsUniqueIdentifier_Result)">
             <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="fn_GetCommaSepratedValuesInList" IsComposable="true" ReturnType="Collection(SESLModel.fn_GetCommaSepratedValuesInList_Result)">
+          <FunctionImport Name="fn_GetCommaSepratedValuesInList" IsComposable="true" ReturnType="Collection(SESModel.fn_GetCommaSepratedValuesInList_Result)">
             <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="fn_GetGeneralBranchSettingForCampus" IsComposable="true" ReturnType="Collection(SESLModel.fn_GetGeneralBranchSettingForCampus_Result)">
+          <FunctionImport Name="fn_GetGeneralBranchSettingForCampus" IsComposable="true" ReturnType="Collection(SESModel.fn_GetGeneralBranchSettingForCampus_Result)">
             <Parameter Name="CampusId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="AASM_AdmissionSession_GetListByParam" ReturnType="Collection(SESLModel.AASM_AdmissionSession_GetListByParam_Result)">
+          <FunctionImport Name="AASM_AdmissionSession_GetListByParam" ReturnType="Collection(SESModel.AASM_AdmissionSession_GetListByParam_Result)">
             <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
             <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
             <Parameter Name="SessionBranchId" Mode="In" Type="Int32" />
@@ -1800,7 +1803,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <Parameter Name="CampusId" Mode="In" Type="Int32" />
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="AASM_AdmissionSession_GetListBySearch" ReturnType="Collection(SESLModel.AASM_AdmissionSession_GetListBySearch_Result)">
+          <FunctionImport Name="AASM_AdmissionSession_GetListBySearch" ReturnType="Collection(SESModel.AASM_AdmissionSession_GetListBySearch_Result)">
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
             <Parameter Name="BranchId" Mode="In" Type="Int32" />
             <Parameter Name="AllowedCampusId" Mode="In" Type="String" />
@@ -1832,7 +1835,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <Parameter Name="Remarks" Mode="In" Type="String" />
             <Parameter Name="Response" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="ACM_Class_GetListByParam" ReturnType="Collection(SESLModel.ACM_Class_GetListByParam_Result)">
+          <FunctionImport Name="ACM_Class_GetListByParam" ReturnType="Collection(SESModel.ACM_Class_GetListByParam_Result)">
             <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
             <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
             <Parameter Name="SessionBranchId" Mode="In" Type="Int32" />
@@ -1841,7 +1844,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <Parameter Name="CampusId" Mode="In" Type="Int32" />
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="ACM_Class_GetListBySearch" ReturnType="Collection(SESLModel.ACM_Class_GetListBySearch_Result)">
+          <FunctionImport Name="ACM_Class_GetListBySearch" ReturnType="Collection(SESModel.ACM_Class_GetListBySearch_Result)">
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
             <Parameter Name="BranchId" Mode="In" Type="Int32" />
             <Parameter Name="AllowedCampusId" Mode="In" Type="String" />
@@ -1868,14 +1871,14 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <Parameter Name="Remarks" Mode="In" Type="String" />
             <Parameter Name="Response" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="ASM_Subject_GetListByParam" ReturnType="Collection(SESLModel.ASM_Subject_GetListByParam_Result)">
+          <FunctionImport Name="ASM_Subject_GetListByParam" ReturnType="Collection(SESModel.ASM_Subject_GetListByParam_Result)">
             <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
             <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
             <Parameter Name="SessionBranchId" Mode="In" Type="Int32" />
             <Parameter Name="SearchParameter" Mode="In" Type="String" />
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="ASM_Subject_GetListBySearch" ReturnType="Collection(SESLModel.ASM_Subject_GetListBySearch_Result)">
+          <FunctionImport Name="ASM_Subject_GetListBySearch" ReturnType="Collection(SESModel.ASM_Subject_GetListBySearch_Result)">
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
             <Parameter Name="BranchId" Mode="In" Type="Int32" />
             <Parameter Name="InputTypeId" Mode="In" Type="Int32" />
@@ -1898,7 +1901,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <Parameter Name="Remarks" Mode="In" Type="String" />
             <Parameter Name="Response" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="BM_Branch_GetListByParam" ReturnType="Collection(SESLModel.BM_Branch_GetListByParam_Result)">
+          <FunctionImport Name="BM_Branch_GetListByParam" ReturnType="Collection(SESModel.BM_Branch_GetListByParam_Result)">
             <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
             <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
             <Parameter Name="SessionBranchId" Mode="In" Type="Int32" />
@@ -1906,7 +1909,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <Parameter Name="SearchParameter" Mode="In" Type="String" />
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="BM_Branch_GetListBySearch" ReturnType="Collection(SESLModel.BM_Branch_GetListBySearch_Result)">
+          <FunctionImport Name="BM_Branch_GetListBySearch" ReturnType="Collection(SESModel.BM_Branch_GetListBySearch_Result)">
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
             <Parameter Name="BranchId" Mode="In" Type="Int32" />
             <Parameter Name="InputTypeId" Mode="In" Type="Int32" />
@@ -1936,12 +1939,12 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <Parameter Name="Remarks" Mode="In" Type="String" />
             <Parameter Name="Response" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="CM_Company_GetDetailByParam" ReturnType="Collection(SESLModel.CM_Company_GetDetailByParam_Result)">
+          <FunctionImport Name="CM_Company_GetDetailByParam" ReturnType="Collection(SESModel.CM_Company_GetDetailByParam_Result)">
             <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
             <Parameter Name="SearchParameter" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="CM_Company_GetListByParam" ReturnType="Collection(SESLModel.CM_Company_GetListByParam_Result)">
+          <FunctionImport Name="CM_Company_GetListByParam" ReturnType="Collection(SESModel.CM_Company_GetListByParam_Result)">
             <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
             <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
             <Parameter Name="AllowedCampusIds" Mode="In" Type="String" />
@@ -1971,7 +1974,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <Parameter Name="Remarks" Mode="In" Type="String" />
             <Parameter Name="Response" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="RSM_RightSetting_GetDetailByParam" ReturnType="Collection(SESLModel.RSM_RightSetting_GetDetailByParam_Result)">
+          <FunctionImport Name="RSM_RightSetting_GetDetailByParam" ReturnType="Collection(SESModel.RSM_RightSetting_GetDetailByParam_Result)">
             <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
             <Parameter Name="AllowedCampusIds" Mode="In" Type="String" />
             <Parameter Name="UserId" Mode="In" Type="Int32" />
@@ -1982,7 +1985,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <Parameter Name="RightId" Mode="In" Type="Int32" />
             <Parameter Name="RightPath" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="RSM_RightSetting_GetListByParam" ReturnType="Collection(SESLModel.RSM_RightSetting_GetListByParam_Result)">
+          <FunctionImport Name="RSM_RightSetting_GetListByParam" ReturnType="Collection(SESModel.RSM_RightSetting_GetListByParam_Result)">
             <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
             <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
             <Parameter Name="SearchParameter" Mode="In" Type="String" />
@@ -2006,7 +2009,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <Parameter Name="Remarks" Mode="In" Type="String" />
             <Parameter Name="Response" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UM_User_GetDetailByParam" ReturnType="Collection(SESLModel.UM_User_GetDetailByParam_Result)">
+          <FunctionImport Name="UM_User_GetDetailByParam" ReturnType="Collection(SESModel.UM_User_GetDetailByParam_Result)">
             <Parameter Name="ListCondition" Mode="In" Type="String" />
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
             <Parameter Name="IsLogIn" Mode="In" Type="Boolean" />
@@ -2014,13 +2017,13 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <Parameter Name="Password" Mode="In" Type="String" />
             <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UM_User_GetListByParam" ReturnType="Collection(SESLModel.UM_User_GetListByParam_Result)">
+          <FunctionImport Name="UM_User_GetListByParam" ReturnType="Collection(SESModel.UM_User_GetListByParam_Result)">
             <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
             <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
             <Parameter Name="SearchParameter" Mode="In" Type="String" />
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="UM_User_GetListBySearch" ReturnType="Collection(SESLModel.UM_User_GetListBySearch_Result)">
+          <FunctionImport Name="UM_User_GetListBySearch" ReturnType="Collection(SESModel.UM_User_GetListBySearch_Result)">
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
             <Parameter Name="BranchId" Mode="In" Type="Int32" />
             <Parameter Name="InputTypeId" Mode="In" Type="Int32" />
@@ -2051,14 +2054,14 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <Parameter Name="Remarks" Mode="In" Type="String" />
             <Parameter Name="Response" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="URM_UserRight_GetListByParam" ReturnType="Collection(SESLModel.URM_UserRight_GetListByParam_Result)">
+          <FunctionImport Name="URM_UserRight_GetListByParam" ReturnType="Collection(SESModel.URM_UserRight_GetListByParam_Result)">
             <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
             <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
             <Parameter Name="SessionBranchId" Mode="In" Type="Int32" />
             <Parameter Name="SearchParameter" Mode="In" Type="String" />
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="URM_UserRight_GetListBySearch" ReturnType="Collection(SESLModel.URM_UserRight_GetListBySearch_Result)">
+          <FunctionImport Name="URM_UserRight_GetListBySearch" ReturnType="Collection(SESModel.URM_UserRight_GetListBySearch_Result)">
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
             <Parameter Name="BranchId" Mode="In" Type="Int32" />
             <Parameter Name="UserId" Mode="In" Type="Guid" />
@@ -2108,7 +2111,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="Guid" Name="GuID" Nullable="true" />
           <Property Type="String" Name="Description" Nullable="true" />
-          <Property Type="Boolean" Name="IsSemesterRequired" Nullable="true" />
+          <Property Type="Int32" Name="StudySchemeId" Nullable="true" />
         </ComplexType>
         <ComplexType Name="ACM_Class_GetListBySearch_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -2252,9 +2255,9 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SESLModelStoreContainer" CdmEntityContainer="SESEntities">
+        <EntityContainerMapping StorageEntityContainer="SESModelStoreContainer" CdmEntityContainer="SESEntities">
           <EntitySetMapping Name="AASM_AdmissionSession">
-            <EntityTypeMapping TypeName="SESLModel.AASM_AdmissionSession">
+            <EntityTypeMapping TypeName="SESModel.AASM_AdmissionSession">
               <MappingFragment StoreEntitySet="AASM_AdmissionSession">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
@@ -2283,7 +2286,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ACCM_ClassCurriculum">
-            <EntityTypeMapping TypeName="SESLModel.ACCM_ClassCurriculum">
+            <EntityTypeMapping TypeName="SESModel.ACCM_ClassCurriculum">
               <MappingFragment StoreEntitySet="ACCM_ClassCurriculum">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
@@ -2307,7 +2310,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ACM_Class">
-            <EntityTypeMapping TypeName="SESLModel.ACM_Class">
+            <EntityTypeMapping TypeName="SESModel.ACM_Class">
               <MappingFragment StoreEntitySet="ACM_Class">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
@@ -2331,7 +2334,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ASM_Subject">
-            <EntityTypeMapping TypeName="SESLModel.ASM_Subject">
+            <EntityTypeMapping TypeName="SESModel.ASM_Subject">
               <MappingFragment StoreEntitySet="ASM_Subject">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
@@ -2352,7 +2355,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BM_Branch">
-            <EntityTypeMapping TypeName="SESLModel.BM_Branch">
+            <EntityTypeMapping TypeName="SESModel.BM_Branch">
               <MappingFragment StoreEntitySet="BM_Branch">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
@@ -2380,7 +2383,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CM_Company">
-            <EntityTypeMapping TypeName="SESLModel.CM_Company">
+            <EntityTypeMapping TypeName="SESModel.CM_Company">
               <MappingFragment StoreEntitySet="CM_Company">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
@@ -2407,7 +2410,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RSM_RightSetting">
-            <EntityTypeMapping TypeName="SESLModel.RSM_RightSetting">
+            <EntityTypeMapping TypeName="SESModel.RSM_RightSetting">
               <MappingFragment StoreEntitySet="RSM_RightSetting">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
@@ -2429,7 +2432,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UM_User">
-            <EntityTypeMapping TypeName="SESLModel.UM_User">
+            <EntityTypeMapping TypeName="SESModel.UM_User">
               <MappingFragment StoreEntitySet="UM_User">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
@@ -2458,7 +2461,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="URM_UserRight">
-            <EntityTypeMapping TypeName="SESLModel.URM_UserRight">
+            <EntityTypeMapping TypeName="SESModel.URM_UserRight">
               <MappingFragment StoreEntitySet="URM_UserRight">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
@@ -2479,7 +2482,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AcademicYear">
-            <EntityTypeMapping TypeName="SESLModel.AcademicYear">
+            <EntityTypeMapping TypeName="SESModel.AcademicYear">
               <MappingFragment StoreEntitySet="AcademicYear">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2488,7 +2491,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AdmissionCatagory">
-            <EntityTypeMapping TypeName="SESLModel.AdmissionCatagory">
+            <EntityTypeMapping TypeName="SESModel.AdmissionCatagory">
               <MappingFragment StoreEntitySet="AdmissionCatagory">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2496,7 +2499,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BillingMethod">
-            <EntityTypeMapping TypeName="SESLModel.BillingMethod">
+            <EntityTypeMapping TypeName="SESModel.BillingMethod">
               <MappingFragment StoreEntitySet="BillingMethod">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2505,7 +2508,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CampusType">
-            <EntityTypeMapping TypeName="SESLModel.CampusType">
+            <EntityTypeMapping TypeName="SESModel.CampusType">
               <MappingFragment StoreEntitySet="CampusType">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2514,7 +2517,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ChallanMethod">
-            <EntityTypeMapping TypeName="SESLModel.ChallanMethod">
+            <EntityTypeMapping TypeName="SESModel.ChallanMethod">
               <MappingFragment StoreEntitySet="ChallanMethod">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
@@ -2526,7 +2529,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ChallanType">
-            <EntityTypeMapping TypeName="SESLModel.ChallanType">
+            <EntityTypeMapping TypeName="SESModel.ChallanType">
               <MappingFragment StoreEntitySet="ChallanType">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2535,7 +2538,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ChargingMethod">
-            <EntityTypeMapping TypeName="SESLModel.ChargingMethod">
+            <EntityTypeMapping TypeName="SESModel.ChargingMethod">
               <MappingFragment StoreEntitySet="ChargingMethod">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2543,7 +2546,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="City">
-            <EntityTypeMapping TypeName="SESLModel.City">
+            <EntityTypeMapping TypeName="SESModel.City">
               <MappingFragment StoreEntitySet="City">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CountryId" ColumnName="CountryId" />
@@ -2555,7 +2558,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CoaCatagory">
-            <EntityTypeMapping TypeName="SESLModel.CoaCatagory">
+            <EntityTypeMapping TypeName="SESModel.CoaCatagory">
               <MappingFragment StoreEntitySet="CoaCatagory">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2566,7 +2569,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CoaType">
-            <EntityTypeMapping TypeName="SESLModel.CoaType">
+            <EntityTypeMapping TypeName="SESModel.CoaType">
               <MappingFragment StoreEntitySet="CoaType">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ShortCode" ColumnName="ShortCode" />
@@ -2576,7 +2579,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Country">
-            <EntityTypeMapping TypeName="SESLModel.Country">
+            <EntityTypeMapping TypeName="SESModel.Country">
               <MappingFragment StoreEntitySet="Country">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2587,7 +2590,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DocType">
-            <EntityTypeMapping TypeName="SESLModel.DocType">
+            <EntityTypeMapping TypeName="SESModel.DocType">
               <MappingFragment StoreEntitySet="DocType">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2596,7 +2599,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DocumentStatus">
-            <EntityTypeMapping TypeName="SESLModel.DocumentStatus">
+            <EntityTypeMapping TypeName="SESModel.DocumentStatus">
               <MappingFragment StoreEntitySet="DocumentStatus">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2605,7 +2608,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EducationBoard">
-            <EntityTypeMapping TypeName="SESLModel.EducationBoard">
+            <EntityTypeMapping TypeName="SESModel.EducationBoard">
               <MappingFragment StoreEntitySet="EducationBoard">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
@@ -2615,7 +2618,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EnrollmentType">
-            <EntityTypeMapping TypeName="SESLModel.EnrollmentType">
+            <EntityTypeMapping TypeName="SESModel.EnrollmentType">
               <MappingFragment StoreEntitySet="EnrollmentType">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2624,7 +2627,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ExportClass">
-            <EntityTypeMapping TypeName="SESLModel.ExportClass">
+            <EntityTypeMapping TypeName="SESModel.ExportClass">
               <MappingFragment StoreEntitySet="ExportClass">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Class" ColumnName="Class" />
@@ -2635,7 +2638,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FeeCatagory">
-            <EntityTypeMapping TypeName="SESLModel.FeeCatagory">
+            <EntityTypeMapping TypeName="SESModel.FeeCatagory">
               <MappingFragment StoreEntitySet="FeeCatagory">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2644,7 +2647,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Gender">
-            <EntityTypeMapping TypeName="SESLModel.Gender">
+            <EntityTypeMapping TypeName="SESModel.Gender">
               <MappingFragment StoreEntitySet="Gender">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2652,7 +2655,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MartialStatus">
-            <EntityTypeMapping TypeName="SESLModel.MartialStatus">
+            <EntityTypeMapping TypeName="SESModel.MartialStatus">
               <MappingFragment StoreEntitySet="MartialStatus">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2660,7 +2663,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Occupation">
-            <EntityTypeMapping TypeName="SESLModel.Occupation">
+            <EntityTypeMapping TypeName="SESModel.Occupation">
               <MappingFragment StoreEntitySet="Occupation">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2668,7 +2671,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrganizationType">
-            <EntityTypeMapping TypeName="SESLModel.OrganizationType">
+            <EntityTypeMapping TypeName="SESModel.OrganizationType">
               <MappingFragment StoreEntitySet="OrganizationType">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2677,7 +2680,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PolicyPeriod">
-            <EntityTypeMapping TypeName="SESLModel.PolicyPeriod">
+            <EntityTypeMapping TypeName="SESModel.PolicyPeriod">
               <MappingFragment StoreEntitySet="PolicyPeriod">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2686,7 +2689,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RegistrationType">
-            <EntityTypeMapping TypeName="SESLModel.RegistrationType">
+            <EntityTypeMapping TypeName="SESModel.RegistrationType">
               <MappingFragment StoreEntitySet="RegistrationType">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2694,7 +2697,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Relationship">
-            <EntityTypeMapping TypeName="SESLModel.Relationship">
+            <EntityTypeMapping TypeName="SESModel.Relationship">
               <MappingFragment StoreEntitySet="Relationship">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2702,7 +2705,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Religion">
-            <EntityTypeMapping TypeName="SESLModel.Religion">
+            <EntityTypeMapping TypeName="SESModel.Religion">
               <MappingFragment StoreEntitySet="Religion">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2710,7 +2713,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Right">
-            <EntityTypeMapping TypeName="SESLModel.Right">
+            <EntityTypeMapping TypeName="SESModel.Right">
               <MappingFragment StoreEntitySet="Right">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FormName" ColumnName="FormName" />
@@ -2726,7 +2729,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Role">
-            <EntityTypeMapping TypeName="SESLModel.Role">
+            <EntityTypeMapping TypeName="SESModel.Role">
               <MappingFragment StoreEntitySet="Role">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2735,7 +2738,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RollCallSystem">
-            <EntityTypeMapping TypeName="SESLModel.RollCallSystem">
+            <EntityTypeMapping TypeName="SESModel.RollCallSystem">
               <MappingFragment StoreEntitySet="RollCallSystem">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2743,15 +2746,16 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Semester">
-            <EntityTypeMapping TypeName="SESLModel.Semester">
+            <EntityTypeMapping TypeName="SESModel.Semester">
               <MappingFragment StoreEntitySet="Semester">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StudySchemeId" ColumnName="StudySchemeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StudyGroup">
-            <EntityTypeMapping TypeName="SESLModel.StudyGroup">
+            <EntityTypeMapping TypeName="SESModel.StudyGroup">
               <MappingFragment StoreEntitySet="StudyGroup">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2760,7 +2764,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StudyLevel">
-            <EntityTypeMapping TypeName="SESLModel.StudyLevel">
+            <EntityTypeMapping TypeName="SESModel.StudyLevel">
               <MappingFragment StoreEntitySet="StudyLevel">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2769,7 +2773,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StudyScheme">
-            <EntityTypeMapping TypeName="SESLModel.StudyScheme">
+            <EntityTypeMapping TypeName="SESModel.StudyScheme">
               <MappingFragment StoreEntitySet="StudyScheme">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2778,7 +2782,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="URLType">
-            <EntityTypeMapping TypeName="SESLModel.URLType">
+            <EntityTypeMapping TypeName="SESModel.URLType">
               <MappingFragment StoreEntitySet="URLType">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2787,7 +2791,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WHTaxPolicy">
-            <EntityTypeMapping TypeName="SESLModel.WHTaxPolicy">
+            <EntityTypeMapping TypeName="SESModel.WHTaxPolicy">
               <MappingFragment StoreEntitySet="WHTaxPolicy">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2800,7 +2804,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WorkingShift">
-            <EntityTypeMapping TypeName="SESLModel.WorkingShift">
+            <EntityTypeMapping TypeName="SESModel.WorkingShift">
               <MappingFragment StoreEntitySet="WorkingShift">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2809,30 +2813,30 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionName="SESLModel.Store.fn_CodeSplitByCommaAsINT" FunctionImportName="fn_CodeSplitByCommaAsINT">
+          <FunctionImportMapping FunctionName="SESModel.Store.fn_CodeSplitByCommaAsINT" FunctionImportName="fn_CodeSplitByCommaAsINT">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SESLModel.fn_CodeSplitByCommaAsINT_Result">
+              <ComplexTypeMapping TypeName="SESModel.fn_CodeSplitByCommaAsINT_Result">
                 <ScalarProperty Name="sID" ColumnName="sID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionName="SESLModel.Store.fn_CodeSplitByCommaAsUniqueIdentifier" FunctionImportName="fn_CodeSplitByCommaAsUniqueIdentifier">
+          <FunctionImportMapping FunctionName="SESModel.Store.fn_CodeSplitByCommaAsUniqueIdentifier" FunctionImportName="fn_CodeSplitByCommaAsUniqueIdentifier">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SESLModel.fn_CodeSplitByCommaAsUniqueIdentifier_Result">
+              <ComplexTypeMapping TypeName="SESModel.fn_CodeSplitByCommaAsUniqueIdentifier_Result">
                 <ScalarProperty Name="sID" ColumnName="sID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionName="SESLModel.Store.fn_GetCommaSepratedValuesInList" FunctionImportName="fn_GetCommaSepratedValuesInList">
+          <FunctionImportMapping FunctionName="SESModel.Store.fn_GetCommaSepratedValuesInList" FunctionImportName="fn_GetCommaSepratedValuesInList">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SESLModel.fn_GetCommaSepratedValuesInList_Result">
+              <ComplexTypeMapping TypeName="SESModel.fn_GetCommaSepratedValuesInList_Result">
                 <ScalarProperty Name="sID" ColumnName="sID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionName="SESLModel.Store.fn_GetGeneralBranchSettingForCampus" FunctionImportName="fn_GetGeneralBranchSettingForCampus">
+          <FunctionImportMapping FunctionName="SESModel.Store.fn_GetGeneralBranchSettingForCampus" FunctionImportName="fn_GetGeneralBranchSettingForCampus">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SESLModel.fn_GetGeneralBranchSettingForCampus_Result">
+              <ComplexTypeMapping TypeName="SESModel.fn_GetGeneralBranchSettingForCampus_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
                 <ScalarProperty Name="RollCallSystem" ColumnName="RollCallSystem" />
@@ -2843,18 +2847,18 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="AASM_AdmissionSession_GetListByParam" FunctionName="SESLModel.Store.AASM_AdmissionSession_GetListByParam">
+          <FunctionImportMapping FunctionImportName="AASM_AdmissionSession_GetListByParam" FunctionName="SESModel.Store.AASM_AdmissionSession_GetListByParam">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SESLModel.AASM_AdmissionSession_GetListByParam_Result">
+              <ComplexTypeMapping TypeName="SESModel.AASM_AdmissionSession_GetListByParam_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="AASM_AdmissionSession_GetListBySearch" FunctionName="SESLModel.Store.AASM_AdmissionSession_GetListBySearch">
+          <FunctionImportMapping FunctionImportName="AASM_AdmissionSession_GetListBySearch" FunctionName="SESModel.Store.AASM_AdmissionSession_GetListBySearch">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SESLModel.AASM_AdmissionSession_GetListBySearch_Result">
+              <ComplexTypeMapping TypeName="SESModel.AASM_AdmissionSession_GetListBySearch_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
@@ -2872,20 +2876,20 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="AASM_AdmissionSession_Upsert" FunctionName="SESLModel.Store.AASM_AdmissionSession_Upsert" />
-          <FunctionImportMapping FunctionImportName="ACM_Class_GetListByParam" FunctionName="SESLModel.Store.ACM_Class_GetListByParam">
+          <FunctionImportMapping FunctionImportName="AASM_AdmissionSession_Upsert" FunctionName="SESModel.Store.AASM_AdmissionSession_Upsert" />
+          <FunctionImportMapping FunctionImportName="ACM_Class_GetListByParam" FunctionName="SESModel.Store.ACM_Class_GetListByParam">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SESLModel.ACM_Class_GetListByParam_Result">
+              <ComplexTypeMapping TypeName="SESModel.ACM_Class_GetListByParam_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="IsSemesterRequired" ColumnName="IsSemesterRequired" />
+                <ScalarProperty Name="StudySchemeId" ColumnName="StudySchemeId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ACM_Class_GetListBySearch" FunctionName="SESLModel.Store.ACM_Class_GetListBySearch">
+          <FunctionImportMapping FunctionImportName="ACM_Class_GetListBySearch" FunctionName="SESModel.Store.ACM_Class_GetListBySearch">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SESLModel.ACM_Class_GetListBySearch_Result">
+              <ComplexTypeMapping TypeName="SESModel.ACM_Class_GetListBySearch_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
@@ -2898,19 +2902,19 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ACM_Class_Upsert" FunctionName="SESLModel.Store.ACM_Class_Upsert" />
-          <FunctionImportMapping FunctionImportName="ASM_Subject_GetListByParam" FunctionName="SESLModel.Store.ASM_Subject_GetListByParam">
+          <FunctionImportMapping FunctionImportName="ACM_Class_Upsert" FunctionName="SESModel.Store.ACM_Class_Upsert" />
+          <FunctionImportMapping FunctionImportName="ASM_Subject_GetListByParam" FunctionName="SESModel.Store.ASM_Subject_GetListByParam">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SESLModel.ASM_Subject_GetListByParam_Result">
+              <ComplexTypeMapping TypeName="SESModel.ASM_Subject_GetListByParam_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ASM_Subject_GetListBySearch" FunctionName="SESLModel.Store.ASM_Subject_GetListBySearch">
+          <FunctionImportMapping FunctionImportName="ASM_Subject_GetListBySearch" FunctionName="SESModel.Store.ASM_Subject_GetListBySearch">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SESLModel.ASM_Subject_GetListBySearch_Result">
+              <ComplexTypeMapping TypeName="SESModel.ASM_Subject_GetListBySearch_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
@@ -2920,10 +2924,10 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ASM_Subject_Upsert" FunctionName="SESLModel.Store.ASM_Subject_Upsert" />
-          <FunctionImportMapping FunctionImportName="BM_Branch_GetListByParam" FunctionName="SESLModel.Store.BM_Branch_GetListByParam">
+          <FunctionImportMapping FunctionImportName="ASM_Subject_Upsert" FunctionName="SESModel.Store.ASM_Subject_Upsert" />
+          <FunctionImportMapping FunctionImportName="BM_Branch_GetListByParam" FunctionName="SESModel.Store.BM_Branch_GetListByParam">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SESLModel.BM_Branch_GetListByParam_Result">
+              <ComplexTypeMapping TypeName="SESModel.BM_Branch_GetListByParam_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2931,9 +2935,9 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="BM_Branch_GetListBySearch" FunctionName="SESLModel.Store.BM_Branch_GetListBySearch">
+          <FunctionImportMapping FunctionImportName="BM_Branch_GetListBySearch" FunctionName="SESModel.Store.BM_Branch_GetListBySearch">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SESLModel.BM_Branch_GetListBySearch_Result">
+              <ComplexTypeMapping TypeName="SESModel.BM_Branch_GetListBySearch_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
@@ -2949,10 +2953,10 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="BM_Branch_Upsert" FunctionName="SESLModel.Store.BM_Branch_Upsert" />
-          <FunctionImportMapping FunctionImportName="CM_Company_GetDetailByParam" FunctionName="SESLModel.Store.CM_Company_GetDetailByParam">
+          <FunctionImportMapping FunctionImportName="BM_Branch_Upsert" FunctionName="SESModel.Store.BM_Branch_Upsert" />
+          <FunctionImportMapping FunctionImportName="CM_Company_GetDetailByParam" FunctionName="SESModel.Store.CM_Company_GetDetailByParam">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SESLModel.CM_Company_GetDetailByParam_Result">
+              <ComplexTypeMapping TypeName="SESModel.CM_Company_GetDetailByParam_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
@@ -2970,19 +2974,19 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CM_Company_GetListByParam" FunctionName="SESLModel.Store.CM_Company_GetListByParam">
+          <FunctionImportMapping FunctionImportName="CM_Company_GetListByParam" FunctionName="SESModel.Store.CM_Company_GetListByParam">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SESLModel.CM_Company_GetListByParam_Result">
+              <ComplexTypeMapping TypeName="SESModel.CM_Company_GetListByParam_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CM_Company_Upsert" FunctionName="SESLModel.Store.CM_Company_Upsert" />
-          <FunctionImportMapping FunctionImportName="RSM_RightSetting_GetDetailByParam" FunctionName="SESLModel.Store.RSM_RightSetting_GetDetailByParam">
+          <FunctionImportMapping FunctionImportName="CM_Company_Upsert" FunctionName="SESModel.Store.CM_Company_Upsert" />
+          <FunctionImportMapping FunctionImportName="RSM_RightSetting_GetDetailByParam" FunctionName="SESModel.Store.RSM_RightSetting_GetDetailByParam">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SESLModel.RSM_RightSetting_GetDetailByParam_Result">
+              <ComplexTypeMapping TypeName="SESModel.RSM_RightSetting_GetDetailByParam_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FormName" ColumnName="FormName" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
@@ -2996,9 +3000,9 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="RSM_RightSetting_GetListByParam" FunctionName="SESLModel.Store.RSM_RightSetting_GetListByParam">
+          <FunctionImportMapping FunctionImportName="RSM_RightSetting_GetListByParam" FunctionName="SESModel.Store.RSM_RightSetting_GetListByParam">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SESLModel.RSM_RightSetting_GetListByParam_Result">
+              <ComplexTypeMapping TypeName="SESModel.RSM_RightSetting_GetListByParam_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
@@ -3006,10 +3010,10 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="RSM_RightSetting_Upsert" FunctionName="SESLModel.Store.RSM_RightSetting_Upsert" />
-          <FunctionImportMapping FunctionImportName="UM_User_GetDetailByParam" FunctionName="SESLModel.Store.UM_User_GetDetailByParam">
+          <FunctionImportMapping FunctionImportName="RSM_RightSetting_Upsert" FunctionName="SESModel.Store.RSM_RightSetting_Upsert" />
+          <FunctionImportMapping FunctionImportName="UM_User_GetDetailByParam" FunctionName="SESModel.Store.UM_User_GetDetailByParam">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SESLModel.UM_User_GetDetailByParam_Result">
+              <ComplexTypeMapping TypeName="SESModel.UM_User_GetDetailByParam_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -3031,18 +3035,18 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UM_User_GetListByParam" FunctionName="SESLModel.Store.UM_User_GetListByParam">
+          <FunctionImportMapping FunctionImportName="UM_User_GetListByParam" FunctionName="SESModel.Store.UM_User_GetListByParam">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SESLModel.UM_User_GetListByParam_Result">
+              <ComplexTypeMapping TypeName="SESModel.UM_User_GetListByParam_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UM_User_GetListBySearch" FunctionName="SESLModel.Store.UM_User_GetListBySearch">
+          <FunctionImportMapping FunctionImportName="UM_User_GetListBySearch" FunctionName="SESModel.Store.UM_User_GetListBySearch">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SESLModel.UM_User_GetListBySearch_Result">
+              <ComplexTypeMapping TypeName="SESModel.UM_User_GetListBySearch_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -3062,19 +3066,19 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UM_User_Upsert" FunctionName="SESLModel.Store.UM_User_Upsert" />
-          <FunctionImportMapping FunctionImportName="URM_UserRight_GetListByParam" FunctionName="SESLModel.Store.URM_UserRight_GetListByParam">
+          <FunctionImportMapping FunctionImportName="UM_User_Upsert" FunctionName="SESModel.Store.UM_User_Upsert" />
+          <FunctionImportMapping FunctionImportName="URM_UserRight_GetListByParam" FunctionName="SESModel.Store.URM_UserRight_GetListByParam">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SESLModel.URM_UserRight_GetListByParam_Result">
+              <ComplexTypeMapping TypeName="SESModel.URM_UserRight_GetListByParam_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="URM_UserRight_GetListBySearch" FunctionName="SESLModel.Store.URM_UserRight_GetListBySearch">
+          <FunctionImportMapping FunctionImportName="URM_UserRight_GetListBySearch" FunctionName="SESModel.Store.URM_UserRight_GetListBySearch">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SESLModel.URM_UserRight_GetListBySearch_Result">
+              <ComplexTypeMapping TypeName="SESModel.URM_UserRight_GetListBySearch_Result">
                 <ScalarProperty Name="FormName" ColumnName="FormName" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
@@ -3082,7 +3086,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="URM_UserRight_Upsert" FunctionName="SESLModel.Store.URM_UserRight_Upsert" />
+          <FunctionImportMapping FunctionImportName="URM_UserRight_Upsert" FunctionName="SESModel.Store.URM_UserRight_Upsert" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -3098,7 +3102,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

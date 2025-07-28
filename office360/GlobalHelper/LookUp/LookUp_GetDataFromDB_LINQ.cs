@@ -394,11 +394,12 @@ namespace office360.GlobalHelper.LookUp
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.Semester
-                         .Select(x => new _SqlParameters
-                         {
-                             Id = x.Id,
-                             Description = x.Description,
-                         })
+                        .Where(x=>x.StudySchemeId == PostedData.StudySchemeId)
+                        .Select(x => new _SqlParameters
+                        {
+                            Id = x.Id,
+                            Description = x.Description,
+                        })
                          .ToList();
 
                 return DATA;
