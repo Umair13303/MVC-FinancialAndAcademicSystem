@@ -860,6 +860,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Common\CommonScripts\SideBarMenu.js" />
+    <Content Include="Library\JS\bootstrap-datepicker.js" />
+    <Content Include="Library\JS\bootstrap-daterangepicker.js" />
+    <Content Include="Library\JS\bootstrap-datetimepicker.js" />
+    <Content Include="Library\JS\FontAwsome.js" />
+    <Content Include="Library\JS\SheetJS.js" />
+    <Content Include="Library\JS\SweetAlert2.js" />
     <Content Include="Models\EDMX\SESModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SESModel.edmx</DependentUpon>
