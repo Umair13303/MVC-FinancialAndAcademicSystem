@@ -5,7 +5,7 @@ using System.Web;
 
 namespace office360.Models.General
 {
-    public class Constants
+    public class AppConstant
     {
         public class ApplicationConstants
         {

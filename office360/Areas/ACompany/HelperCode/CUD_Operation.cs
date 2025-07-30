@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Web;
-using static office360.Models.General.DocumentStatus;
-using static office360.Models.General.Http_Server_Status;
-using static office360.Models.General.DBListCondition;
-using DocumentStatus = office360.Models.General.DocumentStatus;
+
+using static office360.Models.General.HttpServerStatus;
+
+
 using System.Data.Entity.Infrastructure;
 using office360.Models.EDMX;
 using office360.Models.General;
@@ -58,8 +58,8 @@ namespace office360.Areas.ACompany.HelperCode
                                                                         Session_Manager.UserId,
                                                                         DateTime.Now,
                                                                         Session_Manager.UserId,
-                                                                        (int?)DocumentStatus.DocType.COMPANY,
-                                                                        (int?)DocumentStatus.DocStatus.ACTIVE_COMPANY,
+                                                                        (int?)DOCUMENT_TYPE.COMPANY,
+                                                                        (int?)DOCUMENT_STATUS.ACTIVE_COMPANY,
                                                                         true,
                                                                         Session_Manager.BranchId,
                                                                         Session_Manager.CompanyId,
@@ -85,17 +85,17 @@ namespace office360.Areas.ACompany.HelperCode
                                         break;
                                 }
                                 #endregion
-                                return Http_Server_Status.Http_DB_ResponseByReturnValue(Response);
+                                return HttpServerStatus.Http_DB_ResponseByReturnValue(Response);
 
                             default:
-                                return Http_Server_Status.Http_DB_ResponseByReturnValue(DB_OPERATION_STATUS);
+                                return HttpServerStatus.Http_DB_ResponseByReturnValue(DB_OPERATION_STATUS);
                         }
                         #endregion
                     }
                     catch (Exception Ex)
                     {
                         dbTran.Rollback();
-                        return Http_Server_Status.Http_DB_Response.CODE_INTERNAL_SERVER_ERROR.ToInt();
+                        return HttpServerStatus.Http_DB_Response.CODE_INTERNAL_SERVER_ERROR.ToInt();
                     }
                 }
             }
@@ -137,8 +137,8 @@ namespace office360.Areas.ACompany.HelperCode
                                                                                     Session_Manager.UserId,
                                                                                     DateTime.Now,
                                                                                     Session_Manager.UserId,
-                                                                                    (int?)DocumentStatus.DocType.RIGHT_SETTING,
-                                                                                    (int?)DocumentStatus.DocStatus.ACTIVE_RIGHT_SETTING,
+                                                                                    (int?)DOCUMENT_TYPE.RIGHT_SETTING,
+                                                                                    (int?)DOCUMENT_STATUS.ACTIVE_RIGHT_SETTING,
                                                                                     true,
                                                                                     PostedData.BranchId,
                                                                                     PostedData.CompanyId,
@@ -163,9 +163,9 @@ namespace office360.Areas.ACompany.HelperCode
                                         break;
                                 }
                                 #endregion
-                                return Http_Server_Status.Http_DB_ResponseByReturnValue(Response);
+                                return HttpServerStatus.Http_DB_ResponseByReturnValue(Response);
                             default:
-                                return Http_Server_Status.Http_DB_ResponseByReturnValue(DB_OPERATION_STATUS);
+                                return HttpServerStatus.Http_DB_ResponseByReturnValue(DB_OPERATION_STATUS);
 
                         }
                         #endregion
@@ -173,7 +173,7 @@ namespace office360.Areas.ACompany.HelperCode
                     catch (Exception Ex)
                     {
                         dbTran.Rollback();
-                        return Http_Server_Status.Http_DB_Response.CODE_INTERNAL_SERVER_ERROR.ToInt();
+                        return HttpServerStatus.Http_DB_Response.CODE_INTERNAL_SERVER_ERROR.ToInt();
                     }
                 }
             }

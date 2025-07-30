@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Web;
-using static office360.Models.General.DocumentStatus;
-using static office360.Models.General.Http_Server_Status;
-using static office360.Models.General.DBListCondition;
-using DocumentStatus = office360.Models.General.DocumentStatus;
+
+using static office360.Models.General.HttpServerStatus;
+
+
 using System.Data.Entity.Infrastructure;
 using office360.Models.EDMX;
 using office360.Models.General;
@@ -35,7 +35,7 @@ namespace office360.Areas.ACompany.HelperCode
                             IsRecordExist = db.CM_Company
                                 .Any(x =>
                                     x.CompanyName == PostedData.CompanyName &&
-                                    x.DocumentStatus == (int?)DocStatus.ACTIVE_COMPANY &&
+                                    x.DocumentStatus == (int?)DOCUMENT_STATUS.ACTIVE_COMPANY &&
                                     x.Status == true
                                 );
                             #endregion
@@ -65,7 +65,7 @@ namespace office360.Areas.ACompany.HelperCode
                 }
                 catch (Exception Ex)
                 {
-                    return Http_Server_Status.Http_DB_Response.CODE_UN_KNOWN_ACTIVITY.ToInt();
+                    return HttpServerStatus.Http_DB_Response.CODE_UN_KNOWN_ACTIVITY.ToInt();
 
                 }
 
@@ -92,7 +92,7 @@ namespace office360.Areas.ACompany.HelperCode
                                 .Where(x =>
                                     x.RightId == PostedData.RightId &&
                                     x.CompanyId == PostedData.CompanyId &&
-                                    x.DocumentStatus == (int?)DocStatus.ACTIVE_RIGHT_SETTING &&
+                                    x.DocumentStatus == (int?)DOCUMENT_STATUS.ACTIVE_RIGHT_SETTING &&
                                     x.Status == true
                                 )
                                 .Select(x => new _SqlParameters { Id = x.Id }).ToList();
@@ -122,7 +122,7 @@ namespace office360.Areas.ACompany.HelperCode
                 }
                 catch (Exception Ex)
                 {
-                    return Http_Server_Status.Http_DB_Response.CODE_UN_KNOWN_ACTIVITY.ToInt();
+                    return HttpServerStatus.Http_DB_Response.CODE_UN_KNOWN_ACTIVITY.ToInt();
 
                 }
 

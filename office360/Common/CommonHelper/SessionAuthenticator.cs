@@ -11,7 +11,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Web.Mvc;
 using office360.CommonHelper;
-using static office360.Models.General.Http_Server_Status;
+using static office360.Models.General.HttpServerStatus;
 namespace office360.Common.CommonHelper
 {
     public class SessionAuthenticator

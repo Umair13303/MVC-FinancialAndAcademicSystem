@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using static office360.Models.General.DBListCondition;
 
 namespace office360.Models.General
 {
-    public class ASPManagRoles
+    public class Dictionary
     {
         public static readonly Dictionary<int?, string> RoleGuids = new Dictionary<int?, string>
         {
@@ -14,6 +13,8 @@ namespace office360.Models.General
                { 2, "ROLE_DEVELOPER" },
                { 3, "ROLE_MANAGER" },
                { 4, "ROLE_DEO" },
+               { 5, "ROLE_TEACHER" },
+               { 6, "ROLE_STUDENT" },
         };
 
 

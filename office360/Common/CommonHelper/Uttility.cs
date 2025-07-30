@@ -18,9 +18,8 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml;
-using static office360.Models.General.Constants;
-using static office360.Models.General.DocumentStatus;
-using static office360.Models.General.Http_Server_Status;
+using static office360.Models.General.AppConstant;
+using static office360.Models.General.HttpServerStatus;
 namespace office360.Common.CommonHelper
 {
     public class Uttility
@@ -126,52 +125,6 @@ namespace office360.Common.CommonHelper
         public static string _RigthPath(string _Area, string _Controller, string _Action)
         {
             return ("/" + _Area + "/" + _Controller + "/" + _Action).ToSafeString();
-        }
-        public static DateTime? fn_CalculatePolicyPeriod(_SqlParameters PostedData,string FunctionCondition)
-        {
-            using (SESEntities db = new SESEntities())
-            {
-                DateTime? Date=null;
-
-                var data = db.PolicyPeriod
-                   .Where(x => x.Id == PostedData.PolicyPeriodId)
-                   .Select(x => new _SqlParameters
-                   {
-                       MonthsNo = x.MonthNo,
-                   }).FirstOrDefault();
-                #region GET EFFECTIVE DATE BY BRANCH POLICY PERIOD ID
-                if (FunctionCondition == DBListCondition.FN_Condition.GET_EFFECTIVE_DATE_BY_BRANCH_POLICY_PERIOD_ID.ToSafeString())
-                {
-                    if (data != null)
-                    {
-                        DateTime NewDate = DateTime.Now;
-                        Date = new DateTime(NewDate.Year, NewDate.Month, 1);
-                        return Date;
-                    }
-                    else
-                    {
-                        throw new Exception("PolicyPeriod not found");
-                    }
-                }
-                #endregion
-
-                #region GET EXPIRY DATE BY BRANCH POLICY PERIOD ID
-                else if (FunctionCondition== DBListCondition.FN_Condition.GET_EXPIRY_DATE_BY_BRANCH_POLICY_PERIOD_ID.ToSafeString())
-                {
-                    if (data != null)
-                    {
-                        DateTime NewDate = DateTime.Now.AddMonths((int)data.MonthsNo);
-                        Date = new DateTime(NewDate.Year, NewDate.Month, DateTime.DaysInMonth(NewDate.Year, NewDate.Month));
-                        return Date;
-                    }
-                    else
-                    {
-                        throw new Exception("PolicyPeriod not found");
-                    }
-                }
-                return Date;
-                #endregion
-            }
         }
 
         public static string EnumToSafeString(Enum EnumValue)

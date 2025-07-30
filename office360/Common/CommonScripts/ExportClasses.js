@@ -57,7 +57,7 @@ class FILTER {
     }
 }
 class PARAMETER {
-    static DB_IF_Condition = {
+    static DBFilter = {
 
         ACCDISCOUNTTYPE_GETLIST: "ACCDISCOUNTTYPE_GETLIST",
 

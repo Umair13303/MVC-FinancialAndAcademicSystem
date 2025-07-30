@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Web;
-using static office360.Models.General.DocumentStatus;
-using static office360.Models.General.Http_Server_Status;
-using static office360.Models.General.DBListCondition;
-using DocumentStatus = office360.Models.General.DocumentStatus;
+
+using static office360.Models.General.HttpServerStatus;
+
+
 using System.Data.Entity.Infrastructure;
 using office360.Models.EDMX;
 using office360.Models.General;
@@ -36,7 +36,7 @@ namespace office360.Areas.ABranch.HelperCode
                                 .Any(x =>
                                     x.Description == PostedData.Description &&
                                     x.CompanyId == PostedData.CompanyId &&
-                                    x.DocumentStatus == (int?)DocStatus.ACTIVE_BRANCH &&
+                                    x.DocumentStatus == (int?)DOCUMENT_STATUS.ACTIVE_BRANCH &&
                                     x.Status == true
                                 );
                             #endregion
@@ -67,7 +67,7 @@ namespace office360.Areas.ABranch.HelperCode
                 }
                 catch (Exception Ex)
                 {
-                    return Http_Server_Status.Http_DB_Response.CODE_UN_KNOWN_ACTIVITY.ToInt();
+                    return HttpServerStatus.Http_DB_Response.CODE_UN_KNOWN_ACTIVITY.ToInt();
 
                 }
 

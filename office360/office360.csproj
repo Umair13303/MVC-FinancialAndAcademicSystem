@@ -551,16 +551,16 @@
     <Compile Include="Models\EDMX\WorkingShift.cs">
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\General\BULK_TTModel.cs" />
-    <Compile Include="Models\General\Constants.cs" />
-    <Compile Include="Models\General\DocumentStatus.cs" />
-    <Compile Include="Models\General\ASPManagRoles.cs" />
-    <Compile Include="Models\General\ListConditionsForDB.cs" />
-    <Compile Include="Models\General\RightsGUID.cs" />
-    <Compile Include="Models\General\Http_Server_Status.cs" />
-    <Compile Include="Models\General\Paramters.cs" />
-    <Compile Include="Models\General\Urls.cs" />
+    <Compile Include="Models\General\AppConstant.cs" />
+    <Compile Include="Models\General\CommonURL.cs" />
+    <Compile Include="Models\General\DBFilter.cs" />
+    <Compile Include="Models\General\Dictionary.cs" />
+    <Compile Include="Models\General\Enum.cs" />
+    <Compile Include="Models\General\HttpServerStatus.cs" />
+    <Compile Include="Models\General\SQLParamters.cs" />
+    <Compile Include="Models\General\TVParam.cs" />
     <Compile Include="Models\General\Session.cs" />
+    <Compile Include="Models\General\UserRightMenu.cs" />
     <Compile Include="Models\ViewComponents\HTMLAttributes.cs" />
     <Compile Include="Models\ViewComponents\HTMLSelectList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -793,8 +793,12 @@
     <Content Include="Buttons-2.3.4\js\buttons.semanticui.min.js" />
     <Content Include="Buttons-2.3.4\js\dataTables.buttons.js" />
     <Content Include="Buttons-2.3.4\js\dataTables.buttons.min.js" />
+    <Content Include="Common\CommonScripts\CSSFormat.js" />
+    <Content Include="Common\CommonScripts\DBCondition.js" />
+    <Content Include="Common\CommonScripts\Enum.js" />
     <Content Include="Common\CommonScripts\ExportClasses.js" />
     <Content Include="Common\CommonScripts\FrontEndClass.js" />
+    <Content Include="Common\CommonScripts\HTMLAttribute.js" />
     <Content Include="Common\CommonScripts\JSClass.js" />
     <Content Include="Common\CommonScripts\ServerEnd.js" />
     <Content Include="Common\CommonScripts\Uttility.js" />

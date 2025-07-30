@@ -5,8 +5,7 @@ using System.Web;
 using office360.Models.General;
 using office360.Models.EDMX;
 using office360.Extensions;
-using static office360.Models.General.DBListCondition;
-using static office360.Models.General.Http_Server_Status;
+using static office360.Models.General.HttpServerStatus;
 namespace office360.CommonHelper
 {
     public class GetAllListFromDB
@@ -20,11 +19,11 @@ namespace office360.CommonHelper
             using (var db = new SESEntities())
             {
                 var DATA = db.RSM_RightSetting_GetDetailByParam(
-                                                              DB_IF_Condition.GET_ALL_ALLOWED_RIGHTS_TO_LOGIN_USER_FOR_SIDE_MENUE.ToSafeString(),
+                                                              DBFilter.GET_ALL_ALLOWED_RIGHTS_TO_LOGIN_USER_FOR_SIDE_MENUE.ToSafeString(),
                                                               Session_Manager.AllowedCampusIds,
                                                               Session_Manager.UserId,
                                                               Session_Manager.CompanyId,
-                                                              ASPManagRoles.URLTYPEID_FORM,
+                                                              Dictionary.URLTYPEID_FORM,
                                                               true,
                                                               null,
                                                               null,
@@ -40,11 +39,11 @@ namespace office360.CommonHelper
             using (var db = new SESEntities())
             {
                 var data = db.RSM_RightSetting_GetDetailByParam(
-                                                              DB_IF_Condition.GET_ALLOWED_RIGHTS_TO_LOGIN_USER_BY_RIGHTID.ToSafeString(),
+                                                              DBFilter.GET_ALLOWED_RIGHTS_TO_LOGIN_USER_BY_RIGHTID.ToSafeString(),
                                                               Session_Manager.AllowedCampusIds,
                                                               Session_Manager.UserId,
                                                               Session_Manager.CompanyId,
-                                                              ASPManagRoles.URLTYPEID_FORM,
+                                                              Dictionary.URLTYPEID_FORM,
                                                               true,
                                                               null,
                                                               RightId,
@@ -69,11 +68,11 @@ namespace office360.CommonHelper
             using (var db = new SESEntities())
             {
                 var data = db.RSM_RightSetting_GetDetailByParam(
-                                                              DB_IF_Condition.GET_ALLOWED_RIGHTS_TO_LOGIN_USER_BY_URL.ToSafeString(),
+                                                              DBFilter.GET_ALLOWED_RIGHTS_TO_LOGIN_USER_BY_URL.ToSafeString(),
                                                               Session_Manager.AllowedCampusIds,
                                                               Session_Manager.UserId,
                                                               Session_Manager.CompanyId,
-                                                              ASPManagRoles.URLTYPEID_FORM,
+                                                              Dictionary.URLTYPEID_FORM,
                                                               true,
                                                               null,
                                                               null,

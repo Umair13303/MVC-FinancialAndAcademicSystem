@@ -5,7 +5,7 @@ using System.Web;
 
 namespace office360.Models.General
 {
-    public class Http_Server_Status
+    public class HttpServerStatus
     {
 
         public enum Http_DB_Response

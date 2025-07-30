@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using static office360.Models.General.Http_Server_Status;
+using static office360.Models.General.HttpServerStatus;
 
 namespace office360.Areas.AAcademic.Controllers
 {
@@ -98,7 +98,7 @@ namespace office360.Areas.AAcademic.Controllers
         public ActionResult UpSert_Into_ACM_Class(_SqlParameters PostedData)
         {
             _Exe = AAcademic.HelperCode.CUD_Operation.Update_Insert_ACM_Class(PostedData);
-            var data = new { Message = Http_Server_Status.HTTP_DB_TransactionMessagByStatusCode(_Exe), StatusCode = _Exe };
+            var data = new { Message = HttpServerStatus.HTTP_DB_TransactionMessagByStatusCode(_Exe), StatusCode = _Exe };
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 

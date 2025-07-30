@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Web;
-using static office360.Models.General.DocumentStatus;
-using static office360.Models.General.Http_Server_Status;
-using static office360.Models.General.DBListCondition;
-using DocumentStatus = office360.Models.General.DocumentStatus;
+
+using static office360.Models.General.HttpServerStatus;
+
+
 using System.Data.Entity.Infrastructure;
 using office360.Models.EDMX;
 using office360.Models.General;

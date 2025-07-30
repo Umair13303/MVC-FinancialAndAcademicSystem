@@ -7,9 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
-using static office360.Models.General.DocumentStatus;
-using static office360.Models.General.DBListCondition;
-using static office360.Models.General.Http_Server_Status;
+using static office360.Models.General.HttpServerStatus;
 namespace office360.GlobalHelper.LookUp
 {
     public class LookUp_GetDataFromDB_SP

@@ -17,9 +17,8 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
-using static office360.Models.General.DocumentStatus;
-using static office360.Models.General.Http_Server_Status;
-using static office360.Models.General.RightsGUID;
+using static office360.Models.General.HttpServerStatus;
+using static office360.Models.General.UserRightMenu;
 
 namespace REP.Controllers
 {
@@ -51,7 +50,7 @@ namespace REP.Controllers
                 switch (StatusCode)
                 {
                     case (int?)Http_DB_Response.CODE_SUCCESS:
-                        return RedirectToAction(_ActionsURL.GetDashBoard, _Controller.Home);
+                        return RedirectToAction(_ActionsURL.GET_DASHBOARD_FOR_USER, _Controller.Home);
                     case (int?)Http_DB_Response.CODE_INTERNAL_SERVER_ERROR:
                         return RedirectToAction(_ActionsURL.InternalServerError, _Controller.Home);
                     case (int?)Http_DB_Response.CODE_DATA_DOES_NOT_EXIST:
@@ -67,20 +66,20 @@ namespace REP.Controllers
         }
         [UsersSessionCheck]
         [CompanySessionCheck]
-        public  ActionResult GetDashboard()
+        public  ActionResult GET_DASHBOARD_FOR_USER()
         {
             string roleKey;
-            if (ASPManagRoles.RoleGuids.TryGetValue(Session_Manager.RoleId, out roleKey))
+            if (Dictionary.RoleGuids.TryGetValue(Session_Manager.RoleId, out roleKey))
             {
                 switch (roleKey)
                 {
-                    case nameof(UserRoles.ROLE_ADMIN):
+                    case nameof(USER_ROLE.ROLE_ADMIN):
                         return View(DASHBOARD_BY_ROLEID.GetDashBoard_ADMIN);
-                    case nameof(UserRoles.ROLE_DEVELOPER):
+                    case nameof(USER_ROLE.ROLE_DEVELOPER):
                         return View(DASHBOARD_BY_ROLEID.GetDashBoard_DEVELOPER);
-                    case nameof(UserRoles.ROLE_MANAGER):
+                    case nameof(USER_ROLE.ROLE_MANAGER):
                         return View(DASHBOARD_BY_ROLEID.GetDashBoard_DEVELOPER);
-                    case nameof(UserRoles.ROLE_DEO):
+                    case nameof(USER_ROLE.ROLE_DEO):
                         return View(DASHBOARD_BY_ROLEID.GetDashBoard_DEVELOPER);
                     default:
                         return View(_ActionsURL.LogIn);

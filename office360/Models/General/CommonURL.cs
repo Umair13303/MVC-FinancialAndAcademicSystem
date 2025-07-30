@@ -35,7 +35,7 @@ namespace office360.Models.General
         public static string DataDoesNotExist = "DataDoesNotExist";
         public static string LogIn = "LogInPage";
         public static string Logout = "/Home/Logout";
-        public static string GetDashBoard = "GetDashBoard";
+        public static string GET_DASHBOARD_FOR_USER = "GET_DASHBOARD_FOR_USER";
 
         #endregion
     }

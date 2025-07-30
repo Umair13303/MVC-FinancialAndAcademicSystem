@@ -10,8 +10,8 @@ using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Web.Mvc;
-using static office360.Models.General.Http_Server_Status;
-using static office360.Models.General.RightsGUID;
+using static office360.Models.General.HttpServerStatus;
+using static office360.Models.General.UserRightMenu;
 
 namespace office360.CommonHelper
 {
@@ -26,7 +26,7 @@ namespace office360.CommonHelper
                             #region CHECK IF USER EXIST
                 var UserName = Users.UserName.ToString(); 
                 var Password = Users.Password.ToString();
-                var Condition = DBListCondition.DB_IF_Condition.GET_USER_CONFIRMATION.ToSafeString();
+                var Condition = DBFilter.GET_USER_CONFIRMATION.ToSafeString();
                 if (!string.IsNullOrEmpty(UserName) && !string.IsNullOrEmpty(Password))
                 {
                     using (var db = new SESEntities())

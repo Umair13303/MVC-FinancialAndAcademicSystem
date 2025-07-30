@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using static office360.Models.General.Http_Server_Status;
+using static office360.Models.General.HttpServerStatus;
 
 
 namespace office360.Areas.AUser.Controllers
@@ -100,7 +100,7 @@ namespace office360.Areas.AUser.Controllers
         public ActionResult UpSert_Into_UM_User(_SqlParameters PostedData)
         {
             _Exe = AUser.HelperCode.CUD_Operation.Update_Insert_UM_User(PostedData);
-            var data = new { Message = Http_Server_Status.HTTP_DB_TransactionMessagByStatusCode(_Exe), StatusCode = _Exe };
+            var data = new { Message = HttpServerStatus.HTTP_DB_TransactionMessagByStatusCode(_Exe), StatusCode = _Exe };
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 

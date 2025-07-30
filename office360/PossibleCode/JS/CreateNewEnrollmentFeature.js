@@ -48,7 +48,7 @@ $('#ButtonPreviewFeeChallan').click(function (event) {
             var SessionId = $('#DropDownListSession :selected').val();
             var ClassId = $('#DropDownListClass :selected').val();
             var JsonArg = {
-                DB_IF_PARAM: PARAMETER.DB_IF_Condition.ACCFEESTRUCTUREDETAIL_GET_INFO_NEW_STUDENT,
+                DB_IF_PARAM: PARAMETER.DBFilter.ACCFEESTRUCTUREDETAIL_GET_INFO_NEW_STUDENT,
                 CampusId: CampusId,
                 SessionId: SessionId,
                 ClassId: ClassId
@@ -69,7 +69,7 @@ function GET_ACCFEESTRUCTUREDETAIL_DETAILBYID() {
     var ClassId = $('#DropDownListClass :selected').val();
     if (ClassId != null && ClassId != undefined && ClassId != "" && ClassId != "-1") {
         var JsonArg = {
-            DB_IF_PARAM: PARAMETER.DB_IF_Condition.ACCFEESTRUCTUREDETAIL_GET_INFO_NEW_STUDENT,
+            DB_IF_PARAM: PARAMETER.DBFilter.ACCFEESTRUCTUREDETAIL_GET_INFO_NEW_STUDENT,
             SessionId: SessionId,
             ClassId: ClassId,
         }
@@ -148,7 +148,7 @@ function GET_GENERALBRANCH_CHALLANSETTING(ChallanMethodId) {
     var ChallanMethodId_ = (ChallanMethodId == (-1) || ChallanMethodId == undefined || ChallanMethodId == "") ? 0 : ChallanMethodId;
     var JsonArg = {
         Id: ChallanMethodId_,
-        DB_IF_PARAM: PARAMETER.DB_IF_Condition.CHALLANMETHOD_LIST_BY_ID,
+        DB_IF_PARAM: PARAMETER.DBFilter.CHALLANMETHOD_LIST_BY_ID,
     }
     $.ajax({
         type: "POST",

@@ -281,7 +281,7 @@ warning 6002: The table/view 'SESFINAL.dbo.ChallanType' does not have a primary 
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="DB_IF_Condition" Type="nvarchar(max)" />
+          <Property Name="DBFilter" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SESFINAL.dbo.ChargingMethod' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -979,7 +979,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <DefiningQuery>SELECT 
     [ChallanType].[Id] AS [Id], 
     [ChallanType].[Description] AS [Description], 
-    [ChallanType].[DB_IF_Condition] AS [DB_IF_Condition]
+    [ChallanType].[DBFilter] AS [DBFilter]
     FROM [dbo].[ChallanType] AS [ChallanType]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ChargingMethod" EntityType="Self.ChargingMethod" store:Type="Views" store:Schema="dbo">
@@ -1488,7 +1488,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DB_IF_Condition" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DBFilter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ChargingMethod">
           <Key>
@@ -2533,7 +2533,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               <MappingFragment StoreEntitySet="ChallanType">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="DB_IF_Condition" ColumnName="DB_IF_Condition" />
+                <ScalarProperty Name="DBFilter" ColumnName="DBFilter" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

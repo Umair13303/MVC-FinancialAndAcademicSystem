@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using static office360.Models.General.Http_Server_Status;
+using static office360.Models.General.HttpServerStatus;
 
 
 namespace office360.Areas.AAcademic.Controllers
@@ -76,10 +76,10 @@ namespace office360.Areas.AAcademic.Controllers
 
         #region ACTION RESULT FOR :: INSERT/UPDATE/DELETE INTO DBO.ACCM_ClassCurriculum
         [HttpPost]
-        public ActionResult UpSert_Into_ACCM_ClassCurriculum(_SqlParameters PostedData, List<TT_Curriculumn> PostedDataDetail)
+        public ActionResult UpSert_Into_ACCM_ClassCurriculum(_SqlParameters PostedData)
         {
             _Exe = AAcademic.HelperCode.CUD_Operation.Update_Insert_AASM_AdmissionSession(PostedData);
-            var data = new { Message = Http_Server_Status.HTTP_DB_TransactionMessagByStatusCode(_Exe), StatusCode = _Exe };
+            var data = new { Message = HttpServerStatus.HTTP_DB_TransactionMessagByStatusCode(_Exe), StatusCode = _Exe };
             return Json(data, JsonRequestBehavior.AllowGet);
         }
         #endregion
