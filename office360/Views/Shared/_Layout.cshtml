@@ -114,7 +114,7 @@
     <!-- END PAGE LEVEL STYLES -->
 </head>
 <body class="alt-menu">
-    @{ var navigationData = Session["Menu"] as List<office360.Models.General.RightsGUID.MenuViewModel>; }
+    @{ var navigationData = Session["Menu"] as List<office360.Models.General.UserRightMenu.MenuViewModel>; }
     <!--  BEGIN NAVBAR  -->
     <div class="header-container fixed-top">
         <header class="header navbar navbar-expand-sm">
@@ -474,9 +474,11 @@
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="~/Common/CommonScripts/ServerEnd.js"></script>
     <script src="~/Common/CommonScripts/JSClass.js"></script>
+    <script src="~/Common/CommonScripts/CSSFormat.js"></script>
+    <script src="~/Common/CommonScripts/DBCondition.js"></script>
+    <script src="~/Common/CommonScripts/Enum.js"></script>
+    <script src="~/Common/CommonScripts/HTMLAttribute.js"></script>
     <script src="~/SiteAssets/Uttility/JqueryDateFormat.js"></script>
-    @*<script src="~/Common/CommonScripts/ExportClasses.js"></script>*@
-    @*<script src="~/Common/CommonScripts/FrontEndClass.js"></script>*@
     <script src="~/Common/CommonScripts/Uttility.js"></script>
 
 

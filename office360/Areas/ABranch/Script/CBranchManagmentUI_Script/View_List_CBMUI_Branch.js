@@ -45,7 +45,7 @@ function InitDataTable() {
         columnDefs: [
             { visible: false, targets: 1 },
             { "orderable": false, targets: [0, 1, 2, 3, 4, 5, 6] },
-            { className: Css_Class.DynamicGroupBy, targets:[2,3,6] }
+            { className: CSS_CLASS.DATATABLE_COLUMN_DDLADOPTER, targets:[2,3,6] }
         ],
     });
     table.on('order.dt search.dt', function () {
@@ -59,7 +59,7 @@ function InitDataTable() {
 
 /*----------------------------------** FUNCTION FOR::DROP DOWN LIST (DATA TABLE COLUMNS)            **----------------------------------------------*/
 function PopulateDropDownLists() {
-    DataTableDropDown_ColumnClass('MainTableBM_Branch', Css_Class.DynamicGroupBy, 'DropDownListGroupBy');
+    DataTableDropDown_ColumnClass('MainTableBM_Branch', CSS_CLASS.DATATABLE_COLUMN_DDLADOPTER, 'DropDownListGroupBy');
 }
 
 /*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                             **----------------------------------------------*/

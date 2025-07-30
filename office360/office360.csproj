@@ -796,8 +796,6 @@
     <Content Include="Common\CommonScripts\CSSFormat.js" />
     <Content Include="Common\CommonScripts\DBCondition.js" />
     <Content Include="Common\CommonScripts\Enum.js" />
-    <Content Include="Common\CommonScripts\ExportClasses.js" />
-    <Content Include="Common\CommonScripts\FrontEndClass.js" />
     <Content Include="Common\CommonScripts\HTMLAttribute.js" />
     <Content Include="Common\CommonScripts\JSClass.js" />
     <Content Include="Common\CommonScripts\ServerEnd.js" />

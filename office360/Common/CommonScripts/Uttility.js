@@ -1,26 +1,27 @@
 ﻿/*----------------------------------** FUNCTION FOR::GLOBAL VARIABLE **-------------------------------------------------------------------------------------*/
-var DropDownListSelect2Class = '.select2';
-var PhoneClass = '.PhoneNumber';
-var MobileClass = '.MobileNumber';
-var EmailAddressClass = '.EmailAddress';
-var CNICClass = '.CNICNumber';
-var NTNClass = '.NTNNumber';
+var SELECT_DDL = '.select2';
+var PHONENO = '.PhoneNumber';
+var MOBILENO = '.MobileNumber';
+var CNIC = '.CNICNumber';
+var EMAIL = '.EmailAddress';
+var NTN = '.NTNNumber';
 /*----------------------------------** FUNCTION FOR::INITIALIZER CLASSES **-------------------------------------------------------------------------------------*/
-InitializeSelect2(DropDownListSelect2Class);
-InitializeInputMask(PhoneClass, AppliedMasking.Phone_Number);
-InitializeInputMask(MobileClass, AppliedMasking.Mobile_Number);
-InitializeInputMask(EmailAddressClass, AppliedMasking.Email_Address);
-InitializeInputMask(CNICClass, AppliedMasking.CNIC_Number);
-InitializeInputMask(NTNClass, AppliedMasking.NTN_Number);
+INITIALIZE_SELECT2(SELECT_DDL);
+INITIALIZE_INPUT_MASK(PHONENO, MASKING.PHONENO);
+INITIALIZE_INPUT_MASK(MOBILENO, MASKING.MOBILENO);
+INITIALIZE_INPUT_MASK(CNIC, MASKING.CNIC);
+INITIALIZE_INPUT_MASK(NTN, MASKING.NTN);
+INITIALIZE_INPUT_MASK(EMAIL, MASKING.EMAIL);
+
 
 /*----------------------------------** FUNCTION FOR::SELECT2 DROPDOWN **-------------------------------------------------------------------------------------*/
-function InitializeSelect2(selector) {
+function INITIALIZE_SELECT2(selector) {
     $(selector).select2();
 }
 
 /*----------------------------------** FUNCTION FOR::MASKING **---------------------------------------------------------------------------------------------*/
 
-function InitializeInputMask(selector, maskPattern) {
+function INITIALIZE_INPUT_MASK(selector, maskPattern) {
     $(selector).inputmask(maskPattern);
 }
 
