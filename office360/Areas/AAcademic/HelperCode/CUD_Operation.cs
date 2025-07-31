@@ -1,9 +1,6 @@
 ﻿using System.Linq;
 using System.Web;
-
 using static office360.Models.General.HttpServerStatus;
-
-
 using System.Data.Entity.Infrastructure;
 using office360.Models.EDMX;
 using office360.Models.General;

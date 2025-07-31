@@ -131,6 +131,5 @@ namespace office360.Common.CommonHelper
         {
             return EnumValue.ToString();  
         }
-
     }
 }

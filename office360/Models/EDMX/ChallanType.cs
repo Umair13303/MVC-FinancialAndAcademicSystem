@@ -16,6 +16,6 @@ namespace office360.Models.EDMX
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public string DBFilter { get; set; }
+        public string DB_IF_Condition { get; set; }
     }
 }

@@ -7,7 +7,7 @@ namespace office360.Models.General
 {
     public class TVParam
     {
-        public partial class ACCM_ClassCurriculumSubject
+        public partial class ACCM_ClassCurriculumSubject_TVP
         {
             public int? Id { get; set; }
             public Guid? GuID { get; set; }

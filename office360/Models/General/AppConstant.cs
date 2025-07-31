@@ -7,7 +7,7 @@ namespace office360.Models.General
 {
     public class AppConstant
     {
-        public class ApplicationConstants
+        public class Path
         {
             public static string BasePhisicalPath
             {

@@ -76,9 +76,9 @@ namespace office360.Areas.AAcademic.Controllers
 
         #region ACTION RESULT FOR :: INSERT/UPDATE/DELETE INTO DBO.ACCM_ClassCurriculum
         [HttpPost]
-        public ActionResult UpSert_Into_ACCM_ClassCurriculum(SQLParamters PostedData)
+        public ActionResult UpSert_Into_ACCM_ClassCurriculum(SQLParamters PostedData, List<TVParam.ACCM_ClassCurriculumSubject_TVP> PostedDataDetail)
         {
-            _Exe = AAcademic.HelperCode.CUD_Operation.Update_Insert_AASM_AdmissionSession(PostedData);
+            _Exe = AAcademic.HelperCode.BULK_CUD_Operation.Update_Insert_ACCM_ClassCurriculum(PostedData, PostedDataDetail);
             var data = new { Message = HttpServerStatus.HTTP_DB_TransactionMessagByStatusCode(_Exe), StatusCode = _Exe };
             return Json(data, JsonRequestBehavior.AllowGet);
         }

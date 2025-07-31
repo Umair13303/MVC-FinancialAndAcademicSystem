@@ -41,10 +41,8 @@
           <Property Name="GuID" Type="uniqueidentifier" />
           <Property Name="Code" Type="nvarchar(max)" />
           <Property Name="CampusId" Type="int" />
-          <Property Name="SubjectId" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="ClassId" Type="int" />
-          <Property Name="StudySchemeId" Type="int" />
-          <Property Name="SemesterId" Type="int" />
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="UpdatedOn" Type="datetime" />
@@ -55,6 +53,23 @@
           <Property Name="BranchId" Type="int" />
           <Property Name="CompanyId" Type="int" />
           <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ACCM_ClassCurriculumSubject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuID" Type="uniqueidentifier" />
+          <Property Name="ClassCurriculumId" Type="int" />
+          <Property Name="SemesterId" Type="int" />
+          <Property Name="SubjectId" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="DocType" Type="int" />
+          <Property Name="DocumentStatus" Type="int" />
+          <Property Name="Status" Type="bit" />
         </EntityType>
         <EntityType Name="ACM_Class">
           <Key>
@@ -281,7 +296,7 @@ warning 6002: The table/view 'SESFINAL.dbo.ChallanType' does not have a primary 
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="DBFilter" Type="nvarchar(max)" />
+          <Property Name="DB_IF_Condition" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SESFINAL.dbo.ChargingMethod' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -629,6 +644,24 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Response" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="ACCM_ClassCurriculum_Upsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_OperationType" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="GuID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="CampusId" Type="int" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ClassId" Type="int" Mode="In" />
+          <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+          <Parameter Name="UpdatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="UpdatedBy" Type="int" Mode="In" />
+          <Parameter Name="DocType" Type="int" Mode="In" />
+          <Parameter Name="DocumentStatus" Type="int" Mode="In" />
+          <Parameter Name="Status" Type="bit" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Response" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="ACM_Class_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="SessionCompanyId" Type="int" Mode="In" />
@@ -931,6 +964,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
         <EntityContainer Name="SESModelStoreContainer">
           <EntitySet Name="AASM_AdmissionSession" EntityType="Self.AASM_AdmissionSession" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ACCM_ClassCurriculum" EntityType="Self.ACCM_ClassCurriculum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ACCM_ClassCurriculumSubject" EntityType="Self.ACCM_ClassCurriculumSubject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ACM_Class" EntityType="Self.ACM_Class" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ASM_Subject" EntityType="Self.ASM_Subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BM_Branch" EntityType="Self.BM_Branch" Schema="dbo" store:Type="Tables" />
@@ -979,7 +1013,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <DefiningQuery>SELECT 
     [ChallanType].[Id] AS [Id], 
     [ChallanType].[Description] AS [Description], 
-    [ChallanType].[DBFilter] AS [DBFilter]
+    [ChallanType].[DB_IF_Condition] AS [DB_IF_Condition]
     FROM [dbo].[ChallanType] AS [ChallanType]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ChargingMethod" EntityType="Self.ChargingMethod" store:Type="Views" store:Schema="dbo">
@@ -1260,10 +1294,8 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Property Name="GuID" Type="Guid" />
           <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CampusId" Type="Int32" />
-          <Property Name="SubjectId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClassId" Type="Int32" />
-          <Property Name="StudySchemeId" Type="Int32" />
-          <Property Name="SemesterId" Type="Int32" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
@@ -1274,6 +1306,23 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           <Property Name="BranchId" Type="Int32" />
           <Property Name="CompanyId" Type="Int32" />
           <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ACCM_ClassCurriculumSubject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuID" Type="Guid" />
+          <Property Name="ClassCurriculumId" Type="Int32" />
+          <Property Name="SemesterId" Type="Int32" />
+          <Property Name="SubjectId" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="DocType" Type="Int32" />
+          <Property Name="DocumentStatus" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
         </EntityType>
         <EntityType Name="ACM_Class">
           <Key>
@@ -1488,7 +1537,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DBFilter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DB_IF_Condition" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ChargingMethod">
           <Key>
@@ -1740,6 +1789,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
         <EntityContainer Name="SESEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AASM_AdmissionSession" EntityType="Self.AASM_AdmissionSession" />
           <EntitySet Name="ACCM_ClassCurriculum" EntityType="Self.ACCM_ClassCurriculum" />
+          <EntitySet Name="ACCM_ClassCurriculumSubject" EntityType="Self.ACCM_ClassCurriculumSubject" />
           <EntitySet Name="ACM_Class" EntityType="Self.ACM_Class" />
           <EntitySet Name="ASM_Subject" EntityType="Self.ASM_Subject" />
           <EntitySet Name="BM_Branch" EntityType="Self.BM_Branch" />
@@ -1823,6 +1873,24 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             <Parameter Name="ClassIds" Mode="In" Type="String" />
             <Parameter Name="IsEnteryTestRequired" Mode="In" Type="Boolean" />
             <Parameter Name="IsInterviewRequired" Mode="In" Type="Boolean" />
+            <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="DocType" Mode="In" Type="Int32" />
+            <Parameter Name="DocumentStatus" Mode="In" Type="Int32" />
+            <Parameter Name="Status" Mode="In" Type="Boolean" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="Remarks" Mode="In" Type="String" />
+            <Parameter Name="Response" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ACCM_ClassCurriculum_Upsert">
+            <Parameter Name="DB_OperationType" Mode="In" Type="String" />
+            <Parameter Name="GuID" Mode="In" Type="Guid" />
+            <Parameter Name="CampusId" Mode="In" Type="Int32" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="ClassId" Mode="In" Type="Int32" />
             <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
             <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
             <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
@@ -2292,10 +2360,8 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="CampusId" ColumnName="CampusId" />
-                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ClassId" ColumnName="ClassId" />
-                <ScalarProperty Name="StudySchemeId" ColumnName="StudySchemeId" />
-                <ScalarProperty Name="SemesterId" ColumnName="SemesterId" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
@@ -2306,6 +2372,24 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
                 <ScalarProperty Name="BranchId" ColumnName="BranchId" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ACCM_ClassCurriculumSubject">
+            <EntityTypeMapping TypeName="SESModel.ACCM_ClassCurriculumSubject">
+              <MappingFragment StoreEntitySet="ACCM_ClassCurriculumSubject">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="ClassCurriculumId" ColumnName="ClassCurriculumId" />
+                <ScalarProperty Name="SemesterId" ColumnName="SemesterId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="DocType" ColumnName="DocType" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2533,7 +2617,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
               <MappingFragment StoreEntitySet="ChallanType">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="DBFilter" ColumnName="DBFilter" />
+                <ScalarProperty Name="DB_IF_Condition" ColumnName="DB_IF_Condition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2877,6 +2961,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="AASM_AdmissionSession_Upsert" FunctionName="SESModel.Store.AASM_AdmissionSession_Upsert" />
+          <FunctionImportMapping FunctionImportName="ACCM_ClassCurriculum_Upsert" FunctionName="SESModel.Store.ACCM_ClassCurriculum_Upsert" />
           <FunctionImportMapping FunctionImportName="ACM_Class_GetListByParam" FunctionName="SESModel.Store.ACM_Class_GetListByParam">
             <ResultMapping>
               <ComplexTypeMapping TypeName="SESModel.ACM_Class_GetListByParam_Result">
@@ -3102,7 +3187,7 @@ warning 6002: The table/view 'SESFINAL.dbo.WorkingShift' does not have a primary
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

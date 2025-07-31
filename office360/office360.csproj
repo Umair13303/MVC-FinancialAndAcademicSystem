@@ -292,6 +292,7 @@
     <Compile Include="Areas\AAcademic\Controllers\CAcademicClassManagmentUIController.cs" />
     <Compile Include="Areas\AAcademic\Controllers\CAcademicClassCurriculumManagmentUIController.cs" />
     <Compile Include="Areas\AAcademic\Controllers\CAcademicSubjectManagmentUIController.cs" />
+    <Compile Include="Areas\AAcademic\HelperCode\BULK_CUD_Operation.cs" />
     <Compile Include="Areas\AAcademic\HelperCode\Check_Duplicate_By_LINQ.cs" />
     <Compile Include="Areas\AAcademic\HelperCode\CUD_Operation.cs" />
     <Compile Include="Areas\AAcademic\HelperCode\DATA_FROM_LINQ.cs" />
@@ -354,6 +355,9 @@
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\ACCM_ClassCurriculum.cs">
+      <DependentUpon>SESModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDMX\ACCM_ClassCurriculumSubject.cs">
       <DependentUpon>SESModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\ACM_Class.cs">

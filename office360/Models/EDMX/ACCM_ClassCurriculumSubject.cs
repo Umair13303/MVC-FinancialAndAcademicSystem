@@ -12,14 +12,13 @@ namespace office360.Models.EDMX
     using System;
     using System.Collections.Generic;
     
-    public partial class ACCM_ClassCurriculum
+    public partial class ACCM_ClassCurriculumSubject
     {
         public int Id { get; set; }
         public Nullable<System.Guid> GuID { get; set; }
-        public string Code { get; set; }
-        public Nullable<int> CampusId { get; set; }
-        public string Description { get; set; }
-        public Nullable<int> ClassId { get; set; }
+        public Nullable<int> ClassCurriculumId { get; set; }
+        public Nullable<int> SemesterId { get; set; }
+        public Nullable<int> SubjectId { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedOn { get; set; }
@@ -27,8 +26,5 @@ namespace office360.Models.EDMX
         public Nullable<int> DocType { get; set; }
         public Nullable<int> DocumentStatus { get; set; }
         public Nullable<bool> Status { get; set; }
-        public Nullable<int> BranchId { get; set; }
-        public Nullable<int> CompanyId { get; set; }
-        public string Remarks { get; set; }
     }
 }

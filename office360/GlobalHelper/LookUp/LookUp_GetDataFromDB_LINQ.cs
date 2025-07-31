@@ -266,7 +266,7 @@ namespace office360.GlobalHelper.LookUp
                          {
                              Id = x.Id,
                              Description = x.Description,
-                             DB_IF_PARAM = x.DBFilter,
+                             DB_IF_PARAM = x.DB_IF_Condition,
 
                          })
                          .ToList();
