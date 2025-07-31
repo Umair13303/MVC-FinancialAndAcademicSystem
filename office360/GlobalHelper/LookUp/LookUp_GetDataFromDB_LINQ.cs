@@ -13,13 +13,13 @@ namespace office360.GlobalHelper.LookUp
     public class LookUp_GetDataFromDB_LINQ
     {
         #region HELPER FOR :: GET DATA USING LINQ-QUERY ::-- DB_LOOKUP
-        public static List<_SqlParameters> GET_LK1_EnrollmentType(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_EnrollmentType(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.EnrollmentType
                      .Where(x => x.Status == true)
-                     .Select(x => new _SqlParameters
+                     .Select(x => new SQLParamters
                      {
                          Id = x.Id,
                          Description = x.Description,
@@ -28,12 +28,12 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_Gender(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_Gender(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.Gender
-                         .Select(x => new _SqlParameters
+                         .Select(x => new SQLParamters
                          {
                              Id = x.Id,
                              Description = x.Description,
@@ -43,12 +43,12 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_MartialStatus(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_MartialStatus(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.MartialStatus
-                         .Select(x => new _SqlParameters
+                         .Select(x => new SQLParamters
                          {
                              Id = x.Id,
                              Description = x.Description,
@@ -58,12 +58,12 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_Religion(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_Religion(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.Religion
-                         .Select(x => new _SqlParameters
+                         .Select(x => new SQLParamters
                          {
                              Id = x.Id,
                              Description = x.Description,
@@ -73,12 +73,12 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_Country(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_Country(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.Country
-                         .Select(x => new _SqlParameters
+                         .Select(x => new SQLParamters
                          {
                              Id = x.Id,
                              Description = "( " + x.CallingCode + " )" + x.Description,
@@ -88,12 +88,12 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_Relationship(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_Relationship(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.Relationship
-                         .Select(x => new _SqlParameters
+                         .Select(x => new SQLParamters
                          {
                              Id = x.Id,
                              Description = x.Description,
@@ -103,12 +103,12 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_Occupation(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_Occupation(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.Occupation
-                         .Select(x => new _SqlParameters
+                         .Select(x => new SQLParamters
                          {
                              Id = x.Id,
                              Description = x.Description,
@@ -118,12 +118,12 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_PolicyPeriod(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_PolicyPeriod(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.PolicyPeriod
-                         .Select(x => new _SqlParameters
+                         .Select(x => new SQLParamters
                          {
                              Id = x.Id,
                              Description = x.Description,
@@ -134,12 +134,12 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_CampusType(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_CampusType(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.CampusType.Where(x => x.Status == true)
-                         .Select(x => new _SqlParameters
+                         .Select(x => new SQLParamters
                          {
                              Id = x.Id,
                              Description = x.Description,
@@ -150,12 +150,12 @@ namespace office360.GlobalHelper.LookUp
             }
         }
         
-        public static List<_SqlParameters> GET_LK1_AcademicYear(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_AcademicYear(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.AcademicYear.Where(x => x.Status == true)
-                         .Select(x => new _SqlParameters
+                         .Select(x => new SQLParamters
                          {
                              Id = x.Id,
                              Description = x.Description,
@@ -165,13 +165,13 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_OrganizationType(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_OrganizationType(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.OrganizationType
                         .Where(x => x.Status == true)
-                         .Select(x => new _SqlParameters
+                         .Select(x => new SQLParamters
                          {
                              Id = x.Id,
                              Description = x.Description,
@@ -181,88 +181,88 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_City(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_City(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.City
                          .Where(x => x.CountryId == PostedData.CountryId && x.Status == true)
-                         .Select(x => new _SqlParameters { Id = x.Id, Description = x.Description, }).ToList();
+                         .Select(x => new SQLParamters { Id = x.Id, Description = x.Description, }).ToList();
 
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_RollCallSystem(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_RollCallSystem(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.RollCallSystem
-                         .Select(x => new _SqlParameters { Id = x.Id, Description = x.Description, }).ToList();
+                         .Select(x => new SQLParamters { Id = x.Id, Description = x.Description, }).ToList();
 
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_BillingMethod(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_BillingMethod(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.BillingMethod
-                         .Select(x => new _SqlParameters { Id = x.Id, Description = x.Description, }).ToList();
+                         .Select(x => new SQLParamters { Id = x.Id, Description = x.Description, }).ToList();
 
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_RegistrationType(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_RegistrationType(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.RegistrationType
-                      .Select(x => new _SqlParameters { Id = x.Id, Description = x.Description })
+                      .Select(x => new SQLParamters { Id = x.Id, Description = x.Description })
                       .ToList();
 
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_FeeCatagory(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_FeeCatagory(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.FeeCatagory
                       .Where(X => X.Status == true)
-                      .Select(x => new _SqlParameters { Id = x.Id, Description = x.Description })
+                      .Select(x => new SQLParamters { Id = x.Id, Description = x.Description })
                       .ToList();
 
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_ChargingMethod(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_ChargingMethod(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.ChargingMethod
-                      .Select(x => new _SqlParameters { Id = x.Id, Description = x.Description })
+                      .Select(x => new SQLParamters { Id = x.Id, Description = x.Description })
                       .ToList();
 
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_AdmissionCatagory(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_AdmissionCatagory(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.AdmissionCatagory
-                      .Select(x => new _SqlParameters { Id = x.Id, Description = x.Description })
+                      .Select(x => new SQLParamters { Id = x.Id, Description = x.Description })
                       .ToList();
 
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_ChallanType(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_ChallanType(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.ChallanType
-                         .Select(x => new _SqlParameters
+                         .Select(x => new SQLParamters
                          {
                              Id = x.Id,
                              Description = x.Description,
@@ -274,12 +274,12 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_Role(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_Role(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.Role
-                         .Select(x => new _SqlParameters
+                         .Select(x => new SQLParamters
                          {
                              Id = x.Id,
                              Description = x.Description,
@@ -289,12 +289,12 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_Right(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_Right(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.Right
-                         .Select(x => new _SqlParameters
+                         .Select(x => new SQLParamters
                          {
                              Id = x.Id,
                              Description = x.DisplayName + " [" + x.Menu +" / "+x.SubMenu +" ]",
@@ -306,12 +306,12 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_URLType(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_URLType(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.URLType
-                         .Select(x => new _SqlParameters
+                         .Select(x => new SQLParamters
                          {
                              Id = x.Id,
                              Description = x.Description,
@@ -321,13 +321,13 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_StudyLevel(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_StudyLevel(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.StudyLevel
                         .Where(x => x.Status == true)
-                         .Select(x => new _SqlParameters
+                         .Select(x => new SQLParamters
                          {
                              Id = x.Id,
                              Description = x.Description,
@@ -337,13 +337,13 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_StudyGroup(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_StudyGroup(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.StudyGroup
                         .Where(x => x.Status == true)
-                         .Select(x => new _SqlParameters
+                         .Select(x => new SQLParamters
                          {
                              Id = x.Id,
                              Description = x.Description,
@@ -353,13 +353,13 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_ChallanMethod(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_ChallanMethod(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.ChallanMethod
                         .Where(x => x.Status == true)
-                         .Select(x => new _SqlParameters
+                         .Select(x => new SQLParamters
                          {
                              Id = x.Id,
                              Description = x.Description,
@@ -371,12 +371,12 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_StudyScheme(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_StudyScheme(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.StudyScheme
-                         .Select(x => new _SqlParameters
+                         .Select(x => new SQLParamters
                          {
                              Id = x.Id,
                              Description = x.Description,
@@ -387,13 +387,13 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<_SqlParameters> GET_LK1_Semester(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_LK1_Semester(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
                 var DATA = db.Semester
                         .Where(x=>x.StudySchemeId == PostedData.StudySchemeId)
-                        .Select(x => new _SqlParameters
+                        .Select(x => new SQLParamters
                         {
                             Id = x.Id,
                             Description = x.Description,

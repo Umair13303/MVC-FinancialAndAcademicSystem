@@ -11,16 +11,16 @@ namespace office360.Areas.AAcademic.HelperCode
     public class Document_Detail_By_GUID_LINQ
     {
         #region HELPER FOR :: GET DATA USING LINQ (ACM_CLASS) ::-- MAIN DB
-        public static List<_SqlParameters> GET_MT_ACM_CLASS_INFO_BY_GUID(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_MT_ACM_CLASS_INFO_BY_GUID(SQLParamters PostedData)
         {
-            List<_SqlParameters> DATA = new List<_SqlParameters>();
+            List<SQLParamters> DATA = new List<SQLParamters>();
 
             using (SESEntities db = new SESEntities())
             {
-                DATA = ((List<_SqlParameters>)
+                DATA = ((List<SQLParamters>)
                        (from C in db.ACM_Class
                         where C.CompanyId == Session_Manager.CompanyId && C.GuID == PostedData.GuID
-                        select new _SqlParameters
+                        select new SQLParamters
                         {
                             Id = C.Id,
                             GuID = C.GuID,
@@ -39,16 +39,16 @@ namespace office360.Areas.AAcademic.HelperCode
         }
         #endregion
         #region HELPER FOR :: GET DATA USING LINQ (ASM_SUBJECT) ::-- MAIN DB
-        public static List<_SqlParameters> GET_MT_ASM_SUBJECT_INFO_BY_GUID(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_MT_ASM_SUBJECT_INFO_BY_GUID(SQLParamters PostedData)
         {
-            List<_SqlParameters> DATA = new List<_SqlParameters>();
+            List<SQLParamters> DATA = new List<SQLParamters>();
 
             using (SESEntities db = new SESEntities())
             {
-                DATA = ((List<_SqlParameters>)
+                DATA = ((List<SQLParamters>)
                        (from S in db.ASM_Subject
                         where S.CompanyId == Session_Manager.CompanyId && S.GuID == PostedData.GuID
-                        select new _SqlParameters
+                        select new SQLParamters
                         {
                             Id = S.Id,
                             GuID = S.GuID,
@@ -65,16 +65,16 @@ namespace office360.Areas.AAcademic.HelperCode
         #endregion
 
         #region HELPER FOR :: GET DATA USING LINQ (AASM_ADMISSIONSESSION) ::-- MAIN DB
-        public static List<_SqlParameters> GET_MT_AASM_ADMISSIONSESSION_INFO_BY_GUID(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_MT_AASM_ADMISSIONSESSION_INFO_BY_GUID(SQLParamters PostedData)
         {
-            List<_SqlParameters> DATA = new List<_SqlParameters>();
+            List<SQLParamters> DATA = new List<SQLParamters>();
 
             using (SESEntities db = new SESEntities())
             {
-                DATA = ((List<_SqlParameters>)
+                DATA = ((List<SQLParamters>)
                        (from S in db.AASM_AdmissionSession
                         where S.CompanyId == Session_Manager.CompanyId && S.GuID == PostedData.GuID
-                        select new _SqlParameters
+                        select new SQLParamters
                         {
                             Id = S.Id,
                             GuID = S.GuID,

@@ -16,7 +16,7 @@ namespace office360.Areas.AAcademic.HelperCode
     public class Check_Duplicate_By_LINQ
     {
         #region HELPER FOR :: CHECK IF CLASS(ACTIVE_CLASS) ALREADY EXIST
-        public static int? IS_EXIST_ACM_CLASS_BY_PARAMETER(_SqlParameters PostedData)
+        public static int? IS_EXIST_ACM_CLASS_BY_PARAMETER(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
@@ -76,7 +76,7 @@ namespace office360.Areas.AAcademic.HelperCode
         #endregion
 
         #region HELPER FOR :: CHECK IF SUBJECT(ACTIVE_SUBJECT) ALREADY EXIST
-        public static int? IS_EXIST_ASM_SUBJECT_BY_PARAMETER(_SqlParameters PostedData)
+        public static int? IS_EXIST_ASM_SUBJECT_BY_PARAMETER(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
@@ -134,7 +134,7 @@ namespace office360.Areas.AAcademic.HelperCode
         #endregion
 
         #region HELPER FOR :: CHECK IF ADMISSIONSESSION(ACTIVE_ADMISSIONSESSION) ALREADY EXIST
-        public static int? IS_EXIST_AASM_ADMISSIONSESSION_BY_PARAMETER(_SqlParameters PostedData)
+        public static int? IS_EXIST_AASM_ADMISSIONSESSION_BY_PARAMETER(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {

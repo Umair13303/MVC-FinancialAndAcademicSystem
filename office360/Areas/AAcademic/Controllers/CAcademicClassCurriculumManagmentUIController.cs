@@ -24,7 +24,7 @@ namespace office360.Areas.AAcademic.Controllers
         #region ACTION RESULT FOR :: RENDER VIEW
         [UsersSessionCheck]
         [CompanySessionCheck]
-        public ActionResult CreateUpdate_ACCMUI_ClassCurriculum(_SqlParameters PostedData)
+        public ActionResult CreateUpdate_ACCMUI_ClassCurriculum(SQLParamters PostedData)
         {
             #region PASS VIEW
             _Exe = GetAllListFromDB.GetAllowedUsersRightsByParameter(PostedData.RightId);
@@ -45,17 +45,17 @@ namespace office360.Areas.AAcademic.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: RENDER OF DROP DOWN LIST FROM DB_MAIN USING STOREDPROCEDURE ** ---------------------- */
 
         #region ACTION RESULT FOR :: RENDER DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
-        public ActionResult GET_MT_BM_BRANCH_BYPARAMTER(_SqlParameters PostedData)
+        public ActionResult GET_MT_BM_BRANCH_BYPARAMTER(SQLParamters PostedData)
         {
             var DATA = ABranch.HelperCode.DATA_FROM_SP.GET_MT_BM_BRANCH_BYPARAM(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GET_MT_ACM_CLASS_BYPARAMTER(_SqlParameters PostedData)
+        public ActionResult GET_MT_ACM_CLASS_BYPARAMTER(SQLParamters PostedData)
         {
             var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_ACM_CLASS_BYPARAM(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GET_MT_ASM_SUBJECT_BYPARAMTER(_SqlParameters PostedData)
+        public ActionResult GET_MT_ASM_SUBJECT_BYPARAMTER(SQLParamters PostedData)
         {
             var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_ASM_SUBJECT_BYPARAM(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
@@ -65,7 +65,7 @@ namespace office360.Areas.AAcademic.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: RENDER DATA FOR DROP DOWN LIST FROM DB_LOOKUP USING LINQUERY ** --------------------- */
 
         #region ACTION RESULT FOR :: RENDER DATA FOR DROP DOWN FROM DB_LOOKUP -- LINQ-QUERY
-        public ActionResult GET_LK1_SEMESTER(_SqlParameters PostedData)
+        public ActionResult GET_LK1_SEMESTER(SQLParamters PostedData)
         {
             var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_Semester(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
@@ -76,7 +76,7 @@ namespace office360.Areas.AAcademic.Controllers
 
         #region ACTION RESULT FOR :: INSERT/UPDATE/DELETE INTO DBO.ACCM_ClassCurriculum
         [HttpPost]
-        public ActionResult UpSert_Into_ACCM_ClassCurriculum(_SqlParameters PostedData)
+        public ActionResult UpSert_Into_ACCM_ClassCurriculum(SQLParamters PostedData)
         {
             _Exe = AAcademic.HelperCode.CUD_Operation.Update_Insert_AASM_AdmissionSession(PostedData);
             var data = new { Message = HttpServerStatus.HTTP_DB_TransactionMessagByStatusCode(_Exe), StatusCode = _Exe };

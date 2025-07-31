@@ -80,7 +80,7 @@ namespace office360.Common.CommonHelper
                 return "In Valid Request";
             }
         }
-        public static string fn_GetMonthRange(_SqlParameters PostedData)
+        public static string fn_GetMonthRange(SQLParamters PostedData)
         {
             using (var db = new SESEntities())
             {

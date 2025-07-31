@@ -18,7 +18,7 @@ namespace office360.Areas.AUser.HelperCode
     public class CUD_Operation
     {
         #region HELPER FOR :: INSERT/UPDATE DATA USING STORED PROCEDURE (DBO.UM_User) ::-- MAIN DB
-        public static int? Update_Insert_UM_User(_SqlParameters PostedData)
+        public static int? Update_Insert_UM_User(SQLParamters PostedData)
         {
             using (var db = new SESEntities())
             {
@@ -103,7 +103,7 @@ namespace office360.Areas.AUser.HelperCode
         #endregion
 
         #region HELPER FOR :: INSERT/UPDATE DATA USING STORED PROCEDURE (DBO.URM_UserRight) ::-- MAIN DB
-        public static int? Update_Insert_URM_UserRight(_SqlParameters PostedData)
+        public static int? Update_Insert_URM_UserRight(SQLParamters PostedData)
         {
             using (var db = new SESEntities())
             {

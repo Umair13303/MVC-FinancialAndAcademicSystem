@@ -19,7 +19,7 @@ namespace office360.Areas.ABranch.HelperCode
     {
         #region DBO:- BM_BRANCH
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB
-        public static List<BM_Branch_GetListByParam_Result> GET_MT_BM_BRANCH_BYPARAM(_SqlParameters PostedData)
+        public static List<BM_Branch_GetListByParam_Result> GET_MT_BM_BRANCH_BYPARAM(SQLParamters PostedData)
         {
             List<BM_Branch_GetListByParam_Result> DATA = new List<BM_Branch_GetListByParam_Result>();
             using (SESEntities db = new SESEntities())
@@ -38,7 +38,7 @@ namespace office360.Areas.ABranch.HelperCode
         #endregion
 
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB
-        public static List<BM_Branch_GetListBySearch_Result> GET_MT_BM_BRANCH_LIST_BY_SEARCHQUERY(_SqlParameters PostedData)
+        public static List<BM_Branch_GetListBySearch_Result> GET_MT_BM_BRANCH_LIST_BY_SEARCHQUERY(SQLParamters PostedData)
         {
             List<BM_Branch_GetListBySearch_Result> DATA = new List<BM_Branch_GetListBySearch_Result>();
             using (var db = new SESEntities())

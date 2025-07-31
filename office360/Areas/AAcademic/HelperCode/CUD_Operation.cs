@@ -18,7 +18,7 @@ namespace office360.Areas.AAcademic.HelperCode
     public class CUD_Operation
     {
         #region HELPER FOR :: INSERT/UPDATE DATA USING STORED PROCEDURE (DBO.ACM_CLASS) ::-- MAIN DB
-        public static int? Update_Insert_ACM_Class(_SqlParameters PostedData)
+        public static int? Update_Insert_ACM_Class(SQLParamters PostedData)
         {
             using (var db = new SESEntities())
             {
@@ -100,7 +100,7 @@ namespace office360.Areas.AAcademic.HelperCode
         #endregion
 
         #region HELPER FOR :: INSERT/UPDATE DATA USING STORED PROCEDURE (DBO.ASM_SUBJECT) ::-- MAIN DB
-        public static int? Update_Insert_ASM_Subject(_SqlParameters PostedData)
+        public static int? Update_Insert_ASM_Subject(SQLParamters PostedData)
         {
             using (var db = new SESEntities())
             {
@@ -179,7 +179,7 @@ namespace office360.Areas.AAcademic.HelperCode
         #endregion
 
         #region HELPER FOR :: INSERT/UPDATE DATA USING STORED PROCEDURE (DBO.AASM_ADMISSIONSESSION) ::-- MAIN DB
-        public static int? Update_Insert_AASM_AdmissionSession(_SqlParameters PostedData)
+        public static int? Update_Insert_AASM_AdmissionSession(SQLParamters PostedData)
         {
             using (var db = new SESEntities())
             {

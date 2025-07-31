@@ -5,7 +5,7 @@ using System.Web;
 
 namespace office360.Models.General
 {
-    public class _SqlParameters
+    public class SQLParamters
     {
         // Guid or Nullable<Guid>
         public bool? IsDiscount { get; set; }
@@ -196,7 +196,7 @@ namespace office360.Models.General
         public string AllowedCampusIds { get; set; }
 
 
-        public static explicit operator List<object>(_SqlParameters v)
+        public static explicit operator List<object>(SQLParamters v)
         {
             throw new NotImplementedException();
         }

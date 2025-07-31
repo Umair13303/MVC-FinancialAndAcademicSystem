@@ -18,7 +18,7 @@ namespace office360.Areas.ABranch.HelperCode
     public class Check_Duplicate_By_LINQ
     {
         #region HELPER FOR :: CHECK IF Branch(ACTIVE_BRANCH) ALREADY EXIST
-        public static int? IS_EXIST_BM_BRANCH_BY_PARAMETER(_SqlParameters PostedData)
+        public static int? IS_EXIST_BM_BRANCH_BY_PARAMETER(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {

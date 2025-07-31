@@ -24,7 +24,7 @@ namespace office360.Areas.AAcademic.Controllers
         #region ACTION RESULT FOR :: RENDER VIEW
         [UsersSessionCheck]
         [CompanySessionCheck]
-        public ActionResult CreateUpdate_AASMUI_AdmissionSession(_SqlParameters PostedData)
+        public ActionResult CreateUpdate_AASMUI_AdmissionSession(SQLParamters PostedData)
         {
             #region PASS VIEW
             _Exe = GetAllListFromDB.GetAllowedUsersRightsByParameter(PostedData.RightId);
@@ -43,7 +43,7 @@ namespace office360.Areas.AAcademic.Controllers
 
         [UsersSessionCheck]
         [CompanySessionCheck]
-        public ActionResult View_List_AASMUI_AdmissionSession(_SqlParameters PostedData)
+        public ActionResult View_List_AASMUI_AdmissionSession(SQLParamters PostedData)
         {
             #region PASS VIEW
             _Exe = GetAllListFromDB.GetAllowedUsersRightsByParameter(PostedData.RightId);
@@ -65,12 +65,12 @@ namespace office360.Areas.AAcademic.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: RENDER OF DROP DOWN LIST FROM DB_MAIN USING STOREDPROCEDURE ** ---------------------------- */
 
         #region ACTION RESULT FOR :: RENDER DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
-        public ActionResult GET_MT_BM_BRANCH_BYPARAMTER(_SqlParameters PostedData)
+        public ActionResult GET_MT_BM_BRANCH_BYPARAMTER(SQLParamters PostedData)
         {
             var DATA = ABranch.HelperCode.DATA_FROM_SP.GET_MT_BM_BRANCH_BYPARAM(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GET_MT_ACM_CLASS_BYPARAMTER(_SqlParameters PostedData)
+        public ActionResult GET_MT_ACM_CLASS_BYPARAMTER(SQLParamters PostedData)
         {
             var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_ACM_CLASS_BYPARAM(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
@@ -80,7 +80,7 @@ namespace office360.Areas.AAcademic.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: RENDER DATA FOR DROP DOWN LIST FROM DB_LOOKUP USING LINQUERY ** --------------------------- */
 
         #region ACTION RESULT FOR :: RENDER DATA FOR DROP DOWN FROM DB_LOOKUP -- LINQ-QUERY
-        public ActionResult GET_LK1_ACADEMICYEAR(_SqlParameters PostedData)
+        public ActionResult GET_LK1_ACADEMICYEAR(SQLParamters PostedData)
         {
             var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_AcademicYear(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
@@ -91,7 +91,7 @@ namespace office360.Areas.AAcademic.Controllers
 
         #region ACTION RESULT FOR :: INSERT/UPDATE/DELETE INTO DBO.AASM_AdmissionSession
         [HttpPost]
-        public ActionResult UpSert_Into_AASM_AdmissionSession(_SqlParameters PostedData)
+        public ActionResult UpSert_Into_AASM_AdmissionSession(SQLParamters PostedData)
         {
             _Exe = AAcademic.HelperCode.CUD_Operation.Update_Insert_AASM_AdmissionSession(PostedData);
             var data = new { Message = HttpServerStatus.HTTP_DB_TransactionMessagByStatusCode(_Exe), StatusCode = _Exe };
@@ -102,7 +102,7 @@ namespace office360.Areas.AAcademic.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: EDIT (LOAD DOCUMENT OF ADMISSIONSESSION & GET DETAIL BY ADMISSIONSESSION_GUID) ** ------------------------ */
 
         #region ACTION RESULT FOR :: SEARCH DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
-        public ActionResult GET_MT_AASM_ADMISSIONSESSION_BYPARAMETER_SEARCH(_SqlParameters PostedData)
+        public ActionResult GET_MT_AASM_ADMISSIONSESSION_BYPARAMETER_SEARCH(SQLParamters PostedData)
         {
             var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_AASM_ADMISSIONSESSION_BYPARAM(PostedData).ToList();
             return Json(new { data = DATA }, JsonRequestBehavior.AllowGet);
@@ -110,7 +110,7 @@ namespace office360.Areas.AAcademic.Controllers
         #endregion
 
         #region ACTION RESULT FOR :: GET DOCUMENT DETAIL (DBO.AASM_ADMISSIONSESSION) -- LINQ-QUERY
-        public ActionResult GET_MT_AASM_ADMISSIONSESSION_INFOBYGUID(_SqlParameters PostedData)
+        public ActionResult GET_MT_AASM_ADMISSIONSESSION_INFOBYGUID(SQLParamters PostedData)
         {
             var DATA = AAcademic.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_AASM_ADMISSIONSESSION_INFO_BY_GUID(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
@@ -120,7 +120,7 @@ namespace office360.Areas.AAcademic.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: DATA TABLE (LOAD TABLE OF CLASS BY INPUT TYPE & TEXT) ** ---------------------------- */
 
         #region ACTION RESULT FOR :: GET LIST BY SEARCH PARAMETER FOR DATA-TABLE (DBO.AASM_ADMISSIONSESSION)-- STORED PROCEDURE
-        public ActionResult GET_MT_AASM_ADMISSIONSESSION_LIST_BY_SEARCHQUERY_FORDATATABLE(_SqlParameters PostedData)
+        public ActionResult GET_MT_AASM_ADMISSIONSESSION_LIST_BY_SEARCHQUERY_FORDATATABLE(SQLParamters PostedData)
         {
             var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_AASM_ADMISSIONSESSION_LIST_BY_SEARCHQUERY(PostedData).ToList();
             return Json(new { success = true, data = DATA }, JsonRequestBehavior.AllowGet);

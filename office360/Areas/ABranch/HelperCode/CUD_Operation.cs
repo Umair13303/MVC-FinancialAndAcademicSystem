@@ -18,7 +18,7 @@ namespace office360.Areas.ABranch.HelperCode
     public class CUD_Operation
     {
         #region HELPER FOR :: INSERT/UPDATE DATA USING STORED PROCEDURE (DBO.BM_BRANCH) ::-- MAIN DB
-        public static int? Update_Insert_BM_Branch(_SqlParameters PostedData)
+        public static int? Update_Insert_BM_Branch(SQLParamters PostedData)
         {
             using (var db = new SESEntities())
             {

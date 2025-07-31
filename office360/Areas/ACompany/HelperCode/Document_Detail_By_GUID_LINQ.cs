@@ -11,16 +11,16 @@ namespace office360.Areas.ACompany.HelperCode
     public class Document_Detail_By_GUID_LINQ
     {
         #region HELPER FOR :: GET DATA USING LINQ (CM_COMPANY) ::-- MAIN DB
-        public static List<_SqlParameters> GET_MT_CM_COMPANY_INFO_BY_GUID(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_MT_CM_COMPANY_INFO_BY_GUID(SQLParamters PostedData)
         {
-            List<_SqlParameters> DATA = new List<_SqlParameters>();
+            List<SQLParamters> DATA = new List<SQLParamters>();
 
             using (SESEntities db = new SESEntities())
             {
-                DATA = ((List<_SqlParameters>)
+                DATA = ((List<SQLParamters>)
                        (from C in db.CM_Company
                         where C.CompanyId == Session_Manager.CompanyId && C.GuID == PostedData.GuID
-                        select new _SqlParameters
+                        select new SQLParamters
                         {
                             Id = C.Id,
                             GuID = C.GuID,
@@ -42,17 +42,17 @@ namespace office360.Areas.ACompany.HelperCode
         #endregion
 
         #region HELPER FOR :: GET DATA USING LINQ (RSM_RIGHTSETTING) ::-- MAIN DB
-        public static List<_SqlParameters> GET_MT_RSM_RIGHTSETTING_INFO_BY_GUID(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_MT_RSM_RIGHTSETTING_INFO_BY_GUID(SQLParamters PostedData)
         {
-            List<_SqlParameters> DATA = new List<_SqlParameters>();
+            List<SQLParamters> DATA = new List<SQLParamters>();
 
             using (SESEntities db = new SESEntities())
             {
-                DATA = ((List<_SqlParameters>)
+                DATA = ((List<SQLParamters>)
                        (from RS in db.RSM_RightSetting
                         where
                         RS.GuID == PostedData.GuID
-                        select new _SqlParameters
+                        select new SQLParamters
                         {
                             Id = RS.Id,
                             GuID = RS.GuID,

@@ -33,7 +33,7 @@
 
 //        }
 
-//        internal static void CreateReport(string FullReportPath, DataSet ds, _SqlParameters PostedData, Controller ReportController)
+//        internal static void CreateReport(string FullReportPath, DataSet ds, SQLParamters PostedData, Controller ReportController)
 //        {
 //            int statuscode = 200;
 //            ReportController.Response.Clear();

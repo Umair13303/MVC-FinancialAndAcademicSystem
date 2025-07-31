@@ -11,16 +11,16 @@ namespace office360.Areas.ABranch.HelperCode
     public class Document_Detail_By_GUID_LINQ
     {
         #region HELPER FOR :: GET DATA USING LINQ (BM_BRANCH) ::-- MAIN DB
-        public static List<_SqlParameters> GET_MT_BM_BRANCH_INFO_BY_GUID(_SqlParameters PostedData)
+        public static List<SQLParamters> GET_MT_BM_BRANCH_INFO_BY_GUID(SQLParamters PostedData)
         {
-            List<_SqlParameters> DATA = new List<_SqlParameters>();
+            List<SQLParamters> DATA = new List<SQLParamters>();
 
             using (SESEntities db = new SESEntities())
             {
-                DATA = ((List<_SqlParameters>)
+                DATA = ((List<SQLParamters>)
                        (from B in db.BM_Branch
                         where B.CompanyId == Session_Manager.CompanyId && B.GuID == PostedData.GuID
-                        select new _SqlParameters
+                        select new SQLParamters
                         {
                             Id = B.Id,
                             GuID = B.GuID,

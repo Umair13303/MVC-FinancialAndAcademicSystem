@@ -92,7 +92,7 @@ namespace REP.Controllers
         }
         [UsersSessionCheck]
         [CompanySessionCheck]
-        public ActionResult PopulateAllowedRights(_SqlParameters Parameter)
+        public ActionResult PopulateAllowedRights(SQLParamters Parameter)
         {
 
             var RightPaths = this.ControllerContext.RouteData.Values["area"]?.ToString() +"/"+ this.ControllerContext.RouteData.Values["controller"].ToString()+"/"+ this.ControllerContext.RouteData.Values["action"].ToString(); ;

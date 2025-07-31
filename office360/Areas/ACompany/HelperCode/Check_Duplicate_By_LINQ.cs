@@ -18,7 +18,7 @@ namespace office360.Areas.ACompany.HelperCode
 
 
         #region HELPER FOR :: CHECK IF Company(ACTIVE_COMPANY) ALREADY EXIST
-        public static int? IS_EXIST_CM_COMPANY_BY_PARAMETER(_SqlParameters PostedData)
+        public static int? IS_EXIST_CM_COMPANY_BY_PARAMETER(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
@@ -75,7 +75,7 @@ namespace office360.Areas.ACompany.HelperCode
 
         #region HELPER FOR :: CHECK IF RightSetting(ACTIVE_RIGHTSETTING) ALREADY EXIST
 
-        public static int? IS_EXIST_RSM_RIGHTSETTING_BY_PARAMETER(_SqlParameters PostedData)
+        public static int? IS_EXIST_RSM_RIGHTSETTING_BY_PARAMETER(SQLParamters PostedData)
         {
             using (SESEntities db = new SESEntities())
             {
@@ -95,7 +95,7 @@ namespace office360.Areas.ACompany.HelperCode
                                     x.DocumentStatus == (int?)DOCUMENT_STATUS.ACTIVE_RIGHT_SETTING &&
                                     x.Status == true
                                 )
-                                .Select(x => new _SqlParameters { Id = x.Id }).ToList();
+                                .Select(x => new SQLParamters { Id = x.Id }).ToList();
 
                             if (DATA.Count == 0)
                             {

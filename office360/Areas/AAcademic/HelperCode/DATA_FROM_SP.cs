@@ -20,7 +20,7 @@ namespace office360.Areas.AAcademic.HelperCode
         #region DBO:- ACM_CLASS
 
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB -- DBO:- ACM_CLASS
-        public static List<ACM_Class_GetListByParam_Result> GET_MT_ACM_CLASS_BYPARAM(_SqlParameters PostedData)
+        public static List<ACM_Class_GetListByParam_Result> GET_MT_ACM_CLASS_BYPARAM(SQLParamters PostedData)
         {
             List<ACM_Class_GetListByParam_Result> DATA = new List<ACM_Class_GetListByParam_Result>();
             using (SESEntities db = new SESEntities())
@@ -41,7 +41,7 @@ namespace office360.Areas.AAcademic.HelperCode
         #endregion
 
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB
-        public static List<ACM_Class_GetListBySearch_Result> GET_MT_ACM_CLASS_LIST_BY_SEARCHQUERY(_SqlParameters PostedData)
+        public static List<ACM_Class_GetListBySearch_Result> GET_MT_ACM_CLASS_LIST_BY_SEARCHQUERY(SQLParamters PostedData)
         {
             List<ACM_Class_GetListBySearch_Result> DATA = new List<ACM_Class_GetListBySearch_Result>();
             using (var db = new SESEntities())
@@ -64,7 +64,7 @@ namespace office360.Areas.AAcademic.HelperCode
         #region DBO:- ASM_SUBJECT
 
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB -- DBO:- ASM_SUBJECT
-        public static List<ASM_Subject_GetListByParam_Result> GET_MT_ASM_SUBJECT_BYPARAM(_SqlParameters PostedData)
+        public static List<ASM_Subject_GetListByParam_Result> GET_MT_ASM_SUBJECT_BYPARAM(SQLParamters PostedData)
         {
             List<ASM_Subject_GetListByParam_Result> DATA = new List<ASM_Subject_GetListByParam_Result>();
             using (SESEntities db = new SESEntities())
@@ -84,7 +84,7 @@ namespace office360.Areas.AAcademic.HelperCode
         #endregion
 
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB
-        public static List<ASM_Subject_GetListBySearch_Result> GET_MT_ASM_SUBJECT_LIST_BY_SEARCHQUERY(_SqlParameters PostedData)
+        public static List<ASM_Subject_GetListBySearch_Result> GET_MT_ASM_SUBJECT_LIST_BY_SEARCHQUERY(SQLParamters PostedData)
         {
             List<ASM_Subject_GetListBySearch_Result> DATA = new List<ASM_Subject_GetListBySearch_Result>();
             using (SESEntities db = new SESEntities())
@@ -104,7 +104,7 @@ namespace office360.Areas.AAcademic.HelperCode
 
         #region DBO:- AASM_ADMISSIONSESSION
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB
-        public static List<AASM_AdmissionSession_GetListByParam_Result> GET_MT_AASM_ADMISSIONSESSION_BYPARAM(_SqlParameters PostedData)
+        public static List<AASM_AdmissionSession_GetListByParam_Result> GET_MT_AASM_ADMISSIONSESSION_BYPARAM(SQLParamters PostedData)
         {
             List<AASM_AdmissionSession_GetListByParam_Result> DATA = new List<AASM_AdmissionSession_GetListByParam_Result>();
             using (SESEntities db = new SESEntities())
@@ -124,7 +124,7 @@ namespace office360.Areas.AAcademic.HelperCode
         #endregion
 
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB
-        public static List<AASM_AdmissionSession_GetListBySearch_Result> GET_MT_AASM_ADMISSIONSESSION_LIST_BY_SEARCHQUERY(_SqlParameters PostedData)
+        public static List<AASM_AdmissionSession_GetListBySearch_Result> GET_MT_AASM_ADMISSIONSESSION_LIST_BY_SEARCHQUERY(SQLParamters PostedData)
         {
             List<AASM_AdmissionSession_GetListBySearch_Result> DATA = new List<AASM_AdmissionSession_GetListBySearch_Result>();
             using (var db = new SESEntities())

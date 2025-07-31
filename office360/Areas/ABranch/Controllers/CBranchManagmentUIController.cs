@@ -24,7 +24,7 @@ namespace office360.Areas.ABranch.Controllers
         #region ACTION RESULT FOR :: RENDER VIEW
         [UsersSessionCheck]
         [CompanySessionCheck]
-        public ActionResult CreateUpdate_CBMUI_Branch(_SqlParameters PostedData)
+        public ActionResult CreateUpdate_CBMUI_Branch(SQLParamters PostedData)
         {
             #region PASS VIEW
             _Exe = GetAllListFromDB.GetAllowedUsersRightsByParameter(PostedData.RightId);
@@ -43,7 +43,7 @@ namespace office360.Areas.ABranch.Controllers
 
         [UsersSessionCheck]
         [CompanySessionCheck]
-        public ActionResult View_List_CBMUI_Branch(_SqlParameters PostedData)
+        public ActionResult View_List_CBMUI_Branch(SQLParamters PostedData)
         {
             #region PASS VIEW
             _Exe = GetAllListFromDB.GetAllowedUsersRightsByParameter(PostedData.RightId);
@@ -65,22 +65,22 @@ namespace office360.Areas.ABranch.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: RENDER DATA FOR DROP DOWN LIST FROM DB_LOOKUP USING LINQUERY ** --------------------------- */
 
         #region ACTION RESULT FOR :: RENDER DATA FOR DROP DOWN FROM DB_LOOKUP -- LINQ-QUERY
-        public ActionResult GET_LK1_CAMPUSTYPE(_SqlParameters PostedData)
+        public ActionResult GET_LK1_CAMPUSTYPE(SQLParamters PostedData)
         {
             var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_CampusType(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GET_LK1_ORGANIZATIONTYPE(_SqlParameters PostedData)
+        public ActionResult GET_LK1_ORGANIZATIONTYPE(SQLParamters PostedData)
         {
             var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_OrganizationType(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GET_LK1_COUNTRY(_SqlParameters PostedData)
+        public ActionResult GET_LK1_COUNTRY(SQLParamters PostedData)
         {
             var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_Country(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GET_LK1_CITY_BYPARAMETER(_SqlParameters PostedData)
+        public ActionResult GET_LK1_CITY_BYPARAMETER(SQLParamters PostedData)
         {
             var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_City(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
@@ -93,7 +93,7 @@ namespace office360.Areas.ABranch.Controllers
 
         #region ACTION RESULT FOR :: INSERT/UPDATE/DELETE INTO DBO.BM_Branch
         [HttpPost]
-        public ActionResult UpSert_Into_BM_Branch(_SqlParameters PostedData)
+        public ActionResult UpSert_Into_BM_Branch(SQLParamters PostedData)
         {
             _Exe = ABranch.HelperCode.CUD_Operation.Update_Insert_BM_Branch(PostedData);
             var data = new { Message = HttpServerStatus.HTTP_DB_TransactionMessagByStatusCode(_Exe), StatusCode = _Exe };
@@ -105,7 +105,7 @@ namespace office360.Areas.ABranch.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: EDIT (LOAD DOCUMENT OF BRANCH & GET DETAIL BY BRANCH_GUID) ** ------------------------ */
 
         #region ACTION RESULT FOR :: SEARCH DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
-        public ActionResult GET_MT_BM_BRANCH_BYPARAMETER_SEARCH(_SqlParameters PostedData)
+        public ActionResult GET_MT_BM_BRANCH_BYPARAMETER_SEARCH(SQLParamters PostedData)
         {
             var DATA = ABranch.HelperCode.DATA_FROM_SP.GET_MT_BM_BRANCH_BYPARAM(PostedData).ToList();
             return Json(new { data = DATA }, JsonRequestBehavior.AllowGet);
@@ -114,7 +114,7 @@ namespace office360.Areas.ABranch.Controllers
         #endregion
 
         #region ACTION RESULT FOR :: GET DOCUMENT DETAIL (DBO.BM_BRANCH & DBO.BM_BRANCH_SETTING) -- LINQ-QUERY
-        public ActionResult GET_MT_BM_BRANCH_INFOBYGUID(_SqlParameters PostedData)
+        public ActionResult GET_MT_BM_BRANCH_INFOBYGUID(SQLParamters PostedData)
         {
             var DATA = ABranch.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_BM_BRANCH_INFO_BY_GUID(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
@@ -125,7 +125,7 @@ namespace office360.Areas.ABranch.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: DATA TABLE (LOAD TABLE OF BRANCH BY INPUT TYPE & TEXT) ** ---------------------------- */
 
         #region ACTION RESULT FOR :: GET LIST BY SEARCH PARAMETER FOR DATA-TABLE (DBO.BM_BRANCH)-- STORED PROCEDURE
-        public ActionResult GET_MT_BM_BRANCH_LIST_BY_SEARCHQUERY_FORDATATABLE(_SqlParameters PostedData)
+        public ActionResult GET_MT_BM_BRANCH_LIST_BY_SEARCHQUERY_FORDATATABLE(SQLParamters PostedData)
         {
             var DATA = ABranch.HelperCode.DATA_FROM_SP.GET_MT_BM_BRANCH_LIST_BY_SEARCHQUERY(PostedData).ToList();
             return Json(new { success = true, data = DATA }, JsonRequestBehavior.AllowGet);
