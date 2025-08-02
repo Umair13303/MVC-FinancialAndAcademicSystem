@@ -134,7 +134,7 @@ function InsertDataIntoDataTable() {
             Table_Row[2] = Subject;
             Table_Row[3] = SemesterId;
             Table_Row[4] = SubjectId;
-            Table_Row[5] = HTML_BUTTON.DELETE_IN_LIST() + HTML_BUTTON.PRINT();
+            Table_Row[5] = HTML_BUTTON.DELETE_IN_LIST();
 
             CurriculumDetailTable.row.add(Table_Row).draw();
         }

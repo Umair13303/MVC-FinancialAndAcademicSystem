@@ -315,6 +315,8 @@
     <Compile Include="Areas\ACompany\HelperCode\DATA_FROM_SP.cs" />
     <Compile Include="Areas\ACompany\HelperCode\Document_Detail_By_GUID_LINQ.cs" />
     <Compile Include="Areas\ACompany\HelperCode\Document_Detail_By_Id_DBO_FN.cs" />
+    <Compile Include="Areas\AMiscellaneous\AMiscellaneousAreaRegistration.cs" />
+    <Compile Include="Areas\AMiscellaneous\Controllers\CAccountUIController.cs" />
     <Compile Include="Areas\AUser\AUserAreaRegistration.cs" />
     <Compile Include="Areas\ACompany\Controllers\CRightSettingManagmentUIController.cs" />
     <Compile Include="Areas\AUser\Controllers\CUserManagmentUIController.cs" />
@@ -582,6 +584,7 @@
     <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\View_List_CBMUI_Branch.js" />
     <Content Include="Areas\ACompany\Script\CCompanyManagmentUI_Script\CreateUpdate_CMUI_Company.js" />
     <Content Include="Areas\ACompany\Script\CRightSettingManagmentUI_Script\CreateUpdate_RSMUI_RightSetting.js" />
+    <Content Include="Areas\AMiscellaneous\Script\CAccountUI_Script\Reconcile_AUI_LedgerAmountBased.js" />
     <Content Include="Areas\AUser\Script\CUserManagmentUI_Script\CreateUpdate_UMUI_User.js" />
     <Content Include="Areas\AUser\Script\CUserManagmentUI_Script\View_List_UMUI_User.js" />
     <Content Include="Areas\AUser\Script\CUserRightManagmentUI_Script\CreateUpdate_URMUI_UserRight.js" />
@@ -869,6 +872,7 @@
     <Content Include="Library\JS\bootstrap-datepicker.js" />
     <Content Include="Library\JS\bootstrap-daterangepicker.js" />
     <Content Include="Library\JS\bootstrap-datetimepicker.js" />
+    <Content Include="Library\JS\dataTables.rowGroup.min.js" />
     <Content Include="Library\JS\FontAwsome.js" />
     <Content Include="Library\JS\SheetJS.js" />
     <Content Include="Library\JS\SweetAlert2.js" />
@@ -890,6 +894,7 @@
     <Content Include="PossibleCode\JS\CreateNewAppSessionFeature.js" />
     <Content Include="PossibleCode\JS\CreateUpdate_RSMUI_RightSetting.js" />
     <Content Include="PossibleCode\JS\DataTableControl.js" />
+    <Content Include="PossibleCode\JS\UploadExcelFileIntoDataTable.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -1969,6 +1974,8 @@
     <Folder Include="Areas\ACompany\Data\" />
     <Folder Include="Areas\ACompany\FileUpload\CompanyLogo\" />
     <Folder Include="Areas\ACompany\Views\Shared\" />
+    <Folder Include="Areas\AMiscellaneous\Data\" />
+    <Folder Include="Areas\AMiscellaneous\Views\Shared\" />
     <Folder Include="Areas\AUser\Data\" />
     <Folder Include="Areas\AUser\Views\Shared\" />
     <Folder Include="Views\AReports\" />
@@ -2038,6 +2045,8 @@
     <Content Include="Areas\AAcademic\Views\CAcademicClassCurriculumManagmentUI\CreateUpdate_ACCMUI_ClassCurriculum.cshtml" />
     <Content Include="Areas\AAcademic\Views\CAcademicSubjectManagmentUI\CreateUpdate_ASMUI_Subject.cshtml" />
     <Content Include="Areas\AAcademic\Views\CAcademicSubjectManagmentUI\View_List_ASMUI_Subject.cshtml" />
+    <Content Include="Areas\AMiscellaneous\Views\web.config" />
+    <Content Include="Areas\AMiscellaneous\Views\CAccountUI\Reconcile_AUI_LedgerAmountBased.cshtml" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>

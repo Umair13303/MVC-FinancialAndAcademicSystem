@@ -38,12 +38,9 @@ namespace office360.Areas.AAcademic.HelperCode
                                 }
                                 #endregion
                                 #region OUTPUT VARAIBLE
-                                var ResponseParameter = new SqlParameter("@Response", SqlDbType.Int)
-                                {
-                                    Direction = ParameterDirection.Output
-                                };
+                                var ResponseParameter = new ObjectParameter("Response", typeof(int));
                                 #endregion
-                                string ConnectionString = ConfigurationManager.ConnectionStrings["SESFINALEntities"].ConnectionString;
+                                string ConnectionString = ConfigurationManager.ConnectionStrings["SESEntities"].ConnectionString;
                                 using (SqlConnection conn = new SqlConnection(ConnectionString))
                                 {
                                     using (SqlCommand cmd = new SqlCommand("ACCM_ClassCurriculum_Upsert", conn))
@@ -72,8 +69,11 @@ namespace office360.Areas.AAcademic.HelperCode
                                         tvpParam.SqlDbType = SqlDbType.Structured;
                                         tvpParam.TypeName = "dbo.BULK_ACCM_ClassCurriculumSubject";
 
-                                       
-                                        cmd.Parameters.Add(ResponseParameter);
+                                        SqlParameter responseParam = new SqlParameter("@Response", SqlDbType.Int)
+                                        {
+                                            Direction = ParameterDirection.Output
+                                        };
+                                        cmd.Parameters.Add(responseParam);
 
                                         conn.Open();
                                         cmd.ExecuteNonQuery();

@@ -1,0 +1,60 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="statbox widget box box-shadow">
+        <div class="widget-header">
+            <div class="row">
+                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                    <h4>@ViewBag.Title</h4>
+                </div>
+            </div>
+            <nav class="breadcrumb-one" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Miscellaneous</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Account</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><span>@ViewBag.Title</span></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <form>
+        <div class="card" style="margin-top:1%;width:100%">
+            <div class="card-body">
+                <h3 style="font-family: 'Bahnschrift'; font-weight: bolder; color: navy">Campus Detail</h3>
+                <div class="row mb-0">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Excel File", new { @class = "col-form-label", @for = "UploadExcelFile" })
+                            @Html.TextBox("UploadExcelFile", null, new { @class = "form-control ", type = "file", accept = ".xls,.xlsx", placeholder = "Please Upload Excel File  Here!", @id = "UploadExcelFile" })
+                        </div>
+                        <button type="button" class="btn btn-info" id="ButtonPopulateExcel">
+                            <i class="fa fa-sync-alt"></i> Populate Excel Sheet
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top:1%;width:100%">
+            <div class="card-body">
+                <div class="bootstrap-admin-panel-content">
+                    <table class="table table-bordered table-sm order-column stripe table-hover" style="width: 100%" id="MainTableEnrollmentList">
+                        <tbody id="TableBodyMainTableEnrollmentList">
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </form>
+}
+<script src="~/Packages/SheetJS.js"></script>
+
+<script src="~/Areas/AMiscellaneous/Script/CAccountUI_Script/Reconcile_AUI_LedgerAmountBased.js"></script>
