@@ -12,9 +12,11 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
+using office360.Models.DBF;
 
 namespace office360.Areas.AAcademic.HelperCode
 {
+
     public class BULK_CUD_Operation
     {
         #region HELPER FOR :: INSERT/UPDATE DATA USING STORED PROCEDURE (DBO.ACCM_CLASSCURRICULUM && DBO.ACCM_CLASSCURRICULUMSUBJECT) ::-- MAIN DB
@@ -38,53 +40,32 @@ namespace office360.Areas.AAcademic.HelperCode
                                 }
                                 #endregion
                                 #region OUTPUT VARAIBLE
-                                var ResponseParameter = new ObjectParameter("Response", typeof(int));
-                                #endregion
-                                string ConnectionString = ConfigurationManager.ConnectionStrings["SESEntities"].ConnectionString;
-                                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                                var ResponseParameter = new SqlParameter("@Response", SqlDbType.Int)
                                 {
-                                    using (SqlCommand cmd = new SqlCommand("ACCM_ClassCurriculum_Upsert", conn))
-                                    {
-                                        #region EXECUTE STORE PROCEDURE
-
-                                        cmd.CommandType = CommandType.StoredProcedure;
-
-                                        cmd.Parameters.AddWithValue("@DB_OperationType", PostedData.OperationType);
-                                        cmd.Parameters.AddWithValue("@GuID", PostedData.GuID);
-                                        cmd.Parameters.AddWithValue("@CampusId", PostedData.CampusId);
-                                        cmd.Parameters.AddWithValue("@Description", PostedData.Description?.Trim().ToSafeString());
-                                        cmd.Parameters.AddWithValue("@ClassId", PostedData.ClassId);
-                                        cmd.Parameters.AddWithValue("@CreatedOn", DateTime.Now);
-                                        cmd.Parameters.AddWithValue("@CreatedBy", Session_Manager.UserId);
-                                        cmd.Parameters.AddWithValue("@UpdatedOn", DateTime.Now);
-                                        cmd.Parameters.AddWithValue("@UpdatedBy", Session_Manager.UserId);
-                                        cmd.Parameters.AddWithValue("@DocType", (int?)DOCUMENT_TYPE.ACADEMIC_CLASS_CURRICULUM);
-                                        cmd.Parameters.AddWithValue("@DocumentStatus", (int?)DOCUMENT_STATUS.ACTIVE_ACADEMIC_CLASS_CURRICULUM);
-                                        cmd.Parameters.AddWithValue("@Status", true);
-                                        cmd.Parameters.AddWithValue("@BranchId", Session_Manager.BranchId);
-                                        cmd.Parameters.AddWithValue("@CompanyId", Session_Manager.CompanyId);
-                                        cmd.Parameters.AddWithValue("@Remarks", PostedData.Remarks?.Trim().ToSafeString());
-
-                                        SqlParameter tvpParam = cmd.Parameters.AddWithValue("@TVP_ACCM_ClassCurriculum", PostedDataDetail.ToDataTable());
-                                        tvpParam.SqlDbType = SqlDbType.Structured;
-                                        tvpParam.TypeName = "dbo.BULK_ACCM_ClassCurriculumSubject";
-
-                                        SqlParameter responseParam = new SqlParameter("@Response", SqlDbType.Int)
-                                        {
-                                            Direction = ParameterDirection.Output
-                                        };
-                                        cmd.Parameters.Add(responseParam);
-
-                                        conn.Open();
-                                        cmd.ExecuteNonQuery();
-
-
-
-                                        #endregion
-
-                                    }
-
-                                }
+                                    Direction = ParameterDirection.Output
+                                };
+                                #endregion
+                                #region EXECUTE STORE PROCEDURE
+                                var ACCM_ClassCurriculum = DBFStoredProcedure.ACCM_ClassCurriculum_Upsert(
+                                                                PostedData.OperationType,
+                                                                PostedData.GuID,
+                                                                PostedData.CampusId,
+                                                                PostedData.Description?.Trim().ToSafeString(),
+                                                                PostedData.ClassId,
+                                                                DateTime.Now,
+                                                                Session_Manager.UserId,
+                                                                DateTime.Now,
+                                                                Session_Manager.UserId,
+                                                                (int?)DOCUMENT_TYPE.ACADEMIC_CLASS_CURRICULUM,
+                                                                (int?)DOCUMENT_STATUS.ACTIVE_ACADEMIC_CLASS_CURRICULUM,
+                                                                true,
+                                                                Session_Manager.BranchId,
+                                                                Session_Manager.CompanyId,
+                                                                PostedData.Remarks?.Trim().ToSafeString(),
+                                                                PostedDataDetail,
+                                                                ResponseParameter
+                                                                );
+                                #endregion
                                 #region RESPONSE VALUES IN VARIABLE
                                 int? Response = (int)ResponseParameter.Value;
                                 #endregion
@@ -98,6 +79,7 @@ namespace office360.Areas.AAcademic.HelperCode
                                         break;
 
                                     case (int?)Http_DB_Response.CODE_BAD_REQUEST:
+                                    default:
                                         dbTran.Rollback();
                                         break;
                                 }
