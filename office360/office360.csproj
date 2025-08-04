@@ -801,6 +801,7 @@
     <Content Include="Buttons-2.3.4\js\dataTables.buttons.js" />
     <Content Include="Buttons-2.3.4\js\dataTables.buttons.min.js" />
     <Content Include="Common\CommonScripts\CSSFormat.js" />
+    <Content Include="Common\CommonScripts\DataTableUI.js" />
     <Content Include="Common\CommonScripts\DBCondition.js" />
     <Content Include="Common\CommonScripts\Enum.js" />
     <Content Include="Common\CommonScripts\ExcelImportHeader.js" />

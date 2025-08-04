@@ -61,6 +61,9 @@ function InitDataTable() {
         "columnDefs": [
             { visible: false, targets: [20, 21, 22] },
         ],
+        "drawCallback": function (settings) {
+            DataTableGroupBy_Universal(this, 'MainTableEnrollmentList', ['7']);
+        },
         "rowCallback": function (row, data, index) {
             var rowMap = HighLightMap[index] || {};
             Object.entries(rowMap).forEach(([colIndex, HighLightClass]) => {
@@ -125,6 +128,7 @@ $("#ButtonPopulateExcel").click(function () {
                     ROW["Student CNIC"] = CNIC;
                 }
                 else {
+                    var CNICIdx = ValidationHeaderIndexMap["Student CNIC"];
                     ROW["Student CNIC"] = FormattedCNIC;
                 }
 
