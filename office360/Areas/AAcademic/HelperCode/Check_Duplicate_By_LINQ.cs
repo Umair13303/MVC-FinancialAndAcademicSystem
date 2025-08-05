@@ -150,7 +150,6 @@ namespace office360.Areas.AAcademic.HelperCode
                             .Any(x =>
                                 x.CompanyId == Session_Manager.CompanyId
                             && x.CampusId == PostedData.CampusId
-                            && x.Description == PostedData.Description
                             && x.ClassId == PostedData.ClassId
                             && x.DocumentStatus == (int?)DOCUMENT_STATUS.ACTIVE_ACADEMIC_CLASS_CURRICULUM
                             && x.Status == true

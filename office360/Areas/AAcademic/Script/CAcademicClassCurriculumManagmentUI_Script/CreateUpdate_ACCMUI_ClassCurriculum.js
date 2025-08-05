@@ -35,7 +35,8 @@ function ChangeCase() {
     $('#DropDownListClass').change(function () {
         var StudySchemeId = $('#DropDownListClass :selected').attr('data-StudySchemeId');
         /*--var SemesterId = null;  NOT PROVIDED ON LOAD --*/
-        PopulateLK_Semester_List(StudySchemeId,null)
+        PopulateLK_Semester_List(StudySchemeId, null);
+        CurriculumDetailTable.clear().draw();
     });
 
     $('#DropDownListCampus').change(function () {

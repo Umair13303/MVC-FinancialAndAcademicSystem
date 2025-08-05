@@ -25,39 +25,45 @@ function InitDataTable() {
             "sSearchPlaceholder": "Search...",
             "sLengthMenu": "Results :  _MENU_"
         },
-        "serverSide": true,
+        "responsive": true,
+        "ordering": false,
         "processing": true,
-        columns: [
-            { "data": 'Sr' },
-            { "data": 'Reg' },
-            { "data": 'StudentName' },
-            { "data": 'StudentCNIC' },
-            { "data": 'BirthDate' },
-            { "data": 'Religion' },
-            { "data": 'Country' },
-            { "data": 'Domicile' },
-            { "data": 'FatherName' },
-            { "data": 'FatherCNIC' },
-            { "data": 'Occupation' },
-            { "data": 'IsFatherAlive' },
-            { "data": 'Guardian' },
-            { "data": 'GuardianCNIC' },
-            { "data": 'StudentMobile' },
-            { "data": 'StudentEmail' },
-            { "data": 'ParentMobile' },
-            { "data": 'LandLine' },
-            { "data": 'EmergencyMobile' },
-            { "data": 'Address' },
-            { "data": 'ReligionId', visible: false },
-            { "data": 'CountryId', visible: false },
-            { "data": 'OccupationId', visible: false }
+        "paging": true,
+        "pageLength": 100,
+        "deferRender": true,
+        "scroller": true,
+        "scrollY": 500,
+        "columns": [
+            { "title": "#", "orderable": false, },
+            { "title": "Reg", },//1
+            { "title": "Student Name", },//2
+            { "title": "Student CNIC", },//3
+            { "title": "D.O.B", },//4
+            { "title": "Religion", },//5
+            { "title": "Country", },//6
+            { "title": "Domicile", },//7
+            { "title": "Father Name", },//8
+            { "title": "Father CNIC", },//9
+            { "title": "Occupation", },//10
+            { "title": "Is Father Alive", },//11
+            { "title": "Guardian", },//12
+            { "title": "Guardian CNIC", },//13
+            { "title": "Student Mobile", },//14
+            { "title": "Student Email", },//15
+            { "title": "Parent Mobile", },//16
+            { "title": "LandLine", },//17
+            { "title": "Emergency Mobile", },//18
+            { "title": "Address", },//19
+            { "title": "ReligionId", },//20
+            { "title": "CountryId", },//21
+            { "title": "OccupationId", },//22
         ],
         "columnDefs": [
             { visible: false, targets: [20, 21, 22] },
         ],
         "drawCallback": function (settings) {
         },
-        
+
     });
 }
 // FUNCTION TO GET INDEX NUMBE OF COLUMN's IN DATA TABLE BY MATCHING HEADERNAME
