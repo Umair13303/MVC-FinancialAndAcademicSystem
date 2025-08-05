@@ -25,58 +25,40 @@ function InitDataTable() {
             "sSearchPlaceholder": "Search...",
             "sLengthMenu": "Results :  _MENU_"
         },
-        "responsive": true,
-        "ordering": false,
+        "serverSide": true,
         "processing": true,
-        "paging": true,
-        "pageLength": 100,
-        "deferRender": true,
-        "scroller": true,
-        "scrollY": 500,
-        "columns": [
-            { "title": "#", "orderable": false, },
-            { "title": "Reg", },//1
-            { "title": "Student Name", },//2
-            { "title": "Student CNIC", },//3
-            { "title": "D.O.B", },//4
-            { "title": "Religion", },//5
-            { "title": "Country", },//6
-            { "title": "Domicile", },//7
-            { "title": "Father Name", },//8
-            { "title": "Father CNIC", },//9
-            { "title": "Occupation", },//10
-            { "title": "Is Father Alive", },//11
-            { "title": "Guardian", },//12
-            { "title": "Guardian CNIC", },//13
-            { "title": "Student Mobile", },//14
-            { "title": "Student Email", },//15
-            { "title": "Parent Mobile", },//16
-            { "title": "LandLine", },//17
-            { "title": "Emergency Mobile", },//18
-            { "title": "Address", },//19
-            { "title": "ReligionId", },//20
-            { "title": "CountryId", },//21
-            { "title": "OccupationId", },//22
+        columns: [
+            { "data": 'Sr' },
+            { "data": 'Reg' },
+            { "data": 'StudentName' },
+            { "data": 'StudentCNIC' },
+            { "data": 'BirthDate' },
+            { "data": 'Religion' },
+            { "data": 'Country' },
+            { "data": 'Domicile' },
+            { "data": 'FatherName' },
+            { "data": 'FatherCNIC' },
+            { "data": 'Occupation' },
+            { "data": 'IsFatherAlive' },
+            { "data": 'Guardian' },
+            { "data": 'GuardianCNIC' },
+            { "data": 'StudentMobile' },
+            { "data": 'StudentEmail' },
+            { "data": 'ParentMobile' },
+            { "data": 'LandLine' },
+            { "data": 'EmergencyMobile' },
+            { "data": 'Address' },
+            { "data": 'ReligionId', visible: false },
+            { "data": 'CountryId', visible: false },
+            { "data": 'OccupationId', visible: false }
         ],
         "columnDefs": [
             { visible: false, targets: [20, 21, 22] },
         ],
         "drawCallback": function (settings) {
-            DataTableGroupBy_Universal(this, 'MainTableEnrollmentList', ['7']);
         },
-        "rowCallback": function (row, data, index) {
-            var rowMap = HighLightMap[index] || {};
-            Object.entries(rowMap).forEach(([colIndex, HighLightClass]) => {
-                $('td', row).eq(Number(colIndex)).addClass(HighLightClass);
-            });
-        }
+        
     });
-    EnrollmentList.on('order.dt search.dt', function () {
-        EnrollmentList.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
-            cell.innerHTML = i + 1;
-        });
-
-    }).draw();
 }
 // FUNCTION TO GET INDEX NUMBE OF COLUMN's IN DATA TABLE BY MATCHING HEADERNAME
 function GetDataTableColumnIndexByHeaderText(Table, Headers) {
@@ -91,9 +73,10 @@ function GetDataTableColumnIndexByHeaderText(Table, Headers) {
 $("#ButtonPopulateExcel").click(function () {
     var UseFile = $("#UploadExcelFile").prop("files")[0];
     if (UseFile) {
-        startLoading();
         var ContentReader = new FileReader();/* LIBRARY TO READ FILE CONTENT */
         ContentReader.onload = function (event)/* WHEN CONTENT READER FETCH THE DATA */ {
+            startLoading();
+
             var BinaryData = new Uint8Array(event.target.result);/* SETTING ENVOIRMENT TO MAKE SHEETREAD & PARSE */
             var ExcelSheet = XLSX.read(BinaryData, { type: 'array' });/* PARSE BINARYDATA INTO A WORKBOOK  */
             var MainWorkSheet = ExcelSheet.Sheets[ExcelSheet.SheetNames[0]];/* GET THE NAME OF WORKSHEET BY SR.NO FROM ALL PRESENT SHEETS  */
@@ -103,7 +86,13 @@ $("#ButtonPopulateExcel").click(function () {
             });
             var ValidationHeader = ["Student CNIC"]; /* NAME OF HEADER THAT WILL BE VALIDATE ON BASIS OF CONDITION   */
             var ValidationHeaderIndexMap = GetDataTableColumnIndexByHeaderText(EnrollmentList, ValidationHeader);
+            JsonData.sort((a, b) => {
+                const numA = (a["Domicile"] ?? "").toString().trim().toUpperCase();
+                const numB = (b["Domicile"] ?? "").toString().trim().toUpperCase();
 
+
+                return numA.toString().localeCompare(numB.toString(), undefined, { numeric: true, sensitivity: 'base' });
+            });
             JsonData.forEach((ROW, Index) => {
 
                 /* VALIDATE EXCEL SHEET CELL DATA   
@@ -143,9 +132,9 @@ $("#ButtonPopulateExcel").click(function () {
 
 function PopulateDataTable(dataObj) {
     EnrollmentList.clear();
-    const rowsToAdd = dataObj.map(function (row) {
+    const rowsToAdd = dataObj.map(function (row, index) {
         return [
-            '', // Add empty field if needed
+            (index + 1).toString(),
             row["Reg"],
             row["Student Name"],
             row["Student CNIC"],

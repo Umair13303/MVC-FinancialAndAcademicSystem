@@ -1,11 +1,38 @@
 ﻿var EnrollmentList = "";
 var HighLightMap = {};
 
+$(document).ready(function () {
+    InitDataTable();
+});
 function InitDataTable() {
     EnrollmentList = $('#MainTableEnrollmentList').DataTable({
-        "responsive": true, "ordering": false,
-        "processing": true, "pagination": false,
-        "paging": false,
+        dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
+        buttons: {
+            buttons: [
+                { extend: 'copy', className: 'btn' },
+                { extend: 'csv', className: 'btn' },
+                { extend: 'excel', className: 'btn' },
+                { extend: 'print', className: 'btn' }
+            ]
+        },
+        "oLanguage": {
+            "oPaginate": {
+                "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>',
+                "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>'
+            },
+            "sInfo": "Showing page _PAGE_ of _PAGES_",
+            "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+            "sSearchPlaceholder": "Search...",
+            "sLengthMenu": "Results :  _MENU_"
+        },
+        "responsive": true,
+        "ordering": false,
+        "processing": true,
+        "paging": true,
+        "pageLength": 100,
+        "deferRender": true,
+        "scroller": true,
+        "scrollY": 500,
         "columns": [
             { "title": "#", "orderable": false, },
             { "title": "Reg", },//1
@@ -34,6 +61,9 @@ function InitDataTable() {
         "columnDefs": [
             { visible: false, targets: [20, 21, 22] },
         ],
+        "drawCallback": function (settings) {
+            DataTableGroupBy_Universal(this, 'MainTableEnrollmentList', ['7']);
+        },
         "rowCallback": function (row, data, index) {
             var rowMap = HighLightMap[index] || {};
             Object.entries(rowMap).forEach(([colIndex, HighLightClass]) => {
@@ -41,39 +71,40 @@ function InitDataTable() {
             });
         }
     });
-    EnrollmentList.on('order.dt search.dt', function () {
-        EnrollmentList.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
-            cell.innerHTML = i + 1;
-        });
-
-    }).draw();
 }
 // FUNCTION TO GET INDEX NUMBE OF COLUMN's IN DATA TABLE BY MATCHING HEADERNAME
-function GetDataTableColumnIndexByDataKey(Table, DataKeys) {
-    var Column = Table.settings().init().columns;
-    return DataKeys.reduce((Map, DataKey) => {
-        var idx = Column.findIndex(c => c.data === DataKey);
-        if (idx !== -1) Map[DataKey] = idx;
+function GetDataTableColumnIndexByHeaderText(Table, Headers) {
+    var Columns = Table.settings().init().columns;
+    return Headers.reduce((Map, Header) => {
+        var Index = Columns.findIndex(col => col.title === Header);
+        if (Index !== -1) Map[Header] = Index;
         return Map;
     }, {});
 }
+
 $("#ButtonPopulateExcel").click(function () {
     var UseFile = $("#UploadExcelFile").prop("files")[0];
     if (UseFile) {
-        startLoading();
         var ContentReader = new FileReader();/* LIBRARY TO READ FILE CONTENT */
-        ContentReader.onload = function (event)/* WHEN CONTENT READER FETCH THE DATA */
-        {
+        ContentReader.onload = function (event)/* WHEN CONTENT READER FETCH THE DATA */ {
+            startLoading();
+
             var BinaryData = new Uint8Array(event.target.result);/* SETTING ENVOIRMENT TO MAKE SHEETREAD & PARSE */
             var ExcelSheet = XLSX.read(BinaryData, { type: 'array' });/* PARSE BINARYDATA INTO A WORKBOOK  */
             var MainWorkSheet = ExcelSheet.Sheets[ExcelSheet.SheetNames[0]];/* GET THE NAME OF WORKSHEET BY SR.NO FROM ALL PRESENT SHEETS  */
             var JsonData = XLSX.utils.sheet_to_json(MainWorkSheet, {
-                range: 0,   /* SET ROW NO. CONTAINING HEADER ON BASE OF 0 INDEXING  */
+                range: 1,   /* SET ROW NO. CONTAINING HEADER ON BASE OF 0 INDEXING  */
                 defval: null
             });
-            var ValidationHeader = ["Class Name", "Admission Session"]; /* NAME OF HEADER THAT WILL BE VALIDATE ON BASIS OF CONDITION   */
-            var ValidationHeaderIndexMap = GetDataTableColumnIndexByDataKey(EnrollmentList, ValidationHeader);/* GET SERIAL NUMBER OF GIVEN COLUMN NUMBER   */
+            var ValidationHeader = ["Student CNIC"]; /* NAME OF HEADER THAT WILL BE VALIDATE ON BASIS OF CONDITION   */
+            var ValidationHeaderIndexMap = GetDataTableColumnIndexByHeaderText(EnrollmentList, ValidationHeader);
+            JsonData.sort((a, b) => {
+                const numA = (a["Domicile"] ?? "").toString().trim().toUpperCase();
+                const numB = (b["Domicile"] ?? "").toString().trim().toUpperCase();
 
+
+                return numA.toString().localeCompare(numB.toString(), undefined, { numeric: true, sensitivity: 'base' });
+            });
             JsonData.forEach((ROW, Index) => {
 
                 /* VALIDATE EXCEL SHEET CELL DATA   
@@ -83,24 +114,23 @@ $("#ButtonPopulateExcel").click(function () {
                    IS NOT MATCHING A FORMAT(YYYY-MM-DD)
                 */
                 HighLightMap[Index] = {};
-                var AdmissionSession = (ROW["Admission Session"] ?? "").toString().trim();
-                if (!AdmissionSession) {
-                    var AdmissionSessionIdx = ValidationHeaderIndexMap["Admission Session"];
-                    if (AdmissionSessionIdx !== undefined) {
-                        HighLightMap[Index][AdmissionSessionIdx] = "danger";
-                    }
-                }
-                var CNIC = (ROW["CNIC"] ?? "").toString().trim();
+                var CNIC = (ROW["Student CNIC"] ?? "")
+                    .toString()
+                    .replace(/[\u200B-\u200D\uFEFF\xA0\s]/g, '') // Remove all types of weird spaces
+                    .trim();
+
                 var FormattedCNIC = CNIC.replace(/[^0-9]/g, '');
-                if (FormattedCNIC.length !== 13) {
+                if (FormattedCNIC.length != 13) {
+
                     var CNICIdx = ValidationHeaderIndexMap["Student CNIC"];
-                    if (CNICIdx !== undefined) {
+                    if (CNICIdx != undefined) {
                         HighLightMap[Index][CNICIdx] = "danger";
                     }
-                    ROW["Student CNIC"] = rawCNIC;
+                    ROW["Student CNIC"] = CNIC;
                 }
                 else {
-                    ROW["Student CNIC"] = cleanedCNIC;
+                    var CNICIdx = ValidationHeaderIndexMap["Student CNIC"];
+                    ROW["Student CNIC"] = FormattedCNIC;
                 }
 
             });
@@ -113,13 +143,10 @@ $("#ButtonPopulateExcel").click(function () {
 });
 
 function PopulateDataTable(dataObj) {
-    // Clear the table only once
-    table.clear();
-
-    // Use map to process the data and generate rows
-    const rowsToAdd = dataObj.map(function (row) {
+    EnrollmentList.clear();
+    const rowsToAdd = dataObj.map(function (row, index) {
         return [
-            '', // Add empty field if needed
+            (index + 1).toString(),
             row["Reg"],
             row["Student Name"],
             row["Student CNIC"],
@@ -144,12 +171,7 @@ function PopulateDataTable(dataObj) {
             row["OccupationId"],
         ];
     });
-
-    // Add all rows at once
-    table.rows.add(rowsToAdd);
-
-    // Redraw the table
-    table.draw();
+    EnrollmentList.rows.add(rowsToAdd);
+    EnrollmentList.draw();
     stopLoading();
-
 }

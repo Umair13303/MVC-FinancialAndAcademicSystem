@@ -1,0 +1,189 @@
+﻿    [HttpPost]
+        public ActionResult UploadExcel(HttpPostedFileBase file)
+        {
+            if (file?.ContentLength > 0)
+            {
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // ✅ Add this
+
+
+                using (var package = new ExcelPackage(file.InputStream))
+                {
+                    var worksheet = package.Workbook.Worksheets[0];
+                    int rowCount = worksheet.Dimension.Rows;
+
+                    var list = new List<EnrollmentModel>();
+                    int startRow = 3; // <-- skips first two rows
+
+                    for (int row = startRow; row <= rowCount; row++) // skip header
+                    {
+                        var model = new EnrollmentModel
+                        {
+                            Sr = row - 1,
+                            Reg = worksheet.Cells[row, 1].Text,
+                            StudentName = worksheet.Cells[row, 2].Text,
+                            StudentCNIC = worksheet.Cells[row, 3].Text,
+                            BirthDate = worksheet.Cells[row, 4].Text,
+                            Religion = worksheet.Cells[row, 5].Text,
+                            Country = worksheet.Cells[row, 6].Text,
+                            Domicile = worksheet.Cells[row, 7].Text.ToUpper().Trim(),
+                            FatherName = worksheet.Cells[row, 8].Text,
+                            FatherCNIC = worksheet.Cells[row, 9].Text,
+                            Occupation = worksheet.Cells[row, 10].Text,
+                            IsFatherAlive = worksheet.Cells[row, 11].Text,
+                            Guardian = worksheet.Cells[row, 12].Text,
+                            GuardianCNIC = worksheet.Cells[row, 13].Text,
+                            StudentMobile = worksheet.Cells[row, 14].Text,
+                            StudentEmail = worksheet.Cells[row, 15].Text,
+                            ParentMobile = worksheet.Cells[row, 16].Text,
+                            LandLine = worksheet.Cells[row, 17].Text,
+                            EmergencyMobile = worksheet.Cells[row, 18].Text,
+                            Address = worksheet.Cells[row, 19].Text,
+                            ReligionId = worksheet.Cells[row, 20].Text,
+                            CountryId = worksheet.Cells[row, 21].Text,
+                            OccupationId = worksheet.Cells[row, 22].Text,
+                        };
+                        list.Add(model);
+                    }
+
+                    EnrollmentDataStore.EnrollmentList = list;
+                }
+            }
+
+            return RedirectToAction("Reconcile_AUI_LedgerAmountBased");
+        }
+
+        [HttpPost]
+        public JsonResult Get(DataTableRequest request)
+        {
+            var data = EnrollmentDataStore.EnrollmentList;
+
+            int totalRecords = data.Count;
+
+            // Search
+            if (!string.IsNullOrWhiteSpace(request.search.value))
+            {
+                string term = request.search.value.ToLower();
+                data = data.Where(r =>
+                    (r.StudentName ?? "").ToLower().Contains(term) ||
+                    (r.Reg ?? "").ToLower().Contains(term) ||
+                    (r.Domicile ?? "").ToLower().Contains(term)
+                ).ToList();
+            }
+
+            int filteredRecords = data.Count;
+
+            var pagedData = data.Skip(request.start).Take(request.length).ToList();
+
+            return Json(new
+            {
+                draw = request.draw,
+                recordsTotal = totalRecords,
+                recordsFiltered = filteredRecords,
+                data = pagedData
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+
+           public class EnrollmentModel
+    {
+        public int Sr { get; set; }
+        public string Reg { get; set; }
+        public string StudentName { get; set; }
+        public string StudentCNIC { get; set; }
+        public string BirthDate { get; set; }
+        public string Religion { get; set; }
+        public string Country { get; set; }
+        public string Domicile { get; set; }
+        public string FatherName { get; set; }
+        public string FatherCNIC { get; set; }
+        public string Occupation { get; set; }
+        public string IsFatherAlive { get; set; }
+        public string Guardian { get; set; }
+        public string GuardianCNIC { get; set; }
+        public string StudentMobile { get; set; }
+        public string StudentEmail { get; set; }
+        public string ParentMobile { get; set; }
+        public string LandLine { get; set; }
+        public string EmergencyMobile { get; set; }
+        public string Address { get; set; }
+        public string ReligionId { get; set; }
+        public string CountryId { get; set; }
+        public string OccupationId { get; set; }
+    }
+
+    public static class EnrollmentDataStore
+    {
+        public static List<EnrollmentModel> EnrollmentList = new List<EnrollmentModel>();
+    }
+    public class DataTableRequest
+    {
+        public int draw { get; set; }
+        public int start { get; set; }
+        public int length { get; set; }
+        public Search search { get; set; }
+
+        public class Search
+        {
+            public string value { get; set; }
+            public bool regex { get; set; }
+        }
+    }
+
+
+    <script>
+    $(document).ready(function () {
+        $('#MainTableEnrollmentList').DataTable({
+            dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
+            buttons: {
+                buttons: [
+                    { extend: 'copy', className: 'btn' },
+                    { extend: 'csv', className: 'btn' },
+                    { extend: 'excel', className: 'btn' },
+                    { extend: 'print', className: 'btn' }
+                ]
+            },
+            "oLanguage": {
+                "oPaginate": {
+                    "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>',
+                    "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>'
+                },
+                "sInfo": "Showing page _PAGE_ of _PAGES_",
+                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                "sSearchPlaceholder": "Search...",
+                "sLengthMenu": "Results :  _MENU_"
+            },
+            "serverSide": true,
+            "processing": true,
+            ajax: {
+                url: BasePath + '/AMiscellaneous/CAccountUI/Get',
+                type: 'POST'
+            },
+            columns: [
+                { data: 'Sr' },
+                { data: 'Reg' },
+                { data: 'StudentName' },
+                { data: 'StudentCNIC' },
+                { data: 'BirthDate' },
+                { data: 'Religion' },
+                { data: 'Country' },
+                { data: 'Domicile' },
+                { data: 'FatherName' },
+                { data: 'FatherCNIC' },
+                { data: 'Occupation' },
+                { data: 'IsFatherAlive' },
+                { data: 'Guardian' },
+                { data: 'GuardianCNIC' },
+                { data: 'StudentMobile' },
+                { data: 'StudentEmail' },
+                { data: 'ParentMobile' },
+                { data: 'LandLine' },
+                { data: 'EmergencyMobile' },
+                { data: 'Address' }
+            ],
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'print'
+            ]
+        });
+    });
+</script>
