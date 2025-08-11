@@ -16,7 +16,7 @@ namespace office360.CommonHelper
 
         public static List<RSM_RightSetting_GetDetailByParam_Result> GetRightsByParameter()
         {
-            using (var db = new SESEntities())
+            using (var db = new FASEntities())
             {
                 var DATA = db.RSM_RightSetting_GetDetailByParam(
                                                               DBFilter.GET_ALL_ALLOWED_RIGHTS_TO_LOGIN_USER_FOR_SIDE_MENUE.ToSafeString(),
@@ -36,7 +36,7 @@ namespace office360.CommonHelper
         }
         public static int? GetAllowedUsersRightsByParameter(int? RightId)
         {
-            using (var db = new SESEntities())
+            using (var db = new FASEntities())
             {
                 var data = db.RSM_RightSetting_GetDetailByParam(
                                                               DBFilter.GET_ALLOWED_RIGHTS_TO_LOGIN_USER_BY_RIGHTID.ToSafeString(),
@@ -65,7 +65,7 @@ namespace office360.CommonHelper
         }
         public static int? GetAllowedUsersRightsByURL(string RightPATH)
         {
-            using (var db = new SESEntities())
+            using (var db = new FASEntities())
             {
                 var data = db.RSM_RightSetting_GetDetailByParam(
                                                               DBFilter.GET_ALLOWED_RIGHTS_TO_LOGIN_USER_BY_URL.ToSafeString(),

@@ -18,7 +18,7 @@ namespace office360.Areas.AAcademic.HelperCode
         #region HELPER FOR :: CHECK IF CLASS(ACTIVE_CLASS) ALREADY EXIST
         public static int? IS_EXIST_ACM_CLASS_BY_PARAMETER(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 bool IsRecordExist=false;
                 int? Response = (int?)Http_DB_Response.CODE_DATA_ALREADY_EXIST;
@@ -78,7 +78,7 @@ namespace office360.Areas.AAcademic.HelperCode
         #region HELPER FOR :: CHECK IF SUBJECT(ACTIVE_SUBJECT) ALREADY EXIST
         public static int? IS_EXIST_ASM_SUBJECT_BY_PARAMETER(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 bool IsRecordExist=false;
                 int? Response = (int?)Http_DB_Response.CODE_DATA_ALREADY_EXIST;
@@ -136,7 +136,7 @@ namespace office360.Areas.AAcademic.HelperCode
         #region HELPER FOR :: CHECK IF CLASSCURRICULUM(ACTIVE_ACADEMIC_CLASS_CURRICULUM) ALREADY EXIST
         public static int? IS_EXIST_ACCM_CLASSCURRICULUM_BY_PARAMETER(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 int? Response = (int?)Http_DB_Response.CODE_DATA_ALREADY_EXIST;
                 try
@@ -193,7 +193,7 @@ namespace office360.Areas.AAcademic.HelperCode
         #region HELPER FOR :: CHECK IF ADMISSIONSESSION(ACTIVE_ADMISSIONSESSION) ALREADY EXIST
         public static int? IS_EXIST_AASM_ADMISSIONSESSION_BY_PARAMETER(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 int? Response = (int?)Http_DB_Response.CODE_DATA_ALREADY_EXIST;
                 try

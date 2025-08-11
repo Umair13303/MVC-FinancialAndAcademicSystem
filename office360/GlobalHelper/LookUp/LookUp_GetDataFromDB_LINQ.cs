@@ -15,7 +15,7 @@ namespace office360.GlobalHelper.LookUp
         #region HELPER FOR :: GET DATA USING LINQ-QUERY ::-- DB_LOOKUP
         public static List<SQLParamters> GET_LK1_EnrollmentType(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.EnrollmentType
                      .Where(x => x.Status == true)
@@ -30,7 +30,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_Gender(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.Gender
                          .Select(x => new SQLParamters
@@ -45,7 +45,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_MartialStatus(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.MartialStatus
                          .Select(x => new SQLParamters
@@ -60,7 +60,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_Religion(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.Religion
                          .Select(x => new SQLParamters
@@ -75,7 +75,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_Country(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.Country
                          .Select(x => new SQLParamters
@@ -90,7 +90,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_Relationship(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.Relationship
                          .Select(x => new SQLParamters
@@ -105,7 +105,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_Occupation(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.Occupation
                          .Select(x => new SQLParamters
@@ -120,7 +120,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_PolicyPeriod(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.PolicyPeriod
                          .Select(x => new SQLParamters
@@ -136,7 +136,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_CampusType(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.CampusType.Where(x => x.Status == true)
                          .Select(x => new SQLParamters
@@ -152,7 +152,7 @@ namespace office360.GlobalHelper.LookUp
         
         public static List<SQLParamters> GET_LK1_AcademicYear(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.AcademicYear.Where(x => x.Status == true)
                          .Select(x => new SQLParamters
@@ -167,7 +167,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_OrganizationType(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.OrganizationType
                         .Where(x => x.Status == true)
@@ -183,7 +183,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_City(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.City
                          .Where(x => x.CountryId == PostedData.CountryId && x.Status == true)
@@ -194,7 +194,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_RollCallSystem(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.RollCallSystem
                          .Select(x => new SQLParamters { Id = x.Id, Description = x.Description, }).ToList();
@@ -204,7 +204,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_BillingMethod(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.BillingMethod
                          .Select(x => new SQLParamters { Id = x.Id, Description = x.Description, }).ToList();
@@ -214,7 +214,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_RegistrationType(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.RegistrationType
                       .Select(x => new SQLParamters { Id = x.Id, Description = x.Description })
@@ -225,7 +225,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_FeeCatagory(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.FeeCatagory
                       .Where(X => X.Status == true)
@@ -237,7 +237,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_ChargingMethod(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.ChargingMethod
                       .Select(x => new SQLParamters { Id = x.Id, Description = x.Description })
@@ -248,7 +248,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_AdmissionCatagory(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.AdmissionCatagory
                       .Select(x => new SQLParamters { Id = x.Id, Description = x.Description })
@@ -259,7 +259,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_ChallanType(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.ChallanType
                          .Select(x => new SQLParamters
@@ -276,7 +276,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_Role(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.Role
                          .Select(x => new SQLParamters
@@ -291,7 +291,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_Right(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.Right
                          .Select(x => new SQLParamters
@@ -308,7 +308,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_URLType(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.URLType
                          .Select(x => new SQLParamters
@@ -323,7 +323,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_StudyLevel(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.StudyLevel
                         .Where(x => x.Status == true)
@@ -339,7 +339,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_StudyGroup(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.StudyGroup
                         .Where(x => x.Status == true)
@@ -355,7 +355,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_ChallanMethod(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.ChallanMethod
                         .Where(x => x.Status == true)
@@ -373,7 +373,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_StudyScheme(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.StudyScheme
                          .Select(x => new SQLParamters
@@ -389,7 +389,7 @@ namespace office360.GlobalHelper.LookUp
         }
         public static List<SQLParamters> GET_LK1_Semester(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var DATA = db.Semester
                         .Where(x=>x.StudySchemeId == PostedData.StudySchemeId)

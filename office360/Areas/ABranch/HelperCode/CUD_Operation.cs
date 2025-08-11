@@ -20,7 +20,7 @@ namespace office360.Areas.ABranch.HelperCode
         #region HELPER FOR :: INSERT/UPDATE DATA USING STORED PROCEDURE (DBO.BM_BRANCH) ::-- MAIN DB
         public static int? Update_Insert_BM_Branch(SQLParamters PostedData)
         {
-            using (var db = new SESEntities())
+            using (var db = new FASEntities())
             {
                 using (System.Data.Entity.DbContextTransaction dbTran = db.Database.BeginTransaction())
                 {

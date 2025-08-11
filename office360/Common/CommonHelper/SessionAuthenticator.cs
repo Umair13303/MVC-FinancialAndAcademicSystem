@@ -18,7 +18,7 @@ namespace office360.Common.CommonHelper
     {
         public static bool Company_GetStatusUsingSession(int? companyId)
         { 
-            using (SESEntities context = new SESEntities())
+            using (FASEntities context = new FASEntities())
             {
                 string sql = "  SELECT C.[Status] FROM [dbo].[CM_Company] C WHERE C.[Id] =@CompanyId";
                 SqlParameter parameter = new SqlParameter("CompanyId", companyId);
@@ -31,7 +31,7 @@ namespace office360.Common.CommonHelper
         }
         public static bool ACC_Users_GetStatusUsingSession(int? UserId)
         {
-            using (SESEntities context = new SESEntities())
+            using (FASEntities context = new FASEntities())
             {
                 string sql = "SELECT U.[IsLogIn] FROM [dbo].[UM_User] U WHERE U.[Id] =@UserId";
                 SqlParameter parameter = new SqlParameter("UserId", UserId);

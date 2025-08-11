@@ -20,7 +20,7 @@ namespace office360.Areas.ACompany.HelperCode
         #region HELPER FOR :: CHECK IF Company(ACTIVE_COMPANY) ALREADY EXIST
         public static int? IS_EXIST_CM_COMPANY_BY_PARAMETER(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 bool IsRecordExist = false;
                 int? Response = (int?)Http_DB_Response.CODE_DATA_ALREADY_EXIST;
@@ -77,7 +77,7 @@ namespace office360.Areas.ACompany.HelperCode
 
         public static int? IS_EXIST_RSM_RIGHTSETTING_BY_PARAMETER(SQLParamters PostedData)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 int? Response = (int?)Http_DB_Response.CODE_DATA_ALREADY_EXIST;
                 try

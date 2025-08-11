@@ -22,7 +22,7 @@ namespace office360.Areas.ABranch.HelperCode
         public static List<BM_Branch_GetListByParam_Result> GET_MT_BM_BRANCH_BYPARAM(SQLParamters PostedData)
         {
             List<BM_Branch_GetListByParam_Result> DATA = new List<BM_Branch_GetListByParam_Result>();
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 DATA = db.BM_Branch_GetListByParam(
                                                        PostedData.DB_IF_PARAM,
@@ -41,7 +41,7 @@ namespace office360.Areas.ABranch.HelperCode
         public static List<BM_Branch_GetListBySearch_Result> GET_MT_BM_BRANCH_LIST_BY_SEARCHQUERY(SQLParamters PostedData)
         {
             List<BM_Branch_GetListBySearch_Result> DATA = new List<BM_Branch_GetListBySearch_Result>();
-            using (var db = new SESEntities())
+            using (var db = new FASEntities())
             {
                 DATA = db.BM_Branch_GetListBySearch(
                                                         Session_Manager.CompanyId,

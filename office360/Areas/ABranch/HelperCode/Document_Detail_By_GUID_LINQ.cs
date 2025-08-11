@@ -15,7 +15,7 @@ namespace office360.Areas.ABranch.HelperCode
         {
             List<SQLParamters> DATA = new List<SQLParamters>();
 
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 DATA = ((List<SQLParamters>)
                        (from B in db.BM_Branch

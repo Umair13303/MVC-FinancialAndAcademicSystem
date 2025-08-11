@@ -345,217 +345,217 @@
     <Compile Include="Models\DBF\DBFModel.cs" />
     <Compile Include="Models\DBF\DBFStoredProcedure.cs" />
     <Compile Include="Models\EDMX\AASM_AdmissionSession.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\AASM_AdmissionSession_GetListByParam_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\AASM_AdmissionSession_GetListBySearch_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\AcademicYear.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\ACCM_ClassCurriculum.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\ACCM_ClassCurriculumSubject.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\ACM_Class.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\ACM_Class_GetListByParam_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\ACM_Class_GetListBySearch_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\AdmissionCatagory.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\ASM_Subject.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\ASM_Subject_GetListByParam_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\ASM_Subject_GetListBySearch_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\BillingMethod.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\BM_Branch.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\BM_Branch_GetListByParam_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\BM_Branch_GetListBySearch_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\CampusType.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\ChallanMethod.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\ChallanType.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\ChargingMethod.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\City.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\CM_Company.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\CM_Company_GetDetailByParam_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\CM_Company_GetListByParam_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\CoaCatagory.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\CoaType.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\Country.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\DocType.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\DocumentStatus.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\EducationBoard.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\EnrollmentType.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\ExportClass.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDMX\FASModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FASModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDMX\FASModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FASModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDMX\FASModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FASModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\FeeCatagory.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\fn_CodeSplitByCommaAsINT_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\fn_CodeSplitByCommaAsUniqueIdentifier_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\fn_GetCommaSepratedValuesInList_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\fn_GetGeneralBranchSettingForCampus_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\Gender.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\MartialStatus.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\Occupation.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\OrganizationType.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\PolicyPeriod.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\RegistrationType.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\Relationship.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\Religion.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\Right.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\Role.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\RollCallSystem.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\RSM_RightSetting.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\RSM_RightSetting_GetDetailByParam_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\RSM_RightSetting_GetListByParam_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\Semester.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EDMX\SESModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SESModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EDMX\SESModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SESModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EDMX\SESModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SESModel.edmx</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\StudyGroup.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\StudyLevel.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\StudyScheme.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\UM_User.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\UM_User_GetDetailByParam_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\UM_User_GetListByParam_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\UM_User_GetListBySearch_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\URLType.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\URM_UserRight.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\URM_UserRight_GetListByParam_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\URM_UserRight_GetListBySearch_Result.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\WHTaxPolicy.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\WorkingShift.cs">
-      <DependentUpon>SESModel.tt</DependentUpon>
+      <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\General\AppConstant.cs" />
     <Compile Include="Models\General\CommonURL.cs" />
@@ -878,15 +878,15 @@
     <Content Include="Library\JS\FontAwsome.js" />
     <Content Include="Library\JS\SheetJS.js" />
     <Content Include="Library\JS\SweetAlert2.js" />
-    <Content Include="Models\EDMX\SESModel.Context.tt">
+    <Content Include="Models\EDMX\FASModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SESModel.edmx</DependentUpon>
-      <LastGenOutput>SESModel.Context.cs</LastGenOutput>
+      <DependentUpon>FASModel.edmx</DependentUpon>
+      <LastGenOutput>FASModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\EDMX\SESModel.tt">
+    <Content Include="Models\EDMX\FASModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SESModel.edmx</DependentUpon>
-      <LastGenOutput>SESModel.cs</LastGenOutput>
+      <DependentUpon>FASModel.edmx</DependentUpon>
+      <LastGenOutput>FASModel.cs</LastGenOutput>
     </Content>
     <Content Include="Packages\FontAwsome.js" />
     <Content Include="Packages\SheetJS.js" />
@@ -2056,12 +2056,12 @@
     </None>
     <Content Include="ExcelFiles\Developer Upload\StudentBulkUploadDeveloperTesting.xlsm" />
     <Content Include="ExcelFiles\StudentBulkUploadNew.xlsm" />
-    <EntityDeploy Include="Models\EDMX\SESModel.edmx">
+    <EntityDeploy Include="Models\EDMX\FASModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SESModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>FASModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\EDMX\SESModel.edmx.diagram">
-      <DependentUpon>SESModel.edmx</DependentUpon>
+    <Content Include="Models\EDMX\FASModel.edmx.diagram">
+      <DependentUpon>FASModel.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />

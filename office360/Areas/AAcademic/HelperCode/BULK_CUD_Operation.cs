@@ -22,7 +22,7 @@ namespace office360.Areas.AAcademic.HelperCode
         #region HELPER FOR :: INSERT/UPDATE DATA USING STORED PROCEDURE (DBO.ACCM_CLASSCURRICULUM && DBO.ACCM_CLASSCURRICULUMSUBJECT) ::-- MAIN DB
         public static int? Update_Insert_ACCM_ClassCurriculum(SQLParamters PostedData, List<TVParam.ACCM_ClassCurriculumSubject_TVP> PostedDataDetail)
         {
-            using (var db = new SESEntities())
+            using (var db = new FASEntities())
             {
                 using (System.Data.Entity.DbContextTransaction dbTran = db.Database.BeginTransaction())
                 {

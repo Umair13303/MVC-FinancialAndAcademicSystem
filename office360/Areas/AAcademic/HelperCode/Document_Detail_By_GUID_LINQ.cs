@@ -15,7 +15,7 @@ namespace office360.Areas.AAcademic.HelperCode
         {
             List<SQLParamters> DATA = new List<SQLParamters>();
 
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 DATA = ((List<SQLParamters>)
                        (from C in db.ACM_Class
@@ -43,7 +43,7 @@ namespace office360.Areas.AAcademic.HelperCode
         {
             List<SQLParamters> DATA = new List<SQLParamters>();
 
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 DATA = ((List<SQLParamters>)
                        (from S in db.ASM_Subject
@@ -69,7 +69,7 @@ namespace office360.Areas.AAcademic.HelperCode
         {
             List<SQLParamters> DATA = new List<SQLParamters>();
 
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 DATA = ((List<SQLParamters>)
                        (from S in db.AASM_AdmissionSession

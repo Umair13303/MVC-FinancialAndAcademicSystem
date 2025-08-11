@@ -15,7 +15,7 @@ namespace office360.Areas.ACompany.HelperCode
         {
             List<SQLParamters> DATA = new List<SQLParamters>();
 
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 DATA = ((List<SQLParamters>)
                        (from C in db.CM_Company
@@ -46,7 +46,7 @@ namespace office360.Areas.ACompany.HelperCode
         {
             List<SQLParamters> DATA = new List<SQLParamters>();
 
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 DATA = ((List<SQLParamters>)
                        (from RS in db.RSM_RightSetting

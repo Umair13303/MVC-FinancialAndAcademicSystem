@@ -22,7 +22,7 @@ namespace office360.Areas.AUser.HelperCode
         public static List<UM_User_GetListByParam_Result> GET_MT_UM_USER_BYPARAM(SQLParamters PostedData)
         {
             List<UM_User_GetListByParam_Result> DATA = new List<UM_User_GetListByParam_Result>();
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 DATA = db.UM_User_GetListByParam(
                                                        PostedData.DB_IF_PARAM,
@@ -39,7 +39,7 @@ namespace office360.Areas.AUser.HelperCode
         public static List<UM_User_GetListBySearch_Result> GET_MT_UM_USER_LIST_BY_SEARCHQUERY(SQLParamters PostedData)
         {
             List<UM_User_GetListBySearch_Result> DATA = new List<UM_User_GetListBySearch_Result>();
-            using (var db = new SESEntities())
+            using (var db = new FASEntities())
             {
                 DATA = db.UM_User_GetListBySearch(
                                                         Session_Manager.CompanyId,
@@ -59,7 +59,7 @@ namespace office360.Areas.AUser.HelperCode
         public static List<URM_UserRight_GetListByParam_Result> GET_MT_URM_USERRIGHT_BYPARAM(SQLParamters PostedData)
         {
             List<URM_UserRight_GetListByParam_Result> DATA = new List<URM_UserRight_GetListByParam_Result>();
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 DATA = db.URM_UserRight_GetListByParam(
                                                        PostedData.DB_IF_PARAM,
@@ -77,7 +77,7 @@ namespace office360.Areas.AUser.HelperCode
         public static List<URM_UserRight_GetListBySearch_Result> GET_MT_URM_USERRIGHT_LIST_BY_USERID_SEARCHQUERY(SQLParamters PostedData)
         {
             List<URM_UserRight_GetListBySearch_Result> DATA = new List<URM_UserRight_GetListBySearch_Result>();
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 DATA = db.URM_UserRight_GetListBySearch(
                                                         Session_Manager.CompanyId,

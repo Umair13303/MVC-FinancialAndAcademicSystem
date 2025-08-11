@@ -15,10 +15,10 @@ namespace office360.Models.EDMX
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class SESEntities : DbContext
+    public partial class FASEntities : DbContext
     {
-        public SESEntities()
-            : base("name=SESEntities")
+        public FASEntities()
+            : base("name=FASEntities")
         {
         }
     
@@ -73,44 +73,44 @@ namespace office360.Models.EDMX
         public virtual DbSet<WHTaxPolicy> WHTaxPolicy { get; set; }
         public virtual DbSet<WorkingShift> WorkingShift { get; set; }
     
-        [DbFunction("SESEntities", "fn_CodeSplitByCommaAsINT")]
+        [DbFunction("FASEntities", "fn_CodeSplitByCommaAsINT")]
         public virtual IQueryable<fn_CodeSplitByCommaAsINT_Result> fn_CodeSplitByCommaAsINT(string psCSString)
         {
             var psCSStringParameter = psCSString != null ?
                 new ObjectParameter("psCSString", psCSString) :
                 new ObjectParameter("psCSString", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_CodeSplitByCommaAsINT_Result>("[SESEntities].[fn_CodeSplitByCommaAsINT](@psCSString)", psCSStringParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_CodeSplitByCommaAsINT_Result>("[FASEntities].[fn_CodeSplitByCommaAsINT](@psCSString)", psCSStringParameter);
         }
     
-        [DbFunction("SESEntities", "fn_CodeSplitByCommaAsUniqueIdentifier")]
+        [DbFunction("FASEntities", "fn_CodeSplitByCommaAsUniqueIdentifier")]
         public virtual IQueryable<fn_CodeSplitByCommaAsUniqueIdentifier_Result> fn_CodeSplitByCommaAsUniqueIdentifier(string psCSString)
         {
             var psCSStringParameter = psCSString != null ?
                 new ObjectParameter("psCSString", psCSString) :
                 new ObjectParameter("psCSString", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_CodeSplitByCommaAsUniqueIdentifier_Result>("[SESEntities].[fn_CodeSplitByCommaAsUniqueIdentifier](@psCSString)", psCSStringParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_CodeSplitByCommaAsUniqueIdentifier_Result>("[FASEntities].[fn_CodeSplitByCommaAsUniqueIdentifier](@psCSString)", psCSStringParameter);
         }
     
-        [DbFunction("SESEntities", "fn_GetCommaSepratedValuesInList")]
+        [DbFunction("FASEntities", "fn_GetCommaSepratedValuesInList")]
         public virtual IQueryable<fn_GetCommaSepratedValuesInList_Result> fn_GetCommaSepratedValuesInList(string psCSString)
         {
             var psCSStringParameter = psCSString != null ?
                 new ObjectParameter("psCSString", psCSString) :
                 new ObjectParameter("psCSString", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_GetCommaSepratedValuesInList_Result>("[SESEntities].[fn_GetCommaSepratedValuesInList](@psCSString)", psCSStringParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_GetCommaSepratedValuesInList_Result>("[FASEntities].[fn_GetCommaSepratedValuesInList](@psCSString)", psCSStringParameter);
         }
     
-        [DbFunction("SESEntities", "fn_GetGeneralBranchSettingForCampus")]
+        [DbFunction("FASEntities", "fn_GetGeneralBranchSettingForCampus")]
         public virtual IQueryable<fn_GetGeneralBranchSettingForCampus_Result> fn_GetGeneralBranchSettingForCampus(Nullable<int> campusId)
         {
             var campusIdParameter = campusId.HasValue ?
                 new ObjectParameter("CampusId", campusId) :
                 new ObjectParameter("CampusId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_GetGeneralBranchSettingForCampus_Result>("[SESEntities].[fn_GetGeneralBranchSettingForCampus](@CampusId)", campusIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_GetGeneralBranchSettingForCampus_Result>("[FASEntities].[fn_GetGeneralBranchSettingForCampus](@CampusId)", campusIdParameter);
         }
     
         public virtual ObjectResult<AASM_AdmissionSession_GetListByParam_Result> AASM_AdmissionSession_GetListByParam(string dB_IF_PARAM, Nullable<int> sessionCompanyId, Nullable<int> sessionBranchId, string allowedCampusIds, string searchParameter, Nullable<int> campusId, Nullable<int> companyId)

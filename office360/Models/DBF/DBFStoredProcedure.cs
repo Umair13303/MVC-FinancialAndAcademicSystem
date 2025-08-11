@@ -18,7 +18,7 @@ namespace office360.Models.DBF
         {
             try
             {
-                string ConnectionString = ConfigurationManager.ConnectionStrings["SESFINALEntities"].ConnectionString;
+                string ConnectionString = ConfigurationManager.ConnectionStrings["FASQUERYEntities"].ConnectionString;
                 using (SqlConnection conn = new SqlConnection(ConnectionString))
                 {
                     using (SqlCommand cmd = new SqlCommand("ACCM_ClassCurriculum_Upsert", conn))

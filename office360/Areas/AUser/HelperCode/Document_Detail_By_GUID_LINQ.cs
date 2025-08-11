@@ -15,7 +15,7 @@ namespace office360.Areas.AUser.HelperCode
         {
             List<SQLParamters> DATA = new List<SQLParamters>();
 
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 DATA = ((List<SQLParamters>)
                        (from U in db.UM_User
@@ -52,7 +52,7 @@ namespace office360.Areas.AUser.HelperCode
         {
             List<SQLParamters> DATA = new List<SQLParamters>();
 
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 DATA = ((List<SQLParamters>)
                        (from UR in db.URM_UserRight

@@ -20,7 +20,7 @@ namespace office360.Areas.ACompany.HelperCode
         #region HELPER FOR :: INSERT/UPDATE DATA USING STORED PROCEDURE (DBO.CM_COMPANY) ::-- MAIN DB
         public static int? Update_Insert_CM_Company(SQLParamters PostedData)
         {
-            using (var db = new SESEntities())
+            using (var db = new FASEntities())
             {
                 using (System.Data.Entity.DbContextTransaction dbTran = db.Database.BeginTransaction())
                 {
@@ -105,7 +105,7 @@ namespace office360.Areas.ACompany.HelperCode
         #region HELPER FOR :: INSERT/UPDATE DATA USING STORED PROCEDURE (DBO.RSM_RightSetting) ::-- MAIN DB
         public static int? Update_Insert_RSM_RightSetting(SQLParamters PostedData)
         {
-            using (var db = new SESEntities())
+            using (var db = new FASEntities())
             {
                 using (System.Data.Entity.DbContextTransaction dbTran = db.Database.BeginTransaction())
                 {

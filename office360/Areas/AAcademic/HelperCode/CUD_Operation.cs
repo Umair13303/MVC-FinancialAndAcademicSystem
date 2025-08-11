@@ -17,7 +17,7 @@ namespace office360.Areas.AAcademic.HelperCode
         #region HELPER FOR :: INSERT/UPDATE DATA USING STORED PROCEDURE (DBO.ACM_CLASS) ::-- MAIN DB
         public static int? Update_Insert_ACM_Class(SQLParamters PostedData)
         {
-            using (var db = new SESEntities())
+            using (var db = new FASEntities())
             {
                 using (System.Data.Entity.DbContextTransaction dbTran = db.Database.BeginTransaction())
                 {
@@ -99,7 +99,7 @@ namespace office360.Areas.AAcademic.HelperCode
         #region HELPER FOR :: INSERT/UPDATE DATA USING STORED PROCEDURE (DBO.ASM_SUBJECT) ::-- MAIN DB
         public static int? Update_Insert_ASM_Subject(SQLParamters PostedData)
         {
-            using (var db = new SESEntities())
+            using (var db = new FASEntities())
             {
                 using (System.Data.Entity.DbContextTransaction dbTran = db.Database.BeginTransaction())
                 {
@@ -178,7 +178,7 @@ namespace office360.Areas.AAcademic.HelperCode
         #region HELPER FOR :: INSERT/UPDATE DATA USING STORED PROCEDURE (DBO.AASM_ADMISSIONSESSION) ::-- MAIN DB
         public static int? Update_Insert_AASM_AdmissionSession(SQLParamters PostedData)
         {
-            using (var db = new SESEntities())
+            using (var db = new FASEntities())
             {
                 using (System.Data.Entity.DbContextTransaction dbTran = db.Database.BeginTransaction())
                 {

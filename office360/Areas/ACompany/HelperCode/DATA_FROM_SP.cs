@@ -22,7 +22,7 @@ namespace office360.Areas.ACompany.HelperCode
         public static List<CM_Company_GetListByParam_Result> GET_MT_CM_COMPANY_BYPARAM(SQLParamters PostedData)
         {
             List<CM_Company_GetListByParam_Result> DATA = new List<CM_Company_GetListByParam_Result>();
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 DATA = db.CM_Company_GetListByParam(
                                                        PostedData.DB_IF_PARAM,
@@ -43,7 +43,7 @@ namespace office360.Areas.ACompany.HelperCode
         public static List<RSM_RightSetting_GetListByParam_Result> GET_MT_RSM_RIGHTSETTING_BYPARAM(SQLParamters PostedData)
         {
             List<RSM_RightSetting_GetListByParam_Result> DATA = new List<RSM_RightSetting_GetListByParam_Result>();
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
 
                 DATA = db.RSM_RightSetting_GetListByParam(

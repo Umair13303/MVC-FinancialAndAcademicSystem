@@ -15,7 +15,7 @@ namespace office360.Areas.ACompany.Controllers
 {
     public class CCompanyManagmentUIController : Controller
     {
-        SESEntities db = new SESEntities();
+        FASEntities db = new FASEntities();
         int? StatusCode = 0;
         int? _Exe = 0;
 

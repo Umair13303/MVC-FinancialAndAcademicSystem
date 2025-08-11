@@ -23,7 +23,7 @@ namespace office360.Areas.AAcademic.HelperCode
         public static List<ACM_Class_GetListByParam_Result> GET_MT_ACM_CLASS_BYPARAM(SQLParamters PostedData)
         {
             List<ACM_Class_GetListByParam_Result> DATA = new List<ACM_Class_GetListByParam_Result>();
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 DATA = db.ACM_Class_GetListByParam(
                                                        PostedData.DB_IF_PARAM,
@@ -44,7 +44,7 @@ namespace office360.Areas.AAcademic.HelperCode
         public static List<ACM_Class_GetListBySearch_Result> GET_MT_ACM_CLASS_LIST_BY_SEARCHQUERY(SQLParamters PostedData)
         {
             List<ACM_Class_GetListBySearch_Result> DATA = new List<ACM_Class_GetListBySearch_Result>();
-            using (var db = new SESEntities())
+            using (var db = new FASEntities())
             {
                 DATA = db.ACM_Class_GetListBySearch(
                                                         Session_Manager.CompanyId,
@@ -67,7 +67,7 @@ namespace office360.Areas.AAcademic.HelperCode
         public static List<ASM_Subject_GetListByParam_Result> GET_MT_ASM_SUBJECT_BYPARAM(SQLParamters PostedData)
         {
             List<ASM_Subject_GetListByParam_Result> DATA = new List<ASM_Subject_GetListByParam_Result>();
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 DATA = db.ASM_Subject_GetListByParam(
                                                        PostedData.DB_IF_PARAM,
@@ -87,7 +87,7 @@ namespace office360.Areas.AAcademic.HelperCode
         public static List<ASM_Subject_GetListBySearch_Result> GET_MT_ASM_SUBJECT_LIST_BY_SEARCHQUERY(SQLParamters PostedData)
         {
             List<ASM_Subject_GetListBySearch_Result> DATA = new List<ASM_Subject_GetListBySearch_Result>();
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 DATA = db.ASM_Subject_GetListBySearch(
                                                        Session_Manager.CompanyId,
@@ -107,7 +107,7 @@ namespace office360.Areas.AAcademic.HelperCode
         public static List<AASM_AdmissionSession_GetListByParam_Result> GET_MT_AASM_ADMISSIONSESSION_BYPARAM(SQLParamters PostedData)
         {
             List<AASM_AdmissionSession_GetListByParam_Result> DATA = new List<AASM_AdmissionSession_GetListByParam_Result>();
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 DATA = db.AASM_AdmissionSession_GetListByParam(
                                                        PostedData.DB_IF_PARAM,
@@ -127,7 +127,7 @@ namespace office360.Areas.AAcademic.HelperCode
         public static List<AASM_AdmissionSession_GetListBySearch_Result> GET_MT_AASM_ADMISSIONSESSION_LIST_BY_SEARCHQUERY(SQLParamters PostedData)
         {
             List<AASM_AdmissionSession_GetListBySearch_Result> DATA = new List<AASM_AdmissionSession_GetListBySearch_Result>();
-            using (var db = new SESEntities())
+            using (var db = new FASEntities())
             {
                 DATA = db.AASM_AdmissionSession_GetListBySearch(
                                                         Session_Manager.CompanyId,

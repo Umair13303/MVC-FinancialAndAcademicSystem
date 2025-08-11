@@ -25,7 +25,7 @@ namespace REP.Controllers
     public class HomeController : Controller
     {
 
-        SESEntities db = new SESEntities();
+        FASEntities db = new FASEntities();
 
        
         public ActionResult LogInPage()

@@ -18,7 +18,7 @@ namespace office360.CommonHelper
 
     public class LogInAuthentication
     {
-        SESEntities db = new SESEntities();
+        FASEntities db = new FASEntities();
         public static bool CheckUserAuthorization(UM_User Users, out int? RoleId, out int? StatusCode)
         {
             try
@@ -29,7 +29,7 @@ namespace office360.CommonHelper
                 var Condition = DBFilter.GET_USER_CONFIRMATION.ToSafeString();
                 if (!string.IsNullOrEmpty(UserName) && !string.IsNullOrEmpty(Password))
                 {
-                    using (var db = new SESEntities())
+                    using (var db = new FASEntities())
                     {
                         var data = db.UM_User_GetDetailByParam(Condition, null, true, UserName, Password, null).ToList();
                         if (data != null && data.Count > 0)

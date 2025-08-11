@@ -16,7 +16,7 @@ namespace office360.Areas.AAcademic.Controllers
 {
     public class CAcademicClassCurriculumManagmentUIController : Controller
     {
-        SESEntities db = new SESEntities();
+        FASEntities db = new FASEntities();
         int? StatusCode = 0;
         int? _Exe = 0;
         /*---------------------- ** ACTION RESULTS FOR :: RENDER OF VIEW ** ------------------------------------------------------------------- */

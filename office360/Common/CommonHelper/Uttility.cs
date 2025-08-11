@@ -24,7 +24,7 @@ namespace office360.Common.CommonHelper
 {
     public class Uttility
     {
-        SESEntities db = new SESEntities();
+        FASEntities db = new FASEntities();
         public static string fn_GetCodeFormat(string ShortCode)
         {
             return ShortCode + "-" + DateTime.Now.ToString("yyyyMMdd");
@@ -35,7 +35,7 @@ namespace office360.Common.CommonHelper
         }
         public static List<string> fn_GetCommaSeparatedValuesIntoList(string MultiSelectString)
         {
-            using (SESEntities db = new SESEntities())
+            using (FASEntities db = new FASEntities())
             {
                 var data = db.fn_GetCommaSepratedValuesInList(MultiSelectString)
                              .Select(s => s.sID)
@@ -46,7 +46,7 @@ namespace office360.Common.CommonHelper
 
         public static bool fn_InsertHistory(string TableName, string ColumnNames, string Values, out int? StatusCode)
         {
-            using (var db = new SESEntities())
+            using (var db = new FASEntities())
             {
                 try
                 {
@@ -82,7 +82,7 @@ namespace office360.Common.CommonHelper
         }
         public static string fn_GetMonthRange(SQLParamters PostedData)
         {
-            using (var db = new SESEntities())
+            using (var db = new FASEntities())
             {
                 #region CHECK IF PARAMETERS ARE NOT VALID
                 if (!PostedData.TransactionDate.HasValue || !PostedData.TransactionMonth.HasValue || PostedData.TransactionMonth.Value <= 0)

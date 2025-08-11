@@ -20,7 +20,7 @@ namespace office360.Areas.AUser.HelperCode
         #region HELPER FOR :: INSERT/UPDATE DATA USING STORED PROCEDURE (DBO.UM_User) ::-- MAIN DB
         public static int? Update_Insert_UM_User(SQLParamters PostedData)
         {
-            using (var db = new SESEntities())
+            using (var db = new FASEntities())
             {
                 using (System.Data.Entity.DbContextTransaction dbTran = db.Database.BeginTransaction())
                 {
@@ -105,7 +105,7 @@ namespace office360.Areas.AUser.HelperCode
         #region HELPER FOR :: INSERT/UPDATE DATA USING STORED PROCEDURE (DBO.URM_UserRight) ::-- MAIN DB
         public static int? Update_Insert_URM_UserRight(SQLParamters PostedData)
         {
-            using (var db = new SESEntities())
+            using (var db = new FASEntities())
             {
                 using (System.Data.Entity.DbContextTransaction dbTran = db.Database.BeginTransaction())
                 {
