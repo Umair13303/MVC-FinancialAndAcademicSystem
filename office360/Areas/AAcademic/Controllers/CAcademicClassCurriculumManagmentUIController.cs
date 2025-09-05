@@ -87,6 +87,12 @@ namespace office360.Areas.AAcademic.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: EDIT (LOAD DOCUMENT OF CLASSCURRICULUM & GET DETAIL BY CLASSCURRICULUM_GUID) ** --------------------- */
 
         #region ACTION RESULT FOR :: SEARCH DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
+
+        public ActionResult GET_MT_ACCM_CLASSCURRICULUM_BYPARAMETER_SEARCH(SQLParamters PostedData)
+        {
+            var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_ACCM_CLASSCURRICULUM_BYPARAM(PostedData).ToList();
+            return Json(new { data = DATA }, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region ACTION RESULT FOR :: GET DOCUMENT DETAIL (DBO.ACM_CLASSCURRICULUM) -- LINQ-QUERY

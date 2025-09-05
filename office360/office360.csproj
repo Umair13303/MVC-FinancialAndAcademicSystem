@@ -362,6 +362,9 @@
     <Compile Include="Models\EDMX\ACCM_ClassCurriculumSubject.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EDMX\ACCM_ClassCurriculum_GetListByParam_Result.cs">
+      <DependentUpon>FASModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EDMX\ACM_Class.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>

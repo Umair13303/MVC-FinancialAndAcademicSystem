@@ -14,7 +14,7 @@ $(document).ready(function () {
             $('#DivButtonUpdateDown').hide();
             break;
         case DBOperation.UPDATE:
-            //GET_AASM_ADMISSIONSESSION_LISTBYPARAM();
+            GET_ACCM_CLASSCURRICULUM_LISTBYPARAM();
             $('#DivButtonSubmitDown').hide();
             $('#DivButtonUpdateDown').show();
             break;
@@ -380,7 +380,7 @@ function ClearInputFields() {
 
 /*----------------------------------** FUNCTION FOR:: UPDATE CLASSCURRICULAM (LOAD DROPDOWN,DATA FOR CLASSCURRICULAMID)                        **----------------------------------------------*/
 $('#ButtonSubmitGetInfoForEdit').click(function () {
-    if ($('#DropDownListCampus').RequiredDropdown() == false) {
+    if ($('#DropDownListClassCurriculum').RequiredDropdown() == false) {
         return false;
     }
     else {
@@ -390,17 +390,17 @@ $('#ButtonSubmitGetInfoForEdit').click(function () {
 function GET_ACCM_CLASSCURRICULUM_LISTBYPARAM() {
     $('#DropDownListClassCurriculum').empty();
     $('#DropDownListClassCurriculum').select2({
-        placeholder: 'Search By Class Name / Subject Name / Curriculum Code',
+        placeholder: 'Search By Class Name / Curriculum Code',
         minimumInputLength: 3,
         ajax: {
-            url: BasePath + "/ABranch/CBranchManagmentUI/GET_MT_BM_BRANCH_BYPARAMETER_SEARCH",
+            url: BasePath + "/AAcademic/CAcademicClassCurriculumManagmentUI/GET_MT_ACCM_CLASSCURRICULUM_BYPARAMETER_SEARCH",
             type: "POST",
             delay: 250,
             data: function (params) {
                 return {
                     PostedData: {
                         SearchParameter: params.term,
-                        DB_IF_PARAM: DOCUMENT_LIST_CONDITION.BM_BRANCH_BY_ALLOWEDBRANCHIDS_SEARCH_PARAMETER_UPDATEBRANCH,
+                        DB_IF_PARAM: DOCUMENT_LIST_CONDITION.ACCM_CLASSCURRICULUM_BY_ALLOWEDBRANCHIDS_SEARCH_PARAMETER_UPDATECLASSCURRICULUM,
                     }
                 };
             },

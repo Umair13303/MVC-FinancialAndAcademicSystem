@@ -143,6 +143,27 @@ namespace office360.Areas.AAcademic.HelperCode
         #endregion
         #endregion
 
+        #region DBO:- ACCM_CLASSCURRICULUM
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB
+        public static List<ACCM_ClassCurriculum_GetListByParam_Result> GET_MT_ACCM_CLASSCURRICULUM_BYPARAM(SQLParamters PostedData)
+        {
+            List<ACCM_ClassCurriculum_GetListByParam_Result> DATA = new List<ACCM_ClassCurriculum_GetListByParam_Result>();
+            using (FASEntities db = new FASEntities())
+            {
+                DATA = db.ACCM_ClassCurriculum_GetListByParam(
+                                                       PostedData.DB_IF_PARAM,
+                                                       Session_Manager.CompanyId,
+                                                       PostedData.CampusId ?? Session_Manager.BranchId,
+                                                       Session_Manager.AllowedCampusIds,
+                                                       PostedData.SearchParameter,
+                                                       PostedData.CampusId,
+                                                       PostedData.CompanyId
+                                                       ).ToList();
+                return DATA;
+            }
+        }
+        #endregion
+        #endregion
 
     }
 
