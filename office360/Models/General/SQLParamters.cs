@@ -117,6 +117,8 @@ namespace office360.Models.General
         public int? URLTypeId { get; set; }
         public int? RegisteredPeriodId { get; set; }
         public int? AdmissionCatagoryId { get; set; }
+        public int? SemesterId { get; set; }
+        public int? SubjectId { get; set; }
 
         public string ActionCondition { get; set; }
         public string Address { get; set; }
@@ -194,6 +196,8 @@ namespace office360.Models.General
         public string UserName { get; set; } 
         public string Password { get; set; } 
         public string AllowedCampusIds { get; set; }
+        public string Semester { get; set; }
+        public string Subject { get; set; }
 
 
         public static explicit operator List<object>(SQLParamters v)

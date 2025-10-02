@@ -40,6 +40,25 @@ namespace office360.Areas.AAcademic.Controllers
                 return RedirectToAction(_ActionsURL.LogIn, _Controller.Home, new { area = "" });
             }
         }
+
+        [UsersSessionCheck]
+        [CompanySessionCheck]
+        public ActionResult View_List_ACCMUI_ClassCurriculum(SQLParamters PostedData)
+        {
+            #region PASS VIEW
+            _Exe = GetAllListFromDB.GetAllowedUsersRightsByParameter(PostedData.RightId);
+            #endregion
+            if (_Exe == (int?)Http_DB_Response.CODE_SUCCESS)
+            {
+                ViewBag.Title = PostedData.DisplayName.ToSafeString();
+                ViewBag.DB_OperationType = PostedData.OperationType.ToSafeString();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction(_ActionsURL.LogIn, _Controller.Home, new { area = "" });
+            }
+        }
         #endregion
 
         /*---------------------- ** ACTION RESULTS FOR :: RENDER OF DROP DOWN LIST FROM DB_MAIN USING STOREDPROCEDURE ** ---------------------- */
@@ -96,6 +115,12 @@ namespace office360.Areas.AAcademic.Controllers
         #endregion
 
         #region ACTION RESULT FOR :: GET DOCUMENT DETAIL (DBO.ACM_CLASSCURRICULUM) -- LINQ-QUERY
+        public ActionResult GET_ACCM_CLASSCURRICULUM_INFOBYGUID(SQLParamters PostedData)
+        {
+            var DATA = AAcademic.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_ACCM_CLASSCURRICULUM_INFO_BY_GUID(PostedData).ToList();
+            var DATA_DETAIL = AAcademic.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_ACCM_CLASSCURRICULUMSUBJECT_INFO_BY_GUID(PostedData).ToList();
+            return Json(new { DATA, DATA_DETAIL }, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         /*---------------------- ** ACTION RESULTS FOR :: DATA TABLE (LOAD TABLE OF CLASSCURRICULUM BY INPUT TYPE & TEXT) ** ---------------------------- */

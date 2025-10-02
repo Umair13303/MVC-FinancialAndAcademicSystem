@@ -315,7 +315,7 @@ $('#ButtonUpdateDown').click(function (event) {
     if (IS_VALID) {
         try {
             OperationType = DBOperation.UPDATE;
-            //UpSertDataIntoDB();
+            UpSertDataIntoDB();
         }
         catch (err) {
             GetMessageBox(err.message, 505);
@@ -433,21 +433,41 @@ function GET_ACCM_CLASSCURRICULUM_INFOBYGUID() {
         }
         $.ajax({
             type: "POST",
-            url: BasePath + "/ABranch/CBranchManagmentUI/GET_MT_BM_BRANCH_INFOBYGUID",
+            url: BasePath + "/AAcademic/CAcademicClassCurriculumManagmentUI/GET_ACCM_CLASSCURRICULUM_INFOBYGUID",
             dataType: 'json',
             data: { 'PostedData': (JsonArg) },
             beforeSend: function () {
                 startLoading();
             },
             success: function (data) {
-                if (data.length > 0) {
+                if (data.DATA && data.DATA.length > 0) {
                     /*-- LOAD DATA FOR FIELDS RENDERED :: ON LOAD/STATIC --*/
-
+                    $('#DropDownListCampus').val(data.DATA[0].CampusId).trigger('change.select2');
+                    $('#TextBoxDescription').val(data.DATA[0].Description);
+                    $('#TextBoxRemarks').val(data.DATA[0].Remarks).prop('disabled', true);
+                    $('#HiddenFieldClassCurriculumGuID').val(data.DATA[0].GuID);
                     /*-- LOAD DATA FOR FIELDS RENDERED :: ON CHANGE --*/
+                    PopulateMT_ACM_Class_ListByParam(data.DATA[0].CampusId, data.DATA[0].ClassId);
                 }
                 else {
                     GetMessageBox("NO RECORD FOUND FOR FOR SELECTED CLASS CURRICULUM.... CONTACT DEVELOPER TEAM", 505);
                 }
+                if (data.DATA_DETAIL && data.DATA_DETAIL.length > 0) {
+                    /*-- LOAD DATA FOR TABLE RENDERED :: ON LOAD/STATIC --*/
+                    CurriculumDetailTable.clear().draw();
+                    for (var i in data.DATA_DETAIL) {
+                        var row_data = [];
+                        row_data[0] = '';
+                        row_data[1] = data.DATA_DETAIL[i].Semester;
+                        row_data[2] = data.DATA_DETAIL[i].Subject;
+                        row_data[3] = data.DATA_DETAIL[i].SemesterId;
+                        row_data[4] = data.DATA_DETAIL[i].SubjectId;
+                        row_data[5] = HTML_BUTTON.DELETE_IN_LIST();
+                        CurriculumDetailTable.row.add(row_data);
+                    }
+                    CurriculumDetailTable.draw();
+                }
+               
             },
             complete: function () {
                 stopLoading();

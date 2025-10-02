@@ -17,7 +17,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></a></li>
                     <li class="breadcrumb-item"><a href="javascript:void(0);">Academic</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">Class</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Curriculum</a></li>
                     <li class="breadcrumb-item active" aria-current="page"><span>@ViewBag.Title</span></li>
                 </ol>
             </nav>
@@ -35,8 +35,9 @@
                                                                     {
                                                                         new SelectListItem { Value = "0", Text = "Select An Option" },
                                                                         new SelectListItem { Value = "1", Text = "Get All Class" },
-                                                                        new SelectListItem { Value = "2", Text = "Class Code" },
-                                                                        new SelectListItem { Value = "3", Text = "Class Name" },
+                                                                        new SelectListItem { Value = "2", Text = "Curriculum Code" },
+                                                                        new SelectListItem { Value = "3", Text = "Class Code" },
+                                                                        new SelectListItem { Value = "4", Text = "Class Name" },
                                                                     },
                                                                     new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListSearchBy" })
                     </div>
@@ -53,19 +54,17 @@
             </div>
         </div>
     </div>
+
     <div class="card" style="margin-top:1%;width:100%">
         <div class="card-body">
             <div class="bootstrap-admin-panel-content">
-                <table class="table table-bordered table-sm order-column stripe table-hover" style="width: 100%" id="MainTableACM_Class">
-                    <tbody id="TableBodyMainMainTableACM_Class">
+                <table class="table table-bordered table-sm order-column stripe table-hover" style="width: 100%" id="MainTableACCM_ClassCurriculum">
+                    <tbody id="TableBodyMainTableACCM_ClassCurriculum">
                     </tbody>
                 </table>
             </div>
+
         </div>
     </div>
-    <script>
-        var CompanyId = @office360.Models.General.Session_Manager.CompanyId.ToString();
-        var RoleId = @office360.Models.General.Session_Manager.RoleId.ToString();
-    </script>
 }
-<script src="~/Areas/AAcademic/Script/CAcademicClassManagmentUI_Script/View_List_ACMUI_Class.js"></script>
+<script src="~/Areas/AAcademic/Script/CAcademicClassCurriculumManagmentUI_Script/View_List_ACCMUI_ClassCurriculum.js"></script>

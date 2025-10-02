@@ -579,6 +579,7 @@
     <Content Include="Areas\AAcademic\Script\CAcademicAdmissionSessionManagmentUI_Script\CreateUpdate_AASMUI_AdmissionSession.js" />
     <Content Include="Areas\AAcademic\Script\CAcademicAdmissionSessionManagmentUI_Script\View_List_AASMUI_AdmissionSession.js" />
     <Content Include="Areas\AAcademic\Script\CAcademicClassCurriculumManagmentUI_Script\CreateUpdate_ACCMUI_ClassCurriculum.js" />
+    <Content Include="Areas\AAcademic\Script\CAcademicClassCurriculumManagmentUI_Script\View_List_ACCMUI_ClassCurriculum.js" />
     <Content Include="Areas\AAcademic\Script\CAcademicClassManagmentUI_Script\View_List_ACMUI_Class.js" />
     <Content Include="Areas\AAcademic\Script\CAcademicClassManagmentUI_Script\CreateUpdate_ACMUI_Class.js" />
     <Content Include="Areas\AAcademic\Script\CAcademicSubjectManagmentUI_Script\CreateUpdate_ASMUI_Subject.js" />
@@ -2053,6 +2054,7 @@
     <Content Include="Areas\AAcademic\Views\CAcademicSubjectManagmentUI\View_List_ASMUI_Subject.cshtml" />
     <Content Include="Areas\AMiscellaneous\Views\web.config" />
     <Content Include="Areas\AMiscellaneous\Views\CAccountUI\Reconcile_AUI_LedgerAmountBased.cshtml" />
+    <Content Include="Areas\AAcademic\Views\CAcademicClassCurriculumManagmentUI\View_List_ACCMUI_ClassCurriculum.cshtml" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>

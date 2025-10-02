@@ -164,7 +164,7 @@ namespace office360.Areas.AAcademic.HelperCode
                         case nameof(DB_OperationType.UPDATE_DATA_INTO_DB):
 
                             #region IN CASE OF UPDATE :: CHECK IF ENTERY RECORD EXIST , BASED ON SYSTEM GUID
-                            IsRecordExist = db.AASM_AdmissionSession.Any(x => x.GuID == PostedData.GuID);
+                            IsRecordExist = db.ACCM_ClassCurriculum.Any(x => x.GuID == PostedData.GuID);
                             #endregion
                             if (!IsRecordExist)
                                 Response = (int?)Http_DB_Response.CODE_DATA_DOES_NOT_EXIST;
