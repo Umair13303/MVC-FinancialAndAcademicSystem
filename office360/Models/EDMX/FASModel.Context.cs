@@ -297,6 +297,31 @@ namespace office360.Models.EDMX
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ACCM_ClassCurriculum_GetListByParam_Result>("ACCM_ClassCurriculum_GetListByParam", dB_IF_PARAMParameter, sessionCompanyIdParameter, sessionBranchIdParameter, allowedCampusIdsParameter, searchParameterParameter, campusIdParameter, companyIdParameter);
         }
     
+        public virtual ObjectResult<ACCM_ClassCurriculum_GetListBySearch_Result> ACCM_ClassCurriculum_GetListBySearch(Nullable<int> companyId, Nullable<int> branchId, string allowedCampusId, Nullable<int> inputTypeId, string inputText)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(int));
+    
+            var allowedCampusIdParameter = allowedCampusId != null ?
+                new ObjectParameter("AllowedCampusId", allowedCampusId) :
+                new ObjectParameter("AllowedCampusId", typeof(string));
+    
+            var inputTypeIdParameter = inputTypeId.HasValue ?
+                new ObjectParameter("InputTypeId", inputTypeId) :
+                new ObjectParameter("InputTypeId", typeof(int));
+    
+            var inputTextParameter = inputText != null ?
+                new ObjectParameter("InputText", inputText) :
+                new ObjectParameter("InputText", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ACCM_ClassCurriculum_GetListBySearch_Result>("ACCM_ClassCurriculum_GetListBySearch", companyIdParameter, branchIdParameter, allowedCampusIdParameter, inputTypeIdParameter, inputTextParameter);
+        }
+    
         public virtual int ACCM_ClassCurriculum_Upsert(string dB_OperationType, Nullable<System.Guid> guID, Nullable<int> campusId, string description, Nullable<int> classId, Nullable<System.DateTime> createdOn, Nullable<int> createdBy, Nullable<System.DateTime> updatedOn, Nullable<int> updatedBy, Nullable<int> docType, Nullable<int> documentStatus, Nullable<bool> status, Nullable<int> branchId, Nullable<int> companyId, string remarks, ObjectParameter response)
         {
             var dB_OperationTypeParameter = dB_OperationType != null ?
@@ -991,6 +1016,55 @@ namespace office360.Models.EDMX
                 new ObjectParameter("Remarks", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RSM_RightSetting_Upsert", dB_OperationTypeParameter, guIDParameter, rightIdParameter, descriptionParameter, uRLTypeIdParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, remarksParameter, response);
+        }
+    
+        public virtual int So_Far_Best(Nullable<System.Guid> guID, Nullable<int> campusId, string description, Nullable<int> classId, Nullable<int> createdBy, Nullable<int> docType, Nullable<int> documentStatus, Nullable<bool> status, Nullable<int> branchId, Nullable<int> companyId, string remarks, ObjectParameter newClassCurriculumId, ObjectParameter response)
+        {
+            var guIDParameter = guID.HasValue ?
+                new ObjectParameter("GuID", guID) :
+                new ObjectParameter("GuID", typeof(System.Guid));
+    
+            var campusIdParameter = campusId.HasValue ?
+                new ObjectParameter("CampusId", campusId) :
+                new ObjectParameter("CampusId", typeof(int));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var classIdParameter = classId.HasValue ?
+                new ObjectParameter("ClassId", classId) :
+                new ObjectParameter("ClassId", typeof(int));
+    
+            var createdByParameter = createdBy.HasValue ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
+    
+            var docTypeParameter = docType.HasValue ?
+                new ObjectParameter("DocType", docType) :
+                new ObjectParameter("DocType", typeof(int));
+    
+            var documentStatusParameter = documentStatus.HasValue ?
+                new ObjectParameter("DocumentStatus", documentStatus) :
+                new ObjectParameter("DocumentStatus", typeof(int));
+    
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(bool));
+    
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(int));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var remarksParameter = remarks != null ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("So_Far_Best", guIDParameter, campusIdParameter, descriptionParameter, classIdParameter, createdByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, remarksParameter, newClassCurriculumId, response);
         }
     
         public virtual ObjectResult<UM_User_GetDetailByParam_Result> UM_User_GetDetailByParam(string listCondition, Nullable<int> companyId, Nullable<bool> isLogIn, string userName, string password, Nullable<int> id)

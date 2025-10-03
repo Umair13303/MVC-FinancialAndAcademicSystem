@@ -107,17 +107,8 @@
                     </div>
                 </div>
 
-                <div class="row mb-0">
-                    <div class="col-sm-12 col-md-10">
-                        <div class="form-group">
-                            @Html.Label("Class", new { @class = "col-form-label", @for = "DropDownListClasses" })
-                            @Html.DropDownList("DropDownListClasses", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", multiple = "multiple", @data_toggle = "select2", id = "DropDownListClasses" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mb-0">
-                    <div class="col-sm-12 col-md-6">
+                <div class="form-inline mb-0">
+                    <div class="col-sm-12 col-md-2">
                         <div class="form-group">
                             <div class="form-check form-switch">
                                 @Html.CheckBox("CheckBoxIsEnteryTestRequired", false, new { @class = "form-check-input", @role = "switch", id = "CheckBoxIsEnteryTestRequired" })
@@ -125,7 +116,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-6">
+                    <div class="col-sm-12 col-md-2">
                         <div class="form-group">
                             <div class="form-check form-switch">
                                 @Html.CheckBox("CheckBoxIsInterviewRequired", false, new { @class = "form-check-input", @role = "switch", id = "CheckBoxIsInterviewRequired" })
@@ -133,6 +124,19 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Class", new { @class = "col-form-label", @for = "DropDownListClasses" })
+                            @Html.DropDownList("DropDownListClasses", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", multiple = "multiple", @data_toggle = "select2", id = "DropDownListClasses" })
+                        </div>
+                    </div>
+                    <input type="button" class="btn btn-danger" id="ButtonAddDataIntoTable" value="+" />
+                </div>
+
+                <div class="bootstrap-admin-panel-content">
+                    <table class="table table-bordered table-sm order-column stripe table-hover" style="width: 100%" id="MainTableACCM_ClassCurriculum">
+                        <tbody id="MainTableACCM_ClassCurriculum"></tbody>
+                    </table>
                 </div>
 
                 <div class="row mb-0">
@@ -146,7 +150,6 @@
 
 
             </div>
-        </div>
 
         @Html.TextBox("HiddenFieldAdmissionSessionGuID", null, new { @class = "form-control", Value = ViewBag.AdmissionSessionGuIDGuID, hidden = true, @id = "HiddenFieldAdmissionSessionGuID" })
         @Html.TextBox("HiddenFieldDB_OperationType", null, new { @class = "form-control", Value = ViewBag.DB_OperationType, hidden = true, @id = "HiddenFieldDB_OperationType" })

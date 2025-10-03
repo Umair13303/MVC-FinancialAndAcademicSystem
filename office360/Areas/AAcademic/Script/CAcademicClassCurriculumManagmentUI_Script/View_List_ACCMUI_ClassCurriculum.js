@@ -39,6 +39,7 @@ function InitDataTable() {
             { "data": null, "title": "#" },
             { "data": "GuID", "title": "GuID" },
             { "data": "Campus", "title": "Campus" },
+            { "data": "Code", "title": "Code" },
             { "data": "Description", "title": "Description" },
         ],
     });
@@ -84,5 +85,5 @@ function DrawDataTable() {
         InputText: InputText,
     };
     var queryString = $.param(JsonArg);
-    table.ajax.url((BasePath + "/AAcademic/CAcademicClassManagmentUI/GET_MT_ACM_CLASS_LIST_BY_SEARCHQUERY_FORDATATABLE?" + queryString)).load();
+    table.ajax.url((BasePath + "/AAcademic/CAcademicClassCurriculumManagmentUI/GET_MT_ACCM_CLASSCURRICULUM_LIST_BY_SEARCHQUERY_FORDATATABLE?" + queryString)).load();
 }

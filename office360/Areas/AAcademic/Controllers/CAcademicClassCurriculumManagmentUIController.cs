@@ -126,7 +126,11 @@ namespace office360.Areas.AAcademic.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: DATA TABLE (LOAD TABLE OF CLASSCURRICULUM BY INPUT TYPE & TEXT) ** ---------------------------- */
 
         #region ACTION RESULT FOR :: GET LIST BY SEARCH PARAMETER FOR DATA-TABLE (DBO.ACCM_ClassCurriculum)-- STORED PROCEDURE
-
+        public ActionResult GET_MT_ACCM_CLASSCURRICULUM_LIST_BY_SEARCHQUERY_FORDATATABLE(SQLParamters PostedData)
+        {
+            var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_ACCM_CLASSCURRICULUM_LIST_BY_SEARCHQUERY(PostedData).ToList();
+            return Json(new { success = true, data = DATA }, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
     }
