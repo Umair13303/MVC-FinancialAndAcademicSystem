@@ -14,14 +14,9 @@
           <Property Name="Code" Type="nvarchar(max)" />
           <Property Name="CampusId" Type="int" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="SessionStartDate" Type="datetime" />
-          <Property Name="SessionEndDate" Type="datetime" />
+          <Property Name="AcademicYearId" Type="int" />
           <Property Name="AdmissionStartDate" Type="datetime" />
           <Property Name="AdmissionEndDate" Type="datetime" />
-          <Property Name="AcademicYearId" Type="int" />
-          <Property Name="ClassIds" Type="nvarchar(max)" />
-          <Property Name="IsEnteryTestRequired" Type="bit" />
-          <Property Name="IsInterviewRequired" Type="bit" />
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="UpdatedOn" Type="datetime" />
@@ -32,6 +27,26 @@
           <Property Name="BranchId" Type="int" />
           <Property Name="CompanyId" Type="int" />
           <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AASM_AdmissionSessionClass">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuID" Type="uniqueidentifier" />
+          <Property Name="AdmissionSessionId" Type="int" />
+          <Property Name="ClassId" Type="int" />
+          <Property Name="IsEnteryTestRequired" Type="bit" />
+          <Property Name="IsInterviewRequired" Type="bit" />
+          <Property Name="SessionStartDate" Type="date" />
+          <Property Name="SessionEndDate" Type="date" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="DocType" Type="int" />
+          <Property Name="DocumentStatus" Type="int" />
+          <Property Name="Status" Type="bit" />
         </EntityType>
         <EntityType Name="ACCM_ClassCurriculum">
           <Key>
@@ -624,14 +639,9 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Parameter Name="GuID" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="CampusId" Type="int" Mode="In" />
           <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="SessionStartDate" Type="datetime" Mode="In" />
-          <Parameter Name="SessionEndDate" Type="datetime" Mode="In" />
+          <Parameter Name="AcademicYearId" Type="int" Mode="In" />
           <Parameter Name="AdmissionStartDate" Type="datetime" Mode="In" />
           <Parameter Name="AdmissionEndDate" Type="datetime" Mode="In" />
-          <Parameter Name="AcademicYearId" Type="int" Mode="In" />
-          <Parameter Name="ClassIds" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="IsEnteryTestRequired" Type="bit" Mode="In" />
-          <Parameter Name="IsInterviewRequired" Type="bit" Mode="In" />
           <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
           <Parameter Name="CreatedBy" Type="int" Mode="In" />
           <Parameter Name="UpdatedOn" Type="datetime" Mode="In" />
@@ -994,6 +1004,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
         </Function>
         <EntityContainer Name="FASModelStoreContainer">
           <EntitySet Name="AASM_AdmissionSession" EntityType="Self.AASM_AdmissionSession" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AASM_AdmissionSessionClass" EntityType="Self.AASM_AdmissionSessionClass" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ACCM_ClassCurriculum" EntityType="Self.ACCM_ClassCurriculum" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ACCM_ClassCurriculumSubject" EntityType="Self.ACCM_ClassCurriculumSubject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ACM_Class" EntityType="Self.ACM_Class" Schema="dbo" store:Type="Tables" />
@@ -1298,14 +1309,9 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CampusId" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SessionStartDate" Type="DateTime" Precision="3" />
-          <Property Name="SessionEndDate" Type="DateTime" Precision="3" />
+          <Property Name="AcademicYearId" Type="Int32" />
           <Property Name="AdmissionStartDate" Type="DateTime" Precision="3" />
           <Property Name="AdmissionEndDate" Type="DateTime" Precision="3" />
-          <Property Name="AcademicYearId" Type="Int32" />
-          <Property Name="ClassIds" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsEnteryTestRequired" Type="Boolean" />
-          <Property Name="IsInterviewRequired" Type="Boolean" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
@@ -1316,6 +1322,26 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Name="BranchId" Type="Int32" />
           <Property Name="CompanyId" Type="Int32" />
           <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AASM_AdmissionSessionClass">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuID" Type="Guid" />
+          <Property Name="AdmissionSessionId" Type="Int32" />
+          <Property Name="ClassId" Type="Int32" />
+          <Property Name="IsEnteryTestRequired" Type="Boolean" />
+          <Property Name="IsInterviewRequired" Type="Boolean" />
+          <Property Name="SessionStartDate" Type="DateTime" Precision="0" />
+          <Property Name="SessionEndDate" Type="DateTime" Precision="0" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="DocType" Type="Int32" />
+          <Property Name="DocumentStatus" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
         </EntityType>
         <EntityType Name="ACCM_ClassCurriculum">
           <Key>
@@ -1819,6 +1845,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
         </EntityType>
         <EntityContainer Name="FASEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AASM_AdmissionSession" EntityType="Self.AASM_AdmissionSession" />
+          <EntitySet Name="AASM_AdmissionSessionClass" EntityType="Self.AASM_AdmissionSessionClass" />
           <EntitySet Name="ACCM_ClassCurriculum" EntityType="Self.ACCM_ClassCurriculum" />
           <EntitySet Name="ACCM_ClassCurriculumSubject" EntityType="Self.ACCM_ClassCurriculumSubject" />
           <EntitySet Name="ACM_Class" EntityType="Self.ACM_Class" />
@@ -1896,14 +1923,9 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
             <Parameter Name="GuID" Mode="In" Type="Guid" />
             <Parameter Name="CampusId" Mode="In" Type="Int32" />
             <Parameter Name="Description" Mode="In" Type="String" />
-            <Parameter Name="SessionStartDate" Mode="In" Type="DateTime" />
-            <Parameter Name="SessionEndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="AcademicYearId" Mode="In" Type="Int32" />
             <Parameter Name="AdmissionStartDate" Mode="In" Type="DateTime" />
             <Parameter Name="AdmissionEndDate" Mode="In" Type="DateTime" />
-            <Parameter Name="AcademicYearId" Mode="In" Type="Int32" />
-            <Parameter Name="ClassIds" Mode="In" Type="String" />
-            <Parameter Name="IsEnteryTestRequired" Mode="In" Type="Boolean" />
-            <Parameter Name="IsInterviewRequired" Mode="In" Type="Boolean" />
             <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
             <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
             <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
@@ -2226,14 +2248,9 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Type="Guid" Name="GuID" Nullable="true" />
           <Property Type="String" Name="Code" Nullable="true" />
           <Property Type="String" Name="Description" Nullable="true" />
-          <Property Type="DateTime" Name="SessionStartDate" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="SessionEndDate" Nullable="true" Precision="23" />
           <Property Type="DateTime" Name="AdmissionStartDate" Nullable="true" Precision="23" />
           <Property Type="DateTime" Name="AdmissionEndDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="AcademicYear" Nullable="true" />
-          <Property Type="String" Name="Classes" Nullable="true" />
-          <Property Type="Boolean" Name="IsEnteryTestRequired" Nullable="true" />
-          <Property Type="Boolean" Name="IsInterviewRequired" Nullable="true" />
           <Property Type="Int32" Name="DocumentStatus" Nullable="true" />
           <Property Type="String" Name="Campus" Nullable="true" />
         </ComplexType>
@@ -2408,14 +2425,9 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="CampusId" ColumnName="CampusId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="SessionStartDate" ColumnName="SessionStartDate" />
-                <ScalarProperty Name="SessionEndDate" ColumnName="SessionEndDate" />
+                <ScalarProperty Name="AcademicYearId" ColumnName="AcademicYearId" />
                 <ScalarProperty Name="AdmissionStartDate" ColumnName="AdmissionStartDate" />
                 <ScalarProperty Name="AdmissionEndDate" ColumnName="AdmissionEndDate" />
-                <ScalarProperty Name="AcademicYearId" ColumnName="AcademicYearId" />
-                <ScalarProperty Name="ClassIds" ColumnName="ClassIds" />
-                <ScalarProperty Name="IsEnteryTestRequired" ColumnName="IsEnteryTestRequired" />
-                <ScalarProperty Name="IsInterviewRequired" ColumnName="IsInterviewRequired" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
@@ -2426,6 +2438,27 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
                 <ScalarProperty Name="BranchId" ColumnName="BranchId" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AASM_AdmissionSessionClass">
+            <EntityTypeMapping TypeName="FASModel.AASM_AdmissionSessionClass">
+              <MappingFragment StoreEntitySet="AASM_AdmissionSessionClass">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="AdmissionSessionId" ColumnName="AdmissionSessionId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="IsEnteryTestRequired" ColumnName="IsEnteryTestRequired" />
+                <ScalarProperty Name="IsInterviewRequired" ColumnName="IsInterviewRequired" />
+                <ScalarProperty Name="SessionStartDate" ColumnName="SessionStartDate" />
+                <ScalarProperty Name="SessionEndDate" ColumnName="SessionEndDate" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="DocType" ColumnName="DocType" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3023,14 +3056,9 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="SessionStartDate" ColumnName="SessionStartDate" />
-                <ScalarProperty Name="SessionEndDate" ColumnName="SessionEndDate" />
                 <ScalarProperty Name="AdmissionStartDate" ColumnName="AdmissionStartDate" />
                 <ScalarProperty Name="AdmissionEndDate" ColumnName="AdmissionEndDate" />
                 <ScalarProperty Name="AcademicYear" ColumnName="AcademicYear" />
-                <ScalarProperty Name="Classes" ColumnName="Classes" />
-                <ScalarProperty Name="IsEnteryTestRequired" ColumnName="IsEnteryTestRequired" />
-                <ScalarProperty Name="IsInterviewRequired" ColumnName="IsInterviewRequired" />
                 <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
                 <ScalarProperty Name="Campus" ColumnName="Campus" />
               </ComplexTypeMapping>

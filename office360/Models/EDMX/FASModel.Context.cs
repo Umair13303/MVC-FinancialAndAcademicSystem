@@ -28,6 +28,7 @@ namespace office360.Models.EDMX
         }
     
         public virtual DbSet<AASM_AdmissionSession> AASM_AdmissionSession { get; set; }
+        public virtual DbSet<AASM_AdmissionSessionClass> AASM_AdmissionSessionClass { get; set; }
         public virtual DbSet<ACCM_ClassCurriculum> ACCM_ClassCurriculum { get; set; }
         public virtual DbSet<ACCM_ClassCurriculumSubject> ACCM_ClassCurriculumSubject { get; set; }
         public virtual DbSet<ACM_Class> ACM_Class { get; set; }
@@ -171,7 +172,7 @@ namespace office360.Models.EDMX
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AASM_AdmissionSession_GetListBySearch_Result>("AASM_AdmissionSession_GetListBySearch", companyIdParameter, branchIdParameter, allowedCampusIdParameter, inputTypeIdParameter, inputTextParameter);
         }
     
-        public virtual int AASM_AdmissionSession_Upsert(string dB_OperationType, Nullable<System.Guid> guID, Nullable<int> campusId, string description, Nullable<System.DateTime> sessionStartDate, Nullable<System.DateTime> sessionEndDate, Nullable<System.DateTime> admissionStartDate, Nullable<System.DateTime> admissionEndDate, Nullable<int> academicYearId, string classIds, Nullable<bool> isEnteryTestRequired, Nullable<bool> isInterviewRequired, Nullable<System.DateTime> createdOn, Nullable<int> createdBy, Nullable<System.DateTime> updatedOn, Nullable<int> updatedBy, Nullable<int> docType, Nullable<int> documentStatus, Nullable<bool> status, Nullable<int> branchId, Nullable<int> companyId, string remarks, ObjectParameter response)
+        public virtual int AASM_AdmissionSession_Upsert(string dB_OperationType, Nullable<System.Guid> guID, Nullable<int> campusId, string description, Nullable<int> academicYearId, Nullable<System.DateTime> admissionStartDate, Nullable<System.DateTime> admissionEndDate, Nullable<System.DateTime> createdOn, Nullable<int> createdBy, Nullable<System.DateTime> updatedOn, Nullable<int> updatedBy, Nullable<int> docType, Nullable<int> documentStatus, Nullable<bool> status, Nullable<int> branchId, Nullable<int> companyId, string remarks, ObjectParameter response)
         {
             var dB_OperationTypeParameter = dB_OperationType != null ?
                 new ObjectParameter("DB_OperationType", dB_OperationType) :
@@ -189,13 +190,9 @@ namespace office360.Models.EDMX
                 new ObjectParameter("Description", description) :
                 new ObjectParameter("Description", typeof(string));
     
-            var sessionStartDateParameter = sessionStartDate.HasValue ?
-                new ObjectParameter("SessionStartDate", sessionStartDate) :
-                new ObjectParameter("SessionStartDate", typeof(System.DateTime));
-    
-            var sessionEndDateParameter = sessionEndDate.HasValue ?
-                new ObjectParameter("SessionEndDate", sessionEndDate) :
-                new ObjectParameter("SessionEndDate", typeof(System.DateTime));
+            var academicYearIdParameter = academicYearId.HasValue ?
+                new ObjectParameter("AcademicYearId", academicYearId) :
+                new ObjectParameter("AcademicYearId", typeof(int));
     
             var admissionStartDateParameter = admissionStartDate.HasValue ?
                 new ObjectParameter("AdmissionStartDate", admissionStartDate) :
@@ -204,22 +201,6 @@ namespace office360.Models.EDMX
             var admissionEndDateParameter = admissionEndDate.HasValue ?
                 new ObjectParameter("AdmissionEndDate", admissionEndDate) :
                 new ObjectParameter("AdmissionEndDate", typeof(System.DateTime));
-    
-            var academicYearIdParameter = academicYearId.HasValue ?
-                new ObjectParameter("AcademicYearId", academicYearId) :
-                new ObjectParameter("AcademicYearId", typeof(int));
-    
-            var classIdsParameter = classIds != null ?
-                new ObjectParameter("ClassIds", classIds) :
-                new ObjectParameter("ClassIds", typeof(string));
-    
-            var isEnteryTestRequiredParameter = isEnteryTestRequired.HasValue ?
-                new ObjectParameter("IsEnteryTestRequired", isEnteryTestRequired) :
-                new ObjectParameter("IsEnteryTestRequired", typeof(bool));
-    
-            var isInterviewRequiredParameter = isInterviewRequired.HasValue ?
-                new ObjectParameter("IsInterviewRequired", isInterviewRequired) :
-                new ObjectParameter("IsInterviewRequired", typeof(bool));
     
             var createdOnParameter = createdOn.HasValue ?
                 new ObjectParameter("CreatedOn", createdOn) :
@@ -261,7 +242,7 @@ namespace office360.Models.EDMX
                 new ObjectParameter("Remarks", remarks) :
                 new ObjectParameter("Remarks", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AASM_AdmissionSession_Upsert", dB_OperationTypeParameter, guIDParameter, campusIdParameter, descriptionParameter, sessionStartDateParameter, sessionEndDateParameter, admissionStartDateParameter, admissionEndDateParameter, academicYearIdParameter, classIdsParameter, isEnteryTestRequiredParameter, isInterviewRequiredParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, remarksParameter, response);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AASM_AdmissionSession_Upsert", dB_OperationTypeParameter, guIDParameter, campusIdParameter, descriptionParameter, academicYearIdParameter, admissionStartDateParameter, admissionEndDateParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, remarksParameter, response);
         }
     
         public virtual ObjectResult<ACCM_ClassCurriculum_GetListByParam_Result> ACCM_ClassCurriculum_GetListByParam(string dB_IF_PARAM, Nullable<int> sessionCompanyId, Nullable<int> sessionBranchId, string allowedCampusIds, string searchParameter, Nullable<int> campusId, Nullable<int> companyId)

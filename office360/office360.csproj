@@ -347,6 +347,9 @@
     <Compile Include="Models\EDMX\AASM_AdmissionSession.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EDMX\AASM_AdmissionSessionClass.cs">
+      <DependentUpon>FASModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EDMX\AASM_AdmissionSession_GetListByParam_Result.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>

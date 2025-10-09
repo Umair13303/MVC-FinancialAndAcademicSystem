@@ -4,7 +4,7 @@ var DDL_Condition = "";
 var DB_OperationType = $('#HiddenFieldDB_OperationType').val();
 var IsFieldClear = false;
 
-var CurriculumDetailTable = "";
+var ClassCurriculumSubjectTable = "";
 /*----------------------------------** FUNCTION FOR::PAGE LOADER                                                                                **----------------------------------------------*/
 $(document).ready(function () {
     DB_OperationType = $('#HiddenFieldDB_OperationType').val();
@@ -21,7 +21,7 @@ $(document).ready(function () {
     }
     PopulateDropDownLists();
     ChangeCase();
-    InitializeClassCurriculumDataTable();
+    InitializeClassCurriculumSubjectDataTable();
 });
 
 function PopulateDropDownLists() {
@@ -36,7 +36,7 @@ function ChangeCase() {
         var StudySchemeId = $('#DropDownListClass :selected').attr('data-StudySchemeId');
         /*--var SemesterId = null;  NOT PROVIDED ON LOAD --*/
         PopulateLK_Semester_List(StudySchemeId, null);
-        CurriculumDetailTable.clear().draw();
+        ClassCurriculumSubjectTable.clear().draw();
     });
 
     $('#DropDownListCampus').change(function () {
@@ -53,10 +53,9 @@ function ChangeCase() {
         }
     });
 }
-
 /*----------------------------------** FUNCTION FOR::INITIALIZING DATA TABLE's & RELATED OPERATION's                                            **----------------------------------------------*/
-function InitializeClassCurriculumDataTable() {
-    CurriculumDetailTable = $('#MainTableACCM_ClassCurriculum').DataTable({
+function InitializeClassCurriculumSubjectDataTable() {
+    ClassCurriculumSubjectTable = $('#MainTableACCM_ClassCurriculumSubject').DataTable({
         "responsive": true,
         "ordering": false,
         "processing": true,
@@ -75,19 +74,17 @@ function InitializeClassCurriculumDataTable() {
         ],
         drawCallback: async function () {
             $('.delete').off('click').on('click', function () {
-                $('#MainTableACCM_ClassCurriculum').DataTable().row($(this).closest('tr')).remove().draw();
+                $('#MainTableACCM_ClassCurriculumSubject').DataTable().row($(this).closest('tr')).remove().draw();
             });
         }
     });
-    CurriculumDetailTable.on('order.dt search.dt', function () {
-        CurriculumDetailTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+    ClassCurriculumSubjectTable.on('order.dt search.dt', function () {
+        ClassCurriculumSubjectTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
             cell.innerHTML = i + 1;
         });
     }).draw();
 }
-
-/*----------------------------------** FUNCTION FOR::VALIDATE DATA & INSERT INTO DATATABLE                                                      **----------------------------------------------*/
-function ValidateInputFieldsClassCurriculumDetail() {
+function ValidateInputFieldsClassCurriculumSubjectDetail() {
     if ($('#DropDownListSemester').RequiredDropdown() == false) {
         return false;
     }
@@ -98,7 +95,7 @@ function ValidateInputFieldsClassCurriculumDetail() {
 }
 $('#ButtonAddDataIntoTable').click(function (event) {
     event.preventDefault();
-    var IS_VALID = ValidateInputFieldsClassCurriculumDetail();
+    var IS_VALID = ValidateInputFieldsClassCurriculumSubjectDetail();
     if (IS_VALID) {
         try {
             InsertDataIntoDataTable();
@@ -119,7 +116,7 @@ function InsertDataIntoDataTable() {
         var Subject = Subjects[i];
         var IsRecordAlreadyInserted = false;
 
-        CurriculumDetailTable.column(4).data().each(function (ExistingId) {
+        ClassCurriculumSubjectTable.column(4).data().each(function (ExistingId) {
             if (ExistingId == SubjectId) {
                 IsRecordAlreadyInserted = true;
                 return false; 
@@ -128,7 +125,8 @@ function InsertDataIntoDataTable() {
 
         if (IsRecordAlreadyInserted) {
             DuplicateSubject.push(Subject);
-        } else {
+        }
+        else {
             var Table_Row = [];
             Table_Row[0] = "";
             Table_Row[1] = Semester;
@@ -137,7 +135,7 @@ function InsertDataIntoDataTable() {
             Table_Row[4] = SubjectId;
             Table_Row[5] = HTML_BUTTON.DELETE_IN_LIST();
 
-            CurriculumDetailTable.row.add(Table_Row).draw();
+            ClassCurriculumSubjectTable.row.add(Table_Row).draw();
         }
     }
     if (DuplicateSubject.length > 0) {
@@ -153,7 +151,6 @@ function ClearInputFieldsDataTable() {
     $('#DropDownListSemester').val('-1').change();
     $('#DropDownListSubject').val('').change();
 }
-
 
 /*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON LOAD)                                **----------------------------------------------*/
 function PopulateMT_BM_Branch_ListByParam() {
@@ -343,7 +340,7 @@ function UpSertDataIntoDB() {
         3: 'SemesterId',
         4: 'SubjectId'
     };
-    var ClassCurriculumDetail = $('#MainTableACCM_ClassCurriculum').DataTable().rows().data().toArray().map(row => {
+    var ClassCurriculumSubjectDetail = $('#MainTableACCM_ClassCurriculumSubject').DataTable().rows().data().toArray().map(row => {
         return Object.fromEntries(
                 Object.entries(IncludedColumnMappings).map(([index, key]) => [key, row[index]])
             );
@@ -354,7 +351,7 @@ function UpSertDataIntoDB() {
         type: "POST",
         url: BasePath + "/AAcademic/CAcademicClassCurriculumManagmentUI/UpSert_Into_ACCM_ClassCurriculum",
         dataType: 'json',
-        data: { 'PostedData': (JsonArg), 'PostedDataDetail': (ClassCurriculumDetail) },
+        data: { 'PostedData': (JsonArg), 'PostedDataDetail': (ClassCurriculumSubjectDetail) },
         beforeSend: function () {
             startLoading();
         },
@@ -454,7 +451,7 @@ function GET_ACCM_CLASSCURRICULUM_INFOBYGUID() {
                 }
                 if (data.DATA_DETAIL && data.DATA_DETAIL.length > 0) {
                     /*-- LOAD DATA FOR TABLE RENDERED :: ON LOAD/STATIC --*/
-                    CurriculumDetailTable.clear().draw();
+                    ClassCurriculumSubjectTable.clear().draw();
                     for (var i in data.DATA_DETAIL) {
                         var row_data = [];
                         row_data[0] = '';
@@ -463,9 +460,9 @@ function GET_ACCM_CLASSCURRICULUM_INFOBYGUID() {
                         row_data[3] = data.DATA_DETAIL[i].SemesterId;
                         row_data[4] = data.DATA_DETAIL[i].SubjectId;
                         row_data[5] = HTML_BUTTON.DELETE_IN_LIST();
-                        CurriculumDetailTable.row.add(row_data);
+                        ClassCurriculumSubjectTable.row.add(row_data);
                     }
-                    CurriculumDetailTable.draw();
+                    ClassCurriculumSubjectTable.draw();
                 }
                
             },

@@ -4,6 +4,8 @@
 
 @using (Html.BeginForm())
 {
+
+
     <div class="statbox widget box box-shadow">
         <div class="widget-header">
             <div class="row">
@@ -80,7 +82,7 @@
         </div>
         <div class="card" style="margin-top:1%;width:100%">
             <div class="card-body">
-                <div class="form-inline mb-0">
+                <div class="form-row mb-0">
                     <div class="col-sm-12 col-md-3">
                         <div class="form-group">
                             @Html.Label("Semester", new { @class = "col-form-label", @for = "DropDownListSemester" })
@@ -90,14 +92,19 @@
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
                             @Html.Label("Subject", new { @class = "col-form-label", @for = "DropDownListSubject" })
-                            @Html.DropDownList("DropDownListSubject", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListSubject", multiple = true })
+                            <div class="input-group">
+                                @Html.DropDownList("DropDownListSubject", Enumerable.Empty<SelectListItem>(), new { @class = "select2", @data_toggle = "select2", id = "DropDownListSubject", multiple = "multiple" })
+                                <button type="button" class="btn btn-info" id="ButtonAddDataIntoTable">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <input type="button" class="btn btn-danger" id="ButtonAddDataIntoTable" value="+" />
+
                 </div>
                 <div class="bootstrap-admin-panel-content">
-                    <table class="table table-bordered table-sm order-column stripe table-hover" style="width: 100%" id="MainTableACCM_ClassCurriculum">
-                        <tbody id="MainTableACCM_ClassCurriculum"></tbody>
+                    <table class="table table-bordered table-sm order-column stripe table-hover" style="width: 100%" id="MainTableACCM_ClassCurriculumSubject">
+                        <tbody id="TableBodyMainTableACCM_ClassCurriculumSubject"></tbody>
                     </table>
                 </div>
             </div>

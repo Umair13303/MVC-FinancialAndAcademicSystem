@@ -128,14 +128,9 @@ namespace office360.Areas.AAcademic.HelperCode
                             Code = S.Code,
                             CampusId = S.CampusId,
                             Description = S.Description,
-                            SessionStartDate = S.SessionStartDate,
-                            SessionEndDate = S.SessionEndDate,
+                            AcademicYearId = S.AcademicYearId,
                             AdmissionStartDate = S.AdmissionStartDate,
                             AdmissionEndDate = S.AdmissionEndDate,
-                            AcademicYearId = S.AcademicYearId,
-                            ClassIds = S.ClassIds,
-                            IsEnteryTestRequired = S.IsEnteryTestRequired,
-                            IsInterviewRequired = S.IsInterviewRequired,
                             Remarks = S.Remarks,
 
                         }).ToList());

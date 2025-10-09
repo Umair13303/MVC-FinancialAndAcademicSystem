@@ -4,6 +4,8 @@ var DDL_Condition = "";
 var DB_OperationType = $('#HiddenFieldDB_OperationType').val();
 var IsFieldClear = false;
 
+var AdmissionSessionClassTable = "";
+
 /*----------------------------------** FUNCTION FOR::PAGE LOADER                                                             **----------------------------------------------*/
 $(document).ready(function () {
     DB_OperationType = $('#HiddenFieldDB_OperationType').val();
@@ -20,6 +22,7 @@ $(document).ready(function () {
     }
     PopulateDropDownLists();
     ChangeCase();
+    InitializeAdmissionSessionClassDataTable();
 
 });
 
@@ -52,7 +55,113 @@ function ChangeCase() {
         }
     });
 }
-
+function InitializeAdmissionSessionClassDataTable() {
+    AdmissionSessionClassTable = $('#MainTableAASM_AdmissionSessionClass').DataTable({
+        "responsive": true,
+        "ordering": false,
+        "processing": true,
+        "paging": false,
+        "info": false,
+        "columns": [
+            { "title": "#", "orderable": false, },
+            { "title": "Class" },
+            { "title": "Is Entery Test Required" },
+            { "title": "Is Interview Required" },
+            { "title": "Session Start Date" },
+            { "title": "Session End Date" },
+            { "title": "ClassId" },
+            { "title": "IsEnteryTestRequired" },
+            { "title": "IsInterviewRequired" },
+            { "title": "Action(s)" },
+        ],
+        columnDefs: [
+            { visible: false, targets: [6, 7, 8] },
+        ],
+        drawCallback: async function () {
+            $('.delete').off('click').on('click', function () {
+                $('#MainTableAASM_AdmissionSessionClass').DataTable().row($(this).closest('tr')).remove().draw();
+            });
+        }
+    });
+    AdmissionSessionClassTable.on('order.dt search.dt', function () {
+        AdmissionSessionClassTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+        });
+    }).draw();
+}
+function ValidateInputFieldsAdmissionSessionClassDetail() {
+    if ($('#DropDownListClasses').RequiredDropdown() == false) {
+        return false;
+    }
+    if ($('#TextBoxSessionStartDate').RequiredTextBoxInputGroup() == false) {
+        return false;
+    }
+    if ($('#TextBoxSessionEndDate').RequiredTextBoxInputGroup() == false) {
+        return false;
+    }
+    return true;
+}
+$('#ButtonAddDataIntoTable').click(function (event) {
+    event.preventDefault();
+    var IS_VALID = ValidateInputFieldsAdmissionSessionClassDetail();
+    if (IS_VALID) {
+        try {
+            InsertDataIntoDataTable();
+        }
+        catch (err) {
+            GetMessageBox(err.message, 505);
+        }
+    }
+});
+function InsertDataIntoDataTable() {
+    var Classes = $('#DropDownListClasses option:selected').map(function () { return $(this).text(); }).get();
+    var IsEnteryTestRequired = $("#CheckBoxIsEnteryTestRequired").prop('checked');
+    var IsInterviewRequired = $("#CheckBoxIsInterviewRequired").prop('checked');
+    var SessionStartDate = $("#TextBoxSessionStartDate").val();
+    var SessionEndDate = $("#TextBoxSessionEndDate").val();
+    var ClassIds = $('#DropDownListClasses').val();
+    var DuplicateClass = [];
+    for (var i = 0; i < ClassIds.length; i++) {
+        var ClassId = ClassIds[i];
+        var Class = Classes[i];
+        var IsRecordAlreadyInserted = false;
+        AdmissionSessionClassTable.column(6).data().each(function (ExistingId) {
+            if (ExistingId == ClassId) {
+                IsRecordAlreadyInserted = true;
+                return false;
+            }
+        });
+        if (IsRecordAlreadyInserted) {
+            DuplicateClass.push(Class);
+        }
+        else {
+            var Table_Row = [];
+            Table_Row[0] = "";
+            Table_Row[1] = Class;
+            Table_Row[2] = GetTextLabel(CONVERSION.BOOL_CONFIRMATION(IsEnteryTestRequired));
+            Table_Row[3] = GetTextLabel(CONVERSION.BOOL_CONFIRMATION(IsInterviewRequired));
+            Table_Row[4] = SessionStartDate;
+            Table_Row[5] = SessionEndDate;
+            Table_Row[6] = ClassId;
+            Table_Row[7] = IsEnteryTestRequired;
+            Table_Row[8] = IsInterviewRequired;
+            Table_Row[9] = HTML_BUTTON.DELETE_IN_LIST();
+            AdmissionSessionClassTable.row.add(Table_Row).draw();
+        }
+    }
+    if (DuplicateClass.length > 0) {
+        var message = "The following classes already exist in the table:\n\n";
+        message += DuplicateClass.join(", ");
+        GetMessageBox(message, 505);
+    }
+    ClearInputFieldsDataTable();
+}
+function ClearInputFieldsDataTable() {
+    //-----------NOT CLEARING REQUIRED FIELD
+    $('#DropDownListClasses').val('').change();
+    $('#TextBoxSessionStartDate').val('').change();
+    $('#TextBoxSessionEndDate').val('').change();
+}
 /*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON LOAD)             **----------------------------------------------*/
 function PopulateMT_BM_Branch_ListByParam() {
     switch (DB_OperationType) {
@@ -153,10 +262,7 @@ function ValidateInputFields() {
     if ($('#TextBoxDescription').RequiredTextBoxInputGroup() == false) {
         return false;
     }
-    if ($('#TextBoxSessionStartDate').RequiredTextBoxInputGroup() == false) {
-        return false;
-    }
-    if ($('#TextBoxSessionEndDate').RequiredTextBoxInputGroup() == false) {
+    if ($('#DropDownListAcademicYear').RequiredDropdown() == false) {
         return false;
     }
     if ($('#TextBoxAdmissionStartDate').RequiredTextBoxInputGroup() == false) {
@@ -165,12 +271,17 @@ function ValidateInputFields() {
     if ($('#TextBoxAdmissionEndDate').RequiredTextBoxInputGroup() == false) {
         return false;
     }
-    if ($('#DropDownListAcademicYear').RequiredDropdown() == false) {
-        return false;
-    }
-    if ($('#DropDownListClasses').RequiredDropdown() == false) {
-        return false;
-    }
+
+    //if ($('#DropDownListClasses').RequiredDropdown() == false) {
+    //    return false;
+    //}
+
+    //if ($('#TextBoxSessionStartDate').RequiredTextBoxInputGroup() == false) {
+    //    return false;
+    //}
+    //if ($('#TextBoxSessionEndDate').RequiredTextBoxInputGroup() == false) {
+    //    return false;
+    //}
     if ($('#TextBoxRemarks').RequiredTextBoxInputGroup() == false) {
         return false;
     }
@@ -184,8 +295,8 @@ $('#ButtonSubmitDown').click(function (event) {
             OperationType = DBOperation.INSERT;
             UpSertDataIntoDB();
         }
-        catch {
-            GetMessageBox(err, 505);
+        catch (err) {
+            GetMessageBox(err.message, 505);
         }
     }
 });
@@ -205,14 +316,9 @@ $('#ButtonUpdateDown').click(function (event) {
 function UpSertDataIntoDB() {
     var CampusId = $("#DropDownListCampus :selected").val();
     var Description = $("#TextBoxDescription").val();
-    var SessionStartDate = $("#TextBoxSessionStartDate").val();
-    var SessionEndDate = $("#TextBoxSessionEndDate").val();
+    var AcademicYearId = $("#DropDownListAcademicYear :selected").val();
     var AdmissionStartDate = $("#TextBoxAdmissionStartDate").val();
     var AdmissionEndDate = $("#TextBoxAdmissionEndDate").val();
-    var AcademicYearId = $("#DropDownListAcademicYear :selected").val();
-    var ClassIds = $("#DropDownListClasses").val();
-    var IsEnteryTestRequired = $('#CheckBoxIsEnteryTestRequired').prop('checked');
-    var IsInterviewRequired = $('#CheckBoxIsInterviewRequired').prop('checked');
     var Remarks = $('#TextBoxRemarks').val();
 
     var AdmissionSessionGuID = $('#HiddenFieldAdmissionSessionGuID').val();
@@ -223,22 +329,29 @@ function UpSertDataIntoDB() {
 
         CampusId: CampusId,
         Description: Description,
-        SessionStartDate: SessionStartDate,
-        SessionEndDate: SessionEndDate,
+        AcademicYearId: AcademicYearId,
         AdmissionStartDate: AdmissionStartDate,
         AdmissionEndDate: AdmissionEndDate,
-        AcademicYearId: AcademicYearId,
-        ClassIds: ClassIds.toString(),
-        IsEnteryTestRequired: IsEnteryTestRequired,
-        IsInterviewRequired: IsInterviewRequired,
         Remarks: Remarks,
     }
-   
+
+    var IncludedColumnMappings = {
+       // 2: 'IsEnteryTestRequired',
+        //3: 'IsInterviewRequired',
+        4: 'SessionStartDate',
+        5: 'SessionEndDate',
+        6: 'ClassId',
+    };
+    var AdmissionSessionClassDetail = $('#MainTableAASM_AdmissionSessionClass').DataTable().rows().data().toArray().map(row => {
+        return Object.fromEntries(
+            Object.entries(IncludedColumnMappings).map(([index, key]) => [key, row[index]])
+        );
+    });
     $.ajax({
         type: "POST",
         url: BasePath + "/AAcademic/CAcademicAdmissionSessionManagmentUI/UpSert_Into_AASM_AdmissionSession",
         dataType: 'json',
-        data: { 'PostedData': (JsonArg) },
+        data: { 'PostedData': (JsonArg), 'PostedDataDetail': (AdmissionSessionClassDetail) },
         beforeSend: function () {
             startLoading();
         },

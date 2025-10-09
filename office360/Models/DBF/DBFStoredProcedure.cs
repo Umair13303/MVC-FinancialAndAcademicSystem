@@ -61,5 +61,39 @@ namespace office360.Models.DBF
             }
 
         }
+
+        public static int? AASM_AdmissionSession_Upsert(string DB_OperationType, Guid? GuID,int? CampusId, string Description,int? AcademicYearId,int? AdmissionStartDate,int? AdmissionEndDate, DateTime? CreatedOn, int? CreatedBy, DateTime? UpdatedOn, int? UpdatedBy, int? DocType,int? DocumentStatus,bool? Status, int? BranchId, int? CompanyId,string Remarks, List<TVParam.ACCM_ClassCurriculumSubject_TVP> TVP_ACCM_ClassCurriculum, SqlParameter Response)
+        {
+            try
+            {
+                string ConnectionString = ConfigurationManager.ConnectionStrings["FASQUERYEntities"].ConnectionString;
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand("ACCM_ClassCurriculum_Upsert", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@Remarks", Remarks);
+
+                        SqlParameter TVParam = cmd.Parameters.AddWithValue("@TVP_ACCM_ClassCurriculum", TVP_ACCM_ClassCurriculum.ToDataTable());
+                        TVParam.SqlDbType = SqlDbType.Structured;
+                        TVParam.TypeName = "dbo.BULK_ACCM_ClassCurriculumSubject";
+
+
+                        cmd.Parameters.Add(Response);
+
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+
+                        return 200;
+                    }
+                }
+            }
+            catch(Exception Ex)
+            {
+                throw Ex;
+            }
+
+        }
     }
 }

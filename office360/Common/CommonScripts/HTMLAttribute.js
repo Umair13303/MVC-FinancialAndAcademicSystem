@@ -21,3 +21,15 @@ class HTML_BUTTON {
         return "<a title='Click here to Delete " + Title + "' class='btn btn-sm delete'><i class='far fa-trash-alt'></i> " + '' + "</a>";
     }
 }
+class CONVERSION {
+
+    static BOOL_CONFIRMATION(Value) {
+        const TruthValue = ["1", "true", "on", "yes"];
+        const FalseValue = ["0", "false", "off", "no"];
+        if (TruthValue.includes(String(Value))) {
+            return "YES";
+        } else if (FalseValue.includes(String(Value))) {
+            return "NO";
+        }
+    }
+}

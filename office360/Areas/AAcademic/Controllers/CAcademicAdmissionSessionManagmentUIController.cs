@@ -91,9 +91,9 @@ namespace office360.Areas.AAcademic.Controllers
 
         #region ACTION RESULT FOR :: INSERT/UPDATE/DELETE INTO DBO.AASM_AdmissionSession
         [HttpPost]
-        public ActionResult UpSert_Into_AASM_AdmissionSession(SQLParamters PostedData)
+        public ActionResult UpSert_Into_AASM_AdmissionSession(SQLParamters PostedData, List<TVParam.AASM_AdmissionSessionClass_TVP> PostedDataDetail)
         {
-            _Exe = AAcademic.HelperCode.CUD_Operation.Update_Insert_AASM_AdmissionSession(PostedData);
+            _Exe = AAcademic.HelperCode.BULK_CUD_Operation.Update_Insert_AASM_AdmissionSession(PostedData, PostedDataDetail);
             var data = new { Message = HttpServerStatus.HTTP_DB_TransactionMessagByStatusCode(_Exe), StatusCode = _Exe };
             return Json(data, JsonRequestBehavior.AllowGet);
         }

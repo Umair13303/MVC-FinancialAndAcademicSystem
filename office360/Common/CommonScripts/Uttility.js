@@ -266,6 +266,12 @@ function GetStatus(Status) {
     var Label = '<td> <span class="badge badge-' + BadgeColor + '">' + Display + '</span></td>';
     return Label;
 }
+function GetTextLabel(Display) {
+    var BadgeColor = "info";
+    var Label = '<td> <span class="badge badge-' + BadgeColor + '">' + Display + '</span></td>';
+    return Label;
+
+}
 function GetViewbtn(url, title, text) {
     return "<td class='center'><a onclick=" + url + "  title='Click here to View " + title + "' class='btn btn-sm view'><i class='far fa-eye'></i> " + '' + "</a></td>";
 }
@@ -440,10 +446,6 @@ function DataTableGroupBy_Index_Detail_InputLastGroup(ApiWrapper, TableId, Colum
         LastGroupValues = CurrentGroupValues;
     });
 }
-
-
-
-
 function GetColorForTableGroup(index) {
     const colors = [
         { backgroundColor: '#4A235A', color: '#FFFFFF', borderColor: '#BB8FCE' }, // Group 1
@@ -676,7 +678,3 @@ function GET_TRIGGER_DATEPICKER_SIMPLE(ServerDate, selector) {
         $(selector)[0]._flatpickr.setDate(Date_Formated, true);
     }
 }
-
-
-
-
