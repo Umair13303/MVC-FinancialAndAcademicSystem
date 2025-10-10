@@ -51,7 +51,7 @@ namespace office360.Models.DBF
                         conn.Open();
                         cmd.ExecuteNonQuery();
 
-                        return 200;
+                        return (int?)Response.Value;
                     }
                 }
             }
@@ -62,22 +62,38 @@ namespace office360.Models.DBF
 
         }
 
-        public static int? AASM_AdmissionSession_Upsert(string DB_OperationType, Guid? GuID,int? CampusId, string Description,int? AcademicYearId,int? AdmissionStartDate,int? AdmissionEndDate, DateTime? CreatedOn, int? CreatedBy, DateTime? UpdatedOn, int? UpdatedBy, int? DocType,int? DocumentStatus,bool? Status, int? BranchId, int? CompanyId,string Remarks, List<TVParam.ACCM_ClassCurriculumSubject_TVP> TVP_ACCM_ClassCurriculum, SqlParameter Response)
+        public static int? AASM_AdmissionSession_Upsert(string DB_OperationType, Guid? GuID,int? CampusId, string Description,int? AcademicYearId,DateTime? AdmissionStartDate, DateTime? AdmissionEndDate, DateTime? CreatedOn, int? CreatedBy, DateTime? UpdatedOn, int? UpdatedBy, int? DocType,int? DocumentStatus,bool? Status, int? BranchId, int? CompanyId,string Remarks, List<TVParam.AASM_AdmissionSessionClass_TVP> TVP_AASM_AdmissionSessionClass, SqlParameter Response)
         {
             try
             {
                 string ConnectionString = ConfigurationManager.ConnectionStrings["FASQUERYEntities"].ConnectionString;
                 using (SqlConnection conn = new SqlConnection(ConnectionString))
                 {
-                    using (SqlCommand cmd = new SqlCommand("ACCM_ClassCurriculum_Upsert", conn))
+                    using (SqlCommand cmd = new SqlCommand("AASM_AdmissionSession_Upsert", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@Remarks", Remarks);
+                        cmd.Parameters.AddWithValue("@DB_OperationType", DB_OperationType ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@GuID", GuID ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@CampusId", CampusId ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@Description", Description ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@AcademicYearId", AcademicYearId ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@AdmissionStartDate", AdmissionStartDate ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@AdmissionEndDate", AdmissionEndDate ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@CreatedOn", CreatedOn ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@CreatedBy", CreatedBy ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@UpdatedOn", UpdatedOn ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@UpdatedBy", UpdatedBy ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@DocType", DocType ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@DocumentStatus", DocumentStatus ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@Status", Status ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@BranchId", BranchId ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@CompanyId", CompanyId ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@Remarks", Remarks ?? (object)DBNull.Value);
 
-                        SqlParameter TVParam = cmd.Parameters.AddWithValue("@TVP_ACCM_ClassCurriculum", TVP_ACCM_ClassCurriculum.ToDataTable());
+                        SqlParameter TVParam = cmd.Parameters.AddWithValue("@TVP_AASM_AdmissionSessionClass", TVP_AASM_AdmissionSessionClass.ToDataTable());
                         TVParam.SqlDbType = SqlDbType.Structured;
-                        TVParam.TypeName = "dbo.BULK_ACCM_ClassCurriculumSubject";
+                        TVParam.TypeName = "dbo.BULK_AASM_AdmissionSessionClass";
 
 
                         cmd.Parameters.Add(Response);
@@ -85,7 +101,7 @@ namespace office360.Models.DBF
                         conn.Open();
                         cmd.ExecuteNonQuery();
 
-                        return 200;
+                        return (int?)Response.Value;
                     }
                 }
             }

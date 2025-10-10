@@ -124,10 +124,13 @@ namespace office360.Areas.AAcademic.HelperCode
                                 }
                                 #endregion
                                 #region OUTPUT VARAIBLE
-                                var ResponseParameter = new ObjectParameter("Response", typeof(int));
+                                var ResponseParameter = new SqlParameter("@Response", SqlDbType.Int)
+                                {
+                                    Direction = ParameterDirection.Output
+                                };
                                 #endregion
                                 #region EXECUTE STORE PROCEDURE
-                                var AASM_AdmissionSession = db.AASM_AdmissionSession_Upsert(
+                                var AASM_AdmissionSession = DBFStoredProcedure.AASM_AdmissionSession_Upsert(
                                                                      PostedData.OperationType,
                                                                      PostedData.GuID,
                                                                      PostedData.CampusId,
@@ -145,6 +148,7 @@ namespace office360.Areas.AAcademic.HelperCode
                                                                      Session_Manager.BranchId,
                                                                      Session_Manager.CompanyId,
                                                                      PostedData.Remarks?.Trim().ToSafeString(),
+                                                                     PostedDataDetail,
                                                                      ResponseParameter
                                     );
 
