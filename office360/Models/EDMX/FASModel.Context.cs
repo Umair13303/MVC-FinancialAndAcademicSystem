@@ -39,6 +39,8 @@ namespace office360.Models.EDMX
         public virtual DbSet<UM_User> UM_User { get; set; }
         public virtual DbSet<URM_UserRight> URM_UserRight { get; set; }
         public virtual DbSet<AcademicYear> AcademicYear { get; set; }
+        public virtual DbSet<AccountCatagory> AccountCatagory { get; set; }
+        public virtual DbSet<AccountType> AccountType { get; set; }
         public virtual DbSet<AdmissionCatagory> AdmissionCatagory { get; set; }
         public virtual DbSet<BillingMethod> BillingMethod { get; set; }
         public virtual DbSet<CampusType> CampusType { get; set; }
@@ -46,8 +48,6 @@ namespace office360.Models.EDMX
         public virtual DbSet<ChallanType> ChallanType { get; set; }
         public virtual DbSet<ChargingMethod> ChargingMethod { get; set; }
         public virtual DbSet<City> City { get; set; }
-        public virtual DbSet<CoaCatagory> CoaCatagory { get; set; }
-        public virtual DbSet<CoaType> CoaType { get; set; }
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<DocType> DocType { get; set; }
         public virtual DbSet<DocumentStatus> DocumentStatus { get; set; }

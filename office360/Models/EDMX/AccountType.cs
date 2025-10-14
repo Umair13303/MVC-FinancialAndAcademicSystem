@@ -12,7 +12,7 @@ namespace office360.Models.EDMX
     using System;
     using System.Collections.Generic;
     
-    public partial class CoaType
+    public partial class AccountType
     {
         public int Id { get; set; }
         public string ShortCode { get; set; }

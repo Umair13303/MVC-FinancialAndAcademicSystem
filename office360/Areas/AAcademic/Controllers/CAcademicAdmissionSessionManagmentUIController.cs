@@ -113,7 +113,8 @@ namespace office360.Areas.AAcademic.Controllers
         public ActionResult GET_MT_AASM_ADMISSIONSESSION_INFOBYGUID(SQLParamters PostedData)
         {
             var DATA = AAcademic.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_AASM_ADMISSIONSESSION_INFO_BY_GUID(PostedData).ToList();
-            return Json(DATA, JsonRequestBehavior.AllowGet);
+            var DATA_DETAIL = AAcademic.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_AASM_ADMISSIONSESSIONCLASS_INFO_BY_GUID(PostedData).ToList();
+            return Json(new { DATA, DATA_DETAIL }, JsonRequestBehavior.AllowGet);
         }
         #endregion
 

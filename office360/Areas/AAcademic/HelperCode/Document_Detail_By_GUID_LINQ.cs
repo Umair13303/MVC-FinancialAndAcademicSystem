@@ -89,10 +89,10 @@ namespace office360.Areas.AAcademic.HelperCode
         }
         public static List<SQLParamters> GET_MT_ACCM_CLASSCURRICULUMSUBJECT_INFO_BY_GUID(SQLParamters PostedData)
         {
-            List<SQLParamters> DATA = new List<SQLParamters>();
+            List<SQLParamters> DATA_DETAIL = new List<SQLParamters>();
             using (FASEntities db = new FASEntities())
             {
-                DATA = ((List<SQLParamters>)
+                DATA_DETAIL = ((List<SQLParamters>)
                        (from CC in db.ACCM_ClassCurriculum
                         join CCS in db.ACCM_ClassCurriculumSubject on CC.Id equals CCS.ClassCurriculumId 
                         where CC.CompanyId == Session_Manager.CompanyId && CC.GuID == PostedData.GuID && CCS.Status == true
@@ -104,14 +104,14 @@ namespace office360.Areas.AAcademic.HelperCode
                             Subject = db.ASM_Subject.Where(S => S.Id == CCS.SubjectId).Select(S => S.Description).FirstOrDefault(),
                         }).ToList());
 
-                return DATA;
+                return DATA_DETAIL;
             }
         }
-        
+
 
         #endregion
 
-        #region HELPER FOR :: GET DATA USING LINQ (AASM_ADMISSIONSESSION) ::-- MAIN DB
+        #region HELPER FOR :: GET DATA USING LINQ (AASM_ADMISSIONSESSION && AASM_ADMISSIONSESSIONCLASS) ::-- MAIN DB
         public static List<SQLParamters> GET_MT_AASM_ADMISSIONSESSION_INFO_BY_GUID(SQLParamters PostedData)
         {
             List<SQLParamters> DATA = new List<SQLParamters>();
@@ -119,23 +119,50 @@ namespace office360.Areas.AAcademic.HelperCode
             using (FASEntities db = new FASEntities())
             {
                 DATA = ((List<SQLParamters>)
-                       (from S in db.AASM_AdmissionSession
-                        where S.CompanyId == Session_Manager.CompanyId && S.GuID == PostedData.GuID
+                       (from AS in db.AASM_AdmissionSession
+                        where AS.CompanyId == Session_Manager.CompanyId && AS.GuID == PostedData.GuID
                         select new SQLParamters
                         {
-                            Id = S.Id,
-                            GuID = S.GuID,
-                            Code = S.Code,
-                            CampusId = S.CampusId,
-                            Description = S.Description,
-                            AcademicYearId = S.AcademicYearId,
-                            AdmissionStartDate = S.AdmissionStartDate,
-                            AdmissionEndDate = S.AdmissionEndDate,
-                            Remarks = S.Remarks,
+                            Id = AS.Id,
+                            GuID = AS.GuID,
+                            Code = AS.Code,
+                            CampusId = AS.CampusId,
+                            Description = AS.Description,
+                            AcademicYearId = AS.AcademicYearId,
+                            AdmissionStartDate = AS.AdmissionStartDate,
+                            AdmissionEndDate = AS.AdmissionEndDate,
+                            Remarks = AS.Remarks,
 
                         }).ToList());
 
                 return DATA;
+            }
+        }
+        public static List<SQLParamters> GET_MT_AASM_ADMISSIONSESSIONCLASS_INFO_BY_GUID(SQLParamters PostedData)
+        {
+            List<SQLParamters> DATA_DETAIL = new List<SQLParamters>();
+
+            using (FASEntities db = new FASEntities())
+            {
+                DATA_DETAIL = ((List<SQLParamters>)
+                       (from AS in db.AASM_AdmissionSession
+                        join ASC in db.AASM_AdmissionSessionClass on AS.Id equals ASC.AdmissionSessionId
+                        where AS.CompanyId == Session_Manager.CompanyId && AS.GuID == PostedData.GuID && AS.Status == true
+                        select new SQLParamters
+                        {
+                            Id = ASC.Id,
+                            GuID = ASC.GuID,
+                            Class = db.ACM_Class.Where(C => C.Id == ASC.ClassId).Select(S => S.Description).FirstOrDefault(),
+                            IsEnteryTestRequired = ASC.IsEnteryTestRequired,
+                            IsInterviewRequired = ASC.IsInterviewRequired,
+                            SessionStartDate = ASC.SessionStartDate,
+                            SessionEndDate = ASC.SessionEndDate,
+                            ClassId = ASC.ClassId,
+
+
+                        }).ToList());
+
+                return DATA_DETAIL;
             }
         }
         #endregion

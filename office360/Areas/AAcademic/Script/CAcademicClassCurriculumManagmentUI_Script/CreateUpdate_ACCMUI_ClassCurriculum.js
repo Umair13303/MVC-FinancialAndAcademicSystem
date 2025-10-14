@@ -446,9 +446,7 @@ function GET_ACCM_CLASSCURRICULUM_INFOBYGUID() {
                     /*-- LOAD DATA FOR FIELDS RENDERED :: ON CHANGE --*/
                     PopulateMT_ACM_Class_ListByParam(data.DATA[0].CampusId, data.DATA[0].ClassId);
                 }
-                else {
-                    GetMessageBox("NO RECORD FOUND FOR FOR SELECTED CLASS CURRICULUM.... CONTACT DEVELOPER TEAM", 505);
-                }
+               
                 if (data.DATA_DETAIL && data.DATA_DETAIL.length > 0) {
                     /*-- LOAD DATA FOR TABLE RENDERED :: ON LOAD/STATIC --*/
                     ClassCurriculumSubjectTable.clear().draw();
@@ -463,6 +461,9 @@ function GET_ACCM_CLASSCURRICULUM_INFOBYGUID() {
                         ClassCurriculumSubjectTable.row.add(row_data);
                     }
                     ClassCurriculumSubjectTable.draw();
+                }
+                else {
+                    GetMessageBox("NO RECORD FOUND FOR FOR SELECTED CLASS CURRICULUM.... CONTACT DEVELOPER TEAM", 505);
                 }
                
             },

@@ -61,7 +61,6 @@ namespace office360.Areas.ABranch.Controllers
         }
         #endregion
 
-
         /*---------------------- ** ACTION RESULTS FOR :: RENDER DATA FOR DROP DOWN LIST FROM DB_LOOKUP USING LINQUERY ** --------------------------- */
 
         #region ACTION RESULT FOR :: RENDER DATA FOR DROP DOWN FROM DB_LOOKUP -- LINQ-QUERY
@@ -87,7 +86,6 @@ namespace office360.Areas.ABranch.Controllers
         }
 
         #endregion
-
 
         /*---------------------- ** ACTION RESULTS FOR :: DATABASE OPERATION BY USER (INSERT/UPDATE/DELETE OF BRANCH) ** ---------------------- */
 

@@ -457,6 +457,7 @@ function GetColorForTableGroup(index) {
     return colors[index] || { backgroundColor: '#D5D8DC', color: '#2C3E50', borderColor: '#AAB7B8' }; // Default
 }
 
+
 /*----------------------------------** FUNCTION FOR::BLOB OBJECT RESPONSE **------------------------------------------------------------------------------*/
 function OpenReport(response, status, xhr) {
     var filename = "";

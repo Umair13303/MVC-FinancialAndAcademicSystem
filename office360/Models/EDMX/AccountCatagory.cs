@@ -12,7 +12,7 @@ namespace office360.Models.EDMX
     using System;
     using System.Collections.Generic;
     
-    public partial class CoaCatagory
+    public partial class AccountCatagory
     {
         public int Id { get; set; }
         public string Description { get; set; }

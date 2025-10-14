@@ -22,7 +22,6 @@ class HTML_BUTTON {
     }
 }
 class CONVERSION {
-
     static BOOL_CONFIRMATION(Value) {
         const TruthValue = ["1", "true", "on", "yes"];
         const FalseValue = ["0", "false", "off", "no"];
@@ -31,5 +30,21 @@ class CONVERSION {
         } else if (FalseValue.includes(String(Value))) {
             return "NO";
         }
+    }
+    static TO_DISPLAY_DATE(ServerSideDate, Format) {
+        if (!ServerSideDate) return "";
+
+        // Extract timestamp if .NET format
+        let jsDate;
+        if (/\/Date\((\d+)\)\//.test(ServerSideDate)) {
+            jsDate = new Date(parseInt(ServerSideDate.match(/\d+/)[0], 10));
+        } else {
+            jsDate = new Date(ServerSideDate);
+        }
+
+        if (isNaN(jsDate)) return "";
+
+        // Use Flatpickr’s internal formatter
+        return flatpickr.formatDate(jsDate, Format);
     }
 }
