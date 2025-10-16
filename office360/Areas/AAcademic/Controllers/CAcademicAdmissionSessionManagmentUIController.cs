@@ -82,7 +82,7 @@ namespace office360.Areas.AAcademic.Controllers
         #region ACTION RESULT FOR :: RENDER DATA FOR DROP DOWN FROM DB_LOOKUP -- LINQ-QUERY
         public ActionResult GET_LK1_ACADEMICYEAR(SQLParamters PostedData)
         {
-            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_AcademicYear(PostedData).ToList();
+            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_AcademicYear_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
         #endregion

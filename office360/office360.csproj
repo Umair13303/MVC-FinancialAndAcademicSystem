@@ -395,6 +395,12 @@
     <Compile Include="Models\EDMX\ACM_Class_GetListBySearch_Result.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EDMX\ACOAM_ChartOfAccount.cs">
+      <DependentUpon>FASModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDMX\ACOAM_ChartOfAccount_GetListByParam_Result.cs">
+      <DependentUpon>FASModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EDMX\AdmissionCatagory.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
@@ -477,6 +483,9 @@
       <DependentUpon>FASModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\FeeCatagory.cs">
+      <DependentUpon>FASModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDMX\FinancialStatement.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\fn_CodeSplitByCommaAsINT_Result.cs">

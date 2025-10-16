@@ -66,22 +66,22 @@ namespace office360.Areas.ABranch.Controllers
         #region ACTION RESULT FOR :: RENDER DATA FOR DROP DOWN FROM DB_LOOKUP -- LINQ-QUERY
         public ActionResult GET_LK1_CAMPUSTYPE(SQLParamters PostedData)
         {
-            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_CampusType(PostedData).ToList();
+            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_CampusType_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GET_LK1_ORGANIZATIONTYPE(SQLParamters PostedData)
         {
-            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_OrganizationType(PostedData).ToList();
+            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_OrganizationType_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GET_LK1_COUNTRY(SQLParamters PostedData)
         {
-            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_Country(PostedData).ToList();
+            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_Country_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GET_LK1_CITY_BYPARAMETER(SQLParamters PostedData)
         {
-            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_City(PostedData).ToList();
+            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_City_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
 

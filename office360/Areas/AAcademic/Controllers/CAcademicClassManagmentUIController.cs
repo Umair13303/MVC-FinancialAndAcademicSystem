@@ -76,17 +76,17 @@ namespace office360.Areas.AAcademic.Controllers
         #region ACTION RESULT FOR :: RENDER DATA FOR DROP DOWN FROM DB_LOOKUP -- LINQ-QUERY
         public ActionResult GET_LK1_STUDYLEVEL(SQLParamters PostedData)
         {
-            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_StudyLevel(PostedData).ToList();
+            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_StudyLevel_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GET_LK1_STUDYGROUP(SQLParamters PostedData)
         {
-            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_StudyGroup(PostedData).ToList();
+            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_StudyGroup_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GET_LK1_STUDYSCHEME(SQLParamters PostedData)
         {
-            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_StudyScheme(PostedData).ToList();
+            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_StudyScheme_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
         #endregion

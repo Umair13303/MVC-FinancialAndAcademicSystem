@@ -17,6 +17,27 @@ namespace office360.Areas.AAccount.HelperCode
 {
     public class DATA_FROM_SP
     {
+        #region DBO:- ACOAM_CHARTOFACCOUNT
+
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB -- DBO:- ACOAM_CHARTOFACCOUNT
+        public static List<ACOAM_ChartOfAccount_GetListByParam_Result> GET_MT_ACOAM_CHARTOFACCOUNT_BYPARAM(SQLParamters PostedData)
+        {
+            List<ACOAM_ChartOfAccount_GetListByParam_Result> DATA = new List<ACOAM_ChartOfAccount_GetListByParam_Result>();
+            using (FASEntities db = new FASEntities())
+            {
+                DATA = db.ACOAM_ChartOfAccount_GetListByParam(
+                                                       PostedData.DB_IF_PARAM,
+                                                       Session_Manager.CompanyId,
+                                                       PostedData.SearchParameter,
+                                                       PostedData.CompanyId
+                                                       ).ToList();
+
+                return DATA;
+            }
+        }
+        #endregion
+
+        #endregion
 
     }
 

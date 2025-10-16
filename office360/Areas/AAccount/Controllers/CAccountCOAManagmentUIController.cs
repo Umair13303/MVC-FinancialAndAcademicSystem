@@ -46,23 +46,51 @@ namespace office360.Areas.AAccount.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: RENDER DATA FOR DROP DOWN LIST FROM DB_LOOKUP USING LINQUERY ** --------------------------- */
 
         #region ACTION RESULT FOR :: RENDER DATA FOR DROP DOWN FROM DB_LOOKUP -- LINQ-QUERY
-
+        public ActionResult GET_LK1_ACCOUNTTYPE(SQLParamters PostedData)
+        {
+            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_AccountType_List(PostedData).ToList();
+            return Json(DATA, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GET_LK1_ACCOUNTCATAGORY(SQLParamters PostedData)
+        {
+            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_AccountCatagory_List(PostedData).ToList();
+            return Json(DATA, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GET_LK1_FINANCIALSTATEMENT(SQLParamters PostedData)
+        {
+            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_FinancialStatement_List(PostedData).ToList();
+            return Json(DATA, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         /*---------------------- ** ACTION RESULTS FOR :: DATABASE OPERATION BY USER (INSERT/UPDATE/DELETE OF CHARTOFACCOUNT) ** ---------------------- */
 
         #region ACTION RESULT FOR :: INSERT/UPDATE/DELETE INTO DBO.ACOAM_CHARTOFACCOUNT
-
+        public ActionResult UpSert_Into_ACOAM_ChartOfAccount(SQLParamters PostedData)
+        {
+            _Exe = AAccount.HelperCode.CUD_Operation.Update_Insert_ACOAM_ChartOfAccount(PostedData);
+            var data = new { Message = HttpServerStatus.HTTP_DB_TransactionMessagByStatusCode(_Exe), StatusCode = _Exe };
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         /*---------------------- ** ACTION RESULTS FOR :: EDIT (LOAD DOCUMENT OF BRANCH & GET DETAIL BY CHARTOFACCOUNT_GUID) ** ------------------------ */
 
         #region ACTION RESULT FOR :: SEARCH DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
-
+        public ActionResult GET_MT_ACOAM_CHARTOFACCOUNT_BYPARAMETER_SEARCH(SQLParamters PostedData)
+        {
+            var DATA = AAccount.HelperCode.DATA_FROM_SP.GET_MT_ACOAM_CHARTOFACCOUNT_BYPARAM(PostedData).ToList();
+            return Json(new { data = DATA }, JsonRequestBehavior.AllowGet);
+        }
 
         #endregion
 
         #region ACTION RESULT FOR :: GET DOCUMENT DETAIL (DBO.ACOAM_CHARTOFACCOUNT) -- LINQ-QUERY
+        public ActionResult GET_MT_ACOAM_CHARTOFACCOUNT_INFOBYGUID(SQLParamters PostedData)
+        {
+            var DATA = AAccount.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_ACOAM_CHARTOFACCOUNT_INFO_BY_GUID(PostedData).ToList();
+            return Json(DATA, JsonRequestBehavior.AllowGet);
+        }
 
 
         #endregion

@@ -185,11 +185,11 @@ function PopulateMT_BM_Branch_ListByParam() {
             startLoading();
         },
         success: function (data) {
-            var s = '<option value="-1">Select an option</option>';
+            var List = '<option value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
             }
-            $("#DropDownListCampus").html(s);
+            $("#DropDownListCampus").html(List);
         },
         complete: function () {
             stopLoading();
@@ -219,11 +219,11 @@ function PopulateMT_ACM_Class_ListByParam(CampusId) {
             startLoading();
         },
         success: function (data) {
-            var s = '<option value="-1">Select an option</option>';
+            var List = '<option value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
             }
-            $("#DropDownListClasses").html(s);
+            $("#DropDownListClasses").html(List);
         },
         complete: function () {
             stopLoading();
@@ -241,11 +241,11 @@ function PopulateLK_AcademicYear_List() {
             startLoading();
         },
         success: function (data) {
-            var s = '<option  value="-1">Select an option</option>';
+            var List = '<option  value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
             }
-            $("#DropDownListAcademicYear").html(s);
+            $("#DropDownListAcademicYear").html(List);
         },
         complete: function () {
             stopLoading();

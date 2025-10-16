@@ -88,7 +88,7 @@ namespace office360.Areas.AUser.Controllers
         #region ACTION RESULT FOR :: RENDER DATA FOR DROP DOWN FROM DB_LOOKUP -- LINQ-QUERY
         public ActionResult GET_LK1_ROLE(SQLParamters PostedData)
         {
-            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_Role(PostedData).ToList();
+            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_Role_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
         #endregion

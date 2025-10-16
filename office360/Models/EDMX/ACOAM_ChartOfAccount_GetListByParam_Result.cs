@@ -10,14 +10,11 @@
 namespace office360.Models.EDMX
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class AccountCatagory
+    public partial class ACOAM_ChartOfAccount_GetListByParam_Result
     {
         public int Id { get; set; }
+        public Nullable<System.Guid> GuID { get; set; }
         public string Description { get; set; }
-        public string ShortCode { get; set; }
-        public Nullable<int> AccountTypeId { get; set; }
-        public Nullable<bool> Status { get; set; }
     }
 }

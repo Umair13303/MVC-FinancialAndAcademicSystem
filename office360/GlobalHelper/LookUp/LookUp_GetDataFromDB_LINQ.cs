@@ -13,7 +13,7 @@ namespace office360.GlobalHelper.LookUp
     public class LookUp_GetDataFromDB_LINQ
     {
         #region HELPER FOR :: GET DATA USING LINQ-QUERY ::-- DB_LOOKUP
-        public static List<SQLParamters> GET_LK1_EnrollmentType(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_EnrollmentType_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -28,7 +28,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_Gender(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_Gender_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -43,7 +43,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_MartialStatus(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_MartialStatus_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -58,7 +58,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_Religion(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_Religion_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -73,7 +73,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_Country(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_Country_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -88,7 +88,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_Relationship(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_Relationship_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -103,7 +103,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_Occupation(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_Occupation_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -118,7 +118,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_PolicyPeriod(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_PolicyPeriod_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -134,7 +134,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_CampusType(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_CampusType_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -149,8 +149,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        
-        public static List<SQLParamters> GET_LK1_AcademicYear(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_AcademicYear_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -165,7 +164,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_OrganizationType(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_OrganizationType_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -181,7 +180,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_City(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_City_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -192,7 +191,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_RollCallSystem(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_RollCallSystem_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -202,7 +201,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_BillingMethod(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_BillingMethod_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -212,7 +211,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_RegistrationType(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_RegistrationType_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -223,7 +222,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_FeeCatagory(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_FeeCatagory_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -235,7 +234,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_ChargingMethod(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_ChargingMethod_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -246,7 +245,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_AdmissionCatagory(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_AdmissionCatagory_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -257,7 +256,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_ChallanType(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_ChallanType_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -274,7 +273,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_Role(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_Role_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -289,7 +288,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_Right(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_Right_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -306,7 +305,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_URLType(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_URLType_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -321,7 +320,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_StudyLevel(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_StudyLevel_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -337,7 +336,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_StudyGroup(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_StudyGroup_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -353,7 +352,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_ChallanMethod(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_ChallanMethod_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -371,7 +370,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_StudyScheme(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_StudyScheme_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -387,12 +386,60 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_Semester(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_Semester_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
                 var DATA = db.Semester
                         .Where(x=>x.StudySchemeId == PostedData.StudySchemeId)
+                        .Select(x => new SQLParamters
+                        {
+                            Id = x.Id,
+                            Description = x.Description,
+                        })
+                         .ToList();
+
+                return DATA;
+            }
+        }
+        public static List<SQLParamters> GET_LK1_AccountType_List(SQLParamters PostedData)
+        {
+            using (FASEntities db = new FASEntities())
+            {
+                var DATA = db.AccountType
+                        .Where(x=>x.Status == true)
+                        .Select(x => new SQLParamters
+                        {
+                            Id = x.Id,
+                            Description = x.Description,
+                        })
+                         .ToList();
+
+                return DATA;
+            }
+        }
+        public static List<SQLParamters> GET_LK1_AccountCatagory_List(SQLParamters PostedData)
+        {
+            using (FASEntities db = new FASEntities())
+            {
+                var DATA = db.AccountCatagory
+                        .Where(x=>x.Status == true && x.AccountTypeId == PostedData.AccountTypeId)
+                        .Select(x => new SQLParamters
+                        {
+                            Id = x.Id,
+                            Description = x.Description,
+                        })
+                         .ToList();
+
+                return DATA;
+            }
+        }
+        public static List<SQLParamters> GET_LK1_FinancialStatement_List(SQLParamters PostedData)
+        {
+            using (FASEntities db = new FASEntities())
+            {
+                var DATA = db.FinancialStatement
+                        .Where(x=>x.Status == true)
                         .Select(x => new SQLParamters
                         {
                             Id = x.Id,

@@ -109,6 +109,28 @@
           <Property Name="CompanyId" Type="int" />
           <Property Name="Remarks" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="ACOAM_ChartOfAccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuID" Type="uniqueidentifier" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="AccountTypeId" Type="int" />
+          <Property Name="AccountCategoryId" Type="int" />
+          <Property Name="FinancialStatementId" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="DocType" Type="int" />
+          <Property Name="DocumentStatus" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="BranchId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="ASM_Subject">
           <Key>
             <PropertyRef Name="Id" />
@@ -270,7 +292,7 @@ warning 6002: The table/view 'FAS.dbo.AccountCatagory' does not have a primary k
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="ShortCode" Type="nvarchar(max)" />
-          <Property Name="CoaTypeId" Type="int" />
+          <Property Name="AccountTypeId" Type="int" />
           <Property Name="Status" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -426,6 +448,16 @@ warning 6002: The table/view 'FAS.dbo.ExportClass' does not have a primary key d
         <!--Errors Found During Generation:
 warning 6002: The table/view 'FAS.dbo.FeeCatagory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="FeeCatagory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FAS.dbo.FinancialStatement' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FinancialStatement">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -724,6 +756,31 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Response" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="ACOAM_ChartOfAccount_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SessionCompanyId" Type="int" Mode="In" />
+          <Parameter Name="SearchParameter" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ACOAM_ChartOfAccount_Upsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_OperationType" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="GuID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="AccountTypeId" Type="int" Mode="In" />
+          <Parameter Name="AccountCategoryId" Type="int" Mode="In" />
+          <Parameter Name="FinancialStatementId" Type="int" Mode="In" />
+          <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+          <Parameter Name="UpdatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="UpdatedBy" Type="int" Mode="In" />
+          <Parameter Name="DocType" Type="int" Mode="In" />
+          <Parameter Name="DocumentStatus" Type="int" Mode="In" />
+          <Parameter Name="Status" Type="bit" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Response" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="ASM_Subject_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="SessionCompanyId" Type="int" Mode="In" />
@@ -1008,6 +1065,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <EntitySet Name="ACCM_ClassCurriculum" EntityType="Self.ACCM_ClassCurriculum" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ACCM_ClassCurriculumSubject" EntityType="Self.ACCM_ClassCurriculumSubject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ACM_Class" EntityType="Self.ACM_Class" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ACOAM_ChartOfAccount" EntityType="Self.ACOAM_ChartOfAccount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ASM_Subject" EntityType="Self.ASM_Subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BM_Branch" EntityType="Self.BM_Branch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CM_Company" EntityType="Self.CM_Company" Schema="dbo" store:Type="Tables" />
@@ -1026,7 +1084,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
     [AccountCatagory].[Id] AS [Id], 
     [AccountCatagory].[Description] AS [Description], 
     [AccountCatagory].[ShortCode] AS [ShortCode], 
-    [AccountCatagory].[CoaTypeId] AS [CoaTypeId], 
+    [AccountCatagory].[AccountTypeId] AS [AccountTypeId], 
     [AccountCatagory].[Status] AS [Status]
     FROM [dbo].[AccountCatagory] AS [AccountCatagory]</DefiningQuery>
           </EntitySet>
@@ -1144,6 +1202,13 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
     [FeeCatagory].[Description] AS [Description], 
     [FeeCatagory].[Status] AS [Status]
     FROM [dbo].[FeeCatagory] AS [FeeCatagory]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FinancialStatement" EntityType="Self.FinancialStatement" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FinancialStatement].[Id] AS [Id], 
+    [FinancialStatement].[Description] AS [Description], 
+    [FinancialStatement].[Status] AS [Status]
+    FROM [dbo].[FinancialStatement] AS [FinancialStatement]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Gender" EntityType="Self.Gender" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1404,6 +1469,28 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Name="CompanyId" Type="Int32" />
           <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="ACOAM_ChartOfAccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuID" Type="Guid" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AccountTypeId" Type="Int32" />
+          <Property Name="AccountCategoryId" Type="Int32" />
+          <Property Name="FinancialStatementId" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="DocType" Type="Int32" />
+          <Property Name="DocumentStatus" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="BranchId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="ASM_Subject">
           <Key>
             <PropertyRef Name="Id" />
@@ -1561,7 +1648,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ShortCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CoaTypeId" Type="Int32" />
+          <Property Name="AccountTypeId" Type="Int32" />
           <Property Name="Status" Type="Boolean" />
         </EntityType>
         <EntityType Name="AccountType">
@@ -1687,6 +1774,14 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Name="Status" Type="Boolean" />
         </EntityType>
         <EntityType Name="FeeCatagory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="FinancialStatement">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -1849,6 +1944,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <EntitySet Name="ACCM_ClassCurriculum" EntityType="Self.ACCM_ClassCurriculum" />
           <EntitySet Name="ACCM_ClassCurriculumSubject" EntityType="Self.ACCM_ClassCurriculumSubject" />
           <EntitySet Name="ACM_Class" EntityType="Self.ACM_Class" />
+          <EntitySet Name="ACOAM_ChartOfAccount" EntityType="Self.ACOAM_ChartOfAccount" />
           <EntitySet Name="ASM_Subject" EntityType="Self.ASM_Subject" />
           <EntitySet Name="BM_Branch" EntityType="Self.BM_Branch" />
           <EntitySet Name="CM_Company" EntityType="Self.CM_Company" />
@@ -1872,6 +1968,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <EntitySet Name="EnrollmentType" EntityType="Self.EnrollmentType" />
           <EntitySet Name="ExportClass" EntityType="Self.ExportClass" />
           <EntitySet Name="FeeCatagory" EntityType="Self.FeeCatagory" />
+          <EntitySet Name="FinancialStatement" EntityType="Self.FinancialStatement" />
           <EntitySet Name="Gender" EntityType="Self.Gender" />
           <EntitySet Name="MartialStatus" EntityType="Self.MartialStatus" />
           <EntitySet Name="Occupation" EntityType="Self.Occupation" />
@@ -1996,6 +2093,31 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
             <Parameter Name="StudyLevelId" Mode="In" Type="Int32" />
             <Parameter Name="StudyGroupId" Mode="In" Type="Int32" />
             <Parameter Name="StudySchemeId" Mode="In" Type="Int32" />
+            <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="DocType" Mode="In" Type="Int32" />
+            <Parameter Name="DocumentStatus" Mode="In" Type="Int32" />
+            <Parameter Name="Status" Mode="In" Type="Boolean" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="Remarks" Mode="In" Type="String" />
+            <Parameter Name="Response" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ACOAM_ChartOfAccount_GetListByParam" ReturnType="Collection(FASModel.ACOAM_ChartOfAccount_GetListByParam_Result)">
+            <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
+            <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="SearchParameter" Mode="In" Type="String" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ACOAM_ChartOfAccount_Upsert">
+            <Parameter Name="DB_OperationType" Mode="In" Type="String" />
+            <Parameter Name="GuID" Mode="In" Type="Guid" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="AccountTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="AccountCategoryId" Mode="In" Type="Int32" />
+            <Parameter Name="FinancialStatementId" Mode="In" Type="Int32" />
             <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
             <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
             <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
@@ -2285,6 +2407,11 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Type="Int32" Name="DocumentStatus" Nullable="true" />
           <Property Type="String" Name="Campus" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="ACOAM_ChartOfAccount_GetListByParam_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GuID" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="ASM_Subject_GetListByParam_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="Guid" Name="GuID" Nullable="true" />
@@ -2526,6 +2653,29 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ACOAM_ChartOfAccount">
+            <EntityTypeMapping TypeName="FASModel.ACOAM_ChartOfAccount">
+              <MappingFragment StoreEntitySet="ACOAM_ChartOfAccount">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AccountTypeId" ColumnName="AccountTypeId" />
+                <ScalarProperty Name="AccountCategoryId" ColumnName="AccountCategoryId" />
+                <ScalarProperty Name="FinancialStatementId" ColumnName="FinancialStatementId" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="DocType" ColumnName="DocType" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ASM_Subject">
             <EntityTypeMapping TypeName="FASModel.ASM_Subject">
               <MappingFragment StoreEntitySet="ASM_Subject">
@@ -2689,7 +2839,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ShortCode" ColumnName="ShortCode" />
-                <ScalarProperty Name="CoaTypeId" ColumnName="CoaTypeId" />
+                <ScalarProperty Name="AccountTypeId" ColumnName="AccountTypeId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2833,6 +2983,15 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <EntitySetMapping Name="FeeCatagory">
             <EntityTypeMapping TypeName="FASModel.FeeCatagory">
               <MappingFragment StoreEntitySet="FeeCatagory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FinancialStatement">
+            <EntityTypeMapping TypeName="FASModel.FinancialStatement">
+              <MappingFragment StoreEntitySet="FinancialStatement">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
@@ -3114,6 +3273,16 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ACM_Class_Upsert" FunctionName="FASModel.Store.ACM_Class_Upsert" />
+          <FunctionImportMapping FunctionImportName="ACOAM_ChartOfAccount_GetListByParam" FunctionName="FASModel.Store.ACOAM_ChartOfAccount_GetListByParam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FASModel.ACOAM_ChartOfAccount_GetListByParam_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ACOAM_ChartOfAccount_Upsert" FunctionName="FASModel.Store.ACOAM_ChartOfAccount_Upsert" />
           <FunctionImportMapping FunctionImportName="ASM_Subject_GetListByParam" FunctionName="FASModel.Store.ASM_Subject_GetListByParam">
             <ResultMapping>
               <ComplexTypeMapping TypeName="FASModel.ASM_Subject_GetListByParam_Result">

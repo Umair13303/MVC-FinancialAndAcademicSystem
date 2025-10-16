@@ -442,7 +442,7 @@ function GET_ACCM_CLASSCURRICULUM_INFOBYGUID() {
                     $('#DropDownListCampus').val(data.DATA[0].CampusId).trigger('change.select2');
                     $('#TextBoxDescription').val(data.DATA[0].Description);
                     $('#TextBoxRemarks').val(data.DATA[0].Remarks).prop('disabled', true);
-                    $('#HiddenFieldClassCurriculumGuID').val(data.DATA[0].GuID);
+                    $('#HiddenFieldChartOfAccountGuID').val(data.DATA[0].GuID);
                     /*-- LOAD DATA FOR FIELDS RENDERED :: ON CHANGE --*/
                     PopulateMT_ACM_Class_ListByParam(data.DATA[0].CampusId, data.DATA[0].ClassId);
                 }

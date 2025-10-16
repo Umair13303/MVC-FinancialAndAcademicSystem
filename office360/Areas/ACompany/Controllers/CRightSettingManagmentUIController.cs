@@ -48,12 +48,12 @@ namespace office360.Areas.ACompany.Controllers
         #region ACTION RESULT FOR :: RENDER DROP DOWN FROM DB_LOOKUP -- LINQ-QUERY
         public ActionResult GET_LK1_RIGHT(SQLParamters PostedData)
         {
-            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_Right(PostedData).ToList();
+            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_Right_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GET_LK1_URLTYPE(SQLParamters PostedData)
         {
-            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_URLType(PostedData).ToList();
+            var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_URLType_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
         #endregion

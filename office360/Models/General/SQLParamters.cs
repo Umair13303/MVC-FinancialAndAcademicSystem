@@ -81,7 +81,7 @@ namespace office360.Models.General
         public int? EducationLevelId { get; set; }
         public int? EnrollmentTypeId { get; set; }
         public int? ExportType { get; set; }
-        public int? FeeCatagoryId { get; set; }
+        public int? FeeCategoryId { get; set; }
         public int? FeeStructureId { get; set; }
         public int? FeeTypeId { get; set; }
         public int? GenderId { get; set; }
@@ -116,9 +116,12 @@ namespace office360.Models.General
         public int? RoleId { get; set; }
         public int? URLTypeId { get; set; }
         public int? RegisteredPeriodId { get; set; }
-        public int? AdmissionCatagoryId { get; set; }
+        public int? AdmissionCategoryId { get; set; }
         public int? SemesterId { get; set; }
         public int? SubjectId { get; set; }
+        public int? AccountTypeId { get; set; }
+        public int? AccountCategoryId { get; set; }
+        public int? FinancialStatementId { get; set; }
 
         public string ActionCondition { get; set; }
         public string Address { get; set; }

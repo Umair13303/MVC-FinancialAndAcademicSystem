@@ -1,4 +1,4 @@
-﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE ASM_SUBJECT                     **----------------------------------------------*/
+﻿        /*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE ASM_SUBJECT                     **----------------------------------------------*/
 var OperationType = "";
 var DDL_Condition = "";
 var DB_OperationType = $('#HiddenFieldDB_OperationType').val();

@@ -12,12 +12,10 @@ namespace office360.Models.EDMX
     using System;
     using System.Collections.Generic;
     
-    public partial class AccountCatagory
+    public partial class FinancialStatement
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public string ShortCode { get; set; }
-        public Nullable<int> AccountTypeId { get; set; }
         public Nullable<bool> Status { get; set; }
     }
 }
