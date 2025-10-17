@@ -762,6 +762,12 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Parameter Name="SearchParameter" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="CompanyId" Type="int" Mode="In" />
         </Function>
+        <Function Name="ACOAM_ChartOfAccount_GetListBySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="InputTypeId" Type="int" Mode="In" />
+          <Parameter Name="InputText" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="ACOAM_ChartOfAccount_Upsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DB_OperationType" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="GuID" Type="uniqueidentifier" Mode="In" />
@@ -2111,6 +2117,12 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
             <Parameter Name="SearchParameter" Mode="In" Type="String" />
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="ACOAM_ChartOfAccount_GetListBySearch" ReturnType="Collection(FASModel.ACOAM_ChartOfAccount_GetListBySearch_Result)">
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="InputTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="InputText" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="ACOAM_ChartOfAccount_Upsert">
             <Parameter Name="DB_OperationType" Mode="In" Type="String" />
             <Parameter Name="GuID" Mode="In" Type="Guid" />
@@ -2389,6 +2401,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Type="String" Name="Description" Nullable="true" />
           <Property Type="String" Name="Class" Nullable="true" />
           <Property Type="String" Name="Campus" Nullable="true" />
+          <Property Type="Int32" Name="DocumentStatus" Nullable="true" />
         </ComplexType>
         <ComplexType Name="ACM_Class_GetListByParam_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -2411,6 +2424,15 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="Guid" Name="GuID" Nullable="true" />
           <Property Type="String" Name="Description" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ACOAM_ChartOfAccount_GetListBySearch_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GuID" Nullable="true" />
+          <Property Type="String" Name="Code" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="AccountType" Nullable="true" />
+          <Property Type="String" Name="AccountCatagory" Nullable="true" />
+          <Property Type="Int32" Name="DocumentStatus" Nullable="true" />
         </ComplexType>
         <ComplexType Name="ASM_Subject_GetListByParam_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -3243,6 +3265,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Class" ColumnName="Class" />
                 <ScalarProperty Name="Campus" ColumnName="Campus" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3279,6 +3302,19 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ACOAM_ChartOfAccount_GetListBySearch" FunctionName="FASModel.Store.ACOAM_ChartOfAccount_GetListBySearch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FASModel.ACOAM_ChartOfAccount_GetListBySearch_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+                <ScalarProperty Name="AccountCatagory" ColumnName="AccountCatagory" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

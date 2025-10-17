@@ -258,6 +258,66 @@ function GetStatus(Status) {
             Display = "Deleted Academic Subject";
             break;
 
+        case 27:
+            BadgeColor = "primary";
+            Display = "Active Academic Curriculum";
+            break;
+
+        case 28:
+            BadgeColor = "secondary";
+            Display = "Inactive Academic Curriculum";
+            break;
+
+        case 29:
+            BadgeColor = "danger";
+            Display = "Deleted Academic Curriculum";
+            break;
+
+        case 30:
+            BadgeColor = "primary";
+            Display = "Active Academic Curriculum Subject";
+            break;
+
+        case 31:
+            BadgeColor = "secondary";
+            Display = "Inactive Academic Curriculum Subject";
+            break;
+
+        case 32:
+            BadgeColor = "danger";
+            Display = "Deleted Academic Curriculum Subject";
+            break;
+
+        case 33:
+            BadgeColor = "primary";
+            Display = "Active Admission Session Class";
+            break;
+
+        case 34:
+            BadgeColor = "secondary";
+            Display = "Inactive Admission Session Class";
+            break;
+
+        case 35:
+            BadgeColor = "danger";
+            Display = "Deleted Admission Session Class";
+            break;
+
+        case 36:
+            BadgeColor = "primary";
+            Display = "Active Chart of Account";
+            break;
+
+        case 37:
+            BadgeColor = "secondary";
+            Display = "Inactive Chart of Account";
+            break;
+
+        case 38:
+            BadgeColor = "danger";
+            Display = "Deleted Chart of Account";
+            break;
+
         default:
             BadgeColor = "light";
             Display = "Unknown Status";

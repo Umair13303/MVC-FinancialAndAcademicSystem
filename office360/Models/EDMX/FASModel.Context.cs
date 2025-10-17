@@ -522,6 +522,27 @@ namespace office360.Models.EDMX
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ACOAM_ChartOfAccount_GetListByParam_Result>("ACOAM_ChartOfAccount_GetListByParam", dB_IF_PARAMParameter, sessionCompanyIdParameter, searchParameterParameter, companyIdParameter);
         }
     
+        public virtual ObjectResult<ACOAM_ChartOfAccount_GetListBySearch_Result> ACOAM_ChartOfAccount_GetListBySearch(Nullable<int> companyId, Nullable<int> branchId, Nullable<int> inputTypeId, string inputText)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(int));
+    
+            var inputTypeIdParameter = inputTypeId.HasValue ?
+                new ObjectParameter("InputTypeId", inputTypeId) :
+                new ObjectParameter("InputTypeId", typeof(int));
+    
+            var inputTextParameter = inputText != null ?
+                new ObjectParameter("InputText", inputText) :
+                new ObjectParameter("InputText", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ACOAM_ChartOfAccount_GetListBySearch_Result>("ACOAM_ChartOfAccount_GetListBySearch", companyIdParameter, branchIdParameter, inputTypeIdParameter, inputTextParameter);
+        }
+    
         public virtual int ACOAM_ChartOfAccount_Upsert(string dB_OperationType, Nullable<System.Guid> guID, string description, Nullable<int> accountTypeId, Nullable<int> accountCategoryId, Nullable<int> financialStatementId, Nullable<System.DateTime> createdOn, Nullable<int> createdBy, Nullable<System.DateTime> updatedOn, Nullable<int> updatedBy, Nullable<int> docType, Nullable<int> documentStatus, Nullable<bool> status, Nullable<int> branchId, Nullable<int> companyId, string remarks, ObjectParameter response)
         {
             var dB_OperationTypeParameter = dB_OperationType != null ?
