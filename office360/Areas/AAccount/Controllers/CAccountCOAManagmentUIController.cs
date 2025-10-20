@@ -98,7 +98,7 @@ namespace office360.Areas.AAccount.Controllers
         #region ACTION RESULT FOR :: SEARCH DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
         public ActionResult GET_MT_ACOAM_CHARTOFACCOUNT_BYPARAMETER_SEARCH(SQLParamters PostedData)
         {
-            var DATA = AAccount.HelperCode.DATA_FROM_SP.GET_MT_ACOAM_CHARTOFACCOUNT_BYPARAM(PostedData).ToList();
+            var DATA = AAccount.HelperCode.DATA_FROM_SP.GET_MT_ACOAM_ChartOfAccount_By_Param_List(PostedData).ToList();
             return Json(new { data = DATA }, JsonRequestBehavior.AllowGet);
         }
 
@@ -119,7 +119,7 @@ namespace office360.Areas.AAccount.Controllers
         #region ACTION RESULT FOR :: GET LIST BY SEARCH PARAMETER FOR DATA-TABLE (DBO.ACOAM_CHARTOFACCOUNT)-- STORED PROCEDURE
         public ActionResult GET_MT_ACOAM_CHARTOFACCOUNT_LIST_BY_SEARCHQUERY_FORDATATABLE(SQLParamters PostedData)
         {
-            var DATA = AAccount.HelperCode.DATA_FROM_SP.GET_MT_ACOAM_CHARTOFACCOUNT_LIST_BY_SEARCHQUERY(PostedData).ToList();
+            var DATA = AAccount.HelperCode.DATA_FROM_SP.GET_MT_ACOAM_ChartOfAccount_List_By_SearchQuery(PostedData).ToList();
             return Json(new { success = true, data = DATA }, JsonRequestBehavior.AllowGet);
         }
 

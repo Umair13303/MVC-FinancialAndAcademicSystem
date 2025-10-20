@@ -67,12 +67,12 @@ namespace office360.Areas.AAcademic.Controllers
         #region ACTION RESULT FOR :: RENDER DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
         public ActionResult GET_MT_BM_BRANCH_BYPARAMTER(SQLParamters PostedData)
         {
-            var DATA = ABranch.HelperCode.DATA_FROM_SP.GET_MT_BM_BRANCH_BYPARAM(PostedData).ToList();
+            var DATA = ABranch.HelperCode.DATA_FROM_SP.GET_MT_BM_Branch_By_Param_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GET_MT_ACM_CLASS_BYPARAMTER(SQLParamters PostedData)
         {
-            var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_ACM_CLASS_BYPARAM(PostedData).ToList();
+            var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_ACM_Class_By_Param_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
         #endregion

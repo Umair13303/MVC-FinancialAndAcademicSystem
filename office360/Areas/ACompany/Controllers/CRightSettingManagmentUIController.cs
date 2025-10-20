@@ -63,7 +63,7 @@ namespace office360.Areas.ACompany.Controllers
         #region ACTION RESULT FOR :: RENDER DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
         public ActionResult GET_MT_CM_COMPANY_BYPARAMTER(SQLParamters PostedData)
         {
-            var DATA = ACompany.HelperCode.DATA_FROM_SP.GET_MT_CM_COMPANY_BYPARAM(PostedData).ToList();
+            var DATA = ACompany.HelperCode.DATA_FROM_SP.GET_MT_CM_Company_By_Param_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -87,7 +87,7 @@ namespace office360.Areas.ACompany.Controllers
         #region ACTION RESULT FOR :: SEARCH DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
         public ActionResult GET_MT_RSM_RIGHTSETTING_BYPARAMETER_SEARCH(SQLParamters PostedData)
         {
-            var DATA = ACompany.HelperCode.DATA_FROM_SP.GET_MT_RSM_RIGHTSETTING_BYPARAM(PostedData).ToList();
+            var DATA = ACompany.HelperCode.DATA_FROM_SP.GET_MT_RSM_RightSetting_By_Param_List(PostedData).ToList();
             return Json(new { data = DATA }, JsonRequestBehavior.AllowGet);
         }
 

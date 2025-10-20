@@ -21,7 +21,7 @@
                         <a href="javascript:void(0);">Accounts</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="javascript:void(0);">Chart Of Account</a>
+                        <a href="javascript:void(0);">Discount</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
                         <span>@ViewBag.Title</span>
@@ -31,16 +31,16 @@
         </div>
     </div>
     <form>
-
         @if (ViewBag.DB_OperationType == nameof(office360.Models.General.DB_OperationType.UPDATE_DATA_INTO_DB))
         {
             <div class="card" style="margin-top:1%;width:100%">
                 <div class="card-body">
+
                     <div class="row mb-0">
                         <div class="col-sm-12 col-md-8">
                             <div class="form-group">
-                                @Html.Label("Chart of Account ( For Edit )", new { @class = "col-form-label", @for = "DropDownListChartOfAccount" })
-                                @Html.DropDownList("DropDownListChartOfAccount", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListChartOfAccount" })
+                                @Html.Label("Discount Type ( For Edit )", new { @class = "col-form-label", @for = "DropDownListDiscountType" })
+                                @Html.DropDownList("DropDownListDiscountType", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListDiscountType" })
                                 <button type="button" class="btn btn-info" id="ButtonSubmitGetInfoForEdit">
                                     <i class="fa fa-sync-alt"></i> Load Information
                                 </button>
@@ -52,7 +52,7 @@
         }
         <div class="card" style="margin-top:1%;width:100%">
             <div class="card-body">
-                <h3 style="font-family: 'Bahnschrift'; font-weight: bolder; color: navy">Chart of Account Detail</h3>
+                <h3 style="font-family: 'Bahnschrift'; font-weight: bolder; color: navy">Discount Type Detail</h3>
                 <div class="row mb-0">
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
@@ -61,28 +61,36 @@
                         </div>
                     </div>
                 </div>
+                <div class="row mb-0">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Chart Of Account", new { @class = "col-form-label", @for = "DropDownListChartOfAccount" })
+                            @Html.DropDownList("DropDownListChartOfAccount", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListChartOfAccount" })
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-5">
+                        <div class="form-group">
+                            @Html.Label("Discount Amount/Percentage", new { @class = "col-form-label", @for = "TextBoxDiscountPercentageOrAmount" })
+                            <div class="input-group">
+                                <div id="ButtonSearch" class="input-group-append">
+                                    <span class="input-group-text">
+                                        <label class="new-control new-checkbox checkbox-danger" style="height: 21px; margin-bottom: 0; margin-right: 5px;">
+                                            @Html.CheckBox("CheckBoxIsByPercentage", false, new { @class = "new-control-input CheckBox", @id = "CheckBoxIsByPercentage" })
+                                            <span class="new-control-indicator"></span>
+                                            <span style="font-size: 12px; margin-left: 3px;">%</span>
+                                        </label>
+                                        <label class="new-control new-checkbox checkbox-primary" style="height: 21px; margin-bottom: 0; margin-right: 0;">
+                                            @Html.CheckBox("CheckBoxIsByAmount", false, new { @class = "new-control-input CheckBox", @id = "CheckBoxIsByAmount" })
+                                            <span class="new-control-indicator"></span>
+                                            <span style="font-size: 12px; margin-left: 3px;">Rs</span>
+                                        </label>
+                                    </span>
+                                </div>
+                                @Html.TextBox("TextBoxDiscountPercentageOrAmount", null, new { @class = "form-control", placeholder = "Please Enter Discount Amount/Percentage Here!", @id = "TextBoxDiscountPercentageOrAmount" })
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="row mb-0">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="form-group">
-                            @Html.Label("Account Type", new { @class = "col-form-label", @for = "DropDownListAccountType" })
-                            @Html.DropDownList("DropDownListAccountType", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListAccountType" })
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div class="form-group">
-                            @Html.Label("Account Category", new { @class = "col-form-label", @for = "DropDownListAccountCategory" })
-                            @Html.DropDownList("DropDownListAccountCategory", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListAccountCategory" })
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-0">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="form-group">
-                            @Html.Label("Financial Statement", new { @class = "col-form-label", @for = "DropDownListFinancialStatement" })
-                            @Html.DropDownList("DropDownListFinancialStatement", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListFinancialStatement" })
-                        </div>
-                    </div>
                 </div>
                 <div class="row mb-0">
                     <div class="col-sm-12 col-md-6">
@@ -92,10 +100,10 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-        @Html.TextBox("HiddenFieldChartOfAccountGuID", null, new { @class = "form-control", Value = ViewBag.ChartOfAccountGuID, hidden = true, @id = "HiddenFieldChartOfAccountGuID" })
+
+        @Html.TextBox("HiddenFieldDiscountTypeGuID", null, new { @class = "form-control", Value = ViewBag.ChartOfAccountGuID, hidden = true, @id = "HiddenFieldDiscountTypeGuID" })
         @Html.TextBox("HiddenFieldDB_OperationType", null, new { @class = "form-control", Value = ViewBag.DB_OperationType, hidden = true, @id = "HiddenFieldDB_OperationType" })
     </form>
     <div class="card-footer">
@@ -110,5 +118,7 @@
             </div>
         </div>
     </div>
+
+
 }
-<script src="~/Areas/AAccount/Script/CAccountCOAManagmentU_Script/CreateUpdate_ACOAMUI_ChartofAccount.js"></script>
+<script src="~/Areas/AAccount/Script/CAccountDiscountTypeManagmentUI_Script/CreateUpdate_ADTMUI_DiscountType.js"></script>

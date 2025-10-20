@@ -20,7 +20,7 @@ namespace office360.Areas.AAcademic.HelperCode
         #region DBO:- ACM_CLASS
 
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB -- DBO:- ACM_CLASS
-        public static List<ACM_Class_GetListByParam_Result> GET_MT_ACM_CLASS_BYPARAM(SQLParamters PostedData)
+        public static List<ACM_Class_GetListByParam_Result> GET_MT_ACM_Class_By_Param_List(SQLParamters PostedData)
         {
             List<ACM_Class_GetListByParam_Result> DATA = new List<ACM_Class_GetListByParam_Result>();
             using (FASEntities db = new FASEntities())
@@ -41,7 +41,7 @@ namespace office360.Areas.AAcademic.HelperCode
         #endregion
 
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB
-        public static List<ACM_Class_GetListBySearch_Result> GET_MT_ACM_CLASS_LIST_BY_SEARCHQUERY(SQLParamters PostedData)
+        public static List<ACM_Class_GetListBySearch_Result> GET_MT_ACM_Class_List_By_SearchQuery(SQLParamters PostedData)
         {
             List<ACM_Class_GetListBySearch_Result> DATA = new List<ACM_Class_GetListBySearch_Result>();
             using (var db = new FASEntities())
@@ -145,7 +145,7 @@ namespace office360.Areas.AAcademic.HelperCode
 
         #region DBO:- ACCM_CLASSCURRICULUM
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB
-        public static List<ACCM_ClassCurriculum_GetListByParam_Result> GET_MT_ACCM_CLASSCURRICULUM_BYPARAM(SQLParamters PostedData)
+        public static List<ACCM_ClassCurriculum_GetListByParam_Result> GET_MT_ACCM_ClassCurriculum_By_Param_List(SQLParamters PostedData)
         {
             List<ACCM_ClassCurriculum_GetListByParam_Result> DATA = new List<ACCM_ClassCurriculum_GetListByParam_Result>();
             using (FASEntities db = new FASEntities())
@@ -164,7 +164,7 @@ namespace office360.Areas.AAcademic.HelperCode
         }
         #endregion
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB
-        public static List<ACCM_ClassCurriculum_GetListBySearch_Result> GET_MT_ACCM_CLASSCURRICULUM_LIST_BY_SEARCHQUERY(SQLParamters PostedData)
+        public static List<ACCM_ClassCurriculum_GetListBySearch_Result> GET_MT_ACCM_ClassCurriculum_List_By_SearchQuery(SQLParamters PostedData)
         {
             List<ACCM_ClassCurriculum_GetListBySearch_Result> DATA = new List<ACCM_ClassCurriculum_GetListBySearch_Result>();
             using (var db = new FASEntities())

@@ -20,7 +20,7 @@ namespace office360.Areas.AAccount.HelperCode
         #region DBO:- ACOAM_CHARTOFACCOUNT
 
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB -- DBO:- ACOAM_CHARTOFACCOUNT
-        public static List<ACOAM_ChartOfAccount_GetListByParam_Result> GET_MT_ACOAM_CHARTOFACCOUNT_BYPARAM(SQLParamters PostedData)
+        public static List<ACOAM_ChartOfAccount_GetListByParam_Result> GET_MT_ACOAM_ChartOfAccount_By_Param_List(SQLParamters PostedData)
         {
             List<ACOAM_ChartOfAccount_GetListByParam_Result> DATA = new List<ACOAM_ChartOfAccount_GetListByParam_Result>();
             using (FASEntities db = new FASEntities())
@@ -37,7 +37,7 @@ namespace office360.Areas.AAccount.HelperCode
         }
         #endregion
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB
-        public static List<ACOAM_ChartOfAccount_GetListBySearch_Result> GET_MT_ACOAM_CHARTOFACCOUNT_LIST_BY_SEARCHQUERY(SQLParamters PostedData)
+        public static List<ACOAM_ChartOfAccount_GetListBySearch_Result> GET_MT_ACOAM_ChartOfAccount_List_By_SearchQuery(SQLParamters PostedData)
         {
             List<ACOAM_ChartOfAccount_GetListBySearch_Result> DATA = new List<ACOAM_ChartOfAccount_GetListBySearch_Result>();
             using (var db = new FASEntities())

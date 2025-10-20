@@ -66,7 +66,7 @@ namespace office360.Areas.AAcademic.Controllers
         #region ACTION RESULT FOR :: RENDER DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
         public ActionResult GET_MT_BM_BRANCH_BYPARAMTER(SQLParamters PostedData)
         {
-            var DATA = ABranch.HelperCode.DATA_FROM_SP.GET_MT_BM_BRANCH_BYPARAM(PostedData).ToList();
+            var DATA = ABranch.HelperCode.DATA_FROM_SP.GET_MT_BM_Branch_By_Param_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -109,7 +109,7 @@ namespace office360.Areas.AAcademic.Controllers
         #region ACTION RESULT FOR :: SEARCH DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
         public ActionResult GET_MT_ACM_CLASS_BYPARAMETER_SEARCH(SQLParamters PostedData)
         {
-            var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_ACM_CLASS_BYPARAM(PostedData).ToList();
+            var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_ACM_Class_By_Param_List(PostedData).ToList();
             return Json(new { data = DATA }, JsonRequestBehavior.AllowGet);
         }
 
@@ -129,7 +129,7 @@ namespace office360.Areas.AAcademic.Controllers
         #region ACTION RESULT FOR :: GET LIST BY SEARCH PARAMETER FOR DATA-TABLE (DBO.ACM_CLASS)-- STORED PROCEDURE
         public ActionResult GET_MT_ACM_CLASS_LIST_BY_SEARCHQUERY_FORDATATABLE(SQLParamters PostedData)
         {
-            var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_ACM_CLASS_LIST_BY_SEARCHQUERY(PostedData).ToList();
+            var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_ACM_Class_List_By_SearchQuery(PostedData).ToList();
             return Json(new { success = true, data = DATA }, JsonRequestBehavior.AllowGet);
         }
 
