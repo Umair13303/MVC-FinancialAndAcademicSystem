@@ -54,9 +54,9 @@ function ValidateInputFields() {
     if ($('#TextBoxDescription').RequiredTextBoxInputGroup() == false) {
         return false;
     } 
-    if ($('#DropDownListChartOfAccount').RequiredDropdown() == false) {
-        return false;
-    }
+    //if ($('#DropDownListChartOfAccount').RequiredDropdown() == false) {
+    //    return false;
+    //}
     if ($('#TextBoxDiscountPercentageOrAmount').RequiredTextBoxInputGroup() == false) {
         return false;
     }
@@ -94,9 +94,7 @@ $('#ButtonUpdateDown').click(function (event) {
 function UpSertDataIntoDB() {
     var DiscountPercentage = null;
     var DiscountAmount = null;
-
     var Description = $('#TextBoxDescription').val();
-
     var IsByPercentage = $("#CheckBoxIsByPercentage").prop('checked');
     if (IsByPercentage == true) {
         DiscountPercentage = $("#TextBoxDiscountPercentageOrAmount").val();
@@ -118,7 +116,9 @@ function UpSertDataIntoDB() {
         IsByAmount: IsByAmount,
         DiscountAmount: DiscountAmount,
         Remarks: Remarks,
-    }
+    };
+
+    return;
     $.ajax({
         type: "POST",
         url: BasePath + "/AAccount/CAccountDiscountTypeManagmentUI/UpSert_Into_ADTM_DiscountType",
