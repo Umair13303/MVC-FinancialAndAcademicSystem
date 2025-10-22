@@ -21,6 +21,8 @@ namespace office360.Models.General
         public bool? IsEnteryTestRequired { get; set; }
         public bool? IsInterviewRequired { get; set; }
         public bool? IsSemesterRequired { get; set; }
+        public bool? IsByPercentage { get; set; }
+        public bool? IsByAmount { get; set; }
 
         public DateTime? AdmissionStartDate { get; set; }
         public DateTime? AdmissionEndDate { get; set; }
@@ -53,6 +55,8 @@ namespace office360.Models.General
         public decimal? NetRecievable { get; set; }
         public decimal? Percentage { get; set; }
         public decimal? SlabAmount { get; set; }
+        public decimal? DiscountPercentage { get; set; }
+        public decimal? DiscountAmount { get; set; }
 
         public Guid? GuID { get; set; }
 

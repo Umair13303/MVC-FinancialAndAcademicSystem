@@ -35,6 +35,7 @@ namespace office360.Models.General
         ACADEMIC_CLASS_CURRICULUM_SUBJECT = 11,
         ACADEMIC_ADMISSION_SESSION_CLASS = 12,
         ACCOUNT_CHART_OF_ACCOUNT = 13,
+        ACCOUNT_DISCOUNT_TYPE = 14,
 
     }
     public enum DOCUMENT_STATUS
@@ -90,6 +91,10 @@ namespace office360.Models.General
         INACTIVE_ACCOUNT_CHART_OF_ACCOUNT = 37,
         DELETED_ACCOUNT_CHART_OF_ACCOUNT = 38,
 
+        ACTIVE_ACCOUNT_DISCOUNT_TYPE = 39,
+        INACTIVE_ACCOUNT_DISCOUNT_TYPE = 40,
+        DELETED_ACCOUNT_DISCOUNT_TYPE = 41,
+
     }
     public enum DATEPICKER_INCREMENT
     {
@@ -97,4 +102,13 @@ namespace office360.Models.General
         FOR_ADMISSION_OPENING_ROUTINE = 20,
     }
    
+    public enum CHART_OF_ACCOUNT_TYPE
+    {
+        ASSETS=1,
+        LIABILITIES=2,
+        CAPITAL_EQUITY=3,
+        REVENUE_SALE=4,
+        COST_OF_SALES=5,
+        EXPENSES=6
+    }
 }

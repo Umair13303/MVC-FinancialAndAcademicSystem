@@ -11,13 +11,10 @@ namespace office360.Models.EDMX
 {
     using System;
     
-    public partial class ACCM_ClassCurriculum_GetListBySearch_Result
+    public partial class ADTM_DiscountType_GetListByParam_Result
     {
         public int Id { get; set; }
         public Nullable<System.Guid> GuID { get; set; }
-        public string Code { get; set; }
         public string Description { get; set; }
-        public string Class { get; set; }
-        public string Campus { get; set; }
     }
 }

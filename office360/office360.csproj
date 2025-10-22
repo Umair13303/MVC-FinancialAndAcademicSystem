@@ -408,6 +408,12 @@
     <Compile Include="Models\EDMX\AdmissionCatagory.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EDMX\ADTM_DiscountType.cs">
+      <DependentUpon>FASModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDMX\ADTM_DiscountType_GetListByParam_Result.cs">
+      <DependentUpon>FASModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EDMX\ASM_Subject.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>

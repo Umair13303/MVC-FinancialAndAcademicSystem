@@ -131,6 +131,30 @@
           <Property Name="CompanyId" Type="int" />
           <Property Name="Remarks" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="ADTM_DiscountType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuID" Type="uniqueidentifier" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="CostOfSaleAccountId" Type="int" />
+          <Property Name="IsByPercentage" Type="bit" />
+          <Property Name="DiscountPercentage" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="IsByAmount" Type="bit" />
+          <Property Name="DiscountAmount" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="DocType" Type="int" />
+          <Property Name="DocumentStatus" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="BranchId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="ASM_Subject">
           <Key>
             <PropertyRef Name="Id" />
@@ -761,6 +785,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Parameter Name="SessionCompanyId" Type="int" Mode="In" />
           <Parameter Name="SearchParameter" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="AccountTypeId" Type="int" Mode="In" />
         </Function>
         <Function Name="ACOAM_ChartOfAccount_GetListBySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CompanyId" Type="int" Mode="In" />
@@ -775,6 +800,34 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Parameter Name="AccountTypeId" Type="int" Mode="In" />
           <Parameter Name="AccountCategoryId" Type="int" Mode="In" />
           <Parameter Name="FinancialStatementId" Type="int" Mode="In" />
+          <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+          <Parameter Name="UpdatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="UpdatedBy" Type="int" Mode="In" />
+          <Parameter Name="DocType" Type="int" Mode="In" />
+          <Parameter Name="DocumentStatus" Type="int" Mode="In" />
+          <Parameter Name="Status" Type="bit" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Response" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="ADTM_DiscountType_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SessionCompanyId" Type="int" Mode="In" />
+          <Parameter Name="SessionBranchId" Type="int" Mode="In" />
+          <Parameter Name="SearchParameter" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ADTM_DiscountType_Upsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_OperationType" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="GuID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CostOfSaleAccountId" Type="int" Mode="In" />
+          <Parameter Name="IsByPercentage" Type="bit" Mode="In" />
+          <Parameter Name="DiscountPercentage" Type="decimal" Mode="In" />
+          <Parameter Name="IsByAmount" Type="bit" Mode="In" />
+          <Parameter Name="DiscountAmount" Type="decimal" Mode="In" />
           <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
           <Parameter Name="CreatedBy" Type="int" Mode="In" />
           <Parameter Name="UpdatedOn" Type="datetime" Mode="In" />
@@ -1072,6 +1125,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <EntitySet Name="ACCM_ClassCurriculumSubject" EntityType="Self.ACCM_ClassCurriculumSubject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ACM_Class" EntityType="Self.ACM_Class" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ACOAM_ChartOfAccount" EntityType="Self.ACOAM_ChartOfAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ADTM_DiscountType" EntityType="Self.ADTM_DiscountType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ASM_Subject" EntityType="Self.ASM_Subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BM_Branch" EntityType="Self.BM_Branch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CM_Company" EntityType="Self.CM_Company" Schema="dbo" store:Type="Tables" />
@@ -1486,6 +1540,30 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Name="AccountTypeId" Type="Int32" />
           <Property Name="AccountCategoryId" Type="Int32" />
           <Property Name="FinancialStatementId" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="DocType" Type="Int32" />
+          <Property Name="DocumentStatus" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="BranchId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ADTM_DiscountType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuID" Type="Guid" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CostOfSaleAccountId" Type="Int32" />
+          <Property Name="IsByPercentage" Type="Boolean" />
+          <Property Name="DiscountPercentage" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="IsByAmount" Type="Boolean" />
+          <Property Name="DiscountAmount" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
@@ -1951,6 +2029,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <EntitySet Name="ACCM_ClassCurriculumSubject" EntityType="Self.ACCM_ClassCurriculumSubject" />
           <EntitySet Name="ACM_Class" EntityType="Self.ACM_Class" />
           <EntitySet Name="ACOAM_ChartOfAccount" EntityType="Self.ACOAM_ChartOfAccount" />
+          <EntitySet Name="ADTM_DiscountType" EntityType="Self.ADTM_DiscountType" />
           <EntitySet Name="ASM_Subject" EntityType="Self.ASM_Subject" />
           <EntitySet Name="BM_Branch" EntityType="Self.BM_Branch" />
           <EntitySet Name="CM_Company" EntityType="Self.CM_Company" />
@@ -2116,6 +2195,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
             <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
             <Parameter Name="SearchParameter" Mode="In" Type="String" />
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="AccountTypeId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ACOAM_ChartOfAccount_GetListBySearch" ReturnType="Collection(FASModel.ACOAM_ChartOfAccount_GetListBySearch_Result)">
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
@@ -2130,6 +2210,34 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
             <Parameter Name="AccountTypeId" Mode="In" Type="Int32" />
             <Parameter Name="AccountCategoryId" Mode="In" Type="Int32" />
             <Parameter Name="FinancialStatementId" Mode="In" Type="Int32" />
+            <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="DocType" Mode="In" Type="Int32" />
+            <Parameter Name="DocumentStatus" Mode="In" Type="Int32" />
+            <Parameter Name="Status" Mode="In" Type="Boolean" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="Remarks" Mode="In" Type="String" />
+            <Parameter Name="Response" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ADTM_DiscountType_GetListByParam" ReturnType="Collection(FASModel.ADTM_DiscountType_GetListByParam_Result)">
+            <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
+            <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="SessionBranchId" Mode="In" Type="Int32" />
+            <Parameter Name="SearchParameter" Mode="In" Type="String" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ADTM_DiscountType_Upsert">
+            <Parameter Name="DB_OperationType" Mode="In" Type="String" />
+            <Parameter Name="GuID" Mode="In" Type="Guid" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="CostOfSaleAccountId" Mode="In" Type="Int32" />
+            <Parameter Name="IsByPercentage" Mode="In" Type="Boolean" />
+            <Parameter Name="DiscountPercentage" Mode="In" Type="Decimal" />
+            <Parameter Name="IsByAmount" Mode="In" Type="Boolean" />
+            <Parameter Name="DiscountAmount" Mode="In" Type="Decimal" />
             <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
             <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
             <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
@@ -2401,7 +2509,6 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Type="String" Name="Description" Nullable="true" />
           <Property Type="String" Name="Class" Nullable="true" />
           <Property Type="String" Name="Campus" Nullable="true" />
-          <Property Type="Int32" Name="DocumentStatus" Nullable="true" />
         </ComplexType>
         <ComplexType Name="ACM_Class_GetListByParam_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -2433,6 +2540,11 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Type="String" Name="AccountType" Nullable="true" />
           <Property Type="String" Name="AccountCatagory" Nullable="true" />
           <Property Type="Int32" Name="DocumentStatus" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ADTM_DiscountType_GetListByParam_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GuID" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
         </ComplexType>
         <ComplexType Name="ASM_Subject_GetListByParam_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -2685,6 +2797,31 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
                 <ScalarProperty Name="AccountTypeId" ColumnName="AccountTypeId" />
                 <ScalarProperty Name="AccountCategoryId" ColumnName="AccountCategoryId" />
                 <ScalarProperty Name="FinancialStatementId" ColumnName="FinancialStatementId" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="DocType" ColumnName="DocType" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ADTM_DiscountType">
+            <EntityTypeMapping TypeName="FASModel.ADTM_DiscountType">
+              <MappingFragment StoreEntitySet="ADTM_DiscountType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CostOfSaleAccountId" ColumnName="CostOfSaleAccountId" />
+                <ScalarProperty Name="IsByPercentage" ColumnName="IsByPercentage" />
+                <ScalarProperty Name="DiscountPercentage" ColumnName="DiscountPercentage" />
+                <ScalarProperty Name="IsByAmount" ColumnName="IsByAmount" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
@@ -3265,7 +3402,6 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Class" ColumnName="Class" />
                 <ScalarProperty Name="Campus" ColumnName="Campus" />
-                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3319,6 +3455,16 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ACOAM_ChartOfAccount_Upsert" FunctionName="FASModel.Store.ACOAM_ChartOfAccount_Upsert" />
+          <FunctionImportMapping FunctionImportName="ADTM_DiscountType_GetListByParam" FunctionName="FASModel.Store.ADTM_DiscountType_GetListByParam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FASModel.ADTM_DiscountType_GetListByParam_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ADTM_DiscountType_Upsert" FunctionName="FASModel.Store.ADTM_DiscountType_Upsert" />
           <FunctionImportMapping FunctionImportName="ASM_Subject_GetListByParam" FunctionName="FASModel.Store.ASM_Subject_GetListByParam">
             <ResultMapping>
               <ComplexTypeMapping TypeName="FASModel.ASM_Subject_GetListByParam_Result">

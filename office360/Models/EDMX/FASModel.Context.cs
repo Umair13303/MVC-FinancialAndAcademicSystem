@@ -33,6 +33,7 @@ namespace office360.Models.EDMX
         public virtual DbSet<ACCM_ClassCurriculumSubject> ACCM_ClassCurriculumSubject { get; set; }
         public virtual DbSet<ACM_Class> ACM_Class { get; set; }
         public virtual DbSet<ACOAM_ChartOfAccount> ACOAM_ChartOfAccount { get; set; }
+        public virtual DbSet<ADTM_DiscountType> ADTM_DiscountType { get; set; }
         public virtual DbSet<ASM_Subject> ASM_Subject { get; set; }
         public virtual DbSet<BM_Branch> BM_Branch { get; set; }
         public virtual DbSet<CM_Company> CM_Company { get; set; }
@@ -501,7 +502,7 @@ namespace office360.Models.EDMX
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ACM_Class_Upsert", dB_OperationTypeParameter, guIDParameter, campusIdParameter, descriptionParameter, studyLevelIdParameter, studyGroupIdParameter, studySchemeIdParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, remarksParameter, response);
         }
     
-        public virtual ObjectResult<ACOAM_ChartOfAccount_GetListByParam_Result> ACOAM_ChartOfAccount_GetListByParam(string dB_IF_PARAM, Nullable<int> sessionCompanyId, string searchParameter, Nullable<int> companyId)
+        public virtual ObjectResult<ACOAM_ChartOfAccount_GetListByParam_Result> ACOAM_ChartOfAccount_GetListByParam(string dB_IF_PARAM, Nullable<int> sessionCompanyId, string searchParameter, Nullable<int> companyId, Nullable<int> accountTypeId)
         {
             var dB_IF_PARAMParameter = dB_IF_PARAM != null ?
                 new ObjectParameter("DB_IF_PARAM", dB_IF_PARAM) :
@@ -519,7 +520,11 @@ namespace office360.Models.EDMX
                 new ObjectParameter("CompanyId", companyId) :
                 new ObjectParameter("CompanyId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ACOAM_ChartOfAccount_GetListByParam_Result>("ACOAM_ChartOfAccount_GetListByParam", dB_IF_PARAMParameter, sessionCompanyIdParameter, searchParameterParameter, companyIdParameter);
+            var accountTypeIdParameter = accountTypeId.HasValue ?
+                new ObjectParameter("AccountTypeId", accountTypeId) :
+                new ObjectParameter("AccountTypeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ACOAM_ChartOfAccount_GetListByParam_Result>("ACOAM_ChartOfAccount_GetListByParam", dB_IF_PARAMParameter, sessionCompanyIdParameter, searchParameterParameter, companyIdParameter, accountTypeIdParameter);
         }
     
         public virtual ObjectResult<ACOAM_ChartOfAccount_GetListBySearch_Result> ACOAM_ChartOfAccount_GetListBySearch(Nullable<int> companyId, Nullable<int> branchId, Nullable<int> inputTypeId, string inputText)
@@ -610,6 +615,108 @@ namespace office360.Models.EDMX
                 new ObjectParameter("Remarks", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ACOAM_ChartOfAccount_Upsert", dB_OperationTypeParameter, guIDParameter, descriptionParameter, accountTypeIdParameter, accountCategoryIdParameter, financialStatementIdParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, remarksParameter, response);
+        }
+    
+        public virtual ObjectResult<ADTM_DiscountType_GetListByParam_Result> ADTM_DiscountType_GetListByParam(string dB_IF_PARAM, Nullable<int> sessionCompanyId, Nullable<int> sessionBranchId, string searchParameter, Nullable<int> companyId)
+        {
+            var dB_IF_PARAMParameter = dB_IF_PARAM != null ?
+                new ObjectParameter("DB_IF_PARAM", dB_IF_PARAM) :
+                new ObjectParameter("DB_IF_PARAM", typeof(string));
+    
+            var sessionCompanyIdParameter = sessionCompanyId.HasValue ?
+                new ObjectParameter("SessionCompanyId", sessionCompanyId) :
+                new ObjectParameter("SessionCompanyId", typeof(int));
+    
+            var sessionBranchIdParameter = sessionBranchId.HasValue ?
+                new ObjectParameter("SessionBranchId", sessionBranchId) :
+                new ObjectParameter("SessionBranchId", typeof(int));
+    
+            var searchParameterParameter = searchParameter != null ?
+                new ObjectParameter("SearchParameter", searchParameter) :
+                new ObjectParameter("SearchParameter", typeof(string));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ADTM_DiscountType_GetListByParam_Result>("ADTM_DiscountType_GetListByParam", dB_IF_PARAMParameter, sessionCompanyIdParameter, sessionBranchIdParameter, searchParameterParameter, companyIdParameter);
+        }
+    
+        public virtual int ADTM_DiscountType_Upsert(string dB_OperationType, Nullable<System.Guid> guID, string description, Nullable<int> costOfSaleAccountId, Nullable<bool> isByPercentage, Nullable<decimal> discountPercentage, Nullable<bool> isByAmount, Nullable<decimal> discountAmount, Nullable<System.DateTime> createdOn, Nullable<int> createdBy, Nullable<System.DateTime> updatedOn, Nullable<int> updatedBy, Nullable<int> docType, Nullable<int> documentStatus, Nullable<bool> status, Nullable<int> branchId, Nullable<int> companyId, string remarks, ObjectParameter response)
+        {
+            var dB_OperationTypeParameter = dB_OperationType != null ?
+                new ObjectParameter("DB_OperationType", dB_OperationType) :
+                new ObjectParameter("DB_OperationType", typeof(string));
+    
+            var guIDParameter = guID.HasValue ?
+                new ObjectParameter("GuID", guID) :
+                new ObjectParameter("GuID", typeof(System.Guid));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var costOfSaleAccountIdParameter = costOfSaleAccountId.HasValue ?
+                new ObjectParameter("CostOfSaleAccountId", costOfSaleAccountId) :
+                new ObjectParameter("CostOfSaleAccountId", typeof(int));
+    
+            var isByPercentageParameter = isByPercentage.HasValue ?
+                new ObjectParameter("IsByPercentage", isByPercentage) :
+                new ObjectParameter("IsByPercentage", typeof(bool));
+    
+            var discountPercentageParameter = discountPercentage.HasValue ?
+                new ObjectParameter("DiscountPercentage", discountPercentage) :
+                new ObjectParameter("DiscountPercentage", typeof(decimal));
+    
+            var isByAmountParameter = isByAmount.HasValue ?
+                new ObjectParameter("IsByAmount", isByAmount) :
+                new ObjectParameter("IsByAmount", typeof(bool));
+    
+            var discountAmountParameter = discountAmount.HasValue ?
+                new ObjectParameter("DiscountAmount", discountAmount) :
+                new ObjectParameter("DiscountAmount", typeof(decimal));
+    
+            var createdOnParameter = createdOn.HasValue ?
+                new ObjectParameter("CreatedOn", createdOn) :
+                new ObjectParameter("CreatedOn", typeof(System.DateTime));
+    
+            var createdByParameter = createdBy.HasValue ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
+    
+            var updatedOnParameter = updatedOn.HasValue ?
+                new ObjectParameter("UpdatedOn", updatedOn) :
+                new ObjectParameter("UpdatedOn", typeof(System.DateTime));
+    
+            var updatedByParameter = updatedBy.HasValue ?
+                new ObjectParameter("UpdatedBy", updatedBy) :
+                new ObjectParameter("UpdatedBy", typeof(int));
+    
+            var docTypeParameter = docType.HasValue ?
+                new ObjectParameter("DocType", docType) :
+                new ObjectParameter("DocType", typeof(int));
+    
+            var documentStatusParameter = documentStatus.HasValue ?
+                new ObjectParameter("DocumentStatus", documentStatus) :
+                new ObjectParameter("DocumentStatus", typeof(int));
+    
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(bool));
+    
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(int));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var remarksParameter = remarks != null ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADTM_DiscountType_Upsert", dB_OperationTypeParameter, guIDParameter, descriptionParameter, costOfSaleAccountIdParameter, isByPercentageParameter, discountPercentageParameter, isByAmountParameter, discountAmountParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, remarksParameter, response);
         }
     
         public virtual ObjectResult<ASM_Subject_GetListByParam_Result> ASM_Subject_GetListByParam(string dB_IF_PARAM, Nullable<int> sessionCompanyId, Nullable<int> sessionBranchId, string searchParameter, Nullable<int> companyId)

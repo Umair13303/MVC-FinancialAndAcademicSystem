@@ -96,5 +96,89 @@ namespace office360.Areas.AAccount.HelperCode
         }
 
         #endregion
+        #region HELPER FOR :: INSERT/UPDATE DATA USING STORED PROCEDURE (DBO.ADTM_DISCOUNTTYPE) ::-- MAIN DB
+        public static int? Update_Insert_ADTM_DiscountType(SQLParamters PostedData)
+        {
+            using (var db = new FASEntities())
+            {
+                using (System.Data.Entity.DbContextTransaction dbTran = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+
+                        #region CHECK DUPLICATE :: NO-OPERATION IF ACTIVE CHART OF ACCOUNT EXIST
+                        int? DB_OPERATION_STATUS = AAccount.HelperCode.Check_Duplicate_By_LINQ.IS_EXIST_ADTM_DISCOUNTTYPE_BY_PARAMETER(PostedData);
+                        switch (DB_OPERATION_STATUS)
+                        {
+                            case (int?)Http_DB_Response.CODE_AUTHORIZED:
+                                #region DB SETTING
+                                if (PostedData.OperationType == nameof(DB_OperationType.INSERT_DATA_INTO_DB))
+                                {
+                                    PostedData.GuID = Uttility.fn_GetHashGuid();
+                                }
+                                #endregion
+                                #region OUTPUT VARAIBLE
+                                var ResponseParameter = new ObjectParameter("Response", typeof(int));
+                                #endregion
+                                #region EXECUTE STORE PROCEDURE
+                                var ACOAM_ChartOfAccount = db.ADTM_DiscountType_Upsert(
+                                                                     PostedData.OperationType,
+                                                                     PostedData.GuID,
+                                                                     PostedData.Description?.Trim(),
+                                                                     PostedData.CostOfSaleAccountId,
+                                                                     PostedData.IsByPercentage,
+                                                                     PostedData.DiscountPercentage,
+                                                                     PostedData.IsByAmount,
+                                                                     PostedData.DiscountAmount,
+                                                                     DateTime.Now,
+                                                                     Session_Manager.UserId,
+                                                                     DateTime.Now,
+                                                                     Session_Manager.UserId,
+                                                                     (int?)DOCUMENT_TYPE.ACCOUNT_DISCOUNT_TYPE,
+                                                                     (int?)DOCUMENT_STATUS.ACTIVE_ACCOUNT_DISCOUNT_TYPE,
+                                                                     true,
+                                                                     Session_Manager.BranchId,
+                                                                     Session_Manager.CompanyId,
+                                                                     PostedData.Remarks?.Trim().ToSafeString(),
+                                                                     ResponseParameter
+                                    );
+
+                                #endregion
+                                #region RESPONSE VALUES IN VARIABLE
+                                int? Response = (int)ResponseParameter.Value;
+                                #endregion
+                                #region TRANSACTION HANDLING DETAIL
+                                switch (Response)
+                                {
+                                    case (int?)Http_DB_Response.CODE_SUCCESS:
+                                    case (int?)Http_DB_Response.CODE_DATA_UPDATED:
+
+                                        dbTran.Commit();
+                                        break;
+
+                                    case (int?)Http_DB_Response.CODE_BAD_REQUEST:
+                                        dbTran.Rollback();
+                                        break;
+                                }
+                                #endregion
+                                return HttpServerStatus.Http_DB_ResponseByReturnValue(Response);
+
+                            default:
+                                return HttpServerStatus.Http_DB_ResponseByReturnValue(DB_OPERATION_STATUS);
+                        }
+                        #endregion
+
+
+                    }
+                    catch (Exception Ex)
+                    {
+                        dbTran.Rollback();
+                        return HttpServerStatus.Http_DB_Response.CODE_INTERNAL_SERVER_ERROR.ToInt();
+                    }
+                }
+            }
+        }
+
+        #endregion
     }
 }
