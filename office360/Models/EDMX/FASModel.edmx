@@ -819,6 +819,12 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Parameter Name="SearchParameter" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="CompanyId" Type="int" Mode="In" />
         </Function>
+        <Function Name="ADTM_DiscountType_GetListBySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="InputTypeId" Type="int" Mode="In" />
+          <Parameter Name="InputText" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="ADTM_DiscountType_Upsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DB_OperationType" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="GuID" Type="uniqueidentifier" Mode="In" />
@@ -2229,6 +2235,12 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
             <Parameter Name="SearchParameter" Mode="In" Type="String" />
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="ADTM_DiscountType_GetListBySearch" ReturnType="Collection(FASModel.ADTM_DiscountType_GetListBySearch_Result)">
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="InputTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="InputText" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="ADTM_DiscountType_Upsert">
             <Parameter Name="DB_OperationType" Mode="In" Type="String" />
             <Parameter Name="GuID" Mode="In" Type="Guid" />
@@ -2545,6 +2557,18 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="Guid" Name="GuID" Nullable="true" />
           <Property Type="String" Name="Description" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ADTM_DiscountType_GetListBySearch_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GuID" Nullable="true" />
+          <Property Type="String" Name="Code" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="CostOfSaleAccount" Nullable="true" />
+          <Property Type="Boolean" Name="IsByPercentage" Nullable="true" />
+          <Property Type="Decimal" Name="DiscountPercentage" Nullable="true" Precision="18" Scale="4" />
+          <Property Type="Boolean" Name="IsByAmount" Nullable="true" />
+          <Property Type="Decimal" Name="DiscountAmount" Nullable="true" Precision="18" Scale="4" />
+          <Property Type="Int32" Name="DocumentStatus" Nullable="true" />
         </ComplexType>
         <ComplexType Name="ASM_Subject_GetListByParam_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -3461,6 +3485,22 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GuID" ColumnName="GuID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ADTM_DiscountType_GetListBySearch" FunctionName="FASModel.Store.ADTM_DiscountType_GetListBySearch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FASModel.ADTM_DiscountType_GetListBySearch_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CostOfSaleAccount" ColumnName="CostOfSaleAccount" />
+                <ScalarProperty Name="IsByPercentage" ColumnName="IsByPercentage" />
+                <ScalarProperty Name="DiscountPercentage" ColumnName="DiscountPercentage" />
+                <ScalarProperty Name="IsByAmount" ColumnName="IsByAmount" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
