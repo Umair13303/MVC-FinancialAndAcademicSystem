@@ -68,6 +68,9 @@ namespace REP.Controllers
         [CompanySessionCheck]
         public  ActionResult GET_DASHBOARD_FOR_USER()
         {
+
+            ViewBag.TotalBranches = db.BM_Branch.ToList().Count().ToString();
+            ViewBag.TotalUser = db.UM_User.ToList().Count().ToString();
             string roleKey;
             if (Dictionary.RoleGuids.TryGetValue(Session_Manager.RoleId, out roleKey))
             {
