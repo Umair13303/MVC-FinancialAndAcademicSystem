@@ -1,4 +1,4 @@
-﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE ADTM_DISCOUNTTYPE                          **----------------------------------------------*/
+﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE AFTM_FEETYPE                               **----------------------------------------------*/
 var OperationType = "";
 var DDL_Condition = "";
 var DB_OperationType = $('#HiddenFieldDB_OperationType').val();
@@ -22,11 +22,78 @@ $(document).ready(function () {
     ChangeCase();
 });
 function PopulateDropDownLists() {
+    PopulateLK_FeeCatagory_List();
+    PopulateLK_ChargingMethod_List();
+    PopulateMT_ACOAM_RevenueAccount_ListByParam();
+    PopulateMT_ACOAM_AssetAccount_ListByParam();
+    PopulateMT_ACOAM_LiabilityAccount_ListByParam();
     PopulateMT_ACOAM_CostOfSaleAccount_ListByParam();
 }
 
 /*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                                                     **----------------------------------------------*/
 function ChangeCase() {
+    $('#DropDownListFeeCategory').change(function (event) {
+        event.preventDefault();
+        $('#CheckBoxIsOnAdmission,#CheckBoxIsSecurity,#CheckBoxIsRefundable,#CheckBoxIsDiscount').prop("checked", false).change();
+        $('#DropDownListRevenueAccount,#DropDownListAssetAccount,#DropDownListLiabilityAccount,#DropDownListCostOfSaleAccount,#DropDownListChargingMethod').val('-1').trigger('change.select2');
+        var IsOtherFee = $("#DropDownListFeeCategory :selected").attr("data-IsOtherFee");
+        //-----------FOR ::IN CASE FEE CATAGORY IS: OTHER FEE(NOT ACADEMIC FEE'S)
+        if (CONVERSION.TO_BOOL(IsOtherFee) == true) {
+            $("#DivOtherFeeChartOfAccount").show();
+        }
+        //-----------FOR ::IN CASE FEE CATAGORY IS: ACADEMIC FEE'S
+        else
+        {
+            $("#DivOtherFeeChartOfAccount").hide();
+        }
+    });
+    $('#DropDownListChargingMethod').change(function (event) {
+        event.preventDefault();
+        $('#CheckBoxIsOnAdmission').prop("checked", false).change();
+        var IsRecurring = $("#DropDownListChargingMethod :selected").attr("data-IsRecurring");
+        //-----------FOR ::IN CASE FEE IS: RECURRING
+        if (CONVERSION.TO_BOOL(IsRecurring) == true) {
+            $('#DivCheckBoxIsOnAdmission').hide();
+        }
+        //-----------FOR ::IN CASE FEE IS: NOT-RECURRING
+        else {
+            $('#DivCheckBoxIsOnAdmission').show();
+        }
+    });
+    $('#CheckBoxIsSecurity, #CheckBoxIsDiscount').change(function (event) {
+        event.preventDefault();
+        $('#DropDownListRevenueAccount,#DropDownListAssetAccount,#DropDownListLiabilityAccount,#DropDownListCostOfSaleAccount').val('-1').trigger('change.select2');
+        var IsOtherFee = $("#DropDownListFeeCategory :selected").attr("data-IsOtherFee");
+        if (CONVERSION.TO_BOOL(IsOtherFee) == true) {
+            var IsSecurity = $('#CheckBoxIsSecurity').prop('checked');
+            var IsDiscount = $('#CheckBoxIsDiscount').prop('checked');
+            if (IsSecurity == true && IsDiscount == true) {
+                $('#DropDownListRevenueAccount').prop('disabled',true);
+                $('#DropDownListAssetAccount').prop('disabled', false);
+                $('#DropDownListLiabilityAccount').prop('disabled', false);
+                $('#DropDownListCostOfSaleAccount').prop('disabled', false);
+            }
+            else if (IsSecurity == false && IsDiscount == true) {
+                $('#DropDownListRevenueAccount').prop('disabled', false);
+                $('#DropDownListAssetAccount').prop('disabled', false);
+                $('#DropDownListLiabilityAccount').prop('disabled', true);
+                $('#DropDownListCostOfSaleAccount').show();
+            }
+            else if (IsSecurity == true && IsDiscount == false) {
+                $('#DropDownListRevenueAccount').prop('disabled', true);
+                $('#DropDownListAssetAccount').prop('disabled', false);
+                $('#DropDownListLiabilityAccount').prop('disabled', false);
+                $('#DropDownListCostOfSaleAccount').prop('disabled', true);
+            }
+            else if (IsSecurity == false && IsDiscount == false) {
+                $('#DropDownListRevenueAccount').prop('disabled', false);
+                $('#DropDownListAssetAccount').prop('disabled', false);
+                $('#DropDownListLiabilityAccount').prop('disabled', true);
+                $('#DropDownListCostOfSaleAccount').prop('disabled', true);
+            }
+        }
+    });
+
     //-----------FOR ::EDIT CASE
     $('#DropDownListFeeType').change(function () {
         if (!IsFieldClear) {
@@ -37,14 +104,232 @@ function ChangeCase() {
     });
 }
 
+/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_LOOKUP-- LINQUERY (ON LOAD)                  **----------------------------------------------*/
+function PopulateLK_FeeCatagory_List() {
+    $.ajax({
+        type: "POST",
+        url: BasePath + "/AAccount/CAccountFeeTypeManagmentUI/GET_LK1_FEECATEGORY",
+        data: {},
+        beforeSend: function () {
+            startLoading();
+        },
+        success: function (data) {
+            var List = '<option  value="-1">Select an option</option>';
+            for (var i = 0; i < data.length; i++) {
+                List += '<option data-IsOtherFee="' + data[i].IsOtherFee+'" value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+            }
+            $("#DropDownListFeeCategory").html(List);
+        },
+        complete: function () {
+            stopLoading();
+        },
+    });
+}
+function PopulateLK_ChargingMethod_List() {
+    $.ajax({
+        type: "POST",
+        url: BasePath + "/AAccount/CAccountFeeTypeManagmentUI/GET_LK1_CHARGINGMETHOD",
+        data: {},
+        beforeSend: function () {
+            startLoading();
+        },
+        success: function (data) {
+            var List = '<option  value="-1">Select an option</option>';
+            for (var i = 0; i < data.length; i++) {
+                List += '<option data-IsRecurring="' + data[i].IsRecurring + '"value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+            }
+            $("#DropDownListChargingMethod").html(List);
+        },
+        complete: function () {
+            stopLoading();
+        },
+    });
+}
+
 /*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON LOAD)            **----------------------------------------------*/
+function PopulateMT_ACOAM_RevenueAccount_ListByParam() {
+    switch (DB_OperationType) {
+        case DBOperation.INSERT:
+            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORNEWINSERT;
+            break;
+        case DBOperation.UPDATE:
+            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORUPDATERECORD;
+            break;
+    }
+    var JsonArg = {
+        DB_IF_PARAM: DDL_Condition,
+    }
+    $.ajax({
+        type: "POST",
+        url: BasePath + "/AAccount/CAccountFeeTypeManagmentUI/GET_MT_ACOAM_REVENUEACCOUNT_BYPARAMTER",
+        data: { 'PostedData': (JsonArg) },
+        beforeSend: function () {
+            startLoading();
+        },
+        success: function (data) {
+            var List = '<option value="-1">Select an option</option>';
+            for (var i = 0; i < data.length; i++) {
+                List += '<option value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+            }
+            $("#DropDownListRevenueAccount").html(List);
+        },
+        complete: function () {
+            stopLoading();
+        },
+    });
+}
+function PopulateMT_ACOAM_AssetAccount_ListByParam() {
+    switch (DB_OperationType) {
+        case DBOperation.INSERT:
+            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORNEWINSERT;
+            break;
+        case DBOperation.UPDATE:
+            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORUPDATERECORD;
+            break;
+    }
+    var JsonArg = {
+        DB_IF_PARAM: DDL_Condition,
+    }
+    $.ajax({
+        type: "POST",
+        url: BasePath + "/AAccount/CAccountFeeTypeManagmentUI/GET_MT_ACOAM_ASSETACCOUNT_BYPARAMTER",
+        data: { 'PostedData': (JsonArg) },
+        beforeSend: function () {
+            startLoading();
+        },
+        success: function (data) {
+            var List = '<option value="-1">Select an option</option>';
+            for (var i = 0; i < data.length; i++) {
+                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+            }
+            $("#DropDownListAssetAccount").html(List);
+        },
+        complete: function () {
+            stopLoading();
+        },
+    });
+}
+function PopulateMT_ACOAM_LiabilityAccount_ListByParam() {
+    switch (DB_OperationType) {
+        case DBOperation.INSERT:
+            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORNEWINSERT;
+            break;
+        case DBOperation.UPDATE:
+            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORUPDATERECORD;
+            break;
+    }
+    var JsonArg = {
+        DB_IF_PARAM: DDL_Condition,
+    }
+    $.ajax({
+        type: "POST",
+        url: BasePath + "/AAccount/CAccountFeeTypeManagmentUI/GET_MT_ACOAM_LIABILITYACCOUNT_BYPARAMTER",
+        data: { 'PostedData': (JsonArg) },
+        beforeSend: function () {
+            startLoading();
+        },
+        success: function (data) {
+            var List = '<option value="-1">Select an option</option>';
+            for (var i = 0; i < data.length; i++) {
+                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+            }
+            $("#DropDownListLiabilityAccount").html(List);
+        },
+        complete: function () {
+            stopLoading();
+        },
+    });
+}
+function PopulateMT_ACOAM_CostOfSaleAccount_ListByParam() {
+    switch (DB_OperationType) {
+        case DBOperation.INSERT:
+            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORNEWINSERT;
+            break;
+        case DBOperation.UPDATE:
+            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORUPDATERECORD;
+            break;
+    }
+    var JsonArg = {
+        DB_IF_PARAM: DDL_Condition,
+    }
+    $.ajax({
+        type: "POST",
+        url: BasePath + "/AAccount/CAccountFeeTypeManagmentUI/GET_MT_ACOAM_COSTOFSALEACCOUNT_BYPARAMTER",
+        data: { 'PostedData': (JsonArg) },
+        beforeSend: function () {
+            startLoading();
+        },
+        success: function (data) {
+            var List = '<option value="-1">Select an option</option>';
+            for (var i = 0; i < data.length; i++) {
+                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+            }
+            $("#DropDownListCostOfSaleAccount").html(List);
+        },
+        complete: function () {
+            stopLoading();
+        },
+    });
+}
 
 /*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,UPSERT,CLEAR)                            **----------------------------------------------*/
 function ValidateInputFields() {
-
+    var IsOtherFee = $("#DropDownListFeeCategory :selected").attr("data-IsOtherFee");
+    var IsSecurity = $('#CheckBoxIsSecurity').prop('checked');
+    var IsDiscount = $('#CheckBoxIsDiscount').prop('checked');
     if ($('#TextBoxDescription').RequiredTextBoxInputGroup() == false) {
         return false;
-    } 
+    }
+    if ($('#DropDownListFeeCategory').RequiredDropdown() == false) {
+        return false;
+    }
+    if (CONVERSION.TO_BOOL(IsOtherFee) == false) {
+        if ($('#DropDownListChargingMethod').RequiredDropdown() == false) {
+            return false;
+        }
+    }
+    else {
+        if (IsSecurity == true && IsDiscount == true) {
+            if ($('#DropDownListAssetAccount').RequiredDropdown() == false) {
+                return false;
+            }
+            if ($('#DropDownListLiabilityAccount').RequiredDropdown() == false) {
+                return false;
+            }
+            if ($('#DropDownListCostOfSaleAccount').RequiredDropdown() == false) {
+                return false;
+            }
+        }
+        else if (IsSecurity == false && IsDiscount == true) {
+            if ($('#DropDownListRevenueAccount').RequiredDropdown() == false) {
+                return false;
+            }
+            if ($('#DropDownListAssetAccount').RequiredDropdown() == false) {
+                return false;
+            }
+            if ($('#DropDownListCostOfSaleAccount').RequiredDropdown() == false) {
+                return false;
+            }
+
+        }
+        else if (IsSecurity == true && IsDiscount == false) {
+            if ($('#DropDownListAssetAccount').RequiredDropdown() == false) {
+                return false;
+            }
+
+            if ($('#DropDownListLiabilityAccount').RequiredDropdown() == false) {
+                return false;
+            }
+        }
+        else if (IsSecurity == false && IsDiscount == false) {
+            if ($('#DropDownListRevenueAccount').RequiredDropdown() == false) {
+                return false;
+            }
+            if ($('#DropDownListAssetAccount').RequiredDropdown() == false) {
+                return false;
+            }
+        }
+    }
    
     if ($('#TextBoxRemarks').RequiredTextBoxInputGroup() == false) {
         return false;
@@ -59,8 +344,8 @@ $('#ButtonSubmitDown').click(function (event) {
             OperationType = DBOperation.INSERT;
             UpSertDataIntoDB();
         }
-        catch {
-            GetMessageBox(err, 505);
+        catch(err) {
+            GetMessageBox(err.Message, 505);
         }
     }
 });
@@ -78,20 +363,70 @@ $('#ButtonUpdateDown').click(function (event) {
     }
 });
 function UpSertDataIntoDB() {
-    var Description = $('#TextBoxDescription').val();
-    var Remarks = $('#TextBoxRemarks').val();
+    var Description     = null; var ChargingMethodId    = null;
+    var IsOnAdmission   = null; var IsDiscount          = null; var IsRefundable        = null; var IsSecurity          = null;
+    var AssetAccountId  = null; var RevenueAccountId    = null; var CostOfSaleAccountId = null; var LiabilityAccountId  = null;
 
+
+    var Description = $('#TextBoxDescription').val();
+    var FeeCategoryId = $('#DropDownListFeeCategory :selected').val();
+
+
+    var IsOtherFee = $("#DropDownListFeeCategory :selected").attr("data-IsOtherFee");
+
+    if (CONVERSION.TO_BOOL(IsOtherFee) == true) {
+        IsDiscount = $('#CheckBoxIsDiscount').prop('checked');
+        IsRefundable = $('#CheckBoxIsRefundable').prop('checked');
+        IsSecurity = $('#CheckBoxIsSecurity').prop('checked');
+        if (IsSecurity == true && IsDiscount == true) {
+            AssetAccountId = $('#DropDownListAssetAccount :selected').val();
+            LiabilityAccountId = $('#DropDownListLiabilityAccount :selected').val();
+            CostOfSaleAccountId = $('#DropDownListCostOfSaleAccount :selected').val();
+        }
+        else if (IsSecurity == false && IsDiscount == true) {
+            RevenueAccountId = $('#DropDownListRevenueAccount :selected').val();
+            AssetAccountId = $('#DropDownListAssetAccount :selected').val();
+            CostOfSaleAccountId = $('#DropDownListCostOfSaleAccount :selected').val();
+        }
+        else if (IsSecurity == true && IsDiscount == false) {
+            AssetAccountId = $('#DropDownListAssetAccount :selected').val();
+            LiabilityAccountId = $('#DropDownListLiabilityAccount :selected').val();
+        }
+        else if (IsSecurity == false && IsDiscount == false) {
+            RevenueAccountId = $('#DropDownListRevenueAccount :selected').val();
+            AssetAccountId = $('#DropDownListAssetAccount :selected').val();
+        }
+    }
+
+    else if (CONVERSION.TO_BOOL(IsOtherFee) == false) {
+        ChargingMethodId = $('#DropDownListChargingMethod :selected').val();
+        IsOnAdmission = $('#CheckBoxIsOnAdmission').prop('checked');
+        IsDiscount = $('#CheckBoxIsDiscount').prop('checked');
+        IsRefundable = $('#CheckBoxIsRefundable').prop('checked');
+        IsSecurity = $('#CheckBoxIsSecurity').prop('checked');
+    }
+    var Remarks = $('#TextBoxRemarks').val();
     var FeeTypeGuID = $('#HiddenFieldFeeTypeGuID').val();
 
     var JsonArg = {
         GuID: FeeTypeGuID,
         OperationType: OperationType,
         Description: Description,
+        FeeCategoryId: FeeCategoryId,
+        ChargingMethodId: ChargingMethodId,
+        IsOnAdmission: IsOnAdmission,
+        IsSecurity: IsSecurity,
+        IsRefundable: IsRefundable,
+        IsDiscount: IsDiscount,
+        RevenueAccountId: RevenueAccountId,
+        AssetAccountId: AssetAccountId,
+        LiabilityAccountId: LiabilityAccountId,
+        CostOfSaleAccountId: CostOfSaleAccountId,
         Remarks: Remarks,
     };
     $.ajax({
         type: "POST",
-        url: BasePath + "/AAccount/CAccountDiscountTypeManagmentUI/UpSert_Into_AFTM_FeeType",
+        url: BasePath + "/AAccount/CAccountFeeTypeManagmentUI/UpSert_Into_AFTM_FeeType",
         dataType: 'json',
         data: { 'PostedData': (JsonArg) },
         beforeSend: function () {
@@ -116,13 +451,13 @@ function ClearInputFields() {
     $('form').removeClass('Is-Valid');
 }
 
-/*----------------------------------** FUNCTION FOR:: UPDATE CHARTOFACCOUNT (LOAD DROPDOWN,DATA FOR DISCOUNTTYPEID)         **----------------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: UPDATE FEETYPE (LOAD DROPDOWN,DATA FOR FEETYPEID)                     **----------------------------------------------*/
 $('#ButtonSubmitGetInfoForEdit').click(function () {
     if ($('#DropDownListFeeType').RequiredDropdown() == false) {
         return false;
     }
     else {
-        GET_AFTM_FEETYPE_LISTBYPARAM();
+        GET_AFTM_FEETYPE_INFOBYGUID();
     }
 });
 function GET_AFTM_FEETYPE_LISTBYPARAM() {
@@ -138,7 +473,7 @@ function GET_AFTM_FEETYPE_LISTBYPARAM() {
                 return {
                     PostedData: {
                         SearchParameter: params.term,
-                        DB_IF_PARAM: DOCUMENT_LIST_CONDITION.ADTM_DISCOUNTTYPE_BY_COMPANYID_SEARCH_PARAMETER_UPDATEDISCOUNTTYPE,
+                        DB_IF_PARAM: DOCUMENT_LIST_CONDITION.AFTM_FEETYPE_BY_COMPANYID_SEARCH_PARAMETER_UPDATEFEETYPE,
                     }
                 };
             },
@@ -180,6 +515,16 @@ function GET_AFTM_FEETYPE_INFOBYGUID() {
                 if (data.length > 0) {
                     /*-- LOAD DATA FOR FIELDS RENDERED :: ON LOAD/STATIC --*/
                     $('#TextBoxDescription').val(data[0].Description);
+                    $('#DropDownListFeeCategory').val(data[0].FeeCategoryId).trigger('change.select2');
+                    $('#DropDownListChargingMethod').val(data[0].ChargingMethodId).trigger('change.select2');
+                    $("#CheckBoxIsOnAdmission").prop('checked', (data[0].IsOnAdmission)).change();
+                    $("#CheckBoxIsSecurity").prop('checked', (data[0].IsSecurity)).change();
+                    $("#CheckBoxIsRefundable").prop('checked', (data[0].IsRefundable)).change();
+                    $("#CheckBoxIsDiscount").prop('checked', (data[0].IsDiscount)).change();
+                    $("#DropDownListRevenueAccount").val(data[0].RevenueAccountId).trigger('change.select2');
+                    $("#DropDownListAssetAccount").val(data[0].AssetAccountId).trigger('change.select2');
+                    $("#DropDownListLiabilityAccount").val(data[0].LiabilityAccountId).trigger('change.select2');
+                    $("#DropDownListCostOfSaleAccount").val(data[0].CostOfSaleAccountId).trigger('change.select2');
                     $('#TextBoxRemarks').val(data[0].Remarks).prop('disabled', true);
                     $('#HiddenFieldFeeTypeGuID').val(data[0].GuID);
                     /*-- LOAD DATA FOR FIELDS RENDERED :: ON CHANGE --*/

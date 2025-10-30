@@ -63,10 +63,146 @@
                         </div>
                     </div>
                 </div>
+                <div class="row mb-0">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Fee Category", new { @class = "col-form-label", @for = "DropDownListFeeCategory" })
+                            @Html.DropDownList("DropDownListFeeCategory", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListFeeCategory" })
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Charging Method", new { @class = "col-form-label", @for = "DropDownListChargingMethod" })
+                            @Html.DropDownList("DropDownListChargingMethod", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListChargingMethod" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-0">
+                    <div class="col-sm-12 col-md-3" id="DivCheckBoxIsOnAdmission">
+                        <div class="form-group">
+                            @Html.Label("On Admission", new { @class = "col-form-label", @for = "CheckBoxIsOnAdmission" })
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <div class="n-chk align-self-end">
+                                            <label class="new-control new-checkbox checkbox-danger" style="height: 21px; margin-bottom: 0; margin-right: 0">
+                                                @Html.CheckBox("CheckBoxIsOnAdmission", false, new { @class = "new-control-input CheckBox", @id = "CheckBoxIsOnAdmission" })
+                                                <span class="new-control-indicator"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-3">
+                        <div class="form-group">
+                            @Html.Label("Is Security", new { @class = "col-form-label", @for = "CheckBoxIsSecurity" })
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <div class="n-chk align-self-end">
+                                            <label class="new-control new-checkbox checkbox-danger" style="height: 21px; margin-bottom: 0; margin-right: 0">
+                                                @Html.CheckBox("CheckBoxIsSecurity", false, new { @class = "new-control-input CheckBox", @id = "CheckBoxIsSecurity" })
+                                                <span class="new-control-indicator"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                        <div class="form-group">
+                            @Html.Label("Is Refundable", new { @class = "col-form-label", @for = "CheckBoxIsRefundable" })
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <div class="n-chk align-self-end">
+                                            <label class="new-control new-checkbox checkbox-danger" style="height: 21px; margin-bottom: 0; margin-right: 0">
+                                                @Html.CheckBox("CheckBoxIsRefundable", false, new { @class = "new-control-input CheckBox", @id = "CheckBoxIsRefundable" })
+                                                <span class="new-control-indicator"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                        <div class="form-group">
+                            @Html.Label("Is Discount", new { @class = "col-form-label", @for = "CheckBoxIsDiscount" })
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <div class="n-chk align-self-end">
+                                            <label class="new-control new-checkbox checkbox-danger" style="height: 21px; margin-bottom: 0; margin-right: 0">
+                                                @Html.CheckBox("CheckBoxIsDiscount", false, new { @class = "new-control-input CheckBox", @id = "CheckBoxIsDiscount" })
+                                                <span class="new-control-indicator"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-0" id="DivOtherFeeChartOfAccount" style="display:none">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Revenue Account", new { @class = "col-form-label", @for = "DropDownListRevenueAccount" })
+                            @Html.DropDownList("DropDownListRevenueAccount", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListRevenueAccount" })
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Asset Account", new { @class = "col-form-label", @for = "DropDownListAssetAccount" })
+                            @Html.DropDownList("DropDownListAssetAccount", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListAssetAccount" })
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Liability Account", new { @class = "col-form-label", @for = "DropDownListLiabilityAccount" })
+                            @Html.DropDownList("DropDownListLiabilityAccount", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListLiabilityAccount" })
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Cost Of Sale Account", new { @class = "col-form-label", @for = "DropDownListCostOfSaleAccount" })
+                            @Html.DropDownList("DropDownListCostOfSaleAccount", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListCostOfSaleAccount" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-0">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Remarks", new { @class = "col-form-label", @for = "TextBoxRemarks" })
+                            @Html.TextBox("TextBoxRemarks", null, new { @class = "form-control", placeholder = "Please Enter Remarks Here!", @id = "TextBoxRemarks" })
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </form>
-
+    @Html.TextBox("HiddenFieldFeeTypeGuID", null, new { @class = "form-control", Value = ViewBag.AdmissionSessionGuIDGuID, hidden = true, @id = "HiddenFieldFeeTypeGuID" })
+    @Html.TextBox("HiddenFieldDB_OperationType", null, new { @class = "form-control", Value = ViewBag.DB_OperationType, hidden = true, @id = "HiddenFieldDB_OperationType" })
+    <div class="card-footer">
+        <div class="col-sm-12 form-group">
+            <div class="card-heading" id="DivButtonSubmitDown" style="display:none">
+                <input type="button" class="btn btn-info" id="ButtonSubmitDown" value="Sumbit" />
+                <i class="fa fa-arrow-up"></i>
+            </div>
+            <div class="card-heading" id="DivButtonUpdateDown" style="display:none">
+                <input type="button" class="btn btn-warning" id="ButtonUpdateDown" value="Update" />
+                <i class="fa fa-arrow-up"></i>
+            </div>
+        </div>
+    </div>
 }
 
 

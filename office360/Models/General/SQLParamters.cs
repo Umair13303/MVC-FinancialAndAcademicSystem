@@ -23,6 +23,8 @@ namespace office360.Models.General
         public bool? IsSemesterRequired { get; set; }
         public bool? IsByPercentage { get; set; }
         public bool? IsByAmount { get; set; }
+        public bool? IsOtherFee { get; set; }
+        public bool? IsRecurring { get; set; }
 
         public DateTime? AdmissionStartDate { get; set; }
         public DateTime? AdmissionEndDate { get; set; }

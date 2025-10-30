@@ -227,8 +227,7 @@ namespace office360.GlobalHelper.LookUp
             using (FASEntities db = new FASEntities())
             {
                 var DATA = db.FeeCatagory
-                      .Where(X => X.Status == true)
-                      .Select(x => new SQLParamters { Id = x.Id, Description = x.Description })
+                      .Select(x => new SQLParamters { Id = x.Id, Description = x.Description, IsOtherFee = x.IsOtherFee })
                       .ToList();
 
                 return DATA;
@@ -239,7 +238,7 @@ namespace office360.GlobalHelper.LookUp
             using (FASEntities db = new FASEntities())
             {
                 var DATA = db.ChargingMethod
-                      .Select(x => new SQLParamters { Id = x.Id, Description = x.Description })
+                      .Select(x => new SQLParamters { Id = x.Id, Description = x.Description, IsRecurring = x.IsRecurring })
                       .ToList();
 
                 return DATA;

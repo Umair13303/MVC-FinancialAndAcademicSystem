@@ -61,9 +61,9 @@ namespace office360.Areas.AAccount.Controllers
         }
         #endregion
 
-        /*---------------------- ** ACTION RESULTS FOR :: RENDER DATA FOR DROP DOWN LIST FROM DB_LOOKUP USING LINQUERY ** --------------------------- */
+        /*---------------------- ** ACTION RESULTS FOR :: RENDER OF DROP DOWN LIST FROM DB_MAIN USING STOREDPROCEDURE ** ---------------------- */
 
-        #region ACTION RESULT FOR :: RENDER DATA FOR DROP DOWN FROM DB_LOOKUP -- LINQ-QUERY
+        #region ACTION RESULT FOR :: RENDER DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
         public ActionResult GET_MT_ACOAM_COSTOFSALEACCOUNT_BYPARAMTER(SQLParamters PostedData)
         {
             PostedData.AccountTypeId = (int?)CHART_OF_ACCOUNT_TYPE.COST_OF_SALES;

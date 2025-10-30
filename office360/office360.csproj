@@ -418,6 +418,12 @@
     <Compile Include="Models\EDMX\ADTM_DiscountType_GetListBySearch_Result.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EDMX\AFTM_FeeType.cs">
+      <DependentUpon>FASModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDMX\AFTM_FeeType_GetListByParam_Result.cs">
+      <DependentUpon>FASModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EDMX\ASM_Subject.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>

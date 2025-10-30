@@ -33,18 +33,23 @@ class CONVERSION {
     }
     static TO_DISPLAY_DATE(ServerSideDate, Format) {
         if (!ServerSideDate) return "";
-
-        // Extract timestamp if .NET format
         let jsDate;
         if (/\/Date\((\d+)\)\//.test(ServerSideDate)) {
             jsDate = new Date(parseInt(ServerSideDate.match(/\d+/)[0], 10));
         } else {
             jsDate = new Date(ServerSideDate);
         }
-
         if (isNaN(jsDate)) return "";
-
-        // Use Flatpickr’s internal formatter
         return flatpickr.formatDate(jsDate, Format);
     }
+    static TO_BOOL(Value) {
+        if (Value == null) return false;
+        const str = String(Value).toLowerCase().trim();
+        const TruthValue = ["1", "true", "on", "yes"];
+        const FalseValue = ["0", "false", "off", "no"];
+        if (TruthValue.indexOf(str) >= 0) return true;
+        if (FalseValue.indexOf(str) >= 0) return false;
+        return Boolean(Value);
+    }
+
 }

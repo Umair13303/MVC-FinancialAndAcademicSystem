@@ -10,12 +10,11 @@
 namespace office360.Models.EDMX
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class FeeCatagory
+    public partial class AFTM_FeeType_GetListByParam_Result
     {
         public int Id { get; set; }
+        public Nullable<System.Guid> GuID { get; set; }
         public string Description { get; set; }
-        public Nullable<bool> IsOtherFee { get; set; }
     }
 }

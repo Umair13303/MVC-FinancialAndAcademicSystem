@@ -34,6 +34,7 @@ namespace office360.Models.EDMX
         public virtual DbSet<ACM_Class> ACM_Class { get; set; }
         public virtual DbSet<ACOAM_ChartOfAccount> ACOAM_ChartOfAccount { get; set; }
         public virtual DbSet<ADTM_DiscountType> ADTM_DiscountType { get; set; }
+        public virtual DbSet<AFTM_FeeType> AFTM_FeeType { get; set; }
         public virtual DbSet<ASM_Subject> ASM_Subject { get; set; }
         public virtual DbSet<BM_Branch> BM_Branch { get; set; }
         public virtual DbSet<CM_Company> CM_Company { get; set; }
@@ -738,6 +739,128 @@ namespace office360.Models.EDMX
                 new ObjectParameter("Remarks", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADTM_DiscountType_Upsert", dB_OperationTypeParameter, guIDParameter, descriptionParameter, costOfSaleAccountIdParameter, isByPercentageParameter, discountPercentageParameter, isByAmountParameter, discountAmountParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, remarksParameter, response);
+        }
+    
+        public virtual ObjectResult<AFTM_FeeType_GetListByParam_Result> AFTM_FeeType_GetListByParam(string dB_IF_PARAM, Nullable<int> sessionCompanyId, Nullable<int> sessionBranchId, string searchParameter, Nullable<int> companyId)
+        {
+            var dB_IF_PARAMParameter = dB_IF_PARAM != null ?
+                new ObjectParameter("DB_IF_PARAM", dB_IF_PARAM) :
+                new ObjectParameter("DB_IF_PARAM", typeof(string));
+    
+            var sessionCompanyIdParameter = sessionCompanyId.HasValue ?
+                new ObjectParameter("SessionCompanyId", sessionCompanyId) :
+                new ObjectParameter("SessionCompanyId", typeof(int));
+    
+            var sessionBranchIdParameter = sessionBranchId.HasValue ?
+                new ObjectParameter("SessionBranchId", sessionBranchId) :
+                new ObjectParameter("SessionBranchId", typeof(int));
+    
+            var searchParameterParameter = searchParameter != null ?
+                new ObjectParameter("SearchParameter", searchParameter) :
+                new ObjectParameter("SearchParameter", typeof(string));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AFTM_FeeType_GetListByParam_Result>("AFTM_FeeType_GetListByParam", dB_IF_PARAMParameter, sessionCompanyIdParameter, sessionBranchIdParameter, searchParameterParameter, companyIdParameter);
+        }
+    
+        public virtual int AFTM_FeeType_Upsert(string dB_OperationType, Nullable<System.Guid> guID, string description, Nullable<int> feeCategoryId, Nullable<int> chargingMethodId, Nullable<bool> isOnAdmission, Nullable<bool> isSecurity, Nullable<bool> isRefundable, Nullable<bool> isDiscount, Nullable<int> revenueAccountId, Nullable<int> assetAccountId, Nullable<int> liabilityAccountId, Nullable<int> costOfSaleAccountId, Nullable<System.DateTime> createdOn, Nullable<int> createdBy, Nullable<System.DateTime> updatedOn, Nullable<int> updatedBy, Nullable<int> docType, Nullable<int> documentStatus, Nullable<bool> status, Nullable<int> branchId, Nullable<int> companyId, string remarks, ObjectParameter response)
+        {
+            var dB_OperationTypeParameter = dB_OperationType != null ?
+                new ObjectParameter("DB_OperationType", dB_OperationType) :
+                new ObjectParameter("DB_OperationType", typeof(string));
+    
+            var guIDParameter = guID.HasValue ?
+                new ObjectParameter("GuID", guID) :
+                new ObjectParameter("GuID", typeof(System.Guid));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var feeCategoryIdParameter = feeCategoryId.HasValue ?
+                new ObjectParameter("FeeCategoryId", feeCategoryId) :
+                new ObjectParameter("FeeCategoryId", typeof(int));
+    
+            var chargingMethodIdParameter = chargingMethodId.HasValue ?
+                new ObjectParameter("ChargingMethodId", chargingMethodId) :
+                new ObjectParameter("ChargingMethodId", typeof(int));
+    
+            var isOnAdmissionParameter = isOnAdmission.HasValue ?
+                new ObjectParameter("IsOnAdmission", isOnAdmission) :
+                new ObjectParameter("IsOnAdmission", typeof(bool));
+    
+            var isSecurityParameter = isSecurity.HasValue ?
+                new ObjectParameter("IsSecurity", isSecurity) :
+                new ObjectParameter("IsSecurity", typeof(bool));
+    
+            var isRefundableParameter = isRefundable.HasValue ?
+                new ObjectParameter("IsRefundable", isRefundable) :
+                new ObjectParameter("IsRefundable", typeof(bool));
+    
+            var isDiscountParameter = isDiscount.HasValue ?
+                new ObjectParameter("IsDiscount", isDiscount) :
+                new ObjectParameter("IsDiscount", typeof(bool));
+    
+            var revenueAccountIdParameter = revenueAccountId.HasValue ?
+                new ObjectParameter("RevenueAccountId", revenueAccountId) :
+                new ObjectParameter("RevenueAccountId", typeof(int));
+    
+            var assetAccountIdParameter = assetAccountId.HasValue ?
+                new ObjectParameter("AssetAccountId", assetAccountId) :
+                new ObjectParameter("AssetAccountId", typeof(int));
+    
+            var liabilityAccountIdParameter = liabilityAccountId.HasValue ?
+                new ObjectParameter("LiabilityAccountId", liabilityAccountId) :
+                new ObjectParameter("LiabilityAccountId", typeof(int));
+    
+            var costOfSaleAccountIdParameter = costOfSaleAccountId.HasValue ?
+                new ObjectParameter("CostOfSaleAccountId", costOfSaleAccountId) :
+                new ObjectParameter("CostOfSaleAccountId", typeof(int));
+    
+            var createdOnParameter = createdOn.HasValue ?
+                new ObjectParameter("CreatedOn", createdOn) :
+                new ObjectParameter("CreatedOn", typeof(System.DateTime));
+    
+            var createdByParameter = createdBy.HasValue ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
+    
+            var updatedOnParameter = updatedOn.HasValue ?
+                new ObjectParameter("UpdatedOn", updatedOn) :
+                new ObjectParameter("UpdatedOn", typeof(System.DateTime));
+    
+            var updatedByParameter = updatedBy.HasValue ?
+                new ObjectParameter("UpdatedBy", updatedBy) :
+                new ObjectParameter("UpdatedBy", typeof(int));
+    
+            var docTypeParameter = docType.HasValue ?
+                new ObjectParameter("DocType", docType) :
+                new ObjectParameter("DocType", typeof(int));
+    
+            var documentStatusParameter = documentStatus.HasValue ?
+                new ObjectParameter("DocumentStatus", documentStatus) :
+                new ObjectParameter("DocumentStatus", typeof(int));
+    
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(bool));
+    
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(int));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var remarksParameter = remarks != null ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AFTM_FeeType_Upsert", dB_OperationTypeParameter, guIDParameter, descriptionParameter, feeCategoryIdParameter, chargingMethodIdParameter, isOnAdmissionParameter, isSecurityParameter, isRefundableParameter, isDiscountParameter, revenueAccountIdParameter, assetAccountIdParameter, liabilityAccountIdParameter, costOfSaleAccountIdParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, remarksParameter, response);
         }
     
         public virtual ObjectResult<ASM_Subject_GetListByParam_Result> ASM_Subject_GetListByParam(string dB_IF_PARAM, Nullable<int> sessionCompanyId, Nullable<int> sessionBranchId, string searchParameter, Nullable<int> companyId)

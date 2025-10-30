@@ -56,7 +56,7 @@ namespace REP.Controllers
                     case (int?)Http_DB_Response.CODE_DATA_DOES_NOT_EXIST:
                         return RedirectToAction(_ActionsURL.LogIn, _Controller.Home);
                     default:
-                        return RedirectToAction(_ActionsURL.LogIn, _Controller.Home);
+                        return RedirectToAction(_ActionsURL.LogIn, _Controller.Home); 
                 }
             }
             else

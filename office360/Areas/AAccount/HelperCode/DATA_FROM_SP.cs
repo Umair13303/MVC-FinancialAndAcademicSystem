@@ -97,6 +97,46 @@ namespace office360.Areas.AAccount.HelperCode
 
         #endregion
 
+        #region DBO:- AFTM_FEETYPE
+
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB -- DBO:- AFTM_FEETYPE
+        public static List<AFTM_FeeType_GetListByParam_Result> GET_MT_AFTM_FeeType_By_Param_List(SQLParamters PostedData)
+        {
+            List<AFTM_FeeType_GetListByParam_Result> DATA = new List<AFTM_FeeType_GetListByParam_Result>();
+            using (FASEntities db = new FASEntities())
+            {
+                DATA = db.AFTM_FeeType_GetListByParam(
+                                                       PostedData.DB_IF_PARAM,
+                                                       Session_Manager.CompanyId,
+                                                       Session_Manager.BranchId,
+                                                       PostedData.SearchParameter,
+                                                       PostedData.CompanyId
+                                                       ).ToList();
+
+                return DATA;
+            }
+        }
+        #endregion
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB
+        public static List<ADTM_DiscountType_GetListBySearch_Result> GET_MT_AFTM_FeeType_List_By_SearchQuery(SQLParamters PostedData)
+        {
+            List<ADTM_DiscountType_GetListBySearch_Result> DATA = new List<ADTM_DiscountType_GetListBySearch_Result>();
+            using (var db = new FASEntities())
+            {
+                DATA = db.ADTM_DiscountType_GetListBySearch(
+                                                        Session_Manager.CompanyId,
+                                                        Session_Manager.BranchId,
+                                                        PostedData.SearchById,
+                                                        PostedData.InputText
+                                                        ).ToList();
+            }
+            return DATA;
+
+        }
+        #endregion
+
+        #endregion
+
     }
 
 }
