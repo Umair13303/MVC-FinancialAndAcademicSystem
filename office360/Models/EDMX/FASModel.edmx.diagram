@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3855dd2dc30f41b88bad216871203661" Name="Diagram1">
+      <Diagram DiagramId="b90449356a2a42228e504ea971aa1238" Name="Diagram1">
         <EntityTypeShape EntityType="FASModel.AASM_AdmissionSession" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FASModel.AASM_AdmissionSessionClass" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FASModel.ACCM_ClassCurriculum" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />

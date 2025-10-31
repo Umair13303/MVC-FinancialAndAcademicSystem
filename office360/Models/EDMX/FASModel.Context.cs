@@ -766,6 +766,27 @@ namespace office360.Models.EDMX
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AFTM_FeeType_GetListByParam_Result>("AFTM_FeeType_GetListByParam", dB_IF_PARAMParameter, sessionCompanyIdParameter, sessionBranchIdParameter, searchParameterParameter, companyIdParameter);
         }
     
+        public virtual ObjectResult<AFTM_FeeType_GetListBySearch_Result> AFTM_FeeType_GetListBySearch(Nullable<int> companyId, Nullable<int> branchId, Nullable<int> inputTypeId, string inputText)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(int));
+    
+            var inputTypeIdParameter = inputTypeId.HasValue ?
+                new ObjectParameter("InputTypeId", inputTypeId) :
+                new ObjectParameter("InputTypeId", typeof(int));
+    
+            var inputTextParameter = inputText != null ?
+                new ObjectParameter("InputText", inputText) :
+                new ObjectParameter("InputText", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AFTM_FeeType_GetListBySearch_Result>("AFTM_FeeType_GetListBySearch", companyIdParameter, branchIdParameter, inputTypeIdParameter, inputTextParameter);
+        }
+    
         public virtual int AFTM_FeeType_Upsert(string dB_OperationType, Nullable<System.Guid> guID, string description, Nullable<int> feeCategoryId, Nullable<int> chargingMethodId, Nullable<bool> isOnAdmission, Nullable<bool> isSecurity, Nullable<bool> isRefundable, Nullable<bool> isDiscount, Nullable<int> revenueAccountId, Nullable<int> assetAccountId, Nullable<int> liabilityAccountId, Nullable<int> costOfSaleAccountId, Nullable<System.DateTime> createdOn, Nullable<int> createdBy, Nullable<System.DateTime> updatedOn, Nullable<int> updatedBy, Nullable<int> docType, Nullable<int> documentStatus, Nullable<bool> status, Nullable<int> branchId, Nullable<int> companyId, string remarks, ObjectParameter response)
         {
             var dB_OperationTypeParameter = dB_OperationType != null ?

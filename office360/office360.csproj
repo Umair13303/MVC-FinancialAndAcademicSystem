@@ -424,6 +424,9 @@
     <Compile Include="Models\EDMX\AFTM_FeeType_GetListByParam_Result.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EDMX\AFTM_FeeType_GetListBySearch_Result.cs">
+      <DependentUpon>FASModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EDMX\ASM_Subject.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
@@ -633,6 +636,7 @@
     <Content Include="Areas\AAccount\Script\CAccountDiscountTypeManagmentUI_Script\CreateUpdate_ADTMUI_DiscountType.js" />
     <Content Include="Areas\AAccount\Script\CAccountDiscountTypeManagmentUI_Script\View_List_ADTMUI_DiscountType.js" />
     <Content Include="Areas\AAccount\Script\CAccountFeeTypeManagmentUI_Script\CreateUpdate_AFTMUI_FeeType.js" />
+    <Content Include="Areas\AAccount\Script\CAccountFeeTypeManagmentUI_Script\View_List_AFTMUI_FeeType.js" />
     <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\CreateUpdate_CBMUI_Branch.js" />
     <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\View_List_CBMUI_Branch.js" />
     <Content Include="Areas\ACompany\Script\CCompanyManagmentUI_Script\CreateUpdate_CMUI_Company.js" />
@@ -2112,6 +2116,7 @@
     <Content Include="Areas\AAccount\Views\CAccountDiscountTypeManagmentUI\CreateUpdate_ADTMUI_DiscountType.cshtml" />
     <Content Include="Areas\AAccount\Views\CAccountDiscountTypeManagmentUI\View_List_ADTMUI_DiscountType.cshtml" />
     <Content Include="Areas\AAccount\Views\CAccountFeeTypeManagmentUI\CreateUpdate_AFTMUI_FeeType.cshtml" />
+    <Content Include="Areas\AAccount\Views\CAccountFeeTypeManagmentUI\View_List_AFTMUI_FeeType.cshtml" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>

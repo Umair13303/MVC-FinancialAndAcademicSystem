@@ -76,25 +76,26 @@ namespace office360.Areas.AAccount.HelperCode
             using (FASEntities db = new FASEntities())
             {
                 DATA = ((List<SQLParamters>)
-                       (from COA in db.AFTM_FeeType
-                        where COA.CompanyId == Session_Manager.CompanyId && COA.GuID == PostedData.GuID
+                       (from FT in db.AFTM_FeeType
+                        where FT.CompanyId == Session_Manager.CompanyId && FT.GuID == PostedData.GuID
                         select new SQLParamters
                         {
-                            Id = COA.Id,
-                            GuID = COA.GuID,
-                            Code = COA.Code,
-                            Description = COA.Description,
-                            FeeCategoryId = COA.FeeCategoryId,
-                            ChargingMethodId = COA.ChargingMethodId,
-                            IsOnAdmission = COA.IsOnAdmission,
-                            IsSecurity = COA.IsSecurity,
-                            IsRefundable = COA.IsRefundable,
-                            IsDiscount = COA.IsDiscount,
-                            RevenueAccountId = COA.RevenueAccountId,
-                            AssetAccountId = COA.AssetAccountId,
-                            LiabilityAccountId = COA.LiabilityAccountId,
-                            CostOfSaleAccountId = COA.CostOfSaleAccountId,
-                            Remarks = COA.Remarks,
+                            Id = FT.Id,
+                            GuID = FT.GuID,
+                            Code = FT.Code,
+                            Description = FT.Description,
+                            FeeCategoryId = FT.FeeCategoryId,
+                            IsOtherFee = db.FeeCatagory.Where(FC => FC.Id == FT.FeeCategoryId).Select(FC => FC.IsOtherFee).FirstOrDefault(),
+                            ChargingMethodId = FT.ChargingMethodId,
+                            IsOnAdmission = FT.IsOnAdmission,
+                            IsSecurity = FT.IsSecurity,
+                            IsRefundable = FT.IsRefundable,
+                            IsDiscount = FT.IsDiscount,
+                            RevenueAccountId = FT.RevenueAccountId,
+                            AssetAccountId = FT.AssetAccountId,
+                            LiabilityAccountId = FT.LiabilityAccountId,
+                            CostOfSaleAccountId = FT.CostOfSaleAccountId,
+                            Remarks = FT.Remarks,
 
                         }).ToList());
 

@@ -521,10 +521,13 @@ function GET_AFTM_FEETYPE_INFOBYGUID() {
                     $("#CheckBoxIsSecurity").prop('checked', (data[0].IsSecurity)).change();
                     $("#CheckBoxIsRefundable").prop('checked', (data[0].IsRefundable)).change();
                     $("#CheckBoxIsDiscount").prop('checked', (data[0].IsDiscount)).change();
-                    $("#DropDownListRevenueAccount").val(data[0].RevenueAccountId).trigger('change.select2');
-                    $("#DropDownListAssetAccount").val(data[0].AssetAccountId).trigger('change.select2');
-                    $("#DropDownListLiabilityAccount").val(data[0].LiabilityAccountId).trigger('change.select2');
-                    $("#DropDownListCostOfSaleAccount").val(data[0].CostOfSaleAccountId).trigger('change.select2');
+                    if (data[0].IsOtherFee == true) {
+                        $("#DivOtherFeeChartOfAccount").show();
+                        $("#DropDownListRevenueAccount").val(data[0].RevenueAccountId).trigger('change.select2');
+                        $("#DropDownListAssetAccount").val(data[0].AssetAccountId).trigger('change.select2');
+                        $("#DropDownListLiabilityAccount").val(data[0].LiabilityAccountId).trigger('change.select2');
+                        $("#DropDownListCostOfSaleAccount").val(data[0].CostOfSaleAccountId).trigger('change.select2');
+                    }
                     $('#TextBoxRemarks').val(data[0].Remarks).prop('disabled', true);
                     $('#HiddenFieldFeeTypeGuID').val(data[0].GuID);
                     /*-- LOAD DATA FOR FIELDS RENDERED :: ON CHANGE --*/

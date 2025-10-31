@@ -318,6 +318,36 @@ function GetStatus(Status) {
             Display = "Deleted Chart of Account";
             break;
 
+        case 39:
+            BadgeColor = "primary";
+            Display = "Active Discount Type";
+            break;
+
+        case 40:
+            BadgeColor = "secondary";
+            Display = "Inactive Discount Type";
+            break;
+
+        case 41:
+            BadgeColor = "danger";
+            Display = "Deleted Discount Type";
+            break;
+
+        case 42:
+            BadgeColor = "primary";
+            Display = "Active Fee Type";
+            break;
+
+        case 43:
+            BadgeColor = "secondary";
+            Display = "Inactive Fee Type";
+            break;
+
+        case 44:
+            BadgeColor = "danger";
+            Display = "Deleted Fee Type";
+            break;
+
         default:
             BadgeColor = "light";
             Display = "Unknown Status";

@@ -118,12 +118,12 @@ namespace office360.Areas.AAccount.HelperCode
         }
         #endregion
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB
-        public static List<ADTM_DiscountType_GetListBySearch_Result> GET_MT_AFTM_FeeType_List_By_SearchQuery(SQLParamters PostedData)
+        public static List<AFTM_FeeType_GetListBySearch_Result> GET_MT_AFTM_FeeType_List_By_SearchQuery(SQLParamters PostedData)
         {
-            List<ADTM_DiscountType_GetListBySearch_Result> DATA = new List<ADTM_DiscountType_GetListBySearch_Result>();
+            List<AFTM_FeeType_GetListBySearch_Result> DATA = new List<AFTM_FeeType_GetListBySearch_Result>();
             using (var db = new FASEntities())
             {
-                DATA = db.ADTM_DiscountType_GetListBySearch(
+                DATA = db.AFTM_FeeType_GetListBySearch(
                                                         Session_Manager.CompanyId,
                                                         Session_Manager.BranchId,
                                                         PostedData.SearchById,
