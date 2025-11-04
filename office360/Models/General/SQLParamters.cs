@@ -207,6 +207,7 @@ namespace office360.Models.General
         public string AllowedCampusIds { get; set; }
         public string Semester { get; set; }
         public string Subject { get; set; }
+        public string FeeCategoryIds { get; set; }
 
 
         public static explicit operator List<object>(SQLParamters v)

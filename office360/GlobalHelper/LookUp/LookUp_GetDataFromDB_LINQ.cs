@@ -449,6 +449,22 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
+
+        public static List<SQLParamters> GET_LK1_WHTaxPolicy_List(SQLParamters PostedData)
+        {
+            using (FASEntities db = new FASEntities())
+            {
+                var DATA = db.WHTaxPolicy
+                        .Select(x => new SQLParamters
+                        {
+                            Id = x.Id,
+                            Description = x.Description,
+                        })
+                         .ToList();
+
+                return DATA;
+            }
+        }
         #endregion
 
     }

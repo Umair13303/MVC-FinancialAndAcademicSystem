@@ -302,6 +302,7 @@
     <Compile Include="Areas\AAccount\AAccountAreaRegistration.cs" />
     <Compile Include="Areas\AAccount\Controllers\CAccountCOAManagmentUIController.cs" />
     <Compile Include="Areas\AAccount\Controllers\CAccountDiscountTypeManagmentUIController.cs" />
+    <Compile Include="Areas\AAccount\Controllers\CAccountFeeStructureManagmentUIController.cs" />
     <Compile Include="Areas\AAccount\Controllers\CAccountFeeTypeManagmentUIController.cs" />
     <Compile Include="Areas\AAccount\HelperCode\BULK_CUD_Operation.cs" />
     <Compile Include="Areas\AAccount\HelperCode\Check_Duplicate_By_LINQ.cs" />
@@ -631,10 +632,11 @@
     <Content Include="Areas\AAcademic\Script\CAcademicClassManagmentUI_Script\CreateUpdate_ACMUI_Class.js" />
     <Content Include="Areas\AAcademic\Script\CAcademicSubjectManagmentUI_Script\CreateUpdate_ASMUI_Subject.js" />
     <Content Include="Areas\AAcademic\Script\CAcademicSubjectManagmentUI_Script\View_List_ASMUI_Subject.js" />
-    <Content Include="Areas\AAccount\Script\CAccountCOAManagmentU_Script\CreateUpdate_ACOAMUI_ChartofAccount.js" />
-    <Content Include="Areas\AAccount\Script\CAccountCOAManagmentU_Script\View_List_ACOAMUI_ChartofAccount.js" />
+    <Content Include="Areas\AAccount\Script\CAccountCOAManagmentUI_Script\CreateUpdate_ACOAMUI_ChartofAccount.js" />
+    <Content Include="Areas\AAccount\Script\CAccountCOAManagmentUI_Script\View_List_ACOAMUI_ChartofAccount.js" />
     <Content Include="Areas\AAccount\Script\CAccountDiscountTypeManagmentUI_Script\CreateUpdate_ADTMUI_DiscountType.js" />
     <Content Include="Areas\AAccount\Script\CAccountDiscountTypeManagmentUI_Script\View_List_ADTMUI_DiscountType.js" />
+    <Content Include="Areas\AAccount\Script\CAccountFeeStructureManagmentUI_Script\CreateUpdate_AFSMUI_FeeStructure.js" />
     <Content Include="Areas\AAccount\Script\CAccountFeeTypeManagmentUI_Script\CreateUpdate_AFTMUI_FeeType.js" />
     <Content Include="Areas\AAccount\Script\CAccountFeeTypeManagmentUI_Script\View_List_AFTMUI_FeeType.js" />
     <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\CreateUpdate_CBMUI_Branch.js" />
@@ -2117,6 +2119,7 @@
     <Content Include="Areas\AAccount\Views\CAccountDiscountTypeManagmentUI\View_List_ADTMUI_DiscountType.cshtml" />
     <Content Include="Areas\AAccount\Views\CAccountFeeTypeManagmentUI\CreateUpdate_AFTMUI_FeeType.cshtml" />
     <Content Include="Areas\AAccount\Views\CAccountFeeTypeManagmentUI\View_List_AFTMUI_FeeType.cshtml" />
+    <Content Include="Areas\AAccount\Views\CAccountFeeStructureManagmentUI\CreateUpdate_AFSMUI_FeeStructure.cshtml" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>

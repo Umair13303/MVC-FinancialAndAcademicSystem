@@ -104,7 +104,7 @@ namespace office360.Areas.AAcademic.HelperCode
 
         #region DBO:- AASM_ADMISSIONSESSION
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB
-        public static List<AASM_AdmissionSession_GetListByParam_Result> GET_MT_AASM_ADMISSIONSESSION_BYPARAM(SQLParamters PostedData)
+        public static List<AASM_AdmissionSession_GetListByParam_Result> GET_MT_AASM_AdmissionSession_By_Param_List(SQLParamters PostedData)
         {
             List<AASM_AdmissionSession_GetListByParam_Result> DATA = new List<AASM_AdmissionSession_GetListByParam_Result>();
             using (FASEntities db = new FASEntities())
@@ -124,7 +124,7 @@ namespace office360.Areas.AAcademic.HelperCode
         #endregion
 
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB
-        public static List<AASM_AdmissionSession_GetListBySearch_Result> GET_MT_AASM_ADMISSIONSESSION_LIST_BY_SEARCHQUERY(SQLParamters PostedData)
+        public static List<AASM_AdmissionSession_GetListBySearch_Result> GET_MT_AASM_AdmissionSession_List_By_SearchQuery(SQLParamters PostedData)
         {
             List<AASM_AdmissionSession_GetListBySearch_Result> DATA = new List<AASM_AdmissionSession_GetListBySearch_Result>();
             using (var db = new FASEntities())
