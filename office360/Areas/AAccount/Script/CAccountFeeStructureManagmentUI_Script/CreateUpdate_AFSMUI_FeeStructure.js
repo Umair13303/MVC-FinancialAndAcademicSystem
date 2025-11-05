@@ -4,6 +4,9 @@ var DDL_Condition = "";
 var DB_OperationType = $('#HiddenFieldDB_OperationType').val();
 var IsFieldClear = false;
 
+var FeeStructureFeeTypeTable = "";
+
+
 /*----------------------------------** FUNCTION FOR::PAGE LOADER                                                            **----------------------------------------------*/
 $(document).ready(function () {
     DB_OperationType = $('#HiddenFieldDB_OperationType').val();
@@ -20,19 +23,33 @@ $(document).ready(function () {
     }
     PopulateDropDownLists();
     ChangeCase();
+    InitializeFeeStructureFeeTypeDataTable();
 });
 function PopulateDropDownLists() {
     PopulateMT_BM_Branch_ListByParam();
+    PopulateLK_ChallanMethod_List();
+    PopulateLK_WHTaxPolicy_List();
+    PopulateMT_AFTM_FeeType_ListByParam();
     PopulateMT_ACOAM_RevenueAccount_ListByParam();
     PopulateMT_ACOAM_AssetAccount_ListByParam();
     PopulateMT_ACOAM_LiabilityAccount_ListByParam();
     PopulateMT_ACOAM_CostOfSaleAccount_ListByParam();
-    PopulateLK_ChallanMethod_List();
-    PopulateLK_WHTaxPolicy_List();
 }
 
 /*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                                                     **----------------------------------------------*/
 function ChangeCase() {
+    $('#DropDownListCampus').change(function () {
+        var CampusId = $("#DropDownListCampus :selected").val();
+        var AdmissionSessionId = null;
+        PopulateMT_AASM_AdmissionSession_ListByParam(CampusId, AdmissionSessionId)
+    });
+    $('#DropDownListAdmissionSession').change(function () {
+        var CampusId = $("#DropDownListCampus :selected").val();
+        var AdmissionSessionId = $("#DropDownListAdmissionSession :selected").val();
+        var ClassId = null;
+        PopulateMT_ACM_Class_ListByParam(CampusId, AdmissionSessionId, ClassId)
+    });
+
     //-----------FOR ::EDIT CASE
     $('#DropDownListFeeStructure').change(function () {
         if (!IsFieldClear) {
@@ -42,163 +59,93 @@ function ChangeCase() {
         }
     });
 }
+/*----------------------------------** FUNCTION FOR::INITIALIZING DATA TABLE's & RELATED OPERATION's                         **----------------------------------------------*/
+function InitializeFeeStructureFeeTypeDataTable() {
+    FeeStructureFeeTypeTable = $('#MainTableAFSM_FeeStructureFeeType').DataTable({
+        "responsive": true,
+        "ordering": false,
+        "processing": true,
+        "paging": false,
+        "info": false,
+        "columns": [
+            { "title": "#", "orderable": false, },
+            { "title": "Fee Type" },
+            { "title": "Revenue A/C" },
+            { "title": "Asset A/C" },
+            { "title": "Liability A/C" },
+            { "title": "COS A/C" },
+            { "title": "FeeTypeId" },
+            { "title": "RevenueAccountId" },
+            { "title": "AssetAccountId" },
+            { "title": "LiabilityAccountId" },
+            { "title": "CostOfSaleAccountId" },
+            { "title": "Amount" },
+            { "title": "Action(s)" },
+        ],
+        columnDefs: [
+            { visible: false, targets: [6, 7, 8,9,10] },
+        ],
+        drawCallback: async function () {
+            $('.delete').off('click').on('click', function () {
+                $('#MainTableAFSM_FeeStructureFeeType').DataTable().row($(this).closest('tr')).remove().draw();
+            });
+        }
+    });
+    FeeStructureFeeTypeTable.on('order.dt search.dt', function () {
+        FeeStructureFeeTypeTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+        });
+    }).draw();
+}
+function ValidateInputFieldsFeeStructureFeeTypeDetail() {
+    return true;
+}
+$('#ButtonAddDataIntoTable').click(function (event) {
+    event.preventDefault();
+    var IS_VALID = ValidateInputFieldsFeeStructureFeeTypeDetail();
+    if (IS_VALID) {
+        try {
+            InsertDataIntoDataTable();
+        }
+        catch (err) {
+            GetMessageBox(err.message, 505);
+        }
+    }
+});
+function InsertDataIntoDataTable() {
+    var FeeType = $("#DropDownListFeeType :selected").text();
+    var RevenueAccount = $("#DropDownListRevenueAccount :selected").text();
+    var AssetAccount = $("#DropDownListAssetAccount :selected").text();
+    var LiabilityAccount = $("#DropDownListLiabilityAccount :selected").text();
+    var CostOfSaleAccount = $("#DropDownListCostOfSaleAccount :selected").text();
 
-/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON LOAD)            **----------------------------------------------*/
-function PopulateMT_BM_Branch_ListByParam() {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.BM_BRANCH_BY_ALLOWEDBRANCHIDS_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.BM_BRANCH_BY_ALLOWEDBRANCHIDS_FORUPDATERECORD;
-            break;
-    }
-    var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
-    }
-    $.ajax({
-        type: "POST",
-        url: BasePath + "/AAcademic/CAcademicClassManagmentUI/GET_MT_BM_BRANCH_BYPARAMTER",
-        data: { 'PostedData': (JsonArg) },
-        beforeSend: function () {
-            startLoading();
-        },
-        success: function (data) {
-            var List = '<option value="-1">Select an option</option>';
-            for (var i = 0; i < data.length; i++) {
-                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
-            }
-            $("#DropDownListCampus").html(List);
-        },
-        complete: function () {
-            stopLoading();
-        },
-    });
+    var FeeTypeId = $("#DropDownListFeeType :selected").val();
+    var RevenueAccountId = $("#DropDownListRevenueAccount :selected").val();
+    var AssetAccountId = $("#DropDownListAssetAccount :selected").val();
+    var LiabilityAccountId = $("#DropDownListLiabilityAccount :selected").val();
+    var CostOfSaleAccountId = $("#DropDownListCostOfSaleAccount :selected").val();
+
+    var Amount = $("#TextBoxAmount").val();
+
+    var Table_Row = [];
+    Table_Row[0] = "";
+    Table_Row[1] = FeeType;
+    Table_Row[2] = RevenueAccount;
+    Table_Row[3] = AssetAccount;
+    Table_Row[4] = LiabilityAccount;
+    Table_Row[5] = CostOfSaleAccount;
+    Table_Row[6] = FeeTypeId;
+    Table_Row[7] = RevenueAccountId;
+    Table_Row[8] = AssetAccountId;
+    Table_Row[9] = LiabilityAccountId;
+    Table_Row[10] = CostOfSaleAccountId;
+    Table_Row[11] = Amount;
+    Table_Row[12] = HTML_BUTTON.DELETE_IN_LIST();
+    FeeStructureFeeTypeTable.row.add(Table_Row).draw();
+
+    //ClearInputFieldsDataTable();
 }
-function PopulateMT_ACOAM_RevenueAccount_ListByParam() {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORUPDATERECORD;
-            break;
-    }
-    var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
-    }
-    $.ajax({
-        type: "POST",
-        url: BasePath + "/AAccount/CAccountFeeTypeManagmentUI/GET_MT_ACOAM_REVENUEACCOUNT_BYPARAMTER",
-        data: { 'PostedData': (JsonArg) },
-        beforeSend: function () {
-            startLoading();
-        },
-        success: function (data) {
-            var List = '<option value="-1">Select an option</option>';
-            for (var i = 0; i < data.length; i++) {
-                List += '<option value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
-            }
-            $("#DropDownListRevenueAccount").html(List);
-        },
-        complete: function () {
-            stopLoading();
-        },
-    });
-}
-function PopulateMT_ACOAM_AssetAccount_ListByParam() {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORUPDATERECORD;
-            break;
-    }
-    var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
-    }
-    $.ajax({
-        type: "POST",
-        url: BasePath + "/AAccount/CAccountFeeTypeManagmentUI/GET_MT_ACOAM_ASSETACCOUNT_BYPARAMTER",
-        data: { 'PostedData': (JsonArg) },
-        beforeSend: function () {
-            startLoading();
-        },
-        success: function (data) {
-            var List = '<option value="-1">Select an option</option>';
-            for (var i = 0; i < data.length; i++) {
-                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
-            }
-            $("#DropDownListAssetAccount").html(List);
-        },
-        complete: function () {
-            stopLoading();
-        },
-    });
-}
-function PopulateMT_ACOAM_LiabilityAccount_ListByParam() {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORUPDATERECORD;
-            break;
-    }
-    var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
-    }
-    $.ajax({
-        type: "POST",
-        url: BasePath + "/AAccount/CAccountFeeTypeManagmentUI/GET_MT_ACOAM_LIABILITYACCOUNT_BYPARAMTER",
-        data: { 'PostedData': (JsonArg) },
-        beforeSend: function () {
-            startLoading();
-        },
-        success: function (data) {
-            var List = '<option value="-1">Select an option</option>';
-            for (var i = 0; i < data.length; i++) {
-                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
-            }
-            $("#DropDownListLiabilityAccount").html(List);
-        },
-        complete: function () {
-            stopLoading();
-        },
-    });
-}
-function PopulateMT_ACOAM_CostOfSaleAccount_ListByParam() {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORUPDATERECORD;
-            break;
-    }
-    var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
-    }
-    $.ajax({
-        type: "POST",
-        url: BasePath + "/AAccount/CAccountFeeTypeManagmentUI/GET_MT_ACOAM_COSTOFSALEACCOUNT_BYPARAMTER",
-        data: { 'PostedData': (JsonArg) },
-        beforeSend: function () {
-            startLoading();
-        },
-        success: function (data) {
-            var List = '<option value="-1">Select an option</option>';
-            for (var i = 0; i < data.length; i++) {
-                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
-            }
-            $("#DropDownListCostOfSaleAccount").html(List);
-        },
-        complete: function () {
-            stopLoading();
-        },
-    });
-}
+
 
 /*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_LOOKUP-- LINQUERY (ON LOAD)                  **----------------------------------------------*/
 function PopulateLK_ChallanMethod_List() {
@@ -242,11 +189,262 @@ function PopulateLK_WHTaxPolicy_List() {
     });
 }
 
-/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- LINQUERY (ON CHANGE)                  **----------------------------------------------*/
+/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON LOAD)            **----------------------------------------------*/
+function PopulateMT_BM_Branch_ListByParam() {
+    switch (DB_OperationType) {
+        case DBOperation.INSERT:
+            DDL_Condition = MDB_LIST_CONDITION.BM_BRANCH_BY_ALLOWEDBRANCHIDS_FORNEWINSERT;
+            break;
+        case DBOperation.UPDATE:
+            DDL_Condition = MDB_LIST_CONDITION.BM_BRANCH_BY_ALLOWEDBRANCHIDS_FORUPDATERECORD;
+            break;
+    }
+    var JsonArg = {
+        DB_IF_PARAM: DDL_Condition,
+    }
+    $.ajax({
+        type: "POST",
+        url: BasePath + "/AAccount/CAccountFeeStructureManagmentUI/GET_MT_BM_BRANCH_BYPARAMTER",
+        data: { 'PostedData': (JsonArg) },
+        beforeSend: function () {
+            startLoading();
+        },
+        success: function (data) {
+            var List = '<option value="-1">Select an option</option>';
+            for (var i = 0; i < data.length; i++) {
+                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+            }
+            $("#DropDownListCampus").html(List);
+        },
+        complete: function () {
+            stopLoading();
+        },
+    });
+}
+function PopulateMT_ACOAM_RevenueAccount_ListByParam() {
+    switch (DB_OperationType) {
+        case DBOperation.INSERT:
+            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORNEWINSERT;
+            break;
+        case DBOperation.UPDATE:
+            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORUPDATERECORD;
+            break;
+    }
+    var JsonArg = {
+        DB_IF_PARAM: DDL_Condition,
+    }
+    $.ajax({
+        type: "POST",
+        url: BasePath + "/AAccount/CAccountFeeStructureManagmentUI/GET_MT_ACOAM_REVENUEACCOUNT_BYPARAMTER",
+        data: { 'PostedData': (JsonArg) },
+        beforeSend: function () {
+            startLoading();
+        },
+        success: function (data) {
+            var List = '<option value="-1">Select an option</option>';
+            for (var i = 0; i < data.length; i++) {
+                List += '<option value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+            }
+            $("#DropDownListRevenueAccount").html(List);
+        },
+        complete: function () {
+            stopLoading();
+        },
+    });
+}
+function PopulateMT_ACOAM_AssetAccount_ListByParam() {
+    switch (DB_OperationType) {
+        case DBOperation.INSERT:
+            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORNEWINSERT;
+            break;
+        case DBOperation.UPDATE:
+            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORUPDATERECORD;
+            break;
+    }
+    var JsonArg = {
+        DB_IF_PARAM: DDL_Condition,
+    }
+    $.ajax({
+        type: "POST",
+        url: BasePath + "/AAccount/CAccountFeeStructureManagmentUI/GET_MT_ACOAM_ASSETACCOUNT_BYPARAMTER",
+        data: { 'PostedData': (JsonArg) },
+        beforeSend: function () {
+            startLoading();
+        },
+        success: function (data) {
+            var List = '<option value="-1">Select an option</option>';
+            for (var i = 0; i < data.length; i++) {
+                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+            }
+            $("#DropDownListAssetAccount").html(List);
+        },
+        complete: function () {
+            stopLoading();
+        },
+    });
+}
+function PopulateMT_ACOAM_LiabilityAccount_ListByParam() {
+    switch (DB_OperationType) {
+        case DBOperation.INSERT:
+            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORNEWINSERT;
+            break;
+        case DBOperation.UPDATE:
+            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORUPDATERECORD;
+            break;
+    }
+    var JsonArg = {
+        DB_IF_PARAM: DDL_Condition,
+    }
+    $.ajax({
+        type: "POST",
+        url: BasePath + "/AAccount/CAccountFeeStructureManagmentUI/GET_MT_ACOAM_LIABILITYACCOUNT_BYPARAMTER",
+        data: { 'PostedData': (JsonArg) },
+        beforeSend: function () {
+            startLoading();
+        },
+        success: function (data) {
+            var List = '<option value="-1">Select an option</option>';
+            for (var i = 0; i < data.length; i++) {
+                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+            }
+            $("#DropDownListLiabilityAccount").html(List);
+        },
+        complete: function () {
+            stopLoading();
+        },
+    });
+}
+function PopulateMT_ACOAM_CostOfSaleAccount_ListByParam() {
+    switch (DB_OperationType) {
+        case DBOperation.INSERT:
+            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORNEWINSERT;
+            break;
+        case DBOperation.UPDATE:
+            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORUPDATERECORD;
+            break;
+    }
+    var JsonArg = {
+        DB_IF_PARAM: DDL_Condition,
+    }
+    $.ajax({
+        type: "POST",
+        url: BasePath + "/AAccount/CAccountFeeStructureManagmentUI/GET_MT_ACOAM_COSTOFSALEACCOUNT_BYPARAMTER",
+        data: { 'PostedData': (JsonArg) },
+        beforeSend: function () {
+            startLoading();
+        },
+        success: function (data) {
+            var List = '<option value="-1">Select an option</option>';
+            for (var i = 0; i < data.length; i++) {
+                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+            }
+            $("#DropDownListCostOfSaleAccount").html(List);
+        },
+        complete: function () {
+            stopLoading();
+        },
+    });
+}
+function PopulateMT_AFTM_FeeType_ListByParam() {
+    switch (DB_OperationType) {
+        case DBOperation.INSERT:
+            DDL_Condition = MDB_LIST_CONDITION.AFTM_FEETYPE_BY_COMPANYID_FORNEWINSERT;
+            break;
+        case DBOperation.UPDATE:
+            DDL_Condition = MDB_LIST_CONDITION.AFTM_FEETYPE_BY_COMPANYID_FORUPDATERECORD;
+            break;
+    }
+    var JsonArg = {
+        DB_IF_PARAM: DDL_Condition,
+    }
+    $.ajax({
+        type: "POST",
+        url: BasePath + "/AAccount/CAccountFeeStructureManagmentUI/GET_MT_AFTM_FEETYPE_BYPARAMTER",
+        data: { 'PostedData': (JsonArg) },
+        beforeSend: function () {
+            startLoading();
+        },
+        success: function (data) {
+            var List = '<option value="-1">Select an option</option>';
+            for (var i = 0; i < data.length; i++) {
+                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+            }
+            $("#DropDownListFeeType").html(List);
+        },
+        complete: function () {
+            stopLoading();
+        },
+    });
+}
 
+/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- LINQUERY (ON CHANGE)                  **----------------------------------------------*/
+function PopulateMT_AASM_AdmissionSession_ListByParam(CampusId,AdmissionSessionId) {
+    switch (DB_OperationType) {
+        case DBOperation.INSERT:
+            DDL_Condition = MDB_LIST_CONDITION.AASM_ADMISSIONSESSION_BY_CAMPUSID_FORNEWINSERT;
+            break;
+        case DBOperation.UPDATE:
+            DDL_Condition = MDB_LIST_CONDITION.AASM_ADMISSIONSESSION_BY_CAMPUSID_FORUPDATERECORD;
+            break;
+    }
+    var JsonArg = {
+        DB_IF_PARAM: DDL_Condition,
+        CampusId: CampusId,
+    }
+    $.ajax({
+        type: "POST",
+        url: BasePath + "/AAccount/CAccountFeeStructureManagmentUI/GET_MT_AASM_ADMISSIONSESSION_BYPARAMTER",
+        data: { 'PostedData': (JsonArg) },
+        beforeSend: function () {
+            startLoading();
+        },
+        success: function (data) {
+            var List = '<option value="-1">Select an option</option>';
+            for (var i = 0; i < data.length; i++) {
+                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+            }
+            $("#DropDownListAdmissionSession").html(List);
+        },
+        complete: function () {
+            stopLoading();
+        },
+    });
+}
+function PopulateMT_ACM_Class_ListByParam(CampusId, AdmissionSessionId,ClassId) {
+    switch (DB_OperationType) {
+        case DBOperation.INSERT:
+            DDL_Condition = MDB_LIST_CONDITION.ACM_CLASS_BY_ADMISSIONSESSIONID_FORNEWINSERT;
+            break;
+        case DBOperation.UPDATE:
+            DDL_Condition = MDB_LIST_CONDITION.ACM_CLASS_BY_ADMISSIONSESSIONID_FORUPDATERECORD;
+            break;
+    }
+    var JsonArg = {
+        DB_IF_PARAM: DDL_Condition,
+        CampusId: CampusId,
+        AdmissionSessionId: AdmissionSessionId,
+    }
+    $.ajax({
+        type: "POST",
+        url: BasePath + "/AAccount/CAccountFeeStructureManagmentUI/GET_MT_ACM_CLASS_BYPARAMTER",
+        data: { 'PostedData': (JsonArg) },
+        beforeSend: function () {
+            startLoading();
+        },
+        success: function (data) {
+            var List = '<option value="-1">Select an option</option>';
+            for (var i = 0; i < data.length; i++) {
+                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+            }
+            $("#DropDownListClass").html(List);
+        },
+        complete: function () {
+            stopLoading();
+        },
+    });
+}
 
 /*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,UPSERT,CLEAR)                            **----------------------------------------------*/
-
 $('#ButtonSubmitGetInfoForEdit').click(function () {
     if ($('#DropDownListDiscountType').RequiredDropdown() == false) {
         return false;

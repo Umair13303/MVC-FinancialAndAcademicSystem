@@ -64,6 +64,7 @@ namespace office360.Models.General
 
         public int? AcademicYearId { get; set; }
         public int? AdmissionId { get; set; }
+        public int? AdmissionSessionId { get; set; }
         public int? AppSessionId { get; set; }
         public int? AllowedChallanNo { get; set; }
         public int? AssetAccountId { get; set; }

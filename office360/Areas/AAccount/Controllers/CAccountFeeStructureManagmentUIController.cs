@@ -78,7 +78,7 @@ namespace office360.Areas.AAccount.Controllers
             var DATA = ABranch.HelperCode.DATA_FROM_SP.GET_MT_BM_Branch_By_Param_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GET_MT_AFTM_ADMISSIONSESSION_BYPARAMTER(SQLParamters PostedData)
+        public ActionResult GET_MT_AASM_ADMISSIONSESSION_BYPARAMTER(SQLParamters PostedData)
         {
             var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_AASM_AdmissionSession_By_Param_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
@@ -90,7 +90,7 @@ namespace office360.Areas.AAccount.Controllers
         }
         public ActionResult GET_MT_AFTM_FEETYPE_BYPARAMTER(SQLParamters PostedData)
         {
-            PostedData.FeeCategoryIds = "42";
+            PostedData.FeeCategoryIds = ((int)FEE_CATEGORY.ACADEMIC_FEE).ToString();
             var DATA = AAccount.HelperCode.DATA_FROM_SP.GET_MT_AFTM_FeeType_By_Param_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }

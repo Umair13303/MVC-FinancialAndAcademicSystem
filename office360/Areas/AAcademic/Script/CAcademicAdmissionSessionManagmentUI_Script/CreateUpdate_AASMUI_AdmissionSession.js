@@ -55,7 +55,7 @@ function ChangeCase() {
     });
 }
 
-/*----------------------------------** FUNCTION FOR::INITIALIZING DATA TABLE's & RELATED OPERATION's                                            **----------------------------------------------*/
+/*----------------------------------** FUNCTION FOR::INITIALIZING DATA TABLE's & RELATED OPERATION's                         **----------------------------------------------*/
 function InitializeAdmissionSessionClassDataTable() {
     AdmissionSessionClassTable = $('#MainTableAASM_AdmissionSessionClass').DataTable({
         "responsive": true,
@@ -372,6 +372,8 @@ function ClearInputFields() {
     $('.form-control').not('#DropDownListAdmissionSession').val('');
     $('.select2').not('#DropDownListAdmissionSession').val('-1').change();
     $('form').removeClass('Is-Valid');
+    AdmissionSessionClassTable.clear().draw();
+
 }
 
 /*----------------------------------** FUNCTION FOR:: UPDATE ADMISSIONSESSION (LOAD DROPDOWN,DATA FOR ADMISSIONSESSIONID)    **----------------------------------------------*/

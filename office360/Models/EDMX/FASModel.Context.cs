@@ -372,7 +372,7 @@ namespace office360.Models.EDMX
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ACCM_ClassCurriculum_Upsert", dB_OperationTypeParameter, guIDParameter, campusIdParameter, descriptionParameter, classIdParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, remarksParameter, response);
         }
     
-        public virtual ObjectResult<ACM_Class_GetListByParam_Result> ACM_Class_GetListByParam(string dB_IF_PARAM, Nullable<int> sessionCompanyId, Nullable<int> sessionBranchId, string allowedCampusIds, string searchParameter, Nullable<int> campusId, Nullable<int> companyId)
+        public virtual ObjectResult<ACM_Class_GetListByParam_Result> ACM_Class_GetListByParam(string dB_IF_PARAM, Nullable<int> sessionCompanyId, Nullable<int> sessionBranchId, string allowedCampusIds, string searchParameter, Nullable<int> admissionSessionId, Nullable<int> campusId, Nullable<int> companyId)
         {
             var dB_IF_PARAMParameter = dB_IF_PARAM != null ?
                 new ObjectParameter("DB_IF_PARAM", dB_IF_PARAM) :
@@ -394,6 +394,10 @@ namespace office360.Models.EDMX
                 new ObjectParameter("SearchParameter", searchParameter) :
                 new ObjectParameter("SearchParameter", typeof(string));
     
+            var admissionSessionIdParameter = admissionSessionId.HasValue ?
+                new ObjectParameter("AdmissionSessionId", admissionSessionId) :
+                new ObjectParameter("AdmissionSessionId", typeof(int));
+    
             var campusIdParameter = campusId.HasValue ?
                 new ObjectParameter("CampusId", campusId) :
                 new ObjectParameter("CampusId", typeof(int));
@@ -402,7 +406,7 @@ namespace office360.Models.EDMX
                 new ObjectParameter("CompanyId", companyId) :
                 new ObjectParameter("CompanyId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ACM_Class_GetListByParam_Result>("ACM_Class_GetListByParam", dB_IF_PARAMParameter, sessionCompanyIdParameter, sessionBranchIdParameter, allowedCampusIdsParameter, searchParameterParameter, campusIdParameter, companyIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ACM_Class_GetListByParam_Result>("ACM_Class_GetListByParam", dB_IF_PARAMParameter, sessionCompanyIdParameter, sessionBranchIdParameter, allowedCampusIdsParameter, searchParameterParameter, admissionSessionIdParameter, campusIdParameter, companyIdParameter);
         }
     
         public virtual ObjectResult<ACM_Class_GetListBySearch_Result> ACM_Class_GetListBySearch(Nullable<int> companyId, Nullable<int> branchId, string allowedCampusId, Nullable<int> inputTypeId, string inputText)
@@ -741,11 +745,15 @@ namespace office360.Models.EDMX
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ADTM_DiscountType_Upsert", dB_OperationTypeParameter, guIDParameter, descriptionParameter, costOfSaleAccountIdParameter, isByPercentageParameter, discountPercentageParameter, isByAmountParameter, discountAmountParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, remarksParameter, response);
         }
     
-        public virtual ObjectResult<AFTM_FeeType_GetListByParam_Result> AFTM_FeeType_GetListByParam(string dB_IF_PARAM, Nullable<int> sessionCompanyId, Nullable<int> sessionBranchId, string searchParameter, Nullable<int> companyId)
+        public virtual ObjectResult<AFTM_FeeType_GetListByParam_Result> AFTM_FeeType_GetListByParam(string dB_IF_PARAM, string feeCategoryId, Nullable<int> sessionCompanyId, Nullable<int> sessionBranchId, string searchParameter, Nullable<int> companyId)
         {
             var dB_IF_PARAMParameter = dB_IF_PARAM != null ?
                 new ObjectParameter("DB_IF_PARAM", dB_IF_PARAM) :
                 new ObjectParameter("DB_IF_PARAM", typeof(string));
+    
+            var feeCategoryIdParameter = feeCategoryId != null ?
+                new ObjectParameter("FeeCategoryId", feeCategoryId) :
+                new ObjectParameter("FeeCategoryId", typeof(string));
     
             var sessionCompanyIdParameter = sessionCompanyId.HasValue ?
                 new ObjectParameter("SessionCompanyId", sessionCompanyId) :
@@ -763,7 +771,7 @@ namespace office360.Models.EDMX
                 new ObjectParameter("CompanyId", companyId) :
                 new ObjectParameter("CompanyId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AFTM_FeeType_GetListByParam_Result>("AFTM_FeeType_GetListByParam", dB_IF_PARAMParameter, sessionCompanyIdParameter, sessionBranchIdParameter, searchParameterParameter, companyIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AFTM_FeeType_GetListByParam_Result>("AFTM_FeeType_GetListByParam", dB_IF_PARAMParameter, feeCategoryIdParameter, sessionCompanyIdParameter, sessionBranchIdParameter, searchParameterParameter, companyIdParameter);
         }
     
         public virtual ObjectResult<AFTM_FeeType_GetListBySearch_Result> AFTM_FeeType_GetListBySearch(Nullable<int> companyId, Nullable<int> branchId, Nullable<int> inputTypeId, string inputText)

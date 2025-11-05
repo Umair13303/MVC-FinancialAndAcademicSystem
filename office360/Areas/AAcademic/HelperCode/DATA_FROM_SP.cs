@@ -31,6 +31,7 @@ namespace office360.Areas.AAcademic.HelperCode
                                                        Session_Manager.BranchId,
                                                        Session_Manager.AllowedCampusIds,
                                                        PostedData.SearchParameter,
+                                                       PostedData.AdmissionSessionId,
                                                        PostedData.CampusId,
                                                        PostedData.CompanyId
                                                        ).ToList();

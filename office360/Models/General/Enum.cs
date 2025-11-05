@@ -121,4 +121,9 @@ namespace office360.Models.General
         COST_OF_SALES=5,
         EXPENSES=6
     }
+    public enum FEE_CATEGORY
+    {
+        ACADEMIC_FEE=1,
+        OTHER_FEE=2,
+    }
 }

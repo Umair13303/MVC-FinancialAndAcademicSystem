@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AASM_AdmissionSession">
           <Key>
             <PropertyRef Name="Id" />
@@ -780,6 +780,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Parameter Name="SessionBranchId" Type="int" Mode="In" />
           <Parameter Name="AllowedCampusIds" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="SearchParameter" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="AdmissionSessionId" Type="int" Mode="In" />
           <Parameter Name="CampusId" Type="int" Mode="In" />
           <Parameter Name="CompanyId" Type="int" Mode="In" />
         </Function>
@@ -878,6 +879,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
         </Function>
         <Function Name="AFTM_FeeType_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="FeeCategoryId" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="SessionCompanyId" Type="int" Mode="In" />
           <Parameter Name="SessionBranchId" Type="int" Mode="In" />
           <Parameter Name="SearchParameter" Type="nvarchar(max)" Mode="In" />
@@ -1479,8 +1481,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
     FROM [dbo].[WorkingShift] AS [WorkingShift]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FASModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2181,16 +2182,16 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <EntitySet Name="WHTaxPolicy" EntityType="Self.WHTaxPolicy" />
           <EntitySet Name="WorkingShift" EntityType="Self.WorkingShift" />
           <FunctionImport Name="fn_CodeSplitByCommaAsINT" IsComposable="true" ReturnType="Collection(FASModel.fn_CodeSplitByCommaAsINT_Result)">
-            <Parameter Name="psCSString" Mode="In" Type="String" />
+          <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_CodeSplitByCommaAsUniqueIdentifier" IsComposable="true" ReturnType="Collection(FASModel.fn_CodeSplitByCommaAsUniqueIdentifier_Result)">
-            <Parameter Name="psCSString" Mode="In" Type="String" />
+          <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_GetCommaSepratedValuesInList" IsComposable="true" ReturnType="Collection(FASModel.fn_GetCommaSepratedValuesInList_Result)">
-            <Parameter Name="psCSString" Mode="In" Type="String" />
+          <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_GetGeneralBranchSettingForCampus" IsComposable="true" ReturnType="Collection(FASModel.fn_GetGeneralBranchSettingForCampus_Result)">
-            <Parameter Name="CampusId" Mode="In" Type="Int32" />
+          <Parameter Name="CampusId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AASM_AdmissionSession_GetListByParam" ReturnType="Collection(FASModel.AASM_AdmissionSession_GetListByParam_Result)">
             <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
@@ -2268,6 +2269,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
             <Parameter Name="SessionBranchId" Mode="In" Type="Int32" />
             <Parameter Name="AllowedCampusIds" Mode="In" Type="String" />
             <Parameter Name="SearchParameter" Mode="In" Type="String" />
+            <Parameter Name="AdmissionSessionId" Mode="In" Type="Int32" />
             <Parameter Name="CampusId" Mode="In" Type="Int32" />
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -2366,6 +2368,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           </FunctionImport>
           <FunctionImport Name="AFTM_FeeType_GetListByParam" ReturnType="Collection(FASModel.AFTM_FeeType_GetListByParam_Result)">
             <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
+            <Parameter Name="FeeCategoryId" Mode="In" Type="String" />
             <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
             <Parameter Name="SessionBranchId" Mode="In" Type="Int32" />
             <Parameter Name="SearchParameter" Mode="In" Type="String" />

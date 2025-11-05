@@ -107,6 +107,7 @@ namespace office360.Areas.AAccount.HelperCode
             {
                 DATA = db.AFTM_FeeType_GetListByParam(
                                                        PostedData.DB_IF_PARAM,
+                                                       PostedData.FeeCategoryIds,
                                                        Session_Manager.CompanyId,
                                                        Session_Manager.BranchId,
                                                        PostedData.SearchParameter,
