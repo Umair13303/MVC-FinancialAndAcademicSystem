@@ -84,7 +84,7 @@ $('#ButtonPlus').click(function (event) {
             if (FeeSettingIsSecurity == true && FeeSettingIsDiscount == true) {
                 AssetAccountId = $('#DropDownListAssetAccount :selected').val();
                 LiabilityAccountId = $('#DropDownListLiabilityAccount :selected').val();
-                CostOfSaleAccount = $('#DropDownListCostOfSaleAccount :selected').val();
+                CostOfSaleAccountId = $('#DropDownListCostOfSaleAccount :selected').val();
             }
             else if (FeeSettingIsSecurity == false && FeeSettingIsDiscount == true) {
                 RevenueAccountId = $('#DropDownListRevenueAccount :selected').val();

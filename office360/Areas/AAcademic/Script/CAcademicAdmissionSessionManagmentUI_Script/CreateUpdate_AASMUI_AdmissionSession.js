@@ -139,8 +139,8 @@ function InsertDataIntoDataTable() {
             var Table_Row = [];
             Table_Row[0] = "";
             Table_Row[1] = Class;
-            Table_Row[2] = GetTextLabel(CONVERSION.BOOL_CONFIRMATION(IsEnteryTestRequired));
-            Table_Row[3] = GetTextLabel(CONVERSION.BOOL_CONFIRMATION(IsInterviewRequired));
+            Table_Row[2] = HTML_LABEL.TEXT_DISPLAY(CONVERSION.BOOL_CONFIRMATION(IsEnteryTestRequired));
+            Table_Row[3] = HTML_LABEL.TEXT_DISPLAY(CONVERSION.BOOL_CONFIRMATION(IsInterviewRequired));
             Table_Row[4] = SessionStartDate;
             Table_Row[5] = SessionEndDate;
             Table_Row[6] = ClassId;
@@ -454,8 +454,8 @@ function GET_AASM_ADMISSIONSESSION_INFOBYGUID() {
                         var row_data = [];
                         row_data[0] = '';
                         row_data[1] = data.DATA_DETAIL[i].Class;
-                        row_data[2] = GetTextLabel(data.DATA_DETAIL[i].IsEnteryTestRequired);
-                        row_data[3] = GetTextLabel(data.DATA_DETAIL[i].IsInterviewRequired);
+                        row_data[2] = HTML_LABEL.TEXT_DISPLAY(data.DATA_DETAIL[i].IsEnteryTestRequired);
+                        row_data[3] = HTML_LABEL.TEXT_DISPLAY(data.DATA_DETAIL[i].IsInterviewRequired);
                         row_data[4] = CONVERSION.TO_DISPLAY_DATE(data.DATA_DETAIL[i].SessionStartDate, "j-F-Y");
                         row_data[5] = CONVERSION.TO_DISPLAY_DATE(data.DATA_DETAIL[i].SessionEndDate, "j-F-Y");
                         row_data[6] = data.DATA_DETAIL[i].IsEnteryTestRequired;

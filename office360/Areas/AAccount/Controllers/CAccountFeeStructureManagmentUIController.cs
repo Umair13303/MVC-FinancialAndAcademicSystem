@@ -119,5 +119,13 @@ namespace office360.Areas.AAccount.Controllers
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
+        #region ACTION RESULT FOR :: GET DOCUMENT SETTING -- LINQ-QUERY --> FEE_TYPE
+        public ActionResult GET_MT_AFTM_FEETYPE_INFOBYGUID(SQLParamters PostedData)
+        {
+            var DATA = AAccount.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_AFTM_FEETYPE_INFO_BY_GUID(PostedData).ToList();
+            return Json(DATA, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 }

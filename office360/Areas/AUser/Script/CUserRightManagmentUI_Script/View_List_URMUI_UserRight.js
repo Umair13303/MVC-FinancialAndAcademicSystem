@@ -39,7 +39,7 @@ function InitDataTable() {
             {
                 "title": "", "data": null, "defaultContent": '',
                 "render": function (data, type, row) {
-                    return GetDetailControlBtn("Detail_UserRight");
+                    return HTML_BUTTON.DATATABLE_DETAIL_CONTROL("Detail_UserRight");
                 }
             },
             { "data": null, "title": "#" },

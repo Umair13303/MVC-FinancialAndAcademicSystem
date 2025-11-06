@@ -20,6 +20,16 @@ class HTML_BUTTON {
     static DELETE_IN_LIST(Id, Title, URL) {
         return "<a title='Click here to Delete " + Title + "' class='btn btn-sm delete'><i class='far fa-trash-alt'></i> " + '' + "</a>";
     }
+    static DATATABLE_DETAIL_CONTROL(Class) {
+        return "<a class='btn btn-sm  " + Class + " view'><i class='far fa-plus " + Class + "'></i></a>";
+    }
+}
+class HTML_LABEL {
+    static TEXT_DISPLAY(DisplayText) {
+        var Class = "info";
+        var Label = '<td> <span class="badge badge-' + Class + '">' + DisplayText + '</span></td>';
+        return Label;
+    }
 }
 class CONVERSION {
     static BOOL_CONFIRMATION(Value) {
@@ -51,5 +61,4 @@ class CONVERSION {
         if (FalseValue.indexOf(str) >= 0) return false;
         return Boolean(Value);
     }
-
 }

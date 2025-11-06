@@ -47,25 +47,25 @@ function InitDataTable() {
             {
                 "data": null, "title": "On Admission", "defaultContent": "",
                 "render": function (data, type, full, meta) {
-                    return GetTextLabel(data["IsOnAdmission"]);
+                    return HTML_LABEL.TEXT_DISPLAY(data["IsOnAdmission"]);
                 }
             },
             {
                 "data": null, "title": "Is Discountable", "defaultContent": "",
                 "render": function (data, type, full, meta) {
-                    return GetTextLabel(data["IsDiscount"]);
+                    return HTML_LABEL.TEXT_DISPLAY(data["IsDiscount"]);
                 }
             },
             {
                 "data": null, "title": "Is Refundable", "defaultContent": "",
                 "render": function (data, type, full, meta) {
-                    return GetTextLabel(data["IsRefundable"]);
+                    return HTML_LABEL.TEXT_DISPLAY(data["IsRefundable"]);
                 }
             },
             {
                 "data": null, "title": "Is Security", "defaultContent": "",
                 "render": function (data, type, full, meta) {
-                    return GetTextLabel(data["IsSecurity"]);
+                    return HTML_LABEL.TEXT_DISPLAY(data["IsSecurity"]);
                 }
             },
             {

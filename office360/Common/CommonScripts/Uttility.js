@@ -356,86 +356,9 @@ function GetStatus(Status) {
     var Label = '<td> <span class="badge badge-' + BadgeColor + '">' + Display + '</span></td>';
     return Label;
 }
-function GetTextLabel(Display) {
-    var BadgeColor = "info";
-    var Label = '<td> <span class="badge badge-' + BadgeColor + '">' + Display + '</span></td>';
-    return Label;
 
-}
-function GetViewbtn(url, title, text) {
-    return "<td class='center'><a onclick=" + url + "  title='Click here to View " + title + "' class='btn btn-sm view'><i class='far fa-eye'></i> " + '' + "</a></td>";
-}
-function GetEditbtn(url, title, text) {
-    return "<td class='center'><a onclick=" + url + "  title='Click here to Edit " + title + "' class='btn btn-sm edit'><i class='far fa-edit'></i> " + '' + "</a></td>";
-}
-function GetDeletebtn(url, title, text) {
-    return "<a title='Click here to Delete " + title + "' class='btn btn-sm delete'><i class='far fa-trash-alt'></i> " + '' + "</a>";
-}
-function GetCheckBox(Id, Name, ClassName) {
-    return "<input type='checkbox' id='" + Id + "' name='" + Name + "' class='" + ClassName + "' />";
-}
-function GetDetailControlBtn(ClassName) {
-    return "<td class='center " + ClassName + "'><a class='btn btn-sm  " + ClassName +" view'><i class='far fa-plus " + ClassName +"'></i> " + '' + "</a></td>";
-}
-function GetTextBox(Id) {
-    debugger
-    var inputElement = document.createElement('input');
-    inputElement.type = 'text';
-    inputElement.className = 'form-control date_masking';
-    inputElement.placeholder = 'Please Enter End Date Here!';
-    inputElement.id = Id;
-
-    return inputElement; // Return the inputElement, not DatePicker
-}
-
-function DataTable_Sum_Footer(table, columnSpan, footerId, headerText, orderId) {
-    return new Promise((resolve) => {
-        let footer = $('#' + table.table().container().id + ' tfoot');
-
-        // Ensure footer section exists
-        if (footer.length === 0) {
-            $('#' + table.table().container().id).append('<tfoot></tfoot>');
-            footer = $('#' + table.table().container().id + ' tfoot');
-        }
-
-        // Append row in the order defined by orderId
-        footer.append(
-            '<tr data-order-id="' + orderId + '">' +
-            '<th>' + headerText + '</th>' +
-            '<td class="Headings" colspan="' + columnSpan + '"></td>' +
-            '<td id="' + footerId + '"></td>' +
-            '<td colspan="6"></td>' +
-            '</tr>'
-        );
-
-        // Optional: Sort rows based on order-id (if multiple rows are appended at different times)
-        let rows = footer.find('tr').get();
-        rows.sort((a, b) => {
-            return parseInt($(a).attr('data-order-id')) - parseInt($(b).attr('data-order-id'));
-        });
-        footer.empty().append(rows);
-
-        resolve();
-    });
-}
-function DataTableDropDown_ColumnClass(TableId, ClassFilter, DropdownId)
-{
-    const Table = $('#' + TableId).DataTable();
-    const FilteredColumns = Table.columns().indexes().toArray().filter(i =>
-        $(Table.column(i).header()).hasClass(ClassFilter)
-    ).map(i => ({
-        Id: i,
-        Description: $(Table.column(i).header()).text().trim()
-    }));
-
-    if (DropdownId && $('#' + DropdownId).length) {
-        const $Dropdown = $('#' + DropdownId).empty().append('<option value="-1">Select an option</option>');
-        FilteredColumns.forEach(Col => $Dropdown.append(`<option value="${Col.Id}">${Col.Description}</option>`));
-    }
-
-    return FilteredColumns;
-}
-function DataTableGroupBy_Column_Detail(ApiWrapper,TableId, ColumnNames, Options = {}) {
+//---- to be used
+function DataTableGroupBy_Column_Detail(ApiWrapper, TableId, ColumnNames, Options = {}) {
     const Api = ApiWrapper.api();
     const VisibleColumnCount = Api.columns(':visible').count();
     const Rows = Api.rows({ page: 'current' }).nodes();
@@ -461,7 +384,7 @@ function DataTableGroupBy_Column_Detail(ApiWrapper,TableId, ColumnNames, Options
         LastGroupValues = CurrentGroupValues;
     });
 }
-function DataTableGroupBy_Universal(ApiWrapper,TableId, ColumnIndexes, Options = {}) {
+function DataTableGroupBy_ColumnIndex(ApiWrapper, TableId, ColumnIndexes, Options = {}) {
     const Api = ApiWrapper.api();
     const VisibleColumnCount = Api.columns(':visible').count();
     const Rows = Api.rows({ page: 'current' }).nodes();
@@ -493,49 +416,9 @@ function DataTableGroupBy_Universal(ApiWrapper,TableId, ColumnIndexes, Options =
         LastGroupValues = CurrentGroupValues;
     });
 }
-function DataTableGroupBy_Index_Detail_InputLastGroup(ApiWrapper, TableId, ColumnIndexes, InputHTMLField, Options = {}) {
-    const Api = ApiWrapper.api();
-    const VisibleColumnCount = Api.columns(':visible').count();
-    const Rows = Api.rows({ page: 'current' }).nodes();
-    let LastGroupValues = Array(ColumnIndexes.length).fill(null);
 
-    Rows.each(Row => {
-        const RowData = Api.row(Row).data();
-        if (!RowData) return;
+//----
 
-        const CurrentGroupValues = ColumnIndexes.map(Index => {
-            const column = Api.column(Index);
-            const columnDataProp = column.settings()[0].aoColumns[Index].data;
-            if (columnDataProp === undefined || columnDataProp === null) {
-                return RowData[Index];
-            }
-            return typeof columnDataProp === "function"
-                ? columnDataProp(RowData)
-                : RowData[columnDataProp];
-        });
-
-        if (!CurrentGroupValues.some((Val, Idx) => Val !== LastGroupValues[Idx])) return;
-
-        const GroupHeaders = ColumnIndexes.map((ColIndex, Idx) => {
-            const Style = GetColorForTableGroup(Idx);
-            const Padding = Idx ? 'padding-left: 20px;' : '';
-            const Label = Api.column(ColIndex).header().innerText;
-
-            const IsLastGroup = Idx === ColumnIndexes.length - 1;
-            const ExtraField = IsLastGroup && typeof InputHTMLField === 'function'
-                ? InputHTMLField(CurrentGroupValues[Idx])
-                : '';
-
-            return `<tr class="${Idx ? 'subgroup' : 'group'} group-header-row">
-                <td colspan="${VisibleColumnCount}" style="background:${Style.backgroundColor};color:${Style.color};border-color:${Style.borderColor};${Padding}">
-                    ${ExtraField}<b>${Label}: </b>${CurrentGroupValues[Idx]}
-                </td></tr>`;
-        }).join('');
-
-        $(Row).before(GroupHeaders);
-        LastGroupValues = CurrentGroupValues;
-    });
-}
 function GetColorForTableGroup(index) {
     const colors = [
         { backgroundColor: '#4A235A', color: '#FFFFFF', borderColor: '#BB8FCE' }, // Group 1
@@ -678,9 +561,7 @@ function ErrorMessage(Message) {
         }
     });
 }
-function GetDecimalValue(number) {
-    return number.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+
 
 /*----------------------------------** FUNCTION FOR::DATE & DATE PICKER **------------------------------------------------------------------------------*/
 const INITIALIZE_DATE_PICKER = (selector, options = {}) => {

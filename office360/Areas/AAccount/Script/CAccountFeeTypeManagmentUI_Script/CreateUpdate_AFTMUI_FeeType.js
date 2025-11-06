@@ -60,36 +60,36 @@ function ChangeCase() {
             $('#DivCheckBoxIsOnAdmission').show();
         }
     });
-    $('#CheckBoxIsSecurity, #CheckBoxIsDiscount').change(function (event) {
+    $('#CheckBoxIsRefundable, #CheckBoxIsDiscount').change(function (event) {
         event.preventDefault();
         $('#DropDownListRevenueAccount,#DropDownListAssetAccount,#DropDownListLiabilityAccount,#DropDownListCostOfSaleAccount').val('-1').trigger('change.select2');
         var IsOtherFee = $("#DropDownListFeeCategory :selected").attr("data-IsOtherFee");
         if (CONVERSION.TO_BOOL(IsOtherFee) == true) {
-            var IsSecurity = $('#CheckBoxIsSecurity').prop('checked');
+            var IsRefundable = $('#CheckBoxIsRefundable').prop('checked');
             var IsDiscount = $('#CheckBoxIsDiscount').prop('checked');
-            if (IsSecurity == true && IsDiscount == true) {
-                $('#DropDownListRevenueAccount').prop('disabled',true);
-                $('#DropDownListAssetAccount').prop('disabled', false);
-                $('#DropDownListLiabilityAccount').prop('disabled', false);
-                $('#DropDownListCostOfSaleAccount').prop('disabled', false);
+            if (IsRefundable == true && IsDiscount == true) {
+                $('#DivDropDownListRevenueAccount').hide();
+                $('#DivDropDownListAssetAccount').show();
+                $('#DivDropDownListLiabilityAccount').show();
+                $('#DivDropDownListCostOfSaleAccount').show();
             }
-            else if (IsSecurity == false && IsDiscount == true) {
-                $('#DropDownListRevenueAccount').prop('disabled', false);
-                $('#DropDownListAssetAccount').prop('disabled', false);
-                $('#DropDownListLiabilityAccount').prop('disabled', true);
-                $('#DropDownListCostOfSaleAccount').show();
+            else if (IsRefundable == false && IsDiscount == true) {
+                $('#DivDropDownListRevenueAccount').show();
+                $('#DivDropDownListAssetAccount').show();
+                $('#DivDropDownListLiabilityAccount').hide();
+                $('#DivDropDownListCostOfSaleAccount').show();
             }
-            else if (IsSecurity == true && IsDiscount == false) {
-                $('#DropDownListRevenueAccount').prop('disabled', true);
-                $('#DropDownListAssetAccount').prop('disabled', false);
-                $('#DropDownListLiabilityAccount').prop('disabled', false);
-                $('#DropDownListCostOfSaleAccount').prop('disabled', true);
+            else if (IsRefundable == true && IsDiscount == false) {
+                $('#DivDropDownListRevenueAccount').hide();
+                $('#DivDropDownListAssetAccount').show();
+                $('#DivDropDownListLiabilityAccount').show();
+                $('#DivDropDownListCostOfSaleAccount').hide();
             }
-            else if (IsSecurity == false && IsDiscount == false) {
-                $('#DropDownListRevenueAccount').prop('disabled', false);
-                $('#DropDownListAssetAccount').prop('disabled', false);
-                $('#DropDownListLiabilityAccount').prop('disabled', true);
-                $('#DropDownListCostOfSaleAccount').prop('disabled', true);
+            else if (IsRefundable == false && IsDiscount == false) {
+                $('#DivDropDownListRevenueAccount').show();
+                $('#DivDropDownListAssetAccount').show();
+                $('#DivDropDownListLiabilityAccount').hide();
+                $('#DivDropDownListCostOfSaleAccount').hide();
             }
         }
     });
@@ -275,8 +275,8 @@ function PopulateMT_ACOAM_CostOfSaleAccount_ListByParam() {
 /*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,UPSERT,CLEAR)                            **----------------------------------------------*/
 function ValidateInputFields() {
     var IsOtherFee = $("#DropDownListFeeCategory :selected").attr("data-IsOtherFee");
-    var IsSecurity = $('#CheckBoxIsSecurity').prop('checked');
     var IsDiscount = $('#CheckBoxIsDiscount').prop('checked');
+    var IsRefundable = $('#CheckBoxIsRefundable').prop('checked');
     if ($('#TextBoxDescription').RequiredTextBoxInputGroup() == false) {
         return false;
     }
@@ -289,7 +289,7 @@ function ValidateInputFields() {
         }
     }
     else {
-        if (IsSecurity == true && IsDiscount == true) {
+        if (IsRefundable == true && IsDiscount == true) {
             if ($('#DropDownListAssetAccount').RequiredDropdown() == false) {
                 return false;
             }
@@ -300,7 +300,7 @@ function ValidateInputFields() {
                 return false;
             }
         }
-        else if (IsSecurity == false && IsDiscount == true) {
+        else if (IsRefundable == false && IsDiscount == true) {
             if ($('#DropDownListRevenueAccount').RequiredDropdown() == false) {
                 return false;
             }
@@ -312,7 +312,7 @@ function ValidateInputFields() {
             }
 
         }
-        else if (IsSecurity == true && IsDiscount == false) {
+        else if (IsRefundable == true && IsDiscount == false) {
             if ($('#DropDownListAssetAccount').RequiredDropdown() == false) {
                 return false;
             }
@@ -321,7 +321,7 @@ function ValidateInputFields() {
                 return false;
             }
         }
-        else if (IsSecurity == false && IsDiscount == false) {
+        else if (IsRefundable == false && IsDiscount == false) {
             if ($('#DropDownListRevenueAccount').RequiredDropdown() == false) {
                 return false;
             }
@@ -378,21 +378,21 @@ function UpSertDataIntoDB() {
         IsDiscount = $('#CheckBoxIsDiscount').prop('checked');
         IsRefundable = $('#CheckBoxIsRefundable').prop('checked');
         IsSecurity = $('#CheckBoxIsSecurity').prop('checked');
-        if (IsSecurity == true && IsDiscount == true) {
+        if (IsRefundable == true && IsDiscount == true) {
             AssetAccountId = $('#DropDownListAssetAccount :selected').val();
             LiabilityAccountId = $('#DropDownListLiabilityAccount :selected').val();
             CostOfSaleAccountId = $('#DropDownListCostOfSaleAccount :selected').val();
         }
-        else if (IsSecurity == false && IsDiscount == true) {
+        else if (IsRefundable == false && IsDiscount == true) {
             RevenueAccountId = $('#DropDownListRevenueAccount :selected').val();
             AssetAccountId = $('#DropDownListAssetAccount :selected').val();
             CostOfSaleAccountId = $('#DropDownListCostOfSaleAccount :selected').val();
         }
-        else if (IsSecurity == true && IsDiscount == false) {
+        else if (IsRefundable == true && IsDiscount == false) {
             AssetAccountId = $('#DropDownListAssetAccount :selected').val();
             LiabilityAccountId = $('#DropDownListLiabilityAccount :selected').val();
         }
-        else if (IsSecurity == false && IsDiscount == false) {
+        else if (IsRefundable == false && IsDiscount == false) {
             RevenueAccountId = $('#DropDownListRevenueAccount :selected').val();
             AssetAccountId = $('#DropDownListAssetAccount :selected').val();
         }

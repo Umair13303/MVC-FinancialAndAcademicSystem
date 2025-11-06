@@ -59,7 +59,7 @@ function InitDataTable() {
 
 /*----------------------------------** FUNCTION FOR::DROP DOWN LIST (DATA TABLE COLUMNS)            **----------------------------------------------*/
 function PopulateDropDownLists() {
-    DataTableDropDown_ColumnClass('MainTableBM_Branch', CSS_CLASS.DATATABLE_COLUMN_DDLADOPTER, 'DropDownListGroupBy');
+    GET_DATATABLE_DROPDOWNLIST_BY_COLUMN_DATA('MainTableBM_Branch', CSS_CLASS.DATATABLE_COLUMN_DDLADOPTER, 'DropDownListGroupBy');
 }
 
 /*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                             **----------------------------------------------*/

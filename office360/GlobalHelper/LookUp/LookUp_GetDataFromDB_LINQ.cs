@@ -459,6 +459,10 @@ namespace office360.GlobalHelper.LookUp
                         {
                             Id = x.Id,
                             Description = x.Description,
+                            Percentage = x.Percentage,
+                            SlabAmount = x.SlabAmount,
+                            FixedCharges = x.FixedCharges,
+                            IsOnExceedingAmount = x.IsOnExceedingAmount,
                         })
                          .ToList();
 

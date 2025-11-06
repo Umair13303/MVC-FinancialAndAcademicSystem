@@ -151,26 +151,26 @@
                 </div>
 
                 <div class="row mb-0" id="DivOtherFeeChartOfAccount" style="display:none">
-                    <div class="col-sm-12 col-md-6">
+                    <div class="col-sm-12 col-md-6" id="DivDropDownListRevenueAccount">
                         <div class="form-group">
                             @Html.Label("Revenue Account", new { @class = "col-form-label", @for = "DropDownListRevenueAccount" })
                             @Html.DropDownList("DropDownListRevenueAccount", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListRevenueAccount" })
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-6">
+                    <div class="col-sm-12 col-md-6" id="DivDropDownListAssetAccount">
                         <div class="form-group">
                             @Html.Label("Asset Account", new { @class = "col-form-label", @for = "DropDownListAssetAccount" })
                             @Html.DropDownList("DropDownListAssetAccount", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListAssetAccount" })
                         </div>
                     </div>
 
-                    <div class="col-sm-12 col-md-6">
+                    <div class="col-sm-12 col-md-6" id="DivDropDownListLiabilityAccount">
                         <div class="form-group">
                             @Html.Label("Liability Account", new { @class = "col-form-label", @for = "DropDownListLiabilityAccount" })
                             @Html.DropDownList("DropDownListLiabilityAccount", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListLiabilityAccount" })
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-6">
+                    <div class="col-sm-12 col-md-6" id="DivDropDownListCostOfSaleAccount">
                         <div class="form-group">
                             @Html.Label("Cost Of Sale Account", new { @class = "col-form-label", @for = "DropDownListCostOfSaleAccount" })
                             @Html.DropDownList("DropDownListCostOfSaleAccount", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListCostOfSaleAccount" })
