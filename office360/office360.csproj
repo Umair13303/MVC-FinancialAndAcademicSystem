@@ -302,7 +302,7 @@
     <Compile Include="Areas\AAccount\AAccountAreaRegistration.cs" />
     <Compile Include="Areas\AAccount\Controllers\CAccountCOAManagmentUIController.cs" />
     <Compile Include="Areas\AAccount\Controllers\CAccountDiscountTypeManagmentUIController.cs" />
-    <Compile Include="Areas\AAccount\Controllers\CAccountFeeStructureManagmentUIController.cs" />
+    <Compile Include="Areas\AAccount\Controllers\CAccountClassFeeStructureManagmentUIController.cs" />
     <Compile Include="Areas\AAccount\Controllers\CAccountFeeTypeManagmentUIController.cs" />
     <Compile Include="Areas\AAccount\HelperCode\BULK_CUD_Operation.cs" />
     <Compile Include="Areas\AAccount\HelperCode\Check_Duplicate_By_LINQ.cs" />
@@ -387,6 +387,12 @@
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\AccountType.cs">
+      <DependentUpon>FASModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDMX\ACFSM_ClassFeeStructure.cs">
+      <DependentUpon>FASModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDMX\ACFSM_ClassFeeStructureFeeType.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\ACM_Class.cs">
@@ -636,7 +642,7 @@
     <Content Include="Areas\AAccount\Script\CAccountCOAManagmentUI_Script\View_List_ACOAMUI_ChartofAccount.js" />
     <Content Include="Areas\AAccount\Script\CAccountDiscountTypeManagmentUI_Script\CreateUpdate_ADTMUI_DiscountType.js" />
     <Content Include="Areas\AAccount\Script\CAccountDiscountTypeManagmentUI_Script\View_List_ADTMUI_DiscountType.js" />
-    <Content Include="Areas\AAccount\Script\CAccountFeeStructureManagmentUI_Script\CreateUpdate_AFSMUI_FeeStructure.js" />
+    <Content Include="Areas\AAccount\Script\CAccountClassFeeStructureManagmentUI_Script\CreateUpdate_ACFSMUI_ClassFeeStructure.js" />
     <Content Include="Areas\AAccount\Script\CAccountFeeTypeManagmentUI_Script\CreateUpdate_AFTMUI_FeeType.js" />
     <Content Include="Areas\AAccount\Script\CAccountFeeTypeManagmentUI_Script\View_List_AFTMUI_FeeType.js" />
     <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\CreateUpdate_CBMUI_Branch.js" />
@@ -2119,7 +2125,7 @@
     <Content Include="Areas\AAccount\Views\CAccountDiscountTypeManagmentUI\View_List_ADTMUI_DiscountType.cshtml" />
     <Content Include="Areas\AAccount\Views\CAccountFeeTypeManagmentUI\CreateUpdate_AFTMUI_FeeType.cshtml" />
     <Content Include="Areas\AAccount\Views\CAccountFeeTypeManagmentUI\View_List_AFTMUI_FeeType.cshtml" />
-    <Content Include="Areas\AAccount\Views\CAccountFeeStructureManagmentUI\CreateUpdate_AFSMUI_FeeStructure.cshtml" />
+    <Content Include="Areas\AAccount\Views\CAccountClassFeeStructureManagmentUI\CreateUpdate_ACFSMUI_ClassFeeStructure.cshtml" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>

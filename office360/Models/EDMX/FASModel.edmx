@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="FASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="FASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AASM_AdmissionSession">
           <Key>
             <PropertyRef Name="Id" />
@@ -78,6 +78,51 @@
           <Property Name="ClassCurriculumId" Type="int" />
           <Property Name="SemesterId" Type="int" />
           <Property Name="SubjectId" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="DocType" Type="int" />
+          <Property Name="DocumentStatus" Type="int" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="ACFSM_ClassFeeStructure">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuID" Type="uniqueidentifier" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="CampusId" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ChallanMethodId" Type="int" />
+          <Property Name="WHTaxPolicyId" Type="int" />
+          <Property Name="AdmissionSessionId" Type="int" />
+          <Property Name="ClassId" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="DocType" Type="int" />
+          <Property Name="DocumentStatus" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="BranchId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ACFSM_ClassFeeStructureFeeType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuID" Type="uniqueidentifier" />
+          <Property Name="ClassFeeStructureId" Type="int" />
+          <Property Name="FeeTypeId" Type="int" />
+          <Property Name="RevenueAccountId" Type="int" />
+          <Property Name="AssetAccountId" Type="int" />
+          <Property Name="LiabilityAccountId" Type="int" />
+          <Property Name="CostOfSaleAccountId" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="4" />
           <Property Name="CreatedOn" Type="datetime" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="UpdatedOn" Type="datetime" />
@@ -774,6 +819,27 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Response" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="ACFSM_ClassFeeStructure_Upsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_OperationType" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="GuID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="CampusId" Type="int" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ChallanMethodId" Type="int" Mode="In" />
+          <Parameter Name="WHTaxPolicyId" Type="int" Mode="In" />
+          <Parameter Name="AdmissionSessionId" Type="int" Mode="In" />
+          <Parameter Name="ClassId" Type="int" Mode="In" />
+          <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+          <Parameter Name="UpdatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="UpdatedBy" Type="int" Mode="In" />
+          <Parameter Name="DocType" Type="int" Mode="In" />
+          <Parameter Name="DocumentStatus" Type="int" Mode="In" />
+          <Parameter Name="Status" Type="bit" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Response" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="ACM_Class_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="SessionCompanyId" Type="int" Mode="In" />
@@ -1200,6 +1266,8 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <EntitySet Name="AASM_AdmissionSessionClass" EntityType="Self.AASM_AdmissionSessionClass" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ACCM_ClassCurriculum" EntityType="Self.ACCM_ClassCurriculum" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ACCM_ClassCurriculumSubject" EntityType="Self.ACCM_ClassCurriculumSubject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ACFSM_ClassFeeStructure" EntityType="Self.ACFSM_ClassFeeStructure" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ACFSM_ClassFeeStructureFeeType" EntityType="Self.ACFSM_ClassFeeStructureFeeType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ACM_Class" EntityType="Self.ACM_Class" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ACOAM_ChartOfAccount" EntityType="Self.ACOAM_ChartOfAccount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ADTM_DiscountType" EntityType="Self.ADTM_DiscountType" Schema="dbo" store:Type="Tables" />
@@ -1481,7 +1549,8 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
     FROM [dbo].[WorkingShift] AS [WorkingShift]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FASModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1576,6 +1645,51 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Name="ClassCurriculumId" Type="Int32" />
           <Property Name="SemesterId" Type="Int32" />
           <Property Name="SubjectId" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="DocType" Type="Int32" />
+          <Property Name="DocumentStatus" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ACFSM_ClassFeeStructure">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuID" Type="Guid" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CampusId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ChallanMethodId" Type="Int32" />
+          <Property Name="WHTaxPolicyId" Type="Int32" />
+          <Property Name="AdmissionSessionId" Type="Int32" />
+          <Property Name="ClassId" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="DocType" Type="Int32" />
+          <Property Name="DocumentStatus" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="BranchId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ACFSM_ClassFeeStructureFeeType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuID" Type="Guid" />
+          <Property Name="ClassFeeStructureId" Type="Int32" />
+          <Property Name="FeeTypeId" Type="Int32" />
+          <Property Name="RevenueAccountId" Type="Int32" />
+          <Property Name="AssetAccountId" Type="Int32" />
+          <Property Name="LiabilityAccountId" Type="Int32" />
+          <Property Name="CostOfSaleAccountId" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
@@ -2135,6 +2249,8 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <EntitySet Name="AASM_AdmissionSessionClass" EntityType="Self.AASM_AdmissionSessionClass" />
           <EntitySet Name="ACCM_ClassCurriculum" EntityType="Self.ACCM_ClassCurriculum" />
           <EntitySet Name="ACCM_ClassCurriculumSubject" EntityType="Self.ACCM_ClassCurriculumSubject" />
+          <EntitySet Name="ACFSM_ClassFeeStructure" EntityType="Self.ACFSM_ClassFeeStructure" />
+          <EntitySet Name="ACFSM_ClassFeeStructureFeeType" EntityType="Self.ACFSM_ClassFeeStructureFeeType" />
           <EntitySet Name="ACM_Class" EntityType="Self.ACM_Class" />
           <EntitySet Name="ACOAM_ChartOfAccount" EntityType="Self.ACOAM_ChartOfAccount" />
           <EntitySet Name="ADTM_DiscountType" EntityType="Self.ADTM_DiscountType" />
@@ -2182,16 +2298,16 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <EntitySet Name="WHTaxPolicy" EntityType="Self.WHTaxPolicy" />
           <EntitySet Name="WorkingShift" EntityType="Self.WorkingShift" />
           <FunctionImport Name="fn_CodeSplitByCommaAsINT" IsComposable="true" ReturnType="Collection(FASModel.fn_CodeSplitByCommaAsINT_Result)">
-          <Parameter Name="psCSString" Mode="In" Type="String" />
+            <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_CodeSplitByCommaAsUniqueIdentifier" IsComposable="true" ReturnType="Collection(FASModel.fn_CodeSplitByCommaAsUniqueIdentifier_Result)">
-          <Parameter Name="psCSString" Mode="In" Type="String" />
+            <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_GetCommaSepratedValuesInList" IsComposable="true" ReturnType="Collection(FASModel.fn_GetCommaSepratedValuesInList_Result)">
-          <Parameter Name="psCSString" Mode="In" Type="String" />
+            <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_GetGeneralBranchSettingForCampus" IsComposable="true" ReturnType="Collection(FASModel.fn_GetGeneralBranchSettingForCampus_Result)">
-          <Parameter Name="CampusId" Mode="In" Type="Int32" />
+            <Parameter Name="CampusId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AASM_AdmissionSession_GetListByParam" ReturnType="Collection(FASModel.AASM_AdmissionSession_GetListByParam_Result)">
             <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
@@ -2250,6 +2366,27 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
             <Parameter Name="GuID" Mode="In" Type="Guid" />
             <Parameter Name="CampusId" Mode="In" Type="Int32" />
             <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="ClassId" Mode="In" Type="Int32" />
+            <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="DocType" Mode="In" Type="Int32" />
+            <Parameter Name="DocumentStatus" Mode="In" Type="Int32" />
+            <Parameter Name="Status" Mode="In" Type="Boolean" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="Remarks" Mode="In" Type="String" />
+            <Parameter Name="Response" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ACFSM_ClassFeeStructure_Upsert">
+            <Parameter Name="DB_OperationType" Mode="In" Type="String" />
+            <Parameter Name="GuID" Mode="In" Type="Guid" />
+            <Parameter Name="CampusId" Mode="In" Type="Int32" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="ChallanMethodId" Mode="In" Type="Int32" />
+            <Parameter Name="WHTaxPolicyId" Mode="In" Type="Int32" />
+            <Parameter Name="AdmissionSessionId" Mode="In" Type="Int32" />
             <Parameter Name="ClassId" Mode="In" Type="Int32" />
             <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
             <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
@@ -2949,6 +3086,53 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ACFSM_ClassFeeStructure">
+            <EntityTypeMapping TypeName="FASModel.ACFSM_ClassFeeStructure">
+              <MappingFragment StoreEntitySet="ACFSM_ClassFeeStructure">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="CampusId" ColumnName="CampusId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ChallanMethodId" ColumnName="ChallanMethodId" />
+                <ScalarProperty Name="WHTaxPolicyId" ColumnName="WHTaxPolicyId" />
+                <ScalarProperty Name="AdmissionSessionId" ColumnName="AdmissionSessionId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="DocType" ColumnName="DocType" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ACFSM_ClassFeeStructureFeeType">
+            <EntityTypeMapping TypeName="FASModel.ACFSM_ClassFeeStructureFeeType">
+              <MappingFragment StoreEntitySet="ACFSM_ClassFeeStructureFeeType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="ClassFeeStructureId" ColumnName="ClassFeeStructureId" />
+                <ScalarProperty Name="FeeTypeId" ColumnName="FeeTypeId" />
+                <ScalarProperty Name="RevenueAccountId" ColumnName="RevenueAccountId" />
+                <ScalarProperty Name="AssetAccountId" ColumnName="AssetAccountId" />
+                <ScalarProperty Name="LiabilityAccountId" ColumnName="LiabilityAccountId" />
+                <ScalarProperty Name="CostOfSaleAccountId" ColumnName="CostOfSaleAccountId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="DocType" ColumnName="DocType" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ACM_Class">
             <EntityTypeMapping TypeName="FASModel.ACM_Class">
               <MappingFragment StoreEntitySet="ACM_Class">
@@ -3623,6 +3807,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ACCM_ClassCurriculum_Upsert" FunctionName="FASModel.Store.ACCM_ClassCurriculum_Upsert" />
+          <FunctionImportMapping FunctionImportName="ACFSM_ClassFeeStructure_Upsert" FunctionName="FASModel.Store.ACFSM_ClassFeeStructure_Upsert" />
           <FunctionImportMapping FunctionImportName="ACM_Class_GetListByParam" FunctionName="FASModel.Store.ACM_Class_GetListByParam">
             <ResultMapping>
               <ComplexTypeMapping TypeName="FASModel.ACM_Class_GetListByParam_Result">

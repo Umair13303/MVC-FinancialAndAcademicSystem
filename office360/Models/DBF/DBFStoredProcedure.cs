@@ -111,5 +111,55 @@ namespace office360.Models.DBF
             }
 
         }
+        public static int? ACFSM_ClassFeeStructure_Upsert(string DB_OperationType,Guid? GuID,int? CampusId,string Description,int? ChallanMethodId,int? WHTaxPolicyId,int? AdmissionSessionId,int? ClassId,DateTime? CreatedOn,int? CreatedBy,DateTime? UpdatedOn,int? UpdatedBy,int? DocType,int? DocumentStatus,bool? Status,int? BranchId,int? CompanyId,string Remarks, List<TVParam.ACFSM_ClassFeeStructureFeeType_TVP> TVP_ACFSM_ClassFeeStructureFeeType_TVP, SqlParameter Response)
+        {
+            try
+            {
+                string ConnectionString = ConfigurationManager.ConnectionStrings["FASQUERYEntities"].ConnectionString;
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand("ACFSM_ClassFeeStructure_Upsert", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@DB_OperationType", DB_OperationType ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@GuID", GuID ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@CampusId", CampusId ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@Description", Description ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@ChallanMethodId", ChallanMethodId ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@WHTaxPolicyId", WHTaxPolicyId ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@AdmissionSessionId", AdmissionSessionId ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@ClassId", ClassId ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@CreatedOn", CreatedOn ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@CreatedBy", CreatedBy ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@UpdatedOn", UpdatedOn ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@UpdatedBy", UpdatedBy ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@DocType", DocType ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@DocumentStatus", DocumentStatus ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@Status", Status ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@BranchId", BranchId ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@CompanyId", CompanyId ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@Remarks", Remarks ?? (object)DBNull.Value);
+
+                        SqlParameter TVParam = cmd.Parameters.AddWithValue("@TVP_ACFSM_ClassFeeStructureFeeType", TVP_ACFSM_ClassFeeStructureFeeType_TVP.ToDataTable());
+                        TVParam.SqlDbType = SqlDbType.Structured;
+                        TVParam.TypeName = "dbo.BULK_ACFSM_ClassFeeStructureFeeType";
+
+
+                        cmd.Parameters.Add(Response);
+
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+
+                        return (int?)Response.Value;
+                    }
+                }
+            }
+            catch (Exception Ex)
+            {
+                throw Ex;
+            }
+
+        }
     }
 }

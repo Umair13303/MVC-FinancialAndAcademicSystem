@@ -31,6 +31,8 @@ namespace office360.Models.EDMX
         public virtual DbSet<AASM_AdmissionSessionClass> AASM_AdmissionSessionClass { get; set; }
         public virtual DbSet<ACCM_ClassCurriculum> ACCM_ClassCurriculum { get; set; }
         public virtual DbSet<ACCM_ClassCurriculumSubject> ACCM_ClassCurriculumSubject { get; set; }
+        public virtual DbSet<ACFSM_ClassFeeStructure> ACFSM_ClassFeeStructure { get; set; }
+        public virtual DbSet<ACFSM_ClassFeeStructureFeeType> ACFSM_ClassFeeStructureFeeType { get; set; }
         public virtual DbSet<ACM_Class> ACM_Class { get; set; }
         public virtual DbSet<ACOAM_ChartOfAccount> ACOAM_ChartOfAccount { get; set; }
         public virtual DbSet<ADTM_DiscountType> ADTM_DiscountType { get; set; }
@@ -370,6 +372,83 @@ namespace office360.Models.EDMX
                 new ObjectParameter("Remarks", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ACCM_ClassCurriculum_Upsert", dB_OperationTypeParameter, guIDParameter, campusIdParameter, descriptionParameter, classIdParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, remarksParameter, response);
+        }
+    
+        public virtual int ACFSM_ClassFeeStructure_Upsert(string dB_OperationType, Nullable<System.Guid> guID, Nullable<int> campusId, string description, Nullable<int> challanMethodId, Nullable<int> wHTaxPolicyId, Nullable<int> admissionSessionId, Nullable<int> classId, Nullable<System.DateTime> createdOn, Nullable<int> createdBy, Nullable<System.DateTime> updatedOn, Nullable<int> updatedBy, Nullable<int> docType, Nullable<int> documentStatus, Nullable<bool> status, Nullable<int> branchId, Nullable<int> companyId, string remarks, ObjectParameter response)
+        {
+            var dB_OperationTypeParameter = dB_OperationType != null ?
+                new ObjectParameter("DB_OperationType", dB_OperationType) :
+                new ObjectParameter("DB_OperationType", typeof(string));
+    
+            var guIDParameter = guID.HasValue ?
+                new ObjectParameter("GuID", guID) :
+                new ObjectParameter("GuID", typeof(System.Guid));
+    
+            var campusIdParameter = campusId.HasValue ?
+                new ObjectParameter("CampusId", campusId) :
+                new ObjectParameter("CampusId", typeof(int));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var challanMethodIdParameter = challanMethodId.HasValue ?
+                new ObjectParameter("ChallanMethodId", challanMethodId) :
+                new ObjectParameter("ChallanMethodId", typeof(int));
+    
+            var wHTaxPolicyIdParameter = wHTaxPolicyId.HasValue ?
+                new ObjectParameter("WHTaxPolicyId", wHTaxPolicyId) :
+                new ObjectParameter("WHTaxPolicyId", typeof(int));
+    
+            var admissionSessionIdParameter = admissionSessionId.HasValue ?
+                new ObjectParameter("AdmissionSessionId", admissionSessionId) :
+                new ObjectParameter("AdmissionSessionId", typeof(int));
+    
+            var classIdParameter = classId.HasValue ?
+                new ObjectParameter("ClassId", classId) :
+                new ObjectParameter("ClassId", typeof(int));
+    
+            var createdOnParameter = createdOn.HasValue ?
+                new ObjectParameter("CreatedOn", createdOn) :
+                new ObjectParameter("CreatedOn", typeof(System.DateTime));
+    
+            var createdByParameter = createdBy.HasValue ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
+    
+            var updatedOnParameter = updatedOn.HasValue ?
+                new ObjectParameter("UpdatedOn", updatedOn) :
+                new ObjectParameter("UpdatedOn", typeof(System.DateTime));
+    
+            var updatedByParameter = updatedBy.HasValue ?
+                new ObjectParameter("UpdatedBy", updatedBy) :
+                new ObjectParameter("UpdatedBy", typeof(int));
+    
+            var docTypeParameter = docType.HasValue ?
+                new ObjectParameter("DocType", docType) :
+                new ObjectParameter("DocType", typeof(int));
+    
+            var documentStatusParameter = documentStatus.HasValue ?
+                new ObjectParameter("DocumentStatus", documentStatus) :
+                new ObjectParameter("DocumentStatus", typeof(int));
+    
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(bool));
+    
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(int));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var remarksParameter = remarks != null ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ACFSM_ClassFeeStructure_Upsert", dB_OperationTypeParameter, guIDParameter, campusIdParameter, descriptionParameter, challanMethodIdParameter, wHTaxPolicyIdParameter, admissionSessionIdParameter, classIdParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, remarksParameter, response);
         }
     
         public virtual ObjectResult<ACM_Class_GetListByParam_Result> ACM_Class_GetListByParam(string dB_IF_PARAM, Nullable<int> sessionCompanyId, Nullable<int> sessionBranchId, string allowedCampusIds, string searchParameter, Nullable<int> admissionSessionId, Nullable<int> campusId, Nullable<int> companyId)

@@ -189,5 +189,63 @@ namespace office360.Areas.AAccount.HelperCode
         }
         #endregion
 
+        #region HELPER FOR :: CHECK IF FeeType(ACTIVE_CLASSFEESTRUCTURE) ALREADY EXIST
+        public static int? IS_EXIST_ACFSM_CLASSFEESTRUCTURE_BY_PARAMETER(SQLParamters PostedData)
+        {
+            using (FASEntities db = new FASEntities())
+            {
+                bool IsRecordExist = false;
+                int? Response = (int?)Http_DB_Response.CODE_DATA_ALREADY_EXIST;
+                try
+                {
+                    switch (PostedData.OperationType)
+                    {
+
+                        case nameof(DB_OperationType.INSERT_DATA_INTO_DB):
+
+                            #region IN CASE OF INSERT :: CHECK IF ENTERY RECORD EXIST , BASED ON DATA ENTERED
+                            IsRecordExist = db.ACFSM_ClassFeeStructure
+                                .Any(x =>
+                                    x.CompanyId == PostedData.ClassId &&
+                                    x.CompanyId == PostedData.CompanyId &&
+                                    x.DocumentStatus == (int?)DOCUMENT_STATUS.ACTIVE_ACCOUNT_CLASS_FEE_STRUCTURE &&
+                                    x.Status == true
+                                );
+                            #endregion
+                            if (!IsRecordExist)
+                                Response = (int?)Http_DB_Response.CODE_AUTHORIZED;
+                            else
+                                Response = (int?)Http_DB_Response.CODE_DATA_ALREADY_EXIST;
+                            break;
+
+                        case nameof(DB_OperationType.UPDATE_DATA_INTO_DB):
+                            #region IN CASE OF UPDATE :: CHECK IF ENTERY RECORD EXIST , BASED ON SYSTEM GUID
+                            IsRecordExist = db.ACFSM_ClassFeeStructure.Any(x => x.GuID == PostedData.GuID);
+                            #endregion
+                            if (!IsRecordExist)
+                                Response = (int?)Http_DB_Response.CODE_DATA_DOES_NOT_EXIST;
+                            else
+                                Response = (int?)Http_DB_Response.CODE_AUTHORIZED;
+
+                            break;
+
+                        default:
+                            Response = (int?)Http_DB_Response.CODE_DATA_ALREADY_EXIST;
+                            break;
+
+
+                    }
+                    return Response;
+                }
+                catch (Exception Ex)
+                {
+                    return HttpServerStatus.Http_DB_Response.CODE_UN_KNOWN_ACTIVITY.ToInt();
+
+                }
+
+            }
+        }
+        #endregion
+
     }
 }

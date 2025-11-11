@@ -287,7 +287,10 @@ function ValidateInputFields() {
     if ($('#DropDownListClass').RequiredDropdown() == false) {
         return false;
     }
-    
+    if (!ClassCurriculumSubjectTable.data().count()) {
+        GetMessageBox("To Proceed, Atleast Insert Data For One Subject!", 505);
+        return false;
+    }
     if ($('#TextBoxRemarks').RequiredTextBoxInputGroup() == false) {
         return false;
     }
@@ -442,7 +445,7 @@ function GET_ACCM_CLASSCURRICULUM_INFOBYGUID() {
                     $('#DropDownListCampus').val(data.DATA[0].CampusId).trigger('change.select2');
                     $('#TextBoxDescription').val(data.DATA[0].Description);
                     $('#TextBoxRemarks').val(data.DATA[0].Remarks).prop('disabled', true);
-                    $('#HiddenFieldChartOfAccountGuID').val(data.DATA[0].GuID);
+                    $('#HiddenFieldClassCurriculumGuID').val(data.DATA[0].GuID);
                     /*-- LOAD DATA FOR FIELDS RENDERED :: ON CHANGE --*/
                     PopulateMT_ACM_Class_ListByParam(data.DATA[0].CampusId, data.DATA[0].ClassId);
                 }
