@@ -104,6 +104,64 @@ namespace office360.Areas.AAccount.HelperCode
         }
         #endregion
 
+        #region HELPER FOR :: GET DATA USING LINQ (ACFSM_CLASSFEESTRUCTURE && ACFSM_CLASSFEESTRUCTUREFEETYPE) ::-- MAIN DB
+        public static List<SQLParamters> GET_MT_ACFSM_CLASSFEESTRUCTURE_INFO_BY_GUID(SQLParamters PostedData)
+        {
+            List<SQLParamters> DATA = new List<SQLParamters>();
+
+            using (FASEntities db = new FASEntities())
+            {
+                DATA = ((List<SQLParamters>)
+                       (from CFS in db.ACFSM_ClassFeeStructure
+                        where CFS.CompanyId == Session_Manager.CompanyId && CFS.GuID == PostedData.GuID
+                        select new SQLParamters
+                        {
+                            Id = CFS.Id,
+                            GuID = CFS.GuID,
+                            CampusId = CFS.CampusId,
+                            Description = CFS.Description,
+                            ChallanMethodId = CFS.ChallanMethodId,
+                            WHTaxPolicyId = CFS.WHTaxPolicyId,
+                            AdmissionSessionId = CFS.AdmissionSessionId,
+                            ClassId = CFS.ClassId,
+                            Remarks = CFS.Remarks,
+                        }).ToList());
+
+                return DATA;
+            }
+        }
+        public static List<SQLParamters> GET_MT_ACFSM_CLASSFEESTRUCTUREFEETYPE_INFO_BY_GUID(SQLParamters PostedData)
+        {
+            List<SQLParamters> DATA = new List<SQLParamters>();
+
+            using (FASEntities db = new FASEntities())
+            {
+                DATA = ((List<SQLParamters>)
+                       (from CFSFT in db.ACFSM_ClassFeeStructureFeeType
+                        join CFS in db.ACFSM_ClassFeeStructure on CFSFT.ClassFeeStructureId equals CFS.Id
+                        where CFS.CompanyId == Session_Manager.CompanyId && CFS.GuID == PostedData.GuID
+                        select new SQLParamters
+                        {
+                            Id = CFSFT.Id,
+                            GuID = CFSFT.GuID,
+                            FeeType = db.AFTM_FeeType.Where(FT => FT.Id == CFSFT.FeeTypeId).Select(FT => FT.Description).FirstOrDefault(),
+                            RevenueAccount = db.ACOAM_ChartOfAccount.Where(COA => COA.Id == CFSFT.RevenueAccountId).Select(COA => COA.Description).FirstOrDefault(),
+                            AssetAccount = db.ACOAM_ChartOfAccount.Where(COA => COA.Id == CFSFT.AssetAccountId).Select(COA => COA.Description).FirstOrDefault(),
+                            LiabilityAccount = db.ACOAM_ChartOfAccount.Where(COA => COA.Id == CFSFT.LiabilityAccountId).Select(COA => COA.Description).FirstOrDefault(),
+                            CostOfSaleAccount = db.ACOAM_ChartOfAccount.Where(COA => COA.Id == CFSFT.CostOfSaleAccountId).Select(COA => COA.Description).FirstOrDefault(),
+                            Amount= CFSFT.Amount,
+                            FeeTypeId = CFSFT.FeeTypeId,
+                            RevenueAccountId = CFSFT.RevenueAccountId,
+                            AssetAccountId = CFSFT.AssetAccountId,
+                            LiabilityAccountId = CFSFT.LiabilityAccountId,
+                            CostOfSaleAccountId = CFSFT.CostOfSaleAccountId,
+                        }).ToList());
+
+                return DATA;
+            }
+        }
+        #endregion
+
 
     }
 }

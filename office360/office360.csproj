@@ -395,6 +395,12 @@
     <Compile Include="Models\EDMX\ACFSM_ClassFeeStructureFeeType.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EDMX\ACFSM_ClassFeeStructure_GetListByParam_Result.cs">
+      <DependentUpon>FASModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDMX\ACFSM_ClassFeeStructure_GetListBySearch_Result.cs">
+      <DependentUpon>FASModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EDMX\ACM_Class.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
@@ -525,9 +531,6 @@
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\fn_GetCommaSepratedValuesInList_Result.cs">
-      <DependentUpon>FASModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EDMX\fn_GetGeneralBranchSettingForCampus_Result.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\Gender.cs">

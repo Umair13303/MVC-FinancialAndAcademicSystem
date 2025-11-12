@@ -59,6 +59,7 @@ namespace office360.Models.General
         public decimal? SlabAmount { get; set; }
         public decimal? DiscountPercentage { get; set; }
         public decimal? DiscountAmount { get; set; }
+        public decimal? Amount { get; set; }
 
         public Guid? GuID { get; set; }
 
@@ -209,6 +210,7 @@ namespace office360.Models.General
         public string Semester { get; set; }
         public string Subject { get; set; }
         public string FeeCategoryIds { get; set; }
+        public string FeeType { get; set; }
 
 
         public static explicit operator List<object>(SQLParamters v)

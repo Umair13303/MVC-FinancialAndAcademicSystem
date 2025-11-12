@@ -4,7 +4,7 @@ var DDL_Condition = "";
 var DB_OperationType = $('#HiddenFieldDB_OperationType').val();
 var IsFieldClear = false;
 
-var FeeStructureFeeTypeTable = "";
+var ClassFeeStructureFeeTypeTable = "";
 
 var IsSecurity;
 var IsRefundable;
@@ -13,7 +13,6 @@ var WH_Percentage;
 var WH_SlabAmount;
 var WH_FixedCharges;
 var WH_IsOnExceedingAmount;
-
 
 /*----------------------------------** FUNCTION FOR::PAGE LOADER                                                            **----------------------------------------------*/
 $(document).ready(function () {
@@ -43,7 +42,6 @@ function PopulateDropDownLists() {
     PopulateMT_ACOAM_LiabilityAccount_ListByParam();
     PopulateMT_ACOAM_CostOfSaleAccount_ListByParam();
 }
-
 /*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                                                     **----------------------------------------------*/
 function ChangeCase() {
     $('#DropDownListCampus').change(function () {
@@ -67,7 +65,7 @@ function ChangeCase() {
         WH_SlabAmount = parseFloat(Selected_WHTaxPolicyId.attr('data-SlabAmount')) || 0;
         WH_FixedCharges = parseFloat(Selected_WHTaxPolicyId.attr('data-FixedCharges')) || 0;
         WH_IsOnExceedingAmount = $('#DropDownListWHTaxPolicy :selected').attr('data-IsOnExceedingAmount') === 'true';
-        CalculationBoxFeeStructureFeeTypeTable();
+        CalculationBoxClassFeeStructureFeeTypeTable();
     });
 
     //-----------FOR ::EDIT CASE
@@ -79,9 +77,10 @@ function ChangeCase() {
         }
     });
 }
+
 /*----------------------------------** FUNCTION FOR::INITIALIZING DATA TABLE's & RELATED OPERATION's                        **----------------------------------------------*/
 function InitializeFeeStructureFeeTypeDataTable() {
-    FeeStructureFeeTypeTable = $('#MainTableAFSM_FeeStructureFeeType').DataTable({
+    ClassFeeStructureFeeTypeTable = $('#MainTableACFSM_ClassFeeStructureFeeType').DataTable({
         "responsive": true,
         "ordering": false,
         "processing": true,
@@ -111,17 +110,17 @@ function InitializeFeeStructureFeeTypeDataTable() {
             });
         }
     });
-    FeeStructureFeeTypeTable.on('order.dt search.dt', function () {
-        FeeStructureFeeTypeTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+    ClassFeeStructureFeeTypeTable.on('order.dt search.dt', function () {
+        ClassFeeStructureFeeTypeTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
             cell.innerHTML = i + 1;
         });
     }).draw();
-    FeeStructureFeeTypeTable.on('draw', function () {
-        CalculationBoxFeeStructureFeeTypeTable();
+    ClassFeeStructureFeeTypeTable.on('draw', function () {
+        CalculationBoxClassFeeStructureFeeTypeTable();
     });
-    HTML_DATATABLE_UTIL.APPEND_FOOTER("TDTotalFeeTypeAmount", "MainTableAFSM_FeeStructureFeeType", "11", "Total Fee");
-    HTML_DATATABLE_UTIL.APPEND_FOOTER("TDWithHoldingTaxAmount", "MainTableAFSM_FeeStructureFeeType", "11", "With Holding Tax");
-    HTML_DATATABLE_UTIL.APPEND_FOOTER("TDNetFeeAmount", "MainTableAFSM_FeeStructureFeeType", "11", "Net Fee (Tax Inclusive)");
+    HTML_DATATABLE_UTIL.APPEND_FOOTER("TDTotalFeeTypeAmount", "MainTableACFSM_ClassFeeStructureFeeType", "11", "Total Fee");
+    HTML_DATATABLE_UTIL.APPEND_FOOTER("TDWithHoldingTaxAmount", "MainTableACFSM_ClassFeeStructureFeeType", "11", "With Holding Tax");
+    HTML_DATATABLE_UTIL.APPEND_FOOTER("TDNetFeeAmount", "MainTableACFSM_ClassFeeStructureFeeType", "11", "Net Fee (Tax Inclusive)");
 }
 function ValidateInputFieldsFeeStructureFeeTypeDetail() {
     if ($('#DropDownListFeeType').RequiredDropdown() == false) {
@@ -239,7 +238,7 @@ function InsertDataIntoDataTable() {
     Table_Row[11] = Amount;
     Table_Row[12] = HTML_BUTTON.DELETE_IN_LIST();
     var IsRecordAlreadyInserted = false;
-    FeeStructureFeeTypeTable.column(1).data().each(function (value, index) {
+    ClassFeeStructureFeeTypeTable.column(1).data().each(function (value, index) {
         if (value == (Table_Row[1])) {
             IsRecordAlreadyInserted = true;
         }
@@ -248,7 +247,7 @@ function InsertDataIntoDataTable() {
         GetMessageBox("Duplicate Record Exist", 505)
     }
     else {
-        FeeStructureFeeTypeTable.row.add(Table_Row).draw();
+        ClassFeeStructureFeeTypeTable.row.add(Table_Row).draw();
         ClearInputFieldsFeeStructureFeeTypeDataTable();
     }
     IsRecordAlreadyInserted = false;
@@ -261,8 +260,8 @@ function ClearInputFieldsFeeStructureFeeTypeDataTable() {
     $('#DropDownListCostOfSaleAccount').val('-1').trigger('change.select2');
     $('#TextBoxAmount').val('');
 }
-function CalculationBoxFeeStructureFeeTypeTable() {
-    var TotalFeeTypeAmount = FeeStructureFeeTypeTable.column(11).data().reduce(function (a, b) {
+function CalculationBoxClassFeeStructureFeeTypeTable() {
+    var TotalFeeTypeAmount = ClassFeeStructureFeeTypeTable.column(11).data().reduce(function (a, b) {
         return parseFloat(a) + parseFloat(b);
     }, 0);
     var TaxAmount = 0;
@@ -673,7 +672,7 @@ function ValidateInputFields() {
     if ($('#DropDownListClass').RequiredDropdown() == false) {
         return false;
     }
-    if (!FeeStructureFeeTypeTable.data().count()) {
+    if (!ClassFeeStructureFeeTypeTable.data().count()) {
         GetMessageBox("To Proceed, Atleast Insert Data For One Fee Type!", 505);
         return false;
     }
@@ -739,7 +738,7 @@ function UpSertDataIntoDB() {
         10: 'CostOfSaleAccountId',
         11: 'Amount'
     };
-    var FeeStructureFeeTypeDetail = $('#MainTableAFSM_FeeStructureFeeType').DataTable().rows().data().toArray().map(row => {
+    var ClassFeeStructureFeeTypeTableDetail = $('#MainTableACFSM_ClassFeeStructureFeeType').DataTable().rows().data().toArray().map(row => {
         return Object.fromEntries(
             Object.entries(IncludedColumnMappings).map(([index, key]) => [key, row[index]])
         );
@@ -749,7 +748,7 @@ function UpSertDataIntoDB() {
         type: "POST",
         url: BasePath + "/AAccount/CAccountClassFeeStructureManagmentUI/UpSert_Into_ACFSM_ClassFeeStructure",
         dataType: 'json',
-        data: { 'PostedData': (JsonArg), 'PostedDataDetail': (FeeStructureFeeTypeDetail) },
+        data: { 'PostedData': (JsonArg), 'PostedDataDetail': (ClassFeeStructureFeeTypeTableDetail) },
         beforeSend: function () {
             startLoading();
         },
@@ -758,7 +757,7 @@ function UpSertDataIntoDB() {
         },
         complete: function () {
             stopLoading();
-            //ClearInputFields();
+            ClearInputFields();
         },
         error: function (jqXHR, error, errorThrown) {
             GetMessageBox("The Transaction Can Not Be Performed Due To Serve Activity", 500);
@@ -770,7 +769,7 @@ function ClearInputFields() {
     $('.form-control').not('#DropDownListCampus').val('');
     $('.select2').not('#DropDownListCampus').val('-1').change();
     $('form').removeClass('Is-Valid');
-    FeeStructureFeeTypeTable.clear().draw();
+    ClassFeeStructureFeeTypeTable.clear().draw();
 }
 
 /*----------------------------------** FUNCTION FOR:: UPDATE BRANCH (LOAD DROPDOWN,DATA FOR FEESTRUCTUREID)                 **----------------------------------------------*/
@@ -789,14 +788,14 @@ function GET_AFSM_FEESTRUCTURE_LISTBYPARAM() {
         placeholder: 'Search By Description / Code',
         minimumInputLength: 3,
         ajax: {
-            url: BasePath + "/AAccount/CAccountDiscountTypeManagmentUI/GET_MT_ADTM_DISCOUNTTYPE_BYPARAMETER_SEARCH",
+            url: BasePath + "/AAccount/CAccountClassFeeStructureManagmentUI/GET_MT_ACFSM_CLASSFEESTRUCTURE_BYPARAMETER_SEARCH",
             type: "POST",
             delay: 250,
             data: function (params) {
                 return {
                     PostedData: {
                         SearchParameter: params.term,
-                        DB_IF_PARAM: DOCUMENT_LIST_CONDITION.ADTM_DISCOUNTTYPE_BY_COMPANYID_SEARCH_PARAMETER_UPDATEDISCOUNTTYPE,
+                        DB_IF_PARAM: DOCUMENT_LIST_CONDITION.ACFSM_CLASSFEESTRUCTURE_BY_ALLOWEDBRANCHIDS_SEARCH_PARAMETER_UPDATECLASSFEESTRUCTURE,
                     }
                 };
             },
@@ -828,7 +827,7 @@ function GET_AFSM_FEESTRUCTURE_INFOBYGUID() {
         }
         $.ajax({
             type: "POST",
-            url: BasePath + "/AAccount/CAccountDiscountTypeManagmentUI/GET_MT_ADTM_DISCOUNTTYPE_INFOBYGUID",
+            url: BasePath + "/AAccount/CAccountClassFeeStructureManagmentUI/GET_MT_ACFSM_CLASSFEESTRUCTURE_INFOBYGUID",
             dataType: 'json',
             data: { 'PostedData': (JsonArg) },
             beforeSend: function () {
@@ -838,21 +837,13 @@ function GET_AFSM_FEESTRUCTURE_INFOBYGUID() {
                 if (data.length > 0) {
                     /*-- LOAD DATA FOR FIELDS RENDERED :: ON LOAD/STATIC --*/
                     $('#TextBoxDescription').val(data[0].Description);
-                    $('#DropDownListCostOfSaleAccount').val(data[0].CostOfSaleAccountId).trigger('change.select2');
-                    $("#CheckBoxIsByPercentage").prop('checked', (data[0].IsByPercentage)).change();
-                    $("#CheckBoxIsByAmount").prop('checked', (data[0].IsByAmount)).change();
-                    if (data[0].IsByPercentage == true) {
-                        $("#TextBoxDiscountPercentageOrAmount").val(data[0].DiscountPercentage);
-                    }
-                    if (data[0].IsByAmount == true) {
-                        $("#TextBoxDiscountPercentageOrAmount").val(data[0].DiscountAmount);
-                    }
+                   
                     $('#TextBoxRemarks').val(data[0].Remarks).prop('disabled', true);
                     $('#HiddenFieldDiscountTypeGuID').val(data[0].GuID);
                     /*-- LOAD DATA FOR FIELDS RENDERED :: ON CHANGE --*/
                 }
                 else {
-                    GetMessageBox("NO RECORD FOUND FOR FOR SELECTED DISCOUNT TYPE.... CONTACT DEVELOPER TEAM", 505);
+                    GetMessageBox("NO RECORD FOUND FOR FOR SELECTED FEE STRUCTURE.... CONTACT DEVELOPER TEAM", 505);
                 }
             },
             complete: function () {
@@ -864,7 +855,7 @@ function GET_AFSM_FEESTRUCTURE_INFOBYGUID() {
         });
     }
     else {
-        GetMessageBox("Please Select A Discount Type", 505);
+        GetMessageBox("Please Select A Fee Structure", 505);
         return;
     }
 };

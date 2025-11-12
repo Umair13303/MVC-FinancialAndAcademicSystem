@@ -18,7 +18,7 @@ namespace office360.Areas.AAccount.Controllers
         FASEntities db = new FASEntities();
         int? StatusCode = 0;
         int? _Exe = 0;
-        /*---------------------- ** ACTION RESULTS FOR :: RENDER OF VIEW ** ------------------------------------------------------------------------- */
+        /*---------------------- ** ACTION RESULTS FOR :: RENDER OF VIEW ** --------------------------------------------------------------------------------------------- */
         #region ACTION RESULT FOR :: RENDER VIEW
         public ActionResult CreateUpdate_ACFSMUI_ClassFeeStructure(SQLParamters PostedData)
         {
@@ -57,7 +57,7 @@ namespace office360.Areas.AAccount.Controllers
         }
         #endregion
 
-        /*---------------------- ** ACTION RESULTS FOR :: RENDER DATA FOR DROP DOWN LIST FROM DB_LOOKUP USING LINQUERY ** --------------------------- */
+        /*---------------------- ** ACTION RESULTS FOR :: RENDER DATA FOR DROP DOWN LIST FROM DB_LOOKUP USING LINQUERY ** ----------------------------------------------- */
         #region ACTION RESULT FOR :: RENDER DATA FOR DROP DOWN FROM DB_LOOKUP -- LINQ-QUERY
         public ActionResult GET_LK1_CHALLANMETHOD(SQLParamters PostedData)
         {
@@ -71,7 +71,7 @@ namespace office360.Areas.AAccount.Controllers
         }
         #endregion
 
-        /*---------------------- ** ACTION RESULTS FOR :: RENDER OF DROP DOWN LIST FROM DB_MAIN USING STOREDPROCEDURE ** ---------------------------- */
+        /*---------------------- ** ACTION RESULTS FOR :: RENDER OF DROP DOWN LIST FROM DB_MAIN USING STOREDPROCEDURE ** ------------------------------------------------ */
         #region ACTION RESULT FOR :: RENDER DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
         public ActionResult GET_MT_BM_BRANCH_BYPARAMTER(SQLParamters PostedData)
         {
@@ -120,7 +120,7 @@ namespace office360.Areas.AAccount.Controllers
         }
         #endregion
 
-        /*---------------------- ** ACTION RESULTS FOR :: RENDER OF DOCUMENT INFORMATION FROM DB_MAIN USING STOREDPROCEDURE ** ---------------------------- */
+        /*---------------------- ** ACTION RESULTS FOR :: RENDER OF DOCUMENT INFORMATION FROM DB_MAIN USING STOREDPROCEDURE ** ------------------------------------------ */
         #region ACTION RESULT FOR :: GET DOCUMENT SETTING -- LINQ-QUERY --> FEE_TYPE
         public ActionResult GET_MT_AFTM_FEETYPE_INFOBYGUID(SQLParamters PostedData)
         {
@@ -129,7 +129,7 @@ namespace office360.Areas.AAccount.Controllers
         }
         #endregion
 
-        /*---------------------- ** ACTION RESULTS FOR :: DATABASE OPERATION BY USER (INSERT/UPDATE/DELETE OF CLASSFEESTRUCTURE) ** ----------------------- */
+        /*---------------------- ** ACTION RESULTS FOR :: DATABASE OPERATION BY USER (INSERT/UPDATE/DELETE OF CLASSFEESTRUCTURE && CLASSFEESTRUCTUREFEETYPE) ** --------- */
         #region ACTION RESULT FOR :: INSERT/UPDATE/DELETE INTO DBO.ACFSM_ClassFeeStructure
         [HttpPost]
         public ActionResult UpSert_Into_ACFSM_ClassFeeStructure(SQLParamters PostedData, List<TVParam.ACFSM_ClassFeeStructureFeeType_TVP> PostedDataDetail)
@@ -137,6 +137,33 @@ namespace office360.Areas.AAccount.Controllers
             _Exe = AAccount.HelperCode.BULK_CUD_Operation.Update_Insert_ACFSM_ClassFeeStructure(PostedData, PostedDataDetail);
             var data = new { Message = HttpServerStatus.HTTP_DB_TransactionMessagByStatusCode(_Exe), StatusCode = _Exe };
             return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        /*---------------------- ** ACTION RESULTS FOR :: EDIT (LOAD DOCUMENT OF CLASSFEESTRUCTURE & GET DETAIL BY CLASSFEESTRUCTURE_GUID) ** --------------------------- */
+        #region ACTION RESULT FOR :: SEARCH DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
+        public ActionResult GET_MT_ACFSM_CLASSFEESTRUCTURE_BYPARAMETER_SEARCH(SQLParamters PostedData)
+        {
+            var DATA = AAccount.HelperCode.DATA_FROM_SP.GET_MT_ACFSM_ClassFeeStructure_By_Param_List(PostedData).ToList();
+            return Json(new { data = DATA }, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region ACTION RESULT FOR :: GET DOCUMENT DETAIL (DBO.ACFSM_CLASSFEESTRUCTURE) -- LINQ-QUERY
+        public ActionResult GET_MT_ACFSM_CLASSFEESTRUCTURE_INFOBYGUID(SQLParamters PostedData)
+        {
+            var DATA = AAccount.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_ACFSM_CLASSFEESTRUCTURE_INFO_BY_GUID(PostedData).ToList();
+            var DATA_DETAIL = AAccount.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_ACFSM_CLASSFEESTRUCTUREFEETYPE_INFO_BY_GUID(PostedData).ToList();
+            return Json(new { DATA, DATA_DETAIL }, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        /*---------------------- ** ACTION RESULTS FOR :: DATA TABLE (LOAD TABLE OF CLASSFEESTRUCTURE BY INPUT TYPE & TEXT) ** ------------------------------------------ */
+        #region ACTION RESULT FOR :: GET LIST BY SEARCH PARAMETER FOR DATA-TABLE (DBO.ACFSM_CLASSFEESTRUCTURE)-- STORED PROCEDURE
+        public ActionResult GET_MT_ACFSM_CLASSFEESTRUCTURE_LIST_BY_SEARCHQUERY_FORDATATABLE(SQLParamters PostedData)
+        {
+            var DATA = AAccount.HelperCode.DATA_FROM_SP.GET_MT_ACFSM_ClassFeeStructure_List_By_SearchQuery(PostedData).ToList();
+            return Json(new { success = true, data = DATA }, JsonRequestBehavior.AllowGet);
         }
         #endregion
     }

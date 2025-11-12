@@ -206,7 +206,7 @@ namespace office360.Areas.AAccount.HelperCode
                             #region IN CASE OF INSERT :: CHECK IF ENTERY RECORD EXIST , BASED ON DATA ENTERED
                             IsRecordExist = db.ACFSM_ClassFeeStructure
                                 .Any(x =>
-                                    x.CompanyId == PostedData.ClassId &&
+                                    x.ClassId == PostedData.ClassId &&
                                     x.CompanyId == PostedData.CompanyId &&
                                     x.DocumentStatus == (int?)DOCUMENT_STATUS.ACTIVE_ACCOUNT_CLASS_FEE_STRUCTURE &&
                                     x.Status == true

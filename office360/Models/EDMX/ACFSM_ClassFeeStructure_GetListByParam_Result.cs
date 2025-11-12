@@ -11,14 +11,10 @@ namespace office360.Models.EDMX
 {
     using System;
     
-    public partial class fn_GetGeneralBranchSettingForCampus_Result
+    public partial class ACFSM_ClassFeeStructure_GetListByParam_Result
     {
         public int Id { get; set; }
         public Nullable<System.Guid> GuID { get; set; }
-        public string RollCallSystem { get; set; }
-        public string BillingMethod { get; set; }
-        public string PolicyPeriod { get; set; }
-        public string ChallanMethod { get; set; }
-        public Nullable<int> AllowedChallanNo { get; set; }
+        public string Description { get; set; }
     }
 }

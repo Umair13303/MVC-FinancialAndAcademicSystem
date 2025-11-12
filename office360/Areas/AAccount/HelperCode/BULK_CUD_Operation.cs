@@ -18,7 +18,7 @@ namespace office360.Areas.AAccount.HelperCode
 {
     public class BULK_CUD_Operation
     {
-        #region HELPER FOR :: INSERT/UPDATE DATA USING STORED PROCEDURE (DBO.ACCM_CLASSCURRICULUM && DBO.ACCM_CLASSCURRICULUMSUBJECT) ::-- MAIN DB
+        #region HELPER FOR :: INSERT/UPDATE DATA USING STORED PROCEDURE (DBO.ACFSM_CLASSFEESTRUCTURE && DBO.ACFSM_CLASSFEESTRUCTUREFEETYPE) ::-- MAIN DB
         public static int? Update_Insert_ACFSM_ClassFeeStructure(SQLParamters PostedData, List<TVParam.ACFSM_ClassFeeStructureFeeType_TVP> PostedDataDetail)
         {
             using (var db = new FASEntities())

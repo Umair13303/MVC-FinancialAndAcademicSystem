@@ -18,7 +18,6 @@ namespace office360.Areas.AAccount.HelperCode
     public class DATA_FROM_SP
     {
         #region DBO:- ACOAM_CHARTOFACCOUNT
-
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB -- DBO:- ACOAM_CHARTOFACCOUNT
         public static List<ACOAM_ChartOfAccount_GetListByParam_Result> GET_MT_ACOAM_ChartOfAccount_By_Param_List(SQLParamters PostedData)
         {
@@ -54,11 +53,9 @@ namespace office360.Areas.AAccount.HelperCode
 
         }
         #endregion
-
         #endregion
 
         #region DBO:- ADTM_DISCOUNTTYPE
-
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB -- DBO:- ADTM_DISCOUNTTYPE
         public static List<ADTM_DiscountType_GetListByParam_Result> GET_MT_ADTM_DiscountType_By_Param_List(SQLParamters PostedData)
         {
@@ -94,11 +91,9 @@ namespace office360.Areas.AAccount.HelperCode
 
         }
         #endregion
-
         #endregion
 
         #region DBO:- AFTM_FEETYPE
-
         #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB -- DBO:- AFTM_FEETYPE
         public static List<AFTM_FeeType_GetListByParam_Result> GET_MT_AFTM_FeeType_By_Param_List(SQLParamters PostedData)
         {
@@ -135,7 +130,48 @@ namespace office360.Areas.AAccount.HelperCode
 
         }
         #endregion
+        #endregion
 
+        #region DBO:- ACFSM_CLASSFEESTRUCTURE
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE ::-- MAIN DB -- DBO:- ACFSM_CLASSFEESTRUCTURE
+        public static List<ACFSM_ClassFeeStructure_GetListByParam_Result> GET_MT_ACFSM_ClassFeeStructure_By_Param_List(SQLParamters PostedData)
+        {
+            List<ACFSM_ClassFeeStructure_GetListByParam_Result> DATA = new List<ACFSM_ClassFeeStructure_GetListByParam_Result>();
+            using (FASEntities db = new FASEntities())
+            {
+                DATA = db.ACFSM_ClassFeeStructure_GetListByParam(
+                                                       PostedData.DB_IF_PARAM,
+                                                       Session_Manager.CompanyId,
+                                                       Session_Manager.BranchId,
+                                                       Session_Manager.AllowedCampusIds,
+                                                       PostedData.SearchParameter,
+                                                       PostedData.ClassId,
+                                                       PostedData.CampusId,
+                                                       PostedData.CompanyId
+                                                       ).ToList();
+
+                return DATA;
+            }
+        }
+        #endregion
+        #region HELPER FOR :: GET DATA USING STORED PROCEDURE FOR DATA-TABLE BY SEARCH PARAMETER ::-- MAIN DB
+        public static List<ACFSM_ClassFeeStructure_GetListBySearch_Result> GET_MT_ACFSM_ClassFeeStructure_List_By_SearchQuery(SQLParamters PostedData)
+        {
+            List<ACFSM_ClassFeeStructure_GetListBySearch_Result> DATA = new List<ACFSM_ClassFeeStructure_GetListBySearch_Result>();
+            using (var db = new FASEntities())
+            {
+                DATA = db.ACFSM_ClassFeeStructure_GetListBySearch(
+                                                        Session_Manager.CompanyId,
+                                                        Session_Manager.BranchId,
+                                                        Session_Manager.AllowedCampusIds,
+                                                        PostedData.SearchById,
+                                                        PostedData.InputText
+                                                        ).ToList();
+            }
+            return DATA;
+
+        }
+        #endregion
         #endregion
 
     }

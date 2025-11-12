@@ -819,6 +819,23 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Response" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="ACFSM_ClassFeeStructure_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SessionCompanyId" Type="int" Mode="In" />
+          <Parameter Name="SessionBranchId" Type="int" Mode="In" />
+          <Parameter Name="AllowedCampusIds" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SearchParameter" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ClassId" Type="int" Mode="In" />
+          <Parameter Name="CampusId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ACFSM_ClassFeeStructure_GetListBySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="AllowedCampusIds" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="InputTypeId" Type="int" Mode="In" />
+          <Parameter Name="InputText" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="ACFSM_ClassFeeStructure_Upsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DB_OperationType" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="GuID" Type="uniqueidentifier" Mode="In" />
@@ -1086,6 +1103,10 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Response" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="fn_Calculation_WHTax" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="decimal">
+          <Parameter Name="WHTaxPolicyId" Type="int" Mode="In" />
+          <Parameter Name="TaxableAmount" Type="decimal" Mode="In" />
+        </Function>
         <Function Name="fn_CodeFormat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar(max)">
           <Parameter Name="MaxCode" Type="bigint" Mode="In" />
         </Function>
@@ -1115,22 +1136,6 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
             <CollectionType>
               <RowType>
                 <Property Name="sID" Type="nvarchar(max)" />
-              </RowType>
-            </CollectionType>
-          </ReturnType>
-        </Function>
-        <Function Name="fn_GetGeneralBranchSettingForCampus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="CampusId" Type="int" Mode="In" />
-          <ReturnType>
-            <CollectionType>
-              <RowType>
-                <Property Name="Id" Type="int" Nullable="false" />
-                <Property Name="GuID" Type="uniqueidentifier" />
-                <Property Name="RollCallSystem" Type="nvarchar(max)" />
-                <Property Name="BillingMethod" Type="nvarchar(max)" />
-                <Property Name="PolicyPeriod" Type="nvarchar(max)" />
-                <Property Name="ChallanMethod" Type="nvarchar(max)" />
-                <Property Name="AllowedChallanNo" Type="int" />
               </RowType>
             </CollectionType>
           </ReturnType>
@@ -1562,15 +1567,6 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
         </ComplexType>
         <ComplexType Name="fn_GetCommaSepratedValuesInList_Result">
           <Property Name="sID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </ComplexType>
-        <ComplexType Name="fn_GetGeneralBranchSettingForCampus_Result">
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="GuID" Type="Guid" />
-          <Property Name="RollCallSystem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="BillingMethod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PolicyPeriod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ChallanMethod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AllowedChallanNo" Type="Int32" />
         </ComplexType>
         <EntityType Name="AASM_AdmissionSession">
           <Key>
@@ -2306,9 +2302,6 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <FunctionImport Name="fn_GetCommaSepratedValuesInList" IsComposable="true" ReturnType="Collection(FASModel.fn_GetCommaSepratedValuesInList_Result)">
             <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="fn_GetGeneralBranchSettingForCampus" IsComposable="true" ReturnType="Collection(FASModel.fn_GetGeneralBranchSettingForCampus_Result)">
-            <Parameter Name="CampusId" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="AASM_AdmissionSession_GetListByParam" ReturnType="Collection(FASModel.AASM_AdmissionSession_GetListByParam_Result)">
             <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
             <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
@@ -2378,6 +2371,23 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
             <Parameter Name="Remarks" Mode="In" Type="String" />
             <Parameter Name="Response" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ACFSM_ClassFeeStructure_GetListByParam" ReturnType="Collection(FASModel.ACFSM_ClassFeeStructure_GetListByParam_Result)">
+            <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
+            <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="SessionBranchId" Mode="In" Type="Int32" />
+            <Parameter Name="AllowedCampusIds" Mode="In" Type="String" />
+            <Parameter Name="SearchParameter" Mode="In" Type="String" />
+            <Parameter Name="ClassId" Mode="In" Type="Int32" />
+            <Parameter Name="CampusId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ACFSM_ClassFeeStructure_GetListBySearch" ReturnType="Collection(FASModel.ACFSM_ClassFeeStructure_GetListBySearch_Result)">
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="AllowedCampusIds" Mode="In" Type="String" />
+            <Parameter Name="InputTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="InputText" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ACFSM_ClassFeeStructure_Upsert">
             <Parameter Name="DB_OperationType" Mode="In" Type="String" />
@@ -2802,6 +2812,25 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Type="String" Name="Description" Nullable="true" />
           <Property Type="String" Name="Class" Nullable="true" />
           <Property Type="String" Name="Campus" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ACFSM_ClassFeeStructure_GetListByParam_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GuID" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ACFSM_ClassFeeStructure_GetListBySearch_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GuID" Nullable="true" />
+          <Property Type="String" Name="Code" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="ChallanMethod" Nullable="true" />
+          <Property Type="String" Name="WHTaxPolicy" Nullable="true" />
+          <Property Type="String" Name="AdmissionSession" Nullable="true" />
+          <Property Type="String" Name="Class" Nullable="true" />
+          <Property Type="String" Name="Campus" Nullable="true" />
+          <Property Type="Decimal" Name="NetFee" Nullable="true" Precision="38" Scale="4" />
+          <Property Type="Decimal" Name="WithHoldingTax" Nullable="true" Precision="20" Scale="4" />
+          <Property Type="Decimal" Name="GrossFee" Nullable="true" Precision="38" Scale="4" />
         </ComplexType>
         <ComplexType Name="ACM_Class_GetListByParam_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -3746,19 +3775,6 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionName="FASModel.Store.fn_GetGeneralBranchSettingForCampus" FunctionImportName="fn_GetGeneralBranchSettingForCampus">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="FASModel.fn_GetGeneralBranchSettingForCampus_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="GuID" ColumnName="GuID" />
-                <ScalarProperty Name="RollCallSystem" ColumnName="RollCallSystem" />
-                <ScalarProperty Name="BillingMethod" ColumnName="BillingMethod" />
-                <ScalarProperty Name="PolicyPeriod" ColumnName="PolicyPeriod" />
-                <ScalarProperty Name="ChallanMethod" ColumnName="ChallanMethod" />
-                <ScalarProperty Name="AllowedChallanNo" ColumnName="AllowedChallanNo" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="AASM_AdmissionSession_GetListByParam" FunctionName="FASModel.Store.AASM_AdmissionSession_GetListByParam">
             <ResultMapping>
               <ComplexTypeMapping TypeName="FASModel.AASM_AdmissionSession_GetListByParam_Result">
@@ -3807,6 +3823,33 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ACCM_ClassCurriculum_Upsert" FunctionName="FASModel.Store.ACCM_ClassCurriculum_Upsert" />
+          <FunctionImportMapping FunctionImportName="ACFSM_ClassFeeStructure_GetListByParam" FunctionName="FASModel.Store.ACFSM_ClassFeeStructure_GetListByParam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FASModel.ACFSM_ClassFeeStructure_GetListByParam_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ACFSM_ClassFeeStructure_GetListBySearch" FunctionName="FASModel.Store.ACFSM_ClassFeeStructure_GetListBySearch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FASModel.ACFSM_ClassFeeStructure_GetListBySearch_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ChallanMethod" ColumnName="ChallanMethod" />
+                <ScalarProperty Name="WHTaxPolicy" ColumnName="WHTaxPolicy" />
+                <ScalarProperty Name="AdmissionSession" ColumnName="AdmissionSession" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="Campus" ColumnName="Campus" />
+                <ScalarProperty Name="NetFee" ColumnName="NetFee" />
+                <ScalarProperty Name="WithHoldingTax" ColumnName="WithHoldingTax" />
+                <ScalarProperty Name="GrossFee" ColumnName="GrossFee" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ACFSM_ClassFeeStructure_Upsert" FunctionName="FASModel.Store.ACFSM_ClassFeeStructure_Upsert" />
           <FunctionImportMapping FunctionImportName="ACM_Class_GetListByParam" FunctionName="FASModel.Store.ACM_Class_GetListByParam">
             <ResultMapping>

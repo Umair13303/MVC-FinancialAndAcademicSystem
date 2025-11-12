@@ -1,10 +1,4 @@
-﻿class BOOL_STATUS {
-    static OPEN = true;
-    static CLOSE = true;
-}
-class CSS_CLASS {
-    static DISABLED = "disabled";
-    static ENABLED = "ENABLE";
+﻿class CSS_CLASS {
     static DATATABLE_COLUMN_DDLADOPTER = "DATATABLE_COLUMN_DDLADOPTER";
 }
 class INPUT_MASKING_CLASS {
@@ -36,7 +30,6 @@ class DYNAMIC_DATATABLE_OPERATION {
 }
 
 
-Object.freeze(BOOL_STATUS);
 Object.freeze(CSS_CLASS);
 Object.freeze(INPUT_MASKING_CLASS);
 Object.freeze(MASKING);
