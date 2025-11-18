@@ -32,62 +32,63 @@
         </div>
     </div>
 
-
-
-
     <div class="card" style="margin-top:1%;width:100%">
         <div class="card-header">
-            <nav class="nav nav-pills nav-fill">
-                <a class="nav-link tab-pills" href="#">
-                    <i class="fas fa-file-archive" style="margin-right: 8px;"></i>
+            <nav class="nav nav-pills d-flex justify-content-center">
+                <a class="nav-link tab-pills active mx-2" href="#">
+                    <i class="fas fa-file-alt" style="margin-right: 8px;"></i>
                     Admission Detail
                 </a>
-                <a class="nav-link tab-pills" href="#">
-                    <i class="fas fa-user-cog" style="margin-right: 8px;"></i>
+                <a class="nav-link tab-pills completed mx-2" href="#">
+                    <i class="fas fa-user" style="margin-right: 8px;"></i>
                     Student Detail
                 </a>
-                <a class="nav-link tab-pills" href="#">
-                    <i class="fas fa-cogs" style="margin-right: 8px;"></i>
+                <a class="nav-link tab-pills mx-2" href="#">
+                    <i class="fas fa-users" style="margin-right: 8px;"></i>
                     Family Detail
                 </a>
-                <a class="nav-link tab-pills" href="#">
-                    <i class="fas fa-cogs" style="margin-right: 8px;"></i>
+                <a class="nav-link tab-pills mx-2" href="#">
+                    <i class="fas fa-phone" style="margin-right: 8px;"></i>
                     Contact Detail
                 </a>
-
-                @*<a class="nav-link tab-pills" href="#">
-                        <i class="fas fa-print" style="margin-right: 8px;"></i>
-                        Generate Challan
-                    </a>*@
-
             </nav>
         </div>
+
 
         <div class="card-body">
             <div class="tab d-none">
                 <div class="row mb-3">
-                    <div class="col-sm-12 col-md-8">
+                    <div class="col-sm-12 col-md-6">
                         <div class="form-group">
                             @Html.Label("Campus", new { @class = "col-form-label", @for = "DropDownListCampus" })
                             @Html.DropDownList("DropDownListCampus", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListCampus" })
                         </div>
                     </div>
+                    @if (ViewBag.DB_OperationType == nameof(office360.Models.General.DB_OperationType.UPDATE_DATA_INTO_DB))
+                    {
+                        <div class="card" style="margin-top:1%;width:100%">
+                            <div class="card-body">
 
-
-
+                                <div class="row mb-0">
+                                    <div class="col-sm-12 col-md-8">
+                                        <div class="form-group">
+                                            @Html.Label("Student ( For Edit )", new { @class = "col-form-label", @for = "DropDownListStudent" })
+                                            @Html.DropDownList("DropDownListStudent", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListStudent" })
+                                            <button type="button" class="btn btn-info" id="ButtonSubmitGetInfoForEdit">
+                                                <i class="fa fa-sync-alt"></i> Load Information
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
-                            @Html.Label("Session", new { @class = "col-form-label", @for = "DropDownListSession" })
-                            @Html.DropDownList("DropDownListSession", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListSession" })
+                            @Html.Label("Admission Session", new { @class = "col-form-label", @for = "DropDownListAdmissionSession" })
+                            @Html.DropDownList("DropDownListAdmissionSession", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListAdmissionSession" })
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div class="form-group">
-                            @Html.Label("Registered Period", new { @class = "col-form-label", @for = "DropDownListRegisteredPeriod" })
-                            @Html.DropDownList("DropDownListRegisteredPeriod", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListRegisteredPeriod" })
-                        </div>
-                    </div>
-
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
                             @Html.Label("Class", new { @class = "col-form-label", @for = "DropDownListClass" })
@@ -96,8 +97,14 @@
                     </div>
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
-                            @Html.Label("Admission Catagory", new { @class = "col-form-label", @for = "DropDownListAdmissionCatagory" })
-                            @Html.DropDownList("DropDownListAdmissionCatagory", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2 form-control form-control-sm basic requiredtxt select2-hidden-accessible", @data_toggle = "select2", id = "DropDownListAdmissionCatagory" })
+                            @Html.Label("Class Fee Structure", new { @class = "col-form-label", @for = "DropDownListClassFeeStructure" })
+                            @Html.DropDownList("DropDownListClassFeeStructure", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListClassFeeStructure" })
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Admission Category", new { @class = "col-form-label", @for = "DropDownListAdmissionCategory" })
+                            @Html.DropDownList("DropDownListAdmissionCategory", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListAdmissionCategory" })
                         </div>
                     </div>
                 </div>
@@ -107,8 +114,8 @@
                 <div class="row mb-3">
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
-                            @Html.Label("Registration No#", new { @class = "col-form-label", @for = "TextBoxRegistrationNo" })
-                            @Html.TextBox("TextBoxRegistrationNo", null, new { @class = "form-control form-control-sm", placeholder = "Please Enter Registration No Here!", @id = "TextBoxRegistrationNo" })
+                            @Html.Label("Registration No#", new { @class = "col-form-label", @for = "TextBoxRegistrationNumber" })
+                            @Html.TextBox("TextBoxRegistrationNumber", null, new { @class = "form-control form-control-sm", placeholder = "Please Enter Registration No Here!", @id = "TextBoxRegistrationNumber" })
                         </div>
                     </div>
                 </div>
@@ -251,13 +258,19 @@
                             @Html.TextArea("TextBoxAddress", null, new { @class = "form-control", placeholder = "Please Enter Address Here!", @id = "TextBoxAddress" })
                         </div>
                     </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Remarks", new { @class = "col-form-label", @for = "TextBoxRemarks" })
+                            @Html.TextBox("TextBoxRemarks", null, new { @class = "form-control", placeholder = "Please Enter Remarks Here!", @id = "TextBoxRemarks" })
+                        </div>
+                    </div>
                 </div>
             </div>
 
         </div>
 
 
-        @Html.TextBox("HiddenFieldEnrStudentGuID", null, new { @class = "form-control", Value = ViewBag.EnrStudentGUID, hidden = true, @id = "HiddenFieldEnrStudentGuID" })
+        @Html.TextBox("HiddenFieldStudentGuID", null, new { @class = "form-control", Value = ViewBag.StudentGuID, hidden = true, @id = "HiddenFieldStudentGuID" })
         @Html.TextBox("HiddenFieldDB_OperationType", null, new { @class = "form-control", Value = ViewBag.DB_OperationType, hidden = true, @id = "HiddenFieldDB_OperationType" })
 
         <div class="card-footer d-flex justify-content-between align-items-center">
@@ -266,10 +279,12 @@
                 <input type="button" class="btn btn-primary ms-2" id="next_button" onclick="next()" value="Next" />
             </div>
 
+            <div class="DivDB_OperationButton" style="display:none">
 
-            <div class="d-flex align-items-center" id="DivButtonSubmitDown" style="display:none">
-                <input type="button" class="btn btn-info" id="ButtonSubmitDown" value="Submit" />
-                <i class="fa fa-arrow-up ms-2"></i>
+                <div class="d-flex align-items-center" id="DivButtonSubmitDown" style="display:none">
+                    <input type="button" class="btn btn-info" id="ButtonSubmitDown" value="Submit" />
+                    <i class="fa fa-arrow-up ms-2"></i>
+                </div>
             </div>
 
         </div>
@@ -280,4 +295,4 @@
 
 <script src="~/SiteAssets/Uttility/Wizard_Stepper.js"></script>
 
-<script src="~/SiteScripts/AStudent/MEnrollmentUI/CreateNewEnrStudent.js"></script>
+<script src="~/Areas/AStudent/Script/CStudentManagmentUI_Script/CreateUpdate_SMUI_Student.js"></script>

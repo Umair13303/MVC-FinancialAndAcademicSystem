@@ -13,7 +13,6 @@ namespace office360.Models.DBF
 {
     public class DBFStoredProcedure
     {
-
         public static int? ACCM_ClassCurriculum_Upsert(string DB_OperationType, Guid? GuID,int? CampusId, string Description,int? ClassId, DateTime? CreatedOn, int? CreatedBy, DateTime? UpdatedOn, int? UpdatedBy, int? DocType,int? DocumentStatus,bool? Status, int? BranchId, int? CompanyId,string Remarks, List<TVParam.ACCM_ClassCurriculumSubject_TVP> TVP_ACCM_ClassCurriculum, SqlParameter Response)
         {
             try
@@ -61,7 +60,6 @@ namespace office360.Models.DBF
             }
 
         }
-
         public static int? AASM_AdmissionSession_Upsert(string DB_OperationType, Guid? GuID,int? CampusId, string Description,int? AcademicYearId,DateTime? AdmissionStartDate, DateTime? AdmissionEndDate, DateTime? CreatedOn, int? CreatedBy, DateTime? UpdatedOn, int? UpdatedBy, int? DocType,int? DocumentStatus,bool? Status, int? BranchId, int? CompanyId,string Remarks, List<TVParam.AASM_AdmissionSessionClass_TVP> TVP_AASM_AdmissionSessionClass, SqlParameter Response)
         {
             try

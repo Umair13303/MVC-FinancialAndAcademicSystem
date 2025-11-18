@@ -329,6 +329,15 @@
     <Compile Include="Areas\ACompany\HelperCode\Document_Detail_By_Id_DBO_FN.cs" />
     <Compile Include="Areas\AMiscellaneous\AMiscellaneousAreaRegistration.cs" />
     <Compile Include="Areas\AMiscellaneous\Controllers\CAccountUIController.cs" />
+    <Compile Include="Areas\AStudent\AStudentAreaRegistration.cs" />
+    <Compile Include="Areas\AStudent\Controllers\CStudentManagmentUIController.cs" />
+    <Compile Include="Areas\AStudent\HelperCode\BULK_CUD_Operation.cs" />
+    <Compile Include="Areas\AStudent\HelperCode\Check_Duplicate_By_LINQ.cs" />
+    <Compile Include="Areas\AStudent\HelperCode\CUD_Operation.cs" />
+    <Compile Include="Areas\AStudent\HelperCode\DATA_FROM_LINQ.cs" />
+    <Compile Include="Areas\AStudent\HelperCode\DATA_FROM_SP.cs" />
+    <Compile Include="Areas\AStudent\HelperCode\Document_Detail_By_GUID_LINQ.cs" />
+    <Compile Include="Areas\AStudent\HelperCode\Document_Detail_By_Id_DBO_FN.cs" />
     <Compile Include="Areas\AUser\AUserAreaRegistration.cs" />
     <Compile Include="Areas\ACompany\Controllers\CRightSettingManagmentUIController.cs" />
     <Compile Include="Areas\AUser\Controllers\CUserManagmentUIController.cs" />
@@ -355,6 +364,7 @@
     <Compile Include="GlobalHelper\LookUp\LookUp_GetDataFromDB_LINQ.cs" />
     <Compile Include="Models\DBF\DBContextClass.cs" />
     <Compile Include="Models\DBF\DBFModel.cs" />
+    <Compile Include="Models\DBF\DBFScalarValuedFunction.cs" />
     <Compile Include="Models\DBF\DBFStoredProcedure.cs" />
     <Compile Include="Models\EDMX\AASM_AdmissionSession.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
@@ -641,6 +651,7 @@
     <Content Include="Areas\AAcademic\Script\CAcademicClassManagmentUI_Script\CreateUpdate_ACMUI_Class.js" />
     <Content Include="Areas\AAcademic\Script\CAcademicSubjectManagmentUI_Script\CreateUpdate_ASMUI_Subject.js" />
     <Content Include="Areas\AAcademic\Script\CAcademicSubjectManagmentUI_Script\View_List_ASMUI_Subject.js" />
+    <Content Include="Areas\AAccount\Script\CAccountClassFeeStructureManagmentUI_Script\View_List_ACFSMUI_ClassFeeStructure.js" />
     <Content Include="Areas\AAccount\Script\CAccountCOAManagmentUI_Script\CreateUpdate_ACOAMUI_ChartofAccount.js" />
     <Content Include="Areas\AAccount\Script\CAccountCOAManagmentUI_Script\View_List_ACOAMUI_ChartofAccount.js" />
     <Content Include="Areas\AAccount\Script\CAccountDiscountTypeManagmentUI_Script\CreateUpdate_ADTMUI_DiscountType.js" />
@@ -648,11 +659,12 @@
     <Content Include="Areas\AAccount\Script\CAccountClassFeeStructureManagmentUI_Script\CreateUpdate_ACFSMUI_ClassFeeStructure.js" />
     <Content Include="Areas\AAccount\Script\CAccountFeeTypeManagmentUI_Script\CreateUpdate_AFTMUI_FeeType.js" />
     <Content Include="Areas\AAccount\Script\CAccountFeeTypeManagmentUI_Script\View_List_AFTMUI_FeeType.js" />
-    <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\CreateUpdate_CBMUI_Branch.js" />
-    <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\View_List_CBMUI_Branch.js" />
+    <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\CreateUpdate_BMUI_Branch.js" />
+    <Content Include="Areas\ABranch\Script\CBranchManagmentUI_Script\View_List_BMUI_Branch.js" />
     <Content Include="Areas\ACompany\Script\CCompanyManagmentUI_Script\CreateUpdate_CMUI_Company.js" />
     <Content Include="Areas\ACompany\Script\CRightSettingManagmentUI_Script\CreateUpdate_RSMUI_RightSetting.js" />
     <Content Include="Areas\AMiscellaneous\Script\CAccountUI_Script\Reconcile_AUI_LedgerAmountBased.js" />
+    <Content Include="Areas\AStudent\Script\CStudentManagmentUI_Script\CreateUpdate_SMUI_Student.js" />
     <Content Include="Areas\AUser\Script\CUserManagmentUI_Script\CreateUpdate_UMUI_User.js" />
     <Content Include="Areas\AUser\Script\CUserManagmentUI_Script\View_List_UMUI_User.js" />
     <Content Include="Areas\AUser\Script\CUserRightManagmentUI_Script\CreateUpdate_URMUI_UserRight.js" />
@@ -2049,6 +2061,8 @@
     <Folder Include="Areas\ACompany\Views\Shared\" />
     <Folder Include="Areas\AMiscellaneous\Data\" />
     <Folder Include="Areas\AMiscellaneous\Views\Shared\" />
+    <Folder Include="Areas\AStudent\Data\" />
+    <Folder Include="Areas\AStudent\Views\Shared\" />
     <Folder Include="Areas\AUser\Data\" />
     <Folder Include="Areas\AUser\Views\Shared\" />
     <Folder Include="Views\AReports\" />
@@ -2097,8 +2111,8 @@
     <Content Include="ExcelFiles\BulkPatient.xlsx" />
     <Content Include="ExcelFiles\EmployeeBulkUpload.xlsx" />
     <Content Include="ExcelFiles\Branches_ExcelUpload.xlsx" />
-    <Content Include="Areas\ABranch\Views\CBranchManagmentUI\CreateUpdate_CBMUI_Branch.cshtml" />
-    <Content Include="Areas\ABranch\Views\CBranchManagmentUI\View_List_CBMUI_Branch.cshtml" />
+    <Content Include="Areas\ABranch\Views\CBranchManagmentUI\CreateUpdate_BMUI_Branch.cshtml" />
+    <Content Include="Areas\ABranch\Views\CBranchManagmentUI\View_List_BMUI_Branch.cshtml" />
     <Content Include="Areas\ABranch\Views\web.config" />
     <Content Include="Areas\ACompany\Views\CCompanyManagmentUI\CreateUpdate_CMUI_Company.cshtml" />
     <Content Include="Areas\ACompany\Views\web.config" />
@@ -2129,6 +2143,9 @@
     <Content Include="Areas\AAccount\Views\CAccountFeeTypeManagmentUI\CreateUpdate_AFTMUI_FeeType.cshtml" />
     <Content Include="Areas\AAccount\Views\CAccountFeeTypeManagmentUI\View_List_AFTMUI_FeeType.cshtml" />
     <Content Include="Areas\AAccount\Views\CAccountClassFeeStructureManagmentUI\CreateUpdate_ACFSMUI_ClassFeeStructure.cshtml" />
+    <Content Include="Areas\AAccount\Views\CAccountClassFeeStructureManagmentUI\View_List_ACFSMUI_ClassFeeStructure.cshtml" />
+    <Content Include="Areas\AStudent\Views\web.config" />
+    <Content Include="Areas\AStudent\Views\CStudentManagmentUI\CreateUpdate_SMUI_Student.cshtml" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>

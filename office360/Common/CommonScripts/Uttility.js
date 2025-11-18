@@ -348,6 +348,21 @@ function GetStatus(Status) {
             Display = "Deleted Fee Type";
             break;
 
+        case 45:
+            BadgeColor = "primary";
+            Display = "Active Fee Structure";
+            break;
+
+        case 47:
+            BadgeColor = "secondary";
+            Display = "Inactive Fee Structure";
+            break;
+
+        case 47:
+            BadgeColor = "danger";
+            Display = "Deleted Fee Structure";
+            break;
+
         default:
             BadgeColor = "light";
             Display = "Unknown Status";

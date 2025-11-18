@@ -60,6 +60,14 @@ namespace office360.Models.General
             public int? DocumentStatus { get; set; } = (int?)DOCUMENT_STATUS.ACTIVE_ACCOUNT_CLASS_FEE_STRUCTURE_FEE_TYPE;
             public int? Status { get; set; }
         }
+        public class SM_Student_TVP
+        {
+            public int? Id { get; set; }
+            public Guid? GuID { get; set; } = Uttility.fn_GetHashGuid();
+            public int? DocType { get; set; } = (int?)DOCUMENT_TYPE.ACCOUNT_CLASS_FEE_STRUCTURE_FEE_TYPE;
+            public int? DocumentStatus { get; set; } = (int?)DOCUMENT_STATUS.ACTIVE_ACCOUNT_CLASS_FEE_STRUCTURE_FEE_TYPE;
+            public int? Status { get; set; }
+        }
 
     }
 }

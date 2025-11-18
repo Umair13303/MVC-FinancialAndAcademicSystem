@@ -33,8 +33,8 @@ function PopulateDropDownLists() {
 function ChangeCase() {
     $('#DropDownListCountry').change(function() {
         var CountryId = $("#DropDownListCountry :selected").val();
-        //var CityId = null; NOT PROVIDED ON LOAD
-        PopulateLK_City_ListByParam(CountryId, null);
+        var CityId = null;
+        PopulateLK_City_ListByParam(CountryId, CityId);
     });
    
     //-----------FOR ::EDIT CASE
@@ -57,11 +57,11 @@ function PopulateLK_CampusType_List() {
             startLoading();
         },
         success: function (data) {
-            var s = '<option  value="-1">Select an option</option>';
+            var List = '<option  value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
             }
-            $("#DropDownListCampusType").html(s);
+            $("#DropDownListCampusType").html(List);
         },
         complete: function () {
             stopLoading();
@@ -77,11 +77,11 @@ function PopulateLK_OrganizationType_List() {
             startLoading();
         },
         success: function (data) {
-            var s = '<option  value="-1">Select an option</option>';
+            var List = '<option  value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
             }
-            $("#DropDownListOrganizationType").html(s);
+            $("#DropDownListOrganizationType").html(List);
 
         },
         complete: function () {
@@ -98,11 +98,11 @@ function PopulateLK_Country_List() {
             startLoading();
         },
         success: function (data) {
-            var s = '<option  value="-1">Select an option</option>';
+            var List = '<option  value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
             }
-            $("#DropDownListCountry").html(s);
+            $("#DropDownListCountry").html(List);
         },
         complete: function () {
             stopLoading();
@@ -123,11 +123,11 @@ function PopulateLK_City_ListByParam(CountryId, CityId) {
             startLoading();
         },
         success: function (data) {
-            var s = '<option  value="-1">Select an option</option>';
+            var List = '<option  value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                s += '<option ' + (data[i].Id == CityId ? 'selected' : '') + ' value="' + data[i].Id + '">' + data[i].Description + '</option>';
+                List += '<option ' + (data[i].Id == CityId ? 'selected' : '') + ' value="' + data[i].Id + '">' + data[i].Description + '</option>';
             }
-            $("#DropDownListCity").html(s);
+            $("#DropDownListCity").html(List);
         },
         complete: function () {
             stopLoading();

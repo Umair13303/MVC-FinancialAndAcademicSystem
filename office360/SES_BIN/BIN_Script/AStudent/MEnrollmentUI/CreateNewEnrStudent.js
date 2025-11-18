@@ -470,7 +470,6 @@ function UpSertDataIntoDB() {
     });
 }
 function ClearInputFields() {
-
     $('.form-control').not('#DropDownListCampus,#DropDownListStudent').val('');
     $('.select2').not('#DropDownListCampus,#DropDownListStudent').val('-1').change();
     $('form').removeClass('Is-Valid');

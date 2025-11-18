@@ -244,7 +244,7 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-        public static List<SQLParamters> GET_LK1_AdmissionCatagory_List(SQLParamters PostedData)
+        public static List<SQLParamters> GET_LK1_AdmissionCategory_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
             {
@@ -469,6 +469,31 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
+        #endregion
+
+
+
+        /*---------------------- ** ACTION RESULTS FOR :: RENDER OF DOCUMENT INFORMATION FROM DB_MAIN USING LINQ-QUERY ** ------------------------------------------ */
+        #region ACTION RESULT FOR :: GET DOCUMENT SETTING --  LINQ-QUERY ::-- DB_LOOKUP 
+        public static List<SQLParamters> GET_LK1_CHALLANMETHOD_INFO_BY_ID(SQLParamters PostedData)
+        {
+            using (FASEntities db = new FASEntities())
+            {
+                var DATA = db.ChallanMethod
+                        .Where(x => x.Status == true && x.Id == PostedData.ChallanMethodId)
+                         .Select(x => new SQLParamters
+                         {
+                             Id = x.Id,
+                             Description = x.Description,
+                             ChallanNo = x.ChallanNo,
+                             MonthsNo = x.MonthsNo,
+                         })
+                         .ToList();
+
+                return DATA;
+            }
+        }
+
         #endregion
 
     }

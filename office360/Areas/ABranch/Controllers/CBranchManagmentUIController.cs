@@ -24,7 +24,7 @@ namespace office360.Areas.ABranch.Controllers
         #region ACTION RESULT FOR :: RENDER VIEW
         [UsersSessionCheck]
         [CompanySessionCheck]
-        public ActionResult CreateUpdate_CBMUI_Branch(SQLParamters PostedData)
+        public ActionResult CreateUpdate_BMUI_Branch(SQLParamters PostedData)
         {
             #region PASS VIEW
             _Exe = GetAllListFromDB.GetAllowedUsersRightsByParameter(PostedData.RightId);
@@ -43,7 +43,7 @@ namespace office360.Areas.ABranch.Controllers
 
         [UsersSessionCheck]
         [CompanySessionCheck]
-        public ActionResult View_List_CBMUI_Branch(SQLParamters PostedData)
+        public ActionResult View_List_BMUI_Branch(SQLParamters PostedData)
         {
             #region PASS VIEW
             _Exe = GetAllListFromDB.GetAllowedUsersRightsByParameter(PostedData.RightId);

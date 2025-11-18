@@ -44,7 +44,7 @@ namespace office360.Models.General
         public DateTime? UpdatedOn { get; set; }
 
         public decimal? TotalFeeExclusive { get; set; }
-        public decimal? WHTAmount { get; set; }
+        public decimal? WHTax { get; set; }
         public decimal? TotalFee { get; set; }
         public decimal? ActualFeeAmount { get; set; }
         public decimal? ChargedFeeAmount { get; set; }

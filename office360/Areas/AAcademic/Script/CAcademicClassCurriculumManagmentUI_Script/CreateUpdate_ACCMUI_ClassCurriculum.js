@@ -32,6 +32,11 @@ function PopulateDropDownLists() {
 
 /*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                                                                         **----------------------------------------------*/
 function ChangeCase() {
+    $('#DropDownListCampus').change(function () {
+        var CampusId = $("#DropDownListCampus :selected").val();
+        /*--var ClassIds = null;  NOT PROVIDED ON LOAD --*/
+        PopulateMT_ACM_Class_ListByParam(CampusId, null);
+    });
     $('#DropDownListClass').change(function () {
         var StudySchemeId = $('#DropDownListClass :selected').attr('data-StudySchemeId');
         /*--var SemesterId = null;  NOT PROVIDED ON LOAD --*/
@@ -39,11 +44,7 @@ function ChangeCase() {
         ClassCurriculumSubjectTable.clear().draw();
     });
 
-    $('#DropDownListCampus').change(function () {
-        var CampusId = $("#DropDownListCampus :selected").val();
-        /*--var ClassIds = null;  NOT PROVIDED ON LOAD --*/
-        PopulateMT_ACM_Class_ListByParam(CampusId, null);
-    });
+
     //-----------FOR ::EDIT CASE
     $('#DropDownListClassCurriculum').change(function () {
         if (!IsFieldClear) {

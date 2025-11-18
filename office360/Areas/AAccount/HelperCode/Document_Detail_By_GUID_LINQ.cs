@@ -1,4 +1,5 @@
-﻿using office360.Models.EDMX;
+﻿using office360.Models.DBF;
+using office360.Models.EDMX;
 using office360.Models.General;
 using System;
 using System.Collections.Generic;
@@ -111,21 +112,21 @@ namespace office360.Areas.AAccount.HelperCode
 
             using (FASEntities db = new FASEntities())
             {
-                DATA = ((List<SQLParamters>)
-                       (from CFS in db.ACFSM_ClassFeeStructure
-                        where CFS.CompanyId == Session_Manager.CompanyId && CFS.GuID == PostedData.GuID
-                        select new SQLParamters
-                        {
-                            Id = CFS.Id,
-                            GuID = CFS.GuID,
-                            CampusId = CFS.CampusId,
-                            Description = CFS.Description,
-                            ChallanMethodId = CFS.ChallanMethodId,
-                            WHTaxPolicyId = CFS.WHTaxPolicyId,
-                            AdmissionSessionId = CFS.AdmissionSessionId,
-                            ClassId = CFS.ClassId,
-                            Remarks = CFS.Remarks,
-                        }).ToList());
+                DATA = db.ACFSM_ClassFeeStructure
+                    .Where(CFS => CFS.CompanyId == Session_Manager.CompanyId && CFS.GuID == PostedData.GuID)
+                    .AsEnumerable()
+                    .Select(CFS => new SQLParamters
+                    {
+                        Id = CFS.Id,
+                        GuID = CFS.GuID,
+                        CampusId = CFS.CampusId,
+                        Description = CFS.Description,
+                        ChallanMethodId = CFS.ChallanMethodId,
+                        WHTaxPolicyId = CFS.WHTaxPolicyId,
+                        AdmissionSessionId = CFS.AdmissionSessionId,
+                        ClassId = CFS.ClassId,
+                        Remarks = CFS.Remarks,
+                    }).ToList();
 
                 return DATA;
             }
@@ -139,7 +140,10 @@ namespace office360.Areas.AAccount.HelperCode
                 DATA = ((List<SQLParamters>)
                        (from CFSFT in db.ACFSM_ClassFeeStructureFeeType
                         join CFS in db.ACFSM_ClassFeeStructure on CFSFT.ClassFeeStructureId equals CFS.Id
-                        where CFS.CompanyId == Session_Manager.CompanyId && CFS.GuID == PostedData.GuID
+                        where
+                            CFS.CompanyId == Session_Manager.CompanyId
+                        && CFS.GuID == PostedData.GuID
+                        && CFSFT.Status == true
                         select new SQLParamters
                         {
                             Id = CFSFT.Id,
@@ -149,7 +153,7 @@ namespace office360.Areas.AAccount.HelperCode
                             AssetAccount = db.ACOAM_ChartOfAccount.Where(COA => COA.Id == CFSFT.AssetAccountId).Select(COA => COA.Description).FirstOrDefault(),
                             LiabilityAccount = db.ACOAM_ChartOfAccount.Where(COA => COA.Id == CFSFT.LiabilityAccountId).Select(COA => COA.Description).FirstOrDefault(),
                             CostOfSaleAccount = db.ACOAM_ChartOfAccount.Where(COA => COA.Id == CFSFT.CostOfSaleAccountId).Select(COA => COA.Description).FirstOrDefault(),
-                            Amount= CFSFT.Amount,
+                            Amount = CFSFT.Amount,
                             FeeTypeId = CFSFT.FeeTypeId,
                             RevenueAccountId = CFSFT.RevenueAccountId,
                             AssetAccountId = CFSFT.AssetAccountId,

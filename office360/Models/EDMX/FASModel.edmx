@@ -2831,6 +2831,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Type="Decimal" Name="NetFee" Nullable="true" Precision="38" Scale="4" />
           <Property Type="Decimal" Name="WithHoldingTax" Nullable="true" Precision="20" Scale="4" />
           <Property Type="Decimal" Name="GrossFee" Nullable="true" Precision="38" Scale="4" />
+          <Property Type="Int32" Name="DocumentStatus" Nullable="true" />
         </ComplexType>
         <ComplexType Name="ACM_Class_GetListByParam_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -3847,6 +3848,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
                 <ScalarProperty Name="NetFee" ColumnName="NetFee" />
                 <ScalarProperty Name="WithHoldingTax" ColumnName="WithHoldingTax" />
                 <ScalarProperty Name="GrossFee" ColumnName="GrossFee" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

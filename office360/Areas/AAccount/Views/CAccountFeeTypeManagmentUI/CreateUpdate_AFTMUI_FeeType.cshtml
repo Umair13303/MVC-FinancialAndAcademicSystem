@@ -78,78 +78,49 @@
                     </div>
                 </div>
 
-                <div class="row mb-0">
+                <div class="row mb-3">
                     <div class="col-sm-12 col-md-3" id="DivCheckBoxIsOnAdmission">
                         <div class="form-group">
-                            @Html.Label("On Admission", new { @class = "col-form-label", @for = "CheckBoxIsOnAdmission" })
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <div class="n-chk align-self-end">
-                                            <label class="new-control new-checkbox checkbox-danger" style="height: 21px; margin-bottom: 0; margin-right: 0">
-                                                @Html.CheckBox("CheckBoxIsOnAdmission", false, new { @class = "new-control-input CheckBox", @id = "CheckBoxIsOnAdmission" })
-                                                <span class="new-control-indicator"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 col-md-3">
-                        <div class="form-group">
-                            @Html.Label("Is Security", new { @class = "col-form-label", @for = "CheckBoxIsSecurity" })
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <div class="n-chk align-self-end">
-                                            <label class="new-control new-checkbox checkbox-danger" style="height: 21px; margin-bottom: 0; margin-right: 0">
-                                                @Html.CheckBox("CheckBoxIsSecurity", false, new { @class = "new-control-input CheckBox", @id = "CheckBoxIsSecurity" })
-                                                <span class="new-control-indicator"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="n-chk">
+                                <label class="new-control new-checkbox new-checkbox-rounded checkbox-info">
+                                    @Html.CheckBox("CheckBoxIsOnAdmission", new { @class = "new-control-input", id = "CheckBoxIsOnAdmission" })
+                                    <span class="new-control-indicator"></span>Is On Admission
+                                </label>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-3">
                         <div class="form-group">
-                            @Html.Label("Is Refundable", new { @class = "col-form-label", @for = "CheckBoxIsRefundable" })
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <div class="n-chk align-self-end">
-                                            <label class="new-control new-checkbox checkbox-danger" style="height: 21px; margin-bottom: 0; margin-right: 0">
-                                                @Html.CheckBox("CheckBoxIsRefundable", false, new { @class = "new-control-input CheckBox", @id = "CheckBoxIsRefundable" })
-                                                <span class="new-control-indicator"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="n-chk">
+                                <label class="new-control new-checkbox new-checkbox-rounded checkbox-info">
+                                    @Html.CheckBox("CheckBoxIsSecurity", new { @class = "new-control-input", id = "CheckBoxIsSecurity" })
+                                    <span class="new-control-indicator"></span>Is Security
+                                </label>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-3">
                         <div class="form-group">
-                            @Html.Label("Is Discount", new { @class = "col-form-label", @for = "CheckBoxIsDiscount" })
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <div class="n-chk align-self-end">
-                                            <label class="new-control new-checkbox checkbox-danger" style="height: 21px; margin-bottom: 0; margin-right: 0">
-                                                @Html.CheckBox("CheckBoxIsDiscount", false, new { @class = "new-control-input CheckBox", @id = "CheckBoxIsDiscount" })
-                                                <span class="new-control-indicator"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="n-chk">
+                                <label class="new-control new-checkbox new-checkbox-rounded checkbox-info">
+                                    @Html.CheckBox("CheckBoxIsRefundable", new { @class = "new-control-input", id = "CheckBoxIsRefundable" })
+                                    <span class="new-control-indicator"></span>Is Refundable
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                        <div class="form-group">
+                            <div class="n-chk">
+                                <label class="new-control new-checkbox new-checkbox-rounded checkbox-info">
+                                    @Html.CheckBox("CheckBoxIsDiscount", new { @class = "new-control-input", id = "CheckBoxIsDiscount" })
+                                    <span class="new-control-indicator"></span>Is Discount
+                                </label>
                             </div>
                         </div>
                     </div>
                 </div>
-
+              
                 <div class="row mb-0" id="DivOtherFeeChartOfAccount" style="display:none">
                     <div class="col-sm-12 col-md-6" id="DivDropDownListRevenueAccount">
                         <div class="form-group">

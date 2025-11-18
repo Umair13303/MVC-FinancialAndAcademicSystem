@@ -106,7 +106,7 @@ function InitializeFeeStructureFeeTypeDataTable() {
         ],
         drawCallback: async function () {
             $('.delete').off('click').on('click', function () {
-                $('#MainTableAFSM_FeeStructureFeeType').DataTable().row($(this).closest('tr')).remove().draw();
+                $('#MainTableACFSM_ClassFeeStructureFeeType').DataTable().row($(this).closest('tr')).remove().draw();
             });
         }
     });
@@ -545,7 +545,7 @@ function PopulateMT_AASM_AdmissionSession_ListByParam(CampusId,AdmissionSessionI
         success: function (data) {
             var List = '<option value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                List += '<option value="' + data[i].Id + '">' + data[i].Description + '</option>';
+                List += '<option ' + (data[i].Id == AdmissionSessionId ? 'selected' : '') + ' value="' + data[i].Id + '">' + data[i].Description + '</option>';
             }
             $("#DropDownListAdmissionSession").html(List);
         },
@@ -578,7 +578,7 @@ function PopulateMT_ACM_Class_ListByParam(CampusId, AdmissionSessionId,ClassId) 
         success: function (data) {
             var List = '<option value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                List += '<option value="' + data[i].Id + '">' + data[i].Description + '</option>';
+                List += '<option ' + (data[i].Id == ClassId ? 'selected' : '') + ' value="' + data[i].Id + '">' + data[i].Description + '</option>';
             }
             $("#DropDownListClass").html(List);
         },
@@ -647,7 +647,6 @@ function PopulateMT_AFTM_FeeType_SettingByGUID() {
         });
     }
     else {
-        GetMessageBox("Please Select A Fee Type", 505);
         return;
     }
 }
@@ -766,8 +765,8 @@ function UpSertDataIntoDB() {
 }
 function ClearInputFields() {
     //-----------NOT CLEARING REQUIRED FIELD
-    $('.form-control').not('#DropDownListCampus').val('');
-    $('.select2').not('#DropDownListCampus').val('-1').change();
+    $('.form-control').not('#DropDownListFeeStructure').val('');
+    $('.select2').not('#DropDownListFeeStructure').val('-1').change();
     $('form').removeClass('Is-Valid');
     ClassFeeStructureFeeTypeTable.clear().draw();
 }
@@ -775,7 +774,7 @@ function ClearInputFields() {
 /*----------------------------------** FUNCTION FOR:: UPDATE BRANCH (LOAD DROPDOWN,DATA FOR FEESTRUCTUREID)                 **----------------------------------------------*/
 
 $('#ButtonSubmitGetInfoForEdit').click(function () {
-    if ($('#DropDownListDiscountType').RequiredDropdown() == false) {
+    if ($('#DropDownListFeeStructure').RequiredDropdown() == false) {
         return false;
     }
     else {
@@ -834,13 +833,41 @@ function GET_AFSM_FEESTRUCTURE_INFOBYGUID() {
                 startLoading();
             },
             success: function (data) {
-                if (data.length > 0) {
+                if (data.DATA && data.DATA.length > 0) {
                     /*-- LOAD DATA FOR FIELDS RENDERED :: ON LOAD/STATIC --*/
-                    $('#TextBoxDescription').val(data[0].Description);
-                   
-                    $('#TextBoxRemarks').val(data[0].Remarks).prop('disabled', true);
-                    $('#HiddenFieldDiscountTypeGuID').val(data[0].GuID);
+                    $('#DropDownListCampus').val(data.DATA[0].CampusId).trigger('change.select2');
+                    $('#TextBoxDescription').val(data.DATA[0].Description);
+                    $('#DropDownListChallanMethod').val(data.DATA[0].ChallanMethodId).trigger('change.select2');
+                    $('#DropDownListWHTaxPolicy').val(data.DATA[0].WHTaxPolicyId).change();
+                    $('#TextBoxRemarks').val(data.DATA[0].Remarks).prop('disabled', true);
+                    $('#HiddenFieldFeeStructureGuID').val(data.DATA[0].GuID);
+                    $("#TDWithHoldingTaxAmount").text(data.DATA[0].WHTax);
+
                     /*-- LOAD DATA FOR FIELDS RENDERED :: ON CHANGE --*/
+                    PopulateMT_AASM_AdmissionSession_ListByParam(data.DATA[0].CampusId,data.DATA[0].AdmissionSessionId);
+                    PopulateMT_ACM_Class_ListByParam(data.DATA[0].CampusId, data.DATA[0].AdmissionSessionId, data.DATA[0].ClassId);
+                }
+                if (data.DATA_DETAIL && data.DATA_DETAIL.length > 0) {
+                    /*-- LOAD DATA FOR TABLE RENDERED :: ON LOAD/STATIC --*/
+                    ClassFeeStructureFeeTypeTable.clear().draw();
+                    for (var i in data.DATA_DETAIL) {
+                        var row_data = [];
+                        row_data[0] = '';
+                        row_data[1] = data.DATA_DETAIL[i].FeeType;
+                        row_data[2] = data.DATA_DETAIL[i].RevenueAccount ?? HTML_LABEL.TEXT_DISPLAY("N/A");
+                        row_data[3] = data.DATA_DETAIL[i].AssetAccount ?? HTML_LABEL.TEXT_DISPLAY("N/A");
+                        row_data[4] = data.DATA_DETAIL[i].LiabilityAccount ?? HTML_LABEL.TEXT_DISPLAY("N/A");
+                        row_data[5] = data.DATA_DETAIL[i].CostOfSaleAccount ?? HTML_LABEL.TEXT_DISPLAY("N/A");
+                        row_data[6] = data.DATA_DETAIL[i].FeeTypeId;
+                        row_data[7] = data.DATA_DETAIL[i].RevenueAccountId;
+                        row_data[8] = data.DATA_DETAIL[i].AssetAccountId;
+                        row_data[9] = data.DATA_DETAIL[i].LiabilityAccountId;
+                        row_data[10] = data.DATA_DETAIL[i].CostOfSaleAccountId;
+                        row_data[11] = data.DATA_DETAIL[i].Amount;
+                        row_data[12] = HTML_BUTTON.DELETE_IN_LIST();
+                        ClassFeeStructureFeeTypeTable.row.add(row_data);
+                    }
+                    ClassFeeStructureFeeTypeTable.draw();
                 }
                 else {
                     GetMessageBox("NO RECORD FOUND FOR FOR SELECTED FEE STRUCTURE.... CONTACT DEVELOPER TEAM", 505);

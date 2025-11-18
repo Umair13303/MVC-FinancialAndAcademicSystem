@@ -25,5 +25,6 @@ namespace office360.Models.EDMX
         public Nullable<decimal> NetFee { get; set; }
         public Nullable<decimal> WithHoldingTax { get; set; }
         public Nullable<decimal> GrossFee { get; set; }
+        public Nullable<int> DocumentStatus { get; set; }
     }
 }
