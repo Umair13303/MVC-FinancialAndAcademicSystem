@@ -185,7 +185,7 @@ namespace office360.Models.General
         public string StudyGroupIds { get; set; }
         public string StudyLevel { get; set; }
         public string StudyLevelIds { get; set; }
-        public string RegistrationNo { get; set; }
+        public string RegistrationNumber { get; set; }
         public string StudentName { get; set; }
         public string StudentCNIC { get; set; }
         public string BirthDate { get; set; }

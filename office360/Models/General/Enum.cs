@@ -39,6 +39,7 @@ namespace office360.Models.General
         ACCOUNT_FEE_TYPE = 15,
         ACCOUNT_CLASS_FEE_STRUCTURE = 16,
         ACCOUNT_CLASS_FEE_STRUCTURE_FEE_TYPE = 17,
+        STUDENT = 18,
 
     }
     public enum DOCUMENT_STATUS
@@ -114,6 +115,9 @@ namespace office360.Models.General
         ACTIVE_ACCOUNT_CLASS_FEE_STRUCTURE_FEE_TYPE = 45,
         INACTIVE_ACCOUNT_CLASS_FEE_STRUCTURE_FEE_TYPE = 46,
         DELETED_ACCOUNT_CLASS_FEE_STRUCTURE_FEE_TYPE = 47,
+
+        ACTIVE_STUDENT=48,
+        INACTIVE_STUDENT = 49,
 
     }
     public enum DATEPICKER_INCREMENT

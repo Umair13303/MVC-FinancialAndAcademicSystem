@@ -74,7 +74,6 @@ function InitDataTable() {
     }).draw();
 }
 $("#ButtonPopulateExcel").click(function () {
-
     var file = $("#UploadExcelFile").prop("files")[0];
     if (file) {
         startLoading();

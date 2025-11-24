@@ -323,6 +323,47 @@
           <Property Name="CompanyId" Type="int" />
           <Property Name="Remarks" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="SM_Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuID" Type="uniqueidentifier" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="CampusId" Type="int" />
+          <Property Name="AdmissionSessionId" Type="int" />
+          <Property Name="ClassId" Type="int" />
+          <Property Name="AdmissionCategoryId" Type="int" />
+          <Property Name="RegistrationNumber" Type="nvarchar(max)" />
+          <Property Name="StudentName" Type="nvarchar(max)" />
+          <Property Name="StudentCNIC" Type="nvarchar(max)" />
+          <Property Name="BirthDate" Type="date" />
+          <Property Name="ReligionId" Type="int" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="DomicileDistrict" Type="nvarchar(max)" />
+          <Property Name="FatherName" Type="nvarchar(max)" />
+          <Property Name="FatherCNIC" Type="nvarchar(max)" />
+          <Property Name="OccupationId" Type="int" />
+          <Property Name="IsFatherAlive" Type="bit" />
+          <Property Name="GuardianName" Type="nvarchar(max)" />
+          <Property Name="GuardianCNIC" Type="nvarchar(max)" />
+          <Property Name="StudentMobile" Type="nvarchar(max)" />
+          <Property Name="StudentEmail" Type="nvarchar(max)" />
+          <Property Name="ParentMobile" Type="nvarchar(max)" />
+          <Property Name="LandLine" Type="nvarchar(max)" />
+          <Property Name="EmergencyMobile" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="DocType" Type="int" />
+          <Property Name="DocumentStatus" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="BranchId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="UM_User">
           <Key>
             <PropertyRef Name="Id" />
@@ -1175,6 +1216,31 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Response" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="SM_Student_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SessionCompanyId" Type="int" Mode="In" />
+          <Parameter Name="SessionBranchId" Type="int" Mode="In" />
+          <Parameter Name="AllowedCampusIds" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SearchParameter" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CampusId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="ClassId" Type="int" Mode="In" />
+          <Parameter Name="AdmissionSessionId" Type="int" Mode="In" />
+          <Parameter Name="StudentCNIC" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="SM_Student_Upsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_OperationType" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+          <Parameter Name="UpdatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="UpdatedBy" Type="int" Mode="In" />
+          <Parameter Name="DocType" Type="int" Mode="In" />
+          <Parameter Name="DocumentStatus" Type="int" Mode="In" />
+          <Parameter Name="Status" Type="bit" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="Response" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="So_Far_Best" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="GuID" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="CampusId" Type="int" Mode="In" />
@@ -1281,6 +1347,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <EntitySet Name="BM_Branch" EntityType="Self.BM_Branch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CM_Company" EntityType="Self.CM_Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RSM_RightSetting" EntityType="Self.RSM_RightSetting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SM_Student" EntityType="Self.SM_Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UM_User" EntityType="Self.UM_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="URM_UserRight" EntityType="Self.URM_UserRight" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AcademicYear" EntityType="Self.AcademicYear" store:Type="Views" store:Schema="dbo">
@@ -1886,6 +1953,47 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Name="CompanyId" Type="Int32" />
           <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="SM_Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuID" Type="Guid" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CampusId" Type="Int32" />
+          <Property Name="AdmissionSessionId" Type="Int32" />
+          <Property Name="ClassId" Type="Int32" />
+          <Property Name="AdmissionCategoryId" Type="Int32" />
+          <Property Name="RegistrationNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StudentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StudentCNIC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <Property Name="ReligionId" Type="Int32" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="DomicileDistrict" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FatherName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FatherCNIC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OccupationId" Type="Int32" />
+          <Property Name="IsFatherAlive" Type="Boolean" />
+          <Property Name="GuardianName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GuardianCNIC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StudentMobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StudentEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ParentMobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LandLine" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmergencyMobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="DocType" Type="Int32" />
+          <Property Name="DocumentStatus" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="BranchId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="UM_User">
           <Key>
             <PropertyRef Name="Id" />
@@ -2255,6 +2363,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <EntitySet Name="BM_Branch" EntityType="Self.BM_Branch" />
           <EntitySet Name="CM_Company" EntityType="Self.CM_Company" />
           <EntitySet Name="RSM_RightSetting" EntityType="Self.RSM_RightSetting" />
+          <EntitySet Name="SM_Student" EntityType="Self.SM_Student" />
           <EntitySet Name="UM_User" EntityType="Self.UM_User" />
           <EntitySet Name="URM_UserRight" EntityType="Self.URM_UserRight" />
           <EntitySet Name="AcademicYear" EntityType="Self.AcademicYear" />
@@ -2691,6 +2800,31 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
             <Parameter Name="Remarks" Mode="In" Type="String" />
             <Parameter Name="Response" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SM_Student_GetListByParam" ReturnType="Collection(FASModel.SM_Student_GetListByParam_Result)">
+            <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
+            <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="SessionBranchId" Mode="In" Type="Int32" />
+            <Parameter Name="AllowedCampusIds" Mode="In" Type="String" />
+            <Parameter Name="SearchParameter" Mode="In" Type="String" />
+            <Parameter Name="CampusId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="ClassId" Mode="In" Type="Int32" />
+            <Parameter Name="AdmissionSessionId" Mode="In" Type="Int32" />
+            <Parameter Name="StudentCNIC" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SM_Student_Upsert">
+            <Parameter Name="DB_OperationType" Mode="In" Type="String" />
+            <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="DocType" Mode="In" Type="Int32" />
+            <Parameter Name="DocumentStatus" Mode="In" Type="Int32" />
+            <Parameter Name="Status" Mode="In" Type="Boolean" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="Response" Mode="InOut" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="So_Far_Best">
             <Parameter Name="GuID" Mode="In" Type="Guid" />
             <Parameter Name="CampusId" Mode="In" Type="Int32" />
@@ -2969,6 +3103,11 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="Guid" Name="GuID" Nullable="true" />
           <Property Type="String" Name="CompanyName" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SM_Student_GetListByParam_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GuID" Nullable="true" />
           <Property Type="String" Name="Description" Nullable="true" />
         </ComplexType>
         <ComplexType Name="UM_User_GetDetailByParam_Result">
@@ -3350,6 +3489,48 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
                 <ScalarProperty Name="RightId" ColumnName="RightId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="URLTypeId" ColumnName="URLTypeId" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="DocType" ColumnName="DocType" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SM_Student">
+            <EntityTypeMapping TypeName="FASModel.SM_Student">
+              <MappingFragment StoreEntitySet="SM_Student">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="CampusId" ColumnName="CampusId" />
+                <ScalarProperty Name="AdmissionSessionId" ColumnName="AdmissionSessionId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="AdmissionCategoryId" ColumnName="AdmissionCategoryId" />
+                <ScalarProperty Name="RegistrationNumber" ColumnName="RegistrationNumber" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="StudentCNIC" ColumnName="StudentCNIC" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="ReligionId" ColumnName="ReligionId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="DomicileDistrict" ColumnName="DomicileDistrict" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="FatherCNIC" ColumnName="FatherCNIC" />
+                <ScalarProperty Name="OccupationId" ColumnName="OccupationId" />
+                <ScalarProperty Name="IsFatherAlive" ColumnName="IsFatherAlive" />
+                <ScalarProperty Name="GuardianName" ColumnName="GuardianName" />
+                <ScalarProperty Name="GuardianCNIC" ColumnName="GuardianCNIC" />
+                <ScalarProperty Name="StudentMobile" ColumnName="StudentMobile" />
+                <ScalarProperty Name="StudentEmail" ColumnName="StudentEmail" />
+                <ScalarProperty Name="ParentMobile" ColumnName="ParentMobile" />
+                <ScalarProperty Name="LandLine" ColumnName="LandLine" />
+                <ScalarProperty Name="EmergencyMobile" ColumnName="EmergencyMobile" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
@@ -4063,6 +4244,16 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="RSM_RightSetting_Upsert" FunctionName="FASModel.Store.RSM_RightSetting_Upsert" />
+          <FunctionImportMapping FunctionImportName="SM_Student_GetListByParam" FunctionName="FASModel.Store.SM_Student_GetListByParam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FASModel.SM_Student_GetListByParam_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SM_Student_Upsert" FunctionName="FASModel.Store.SM_Student_Upsert" />
           <FunctionImportMapping FunctionImportName="So_Far_Best" FunctionName="FASModel.Store.So_Far_Best" />
           <FunctionImportMapping FunctionImportName="UM_User_GetDetailByParam" FunctionName="FASModel.Store.UM_User_GetDetailByParam">
             <ResultMapping>

@@ -382,30 +382,30 @@ $('#ButtonUpdateDown').click(function (event) {
 
 
 function UpSertDataIntoDB() {
-    var CampusId                = $("#DropDownListCampus :selected").val();
-    var SessionId               = $("#DropDownListSession :selected").val();
-    var RegisteredPeriodId      = $("#DropDownListRegisteredPeriod :selected").val();
-    var ClassId                 = $("#DropDownListClass :selected").val();
-    var AdmissionCatagoryId     = $("#DropDownListAdmissionCatagory :selected").val();
-    var RegistrationNo          = $("#TextBoxRegistrationNo").val();
-    var StudentName             = $("#TextBoxStudentName").val();
-    var StudentCNIC             = $("#TextBoxStudentCNIC").val();
-    var BirthDate               = $("#TextBoxBirthDate").val();
-    var ReligionId              = $("#DropDownListReligion :selected").val();
-    var CountryId               = $("#DropDownListCountry :selected").val();
-    var DomicileDistrict        = $("#TextBoxDomicileDistrict").val();
-    var FatherName              = $("#TextBoxFatherName").val();
-    var FatherCNIC              = $("#TextBoxFatherCNIC").val();
-    var OccupationId            = $("#DropDownListOccupation :selected").val();
-    var IsFatherAlive           = $("#CheckBoxIsFatherAlive").val();
-    var GuardianName            = $("#TextBoxGuardianName").val();
-    var GuardianCNIC            = $("#TextBoxGuardianCNIC").val();
-    var StudentMobile           = $("#TextBoxStudentMobile").val();
-    var StudentEmail            = $("#TextBoxStudentEmail").val();
-    var ParentMobile            = $("#TextBoxParentMobile").val();
-    var LandLine                = $("#TextBoxLandLine").val();
-    var EmergencyMobile         = $("#TextBoxEmergencyMobile").val();
-    var Address                 = $("#TextBoxAddress").val();
+    var CampusId = $("#DropDownListCampus :selected").val();
+    var SessionId = $("#DropDownListSession :selected").val();
+    var RegisteredPeriodId = $("#DropDownListRegisteredPeriod :selected").val();
+    var ClassId = $("#DropDownListClass :selected").val();
+    var AdmissionCatagoryId = $("#DropDownListAdmissionCatagory :selected").val();
+    var RegistrationNo = $("#TextBoxRegistrationNo").val();
+    var StudentName = $("#TextBoxStudentName").val();
+    var StudentCNIC = $("#TextBoxStudentCNIC").val();
+    var BirthDate = $("#TextBoxBirthDate").val();
+    var ReligionId = $("#DropDownListReligion :selected").val();
+    var CountryId = $("#DropDownListCountry :selected").val();
+    var DomicileDistrict = $("#TextBoxDomicileDistrict").val();
+    var FatherName = $("#TextBoxFatherName").val();
+    var FatherCNIC = $("#TextBoxFatherCNIC").val();
+    var OccupationId = $("#DropDownListOccupation :selected").val();
+    var IsFatherAlive = $("#CheckBoxIsFatherAlive").val();
+    var GuardianName = $("#TextBoxGuardianName").val();
+    var GuardianCNIC = $("#TextBoxGuardianCNIC").val();
+    var StudentMobile = $("#TextBoxStudentMobile").val();
+    var StudentEmail = $("#TextBoxStudentEmail").val();
+    var ParentMobile = $("#TextBoxParentMobile").val();
+    var LandLine = $("#TextBoxLandLine").val();
+    var EmergencyMobile = $("#TextBoxEmergencyMobile").val();
+    var Address = $("#TextBoxAddress").val();
 
 
 
@@ -575,20 +575,15 @@ function GET_ENRSTUDENT_DETAILBYID() {
                 startLoading();
             },
             success: function (data) {
-
-              
                 setTimeout(function () {
                     $('#DropDownListSession').val(data[0].SessionId).change().prop('disabled', true);
                 }, 3000);
-
                 setTimeout(function () {
                     $('#DropDownListRegisteredPeriod').val(data[0].RegisteredPeriodId).change().prop('disabled', true);
                 }, 4000);
                 setTimeout(function () {
                     $('#DropDownListClass').val(data[0].ClassId).change().prop('disabled', true);
                 }, 5000);
-
-
                 $("#DropDownListAdmissionCatagory").val(data[0].AdmissionCatagoryId).change();
                 $("#TextBoxRegistrationNo").val(data[0].RegistrationNo);
                 $("#TextBoxStudentName").val(data[0].StudentName);
@@ -610,8 +605,6 @@ function GET_ENRSTUDENT_DETAILBYID() {
                 $("#TextBoxEmergencyMobile").val(data[0].EmergencyMobile);
                 $("#TextBoxAddress").val(data[0].Address);
                 $('#HiddenFieldEnrStudentGuID').val(data[0].GuID);
-
-
             },
             complete: function () {
                 stopLoading();

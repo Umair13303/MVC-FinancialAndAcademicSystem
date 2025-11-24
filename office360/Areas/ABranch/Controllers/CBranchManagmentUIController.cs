@@ -108,7 +108,6 @@ namespace office360.Areas.ABranch.Controllers
             var DATA = ABranch.HelperCode.DATA_FROM_SP.GET_MT_BM_Branch_By_Param_List(PostedData).ToList();
             return Json(new { data = DATA }, JsonRequestBehavior.AllowGet);
         }
-
         #endregion
 
         #region ACTION RESULT FOR :: GET DOCUMENT DETAIL (DBO.BM_BRANCH & DBO.BM_BRANCH_SETTING) -- LINQ-QUERY
