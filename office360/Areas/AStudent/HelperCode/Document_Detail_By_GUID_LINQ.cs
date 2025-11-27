@@ -31,7 +31,7 @@ namespace office360.Areas.AStudent.HelperCode
                             RegistrationNumber = S.RegistrationNumber,
                             StudentName =S.StudentName,
                             StudentCNIC= S.StudentCNIC,
-                            //BirthDate= S.BirthDate.HasValue? S.BirthDate.Value.ToString("yyyy-MM-dd"): null, 
+                            BirthDate= S.BirthDate.ToString(), 
                             ReligionId= S.ReligionId, 
                             CountryId= S.CountryId,
                             DomicileDistrict= S.DomicileDistrict,

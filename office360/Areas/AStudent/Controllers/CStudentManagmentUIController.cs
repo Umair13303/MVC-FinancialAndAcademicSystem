@@ -58,6 +58,24 @@ namespace office360.Areas.AStudent.Controllers
                 return RedirectToAction(_ActionsURL.LogIn, _Controller.Home, new { area = "" });
             }
         }
+        [UsersSessionCheck]
+        [CompanySessionCheck]
+        public ActionResult View_List_SMUI_Student(SQLParamters PostedData)
+        {
+            #region PASS VIEW
+            _Exe = GetAllListFromDB.GetAllowedUsersRightsByParameter(PostedData.RightId);
+            #endregion
+            if (_Exe == (int?)Http_DB_Response.CODE_SUCCESS)
+            {
+                ViewBag.Title = PostedData.DisplayName.ToSafeString();
+                ViewBag.DB_OperationType = PostedData.OperationType.ToSafeString();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction(_ActionsURL.LogIn, _Controller.Home, new { area = "" });
+            }
+        }
         #endregion
 
         /*---------------------- ** ACTION RESULTS FOR :: RENDER OF DROP DOWN LIST FROM DB_MAIN USING STOREDPROCEDURE ** ------------------------------------------ */
@@ -148,6 +166,15 @@ namespace office360.Areas.AStudent.Controllers
         {
             var DATA = AStudent.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_SM_STUDENT_INFO_BY_GUID(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        /*---------------------- ** ACTION RESULTS FOR :: DATA TABLE (LOAD TABLE OF STUDENT BY INPUT TYPE & TEXT) ** ---------------------------- */
+        #region ACTION RESULT FOR :: GET LIST BY SEARCH PARAMETER FOR DATA-TABLE (DBO.ACOAM_CHARTOFACCOUNT)-- STORED PROCEDURE
+        public ActionResult GET_MT_SM_STUDENT_LIST_BY_SEARCHQUERY_FORDATATABLE(SQLParamters PostedData)
+        {
+            var DATA = AStudent.HelperCode.DATA_FROM_SP.GET_MT_SM_Student_List_By_SearchQuery(PostedData).ToList();
+            return Json(new { success = true, data = DATA }, JsonRequestBehavior.AllowGet);
         }
         #endregion
     }

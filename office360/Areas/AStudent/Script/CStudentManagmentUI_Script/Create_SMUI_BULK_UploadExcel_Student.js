@@ -75,8 +75,6 @@ function InitializeStudentDataTable() {
         "paging": true,
         "pageLength": 100,
         "deferRender": true,
-        "scroller": true,
-        "scrollX": true,
         "scrollY": 500,
         "columns": [
             { "title": "#", "orderable": false, },//0

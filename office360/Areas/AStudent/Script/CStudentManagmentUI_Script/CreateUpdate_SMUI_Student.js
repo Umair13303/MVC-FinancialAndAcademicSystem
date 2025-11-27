@@ -180,7 +180,7 @@ function PopulateMT_ACFSM_ClassFeeStructure_ListByParam(ClassId, ClassFeeStructu
         success: function (data) {
             var List = '<option value="-1">Select an option</option>';
             for (var i = 0; i < data.length; i++) {
-                List += '<option ' + (data[i].Id == ClassFeeStructureId ? 'selected' : '') + ' value="' + data[i].Id + '">' + data[i].Description + '</option>';
+                List += '<option value="' + data[i].Id + '"' + (data[i].Id == ClassFeeStructureId ? ' selected' : '') + '>' + data[i].Description + '</option>';
             }
             $("#DropDownListClassFeeStructure").html(List);
         },
@@ -289,7 +289,7 @@ $('#ButtonSubmitDown').click(function (event) {
 });
 $('#ButtonUpdateDown').click(function (event) {
     event.preventDefault();
-    var IS_VALID = ValidateInputFields();
+    var IS_VALID = true;
     if (IS_VALID) {
         try {
             OperationType = DBOperation.UPDATE;
@@ -464,13 +464,33 @@ function GET_SM_STUDENT_INFOBYGUID() {
             success: function (data) {
                 if (data.length > 0) {
                     /*-- LOAD DATA FOR FIELDS RENDERED :: ON LOAD/STATIC --*/
-                    $('#TextBoxRemarks').val(data[0].Remarks).prop('disabled', true);
-                    $('#HiddenFieldStudentGuID').val(data[0].GuID);
+                    $("#DropDownListAdmissionCategory").val(data[0].AdmissionCategoryId).trigger('change.select2');
+                    $("#TextBoxRegistrationNumber").val(data[0].RegistrationNumber);
+                    $("#TextBoxStudentName").val(data[0].StudentName);
+                    $("#TextBoxStudentCNIC").val(data[0].StudentCNIC);
+                    $("#TextBoxBirthDate").val(data[0].BirthDate);
+                    //GET_TRIGGER_DATEPICKER_SIMPLE(data[0].BirthDate, '#TextBoxBirthDate');
+                    $("#DropDownListReligion").val(data[0].ReligionId).trigger('change.select2');
+                    $("#DropDownListCountry").val(data[0].CountryId).trigger('change.select2');
+                    $("#TextBoxDomicileDistrict").val(data[0].DomicileDistrict);
+                    $("#TextBoxFatherName").val(data[0].FatherName);
+                    $("#TextBoxFatherCNIC").val(data[0].FatherCNIC);
+                    $("#DropDownListOccupation").val(data[0].OccupationId).trigger('change.select2');
+                    $("#TextBoxGuardianName").val(data[0].GuardianName);
+                    $("#TextBoxGuardianCNIC").val(data[0].GuardianCNIC);
+                    $("#TextBoxStudentMobile").val(data[0].StudentMobile);
+                    $("#TextBoxStudentEmail").val(data[0].StudentEmail);
+                    $("#TextBoxParentMobile").val(data[0].ParentMobile);
+                    $("#TextBoxLandLine").val(data[0].LandLine);
+                    $("#TextBoxEmergencyMobile").val(data[0].EmergencyMobile);
+                    $("#TextBoxAddress").val(data[0].Address);
+                    $("#TextBoxRemarks").val(data[0].Remarks).prop('disabled', true);
+                    $("#HiddenFieldStudentGuID").val(data[0].GuID);
 
                     /*-- LOAD DATA FOR FIELDS RENDERED :: ON CHANGE --*/
                     PopulateMT_AASM_AdmissionSession_ListByParam(data[0].CampusId, data[0].AdmissionSessionId);
                     PopulateMT_ACM_Class_ListByParam(data[0].CampusId, data[0].AdmissionSessionId, data[0].ClassId);
-                    PopulateMT_ACFSM_ClassFeeStructure_ListByParam(data[0].ClassId, data[0].ClassFeeStructureId);
+                    PopulateMT_ACFSM_ClassFeeStructure_ListByParam(data[0].ClassId, 1);
                 }
                 else {
                     GetMessageBox("NO RECORD FOUND FOR FOR SELECTED STUDENT.... CONTACT DEVELOPER TEAM", 505);

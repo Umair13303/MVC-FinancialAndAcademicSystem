@@ -110,8 +110,6 @@ namespace office360.Areas.AAccount.Controllers
             var DATA = AAccount.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_ACOAM_CHARTOFACCOUNT_INFO_BY_GUID(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
-
-
         #endregion
 
         /*---------------------- ** ACTION RESULTS FOR :: DATA TABLE (LOAD TABLE OF CHARTOFACCOUNT BY INPUT TYPE & TEXT) ** ---------------------------- */

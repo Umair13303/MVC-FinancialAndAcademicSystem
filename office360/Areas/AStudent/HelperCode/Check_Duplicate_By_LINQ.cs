@@ -23,19 +23,18 @@ namespace office360.Areas.AStudent.HelperCode
                 try
                 {
                     bool IsRecordExist = false;
-                    var CampusIds = PostedDataDetail.Select(p => p.CampusId).ToList();
-                    var StudentCNICs = PostedDataDetail.Select(p => p.StudentCNIC).ToList();
                     switch (OperationType)
                     {
                         case nameof(DB_OperationType.INSERT_DATA_INTO_DB):
                             #region IN CASE OF INSERT :: CHECK IF ENTERY RECORD EXIST , BASED ON DATA ENTERED
+                            var CampusIds = PostedDataDetail.Select(PDD => PDD.CampusId).ToList();
+                            var StudentCNICs = PostedDataDetail.Select(PDD => PDD.StudentCNIC).ToList();
                             IsRecordExist =
                                 db.SM_Student
                                 .Any(x =>
                                     x.CompanyId == Session_Manager.CompanyId
                                 && CampusIds.Contains(x.CampusId)
                                 && StudentCNICs.Contains(x.StudentCNIC)
-                                && x.DocumentStatus == (int?)DOCUMENT_STATUS.ACTIVE_STUDENT
                                 && x.Status == true
                                 );
                             #endregion
@@ -44,6 +43,28 @@ namespace office360.Areas.AStudent.HelperCode
                             else
                                 Response = (int?)Http_DB_Response.CODE_DATA_ALREADY_EXIST;
                             break;
+
+                        case nameof(DB_OperationType.UPDATE_DATA_INTO_DB):
+                            #region IN CASE OF UPDATE :: CHECK IF ENTERY RECORD EXIST , BASED ON SYSTEM GUID
+                            var GuIDs = PostedDataDetail.Select(PDD => PDD.GuID).ToList();
+                            IsRecordExist =
+                                db.SM_Student
+                                .Any(x =>
+                                    x.CompanyId == Session_Manager.CompanyId
+                                && GuIDs.Contains(x.GuID)
+                                );
+                            #endregion
+                            if (!IsRecordExist)
+                                Response = (int?)Http_DB_Response.CODE_DATA_DOES_NOT_EXIST;
+                            else
+                                Response = (int?)Http_DB_Response.CODE_AUTHORIZED;
+
+                            break;
+
+                        default:
+                            Response = (int?)Http_DB_Response.CODE_DATA_ALREADY_EXIST;
+                            break;
+
                     }
                     return Response;
                 }

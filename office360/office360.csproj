@@ -594,6 +594,12 @@
     <Compile Include="Models\EDMX\SM_Student_GetListByParam_Result.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EDMX\SM_Student_GetListBySearch_Result.cs">
+      <DependentUpon>FASModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDMX\SSR_StudentSemesterRegistration.cs">
+      <DependentUpon>FASModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EDMX\StudyGroup.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
@@ -672,6 +678,7 @@
     <Content Include="Areas\AMiscellaneous\Script\CAccountUI_Script\Reconcile_AUI_LedgerAmountBased.js" />
     <Content Include="Areas\AStudent\Script\CStudentManagmentUI_Script\Create_SMUI_BULK_UploadExcel_Student.js" />
     <Content Include="Areas\AStudent\Script\CStudentManagmentUI_Script\CreateUpdate_SMUI_Student.js" />
+    <Content Include="Areas\AStudent\Script\CStudentManagmentUI_Script\View_List_SMUI_Student.js" />
     <Content Include="Areas\AUser\Script\CUserManagmentUI_Script\CreateUpdate_UMUI_User.js" />
     <Content Include="Areas\AUser\Script\CUserManagmentUI_Script\View_List_UMUI_User.js" />
     <Content Include="Areas\AUser\Script\CUserRightManagmentUI_Script\CreateUpdate_URMUI_UserRight.js" />
@@ -2072,6 +2079,7 @@
     <Folder Include="Areas\AStudent\Views\Shared\" />
     <Folder Include="Areas\AUser\Data\" />
     <Folder Include="Areas\AUser\Views\Shared\" />
+    <Folder Include="DB_BackUp\" />
     <Folder Include="Views\AReports\" />
     <Folder Include="Views\AStudent\" />
     <Folder Include="Views\HTML\" />
@@ -2131,8 +2139,6 @@
     <Content Include="Areas\AUser\Views\CUserRightManagmentUI\View_List_URMUI_UserRight.cshtml" />
     <Content Include="Areas\AAcademic\Views\web.config" />
     <Content Include="Areas\AAcademic\Views\CAcademicClassManagmentUI\CreateUpdate_ACMUI_Class.cshtml" />
-    <Content Include="DB_BackUp\SESFINAL BACKUP.bak" />
-    <Content Include="DB_BackUp\XLookUp BACKUP.bak" />
     <Content Include="Areas\AAcademic\Views\CAcademicClassManagmentUI\View_List_ACMUI_Class.cshtml" />
     <Content Include="Areas\AAcademic\Views\CAcademicAdmissionSessionManagmentUI\CreateUpdate_AASMUI_AdmissionSession.cshtml" />
     <Content Include="Areas\AAcademic\Views\CAcademicAdmissionSessionManagmentUI\View_List_AASMUI_AdmissionSession.cshtml" />
@@ -2154,6 +2160,7 @@
     <Content Include="Areas\AStudent\Views\web.config" />
     <Content Include="Areas\AStudent\Views\CStudentManagmentUI\CreateUpdate_SMUI_Student.cshtml" />
     <Content Include="Areas\AStudent\Views\CStudentManagmentUI\Create_SMUI_BULK_UploadExcel_Student.cshtml" />
+    <Content Include="Areas\AStudent\Views\CStudentManagmentUI\View_List_SMUI_Student.cshtml" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>

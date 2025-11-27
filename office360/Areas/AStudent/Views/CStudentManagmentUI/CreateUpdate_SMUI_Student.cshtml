@@ -272,12 +272,14 @@
         @Html.TextBox("HiddenFieldStudentGuID", null, new { @class = "form-control", Value = ViewBag.StudentGuID, hidden = true, @id = "HiddenFieldStudentGuID" })
         @Html.TextBox("HiddenFieldDB_OperationType", null, new { @class = "form-control", Value = ViewBag.DB_OperationType, hidden = true, @id = "HiddenFieldDB_OperationType" })
 
-        <div class="card-footer d-flex justify-content-between align-items-center">
-            <div class="d-flex">
-                <input type="button" class="btn btn-link" id="back_button" onclick="back()" value="Back" />
-                <input type="button" class="btn btn-primary ms-2" id="next_button" onclick="next()" value="Next" />
-            </div>
+    <div class="card-footer d-flex justify-content-between align-items-center">
+        <div class="d-flex">
+            <input type="button" class="btn btn-link" id="back_button" onclick="back()" value="Back" />
+            <input type="button" class="btn btn-primary ms-2" id="next_button" onclick="next()" value="Next" />
+        </div>
 
+        @if (ViewBag.DB_OperationType == nameof(office360.Models.General.DB_OperationType.INSERT_DATA_INTO_DB))
+        {
             <div class="DivDB_OperationButton" style="display:none">
 
                 <div class="d-flex align-items-center" id="DivButtonSubmitDown" style="display:none">
@@ -285,8 +287,19 @@
                     <i class="fa fa-arrow-up ms-2"></i>
                 </div>
             </div>
+        }
+        @if (ViewBag.DB_OperationType == nameof(office360.Models.General.DB_OperationType.UPDATE_DATA_INTO_DB))
+        {
+            <div class="DivDB_OperationButton" style="display:none">
 
-        </div>
+                <div class="d-flex align-items-center" id="DivButtonUpdateDown" style="display:none">
+                    <input type="button" class="btn btn-warning" id="ButtonUpdateDown" value="Update" />
+                    <i class="fa fa-arrow-up ms-2"></i>
+                </div>
+            </div>
+        }
+
+    </div>
     </div>
 
 

@@ -54,7 +54,7 @@ namespace office360.Areas.AStudent.HelperCode
                                                         DateTime.Now,
                                                         Session_Manager.UserId,
                                                         (int?)DOCUMENT_TYPE.STUDENT,
-                                                        (int?)DOCUMENT_STATUS.ACTIVE_STUDENT,
+                                                        (int?)DOCUMENT_STATUS.ACTIVE_NON_REGISTERED_STUDENT,
                                                         true,
                                                         Session_Manager.BranchId,
                                                         Session_Manager.CompanyId,
