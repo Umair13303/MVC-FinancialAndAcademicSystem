@@ -1,6 +1,6 @@
 ﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE SM_STUDENT                                                    **----------------------------------------------*/
 var OperationType = "";
-var DDL_Condition = "";
+
 var DB_OperationType = $('#HiddenFieldDB_OperationType').val();
 var IsFieldClear = false;
 
@@ -136,7 +136,6 @@ function PopulateMT_ACM_Class_ListByParam(CampusId, AdmissionSessionId, ClassId)
 function PopulateMT_ACFSM_ClassFeeStructure_ListByParam(ClassId, ClassFeeStructureId) {
     var JsonArg = {
         OperationType: DB_OperationType,
-        DB_IF_PARAM: DDL_Condition,
         ClassId: ClassId,
     }
     $.ajax({

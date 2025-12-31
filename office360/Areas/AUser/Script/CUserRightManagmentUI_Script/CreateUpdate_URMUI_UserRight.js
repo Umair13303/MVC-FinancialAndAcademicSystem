@@ -1,6 +1,6 @@
 ﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE URM_USERRIGHT                          **----------------------------------------------*/
 var OperationType = "";
-var DDL_Condition = "";
+
 var DB_OperationType = $('#HiddenFieldDB_OperationType').val();
 var IsFieldClear = false;
 
@@ -46,16 +46,8 @@ function ChangeCase() {
 
 /*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON LOAD)        **----------------------------------------------*/
 function PopulateMT_CM_Company_ListByParam() {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.CM_COMPANY_BY_SOLUTION_DEVELOPER_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.CM_COMPANY_BY_SOLUTION_DEVELOPER_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        DBOperation: DB_OperationType,
     }
     $.ajax({
         type: "POST",
@@ -89,8 +81,8 @@ function PopulateMT_UM_User_ListByParam(CompanyId,UserId) {
             break;
     }
     var JsonArg = {
+        DBOperation: DB_OperationType,
         CompanyId: CompanyId,
-        DB_IF_PARAM: DDL_Condition,
     }
     $.ajax({
         type: "POST",

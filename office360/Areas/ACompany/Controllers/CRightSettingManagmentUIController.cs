@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static office360.Models.General.DDOFilter;
 using static office360.Models.General.HttpServerStatus;
 
 
@@ -63,6 +64,15 @@ namespace office360.Areas.ACompany.Controllers
         #region ACTION RESULT FOR :: RENDER DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
         public ActionResult GET_MT_CM_COMPANY_BYPARAMTER(SQLParamters PostedData)
         {
+            switch (PostedData.OperationType)
+            {
+                case nameof(DB_OperationType.INSERT_DATA_INTO_DB):
+                    PostedData.DB_IF_PARAM = nameof(MDBDataFilter.CM_COMPANY_BY_SOLUTION_DEVELOPER_FORNEWINSERT);
+                    break;
+                default:
+                    PostedData.DB_IF_PARAM = nameof(MDBDataFilter.CM_COMPANY_BY_SOLUTION_DEVELOPER_FORUPDATERECORD);
+                    break;
+            }
             var DATA = ACompany.HelperCode.DATA_FROM_SP.GET_MT_CM_Company_By_Param_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
