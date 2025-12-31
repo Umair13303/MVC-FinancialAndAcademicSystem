@@ -1,14 +1,15 @@
-﻿using office360.Common.CommonHelper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using office360.Common.CommonHelper;
 using office360.CommonHelper;
 using office360.Extensions;
 using office360.GlobalHelper.LookUp;
 using office360.Models.EDMX;
 using office360.Models.General;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using static office360.Models.General.DDOFilter;
 using static office360.Models.General.HttpServerStatus;
 
 namespace office360.Areas.AStudent.Controllers
@@ -82,21 +83,57 @@ namespace office360.Areas.AStudent.Controllers
         #region ACTION RESULT FOR :: RENDER DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
         public ActionResult GET_MT_BM_BRANCH_BYPARAMTER(SQLParamters PostedData)
         {
+            switch (PostedData.OperationType)
+            {
+                case nameof(DB_OperationType.INSERT_DATA_INTO_DB):
+                    PostedData.DB_IF_PARAM = nameof(MDBDataFilter.BM_BRANCH_BY_ALLOWEDBRANCHIDS_FORNEWINSERT);
+                    break;
+                default:
+                    PostedData.DB_IF_PARAM = nameof(MDBDataFilter.BM_BRANCH_BY_ALLOWEDBRANCHIDS_FORUPDATERECORD);
+                    break;
+            }
             var DATA = ABranch.HelperCode.DATA_FROM_SP.GET_MT_BM_Branch_By_Param_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GET_MT_AASM_ADMISSIONSESSION_BYPARAMTER(SQLParamters PostedData)
         {
+            switch (PostedData.OperationType)
+            {
+                case nameof(DB_OperationType.INSERT_DATA_INTO_DB):
+                    PostedData.DB_IF_PARAM = nameof(MDBDataFilter.AASM_ADMISSIONSESSION_BY_CAMPUSID_FORNEWINSERT);
+                    break;
+                default:
+                    PostedData.DB_IF_PARAM = nameof(MDBDataFilter.AASM_ADMISSIONSESSION_BY_CAMPUSID_FORUPDATERECORD);
+                    break;
+            }
             var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_AASM_AdmissionSession_By_Param_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GET_MT_ACM_CLASS_BYPARAMTER(SQLParamters PostedData)
         {
+            switch (PostedData.OperationType)
+            {
+                case nameof(DB_OperationType.INSERT_DATA_INTO_DB):
+                    PostedData.DB_IF_PARAM = nameof(MDBDataFilter.ACM_CLASS_BY_ADMISSIONSESSIONID_FORNEWINSERT);
+                    break;
+                default:
+                    PostedData.DB_IF_PARAM = nameof(MDBDataFilter.ACM_CLASS_BY_ADMISSIONSESSIONID_FORUPDATERECORD);
+                    break;
+            }
             var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_ACM_Class_By_Param_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GET_MT_ACFSM_CLASSFEESTRUCTURE_BYPARAMETER_(SQLParamters PostedData)
         {
+            switch (PostedData.OperationType)
+            {
+                case nameof(DB_OperationType.INSERT_DATA_INTO_DB):
+                    PostedData.DB_IF_PARAM = nameof(MDBDataFilter.ACFSM_CLASSFEESTRUCTURE_BY_CLASSID_FORNEWINSERT);
+                    break;
+                default:
+                    PostedData.DB_IF_PARAM = nameof(MDBDataFilter.ACFSM_CLASSFEESTRUCTURE_BY_CLASSID_FORUPDATERECORD);
+                    break;
+            }
             var DATA = AAccount.HelperCode.DATA_FROM_SP.GET_MT_ACFSM_ClassFeeStructure_By_Param_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }

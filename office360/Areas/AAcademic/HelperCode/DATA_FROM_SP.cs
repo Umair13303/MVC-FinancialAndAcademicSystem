@@ -75,7 +75,8 @@ namespace office360.Areas.AAcademic.HelperCode
                                                        Session_Manager.CompanyId,
                                                        Session_Manager.BranchId,
                                                        PostedData.SearchParameter,
-                                                       PostedData.CompanyId
+                                                       PostedData.CompanyId,
+                                                       PostedData.ClassId
                                                        ).ToList();
 
                 return DATA;

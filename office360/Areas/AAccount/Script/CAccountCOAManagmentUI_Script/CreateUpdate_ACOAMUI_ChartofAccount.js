@@ -225,7 +225,6 @@ function GET_ACOAM_CHARTOFACCOUNT_LISTBYPARAM() {
                 return {
                     PostedData: {
                         SearchParameter: params.term,
-                        DB_IF_PARAM: DOCUMENT_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_SEARCH_PARAMETER_UPDATECHARTOFACCOUNT,
                     }
                 };
             },

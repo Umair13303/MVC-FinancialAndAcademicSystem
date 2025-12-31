@@ -175,20 +175,12 @@ function PopulateDataTable(dataObj) {
 
 /*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON LOAD)                                **----------------------------------------------*/
 function PopulateMT_BM_Branch_ListByParam() {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.BM_BRANCH_BY_ALLOWEDBRANCHIDS_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.BM_BRANCH_BY_ALLOWEDBRANCHIDS_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType
     }
     $.ajax({
         type: "POST",
-        url: BasePath + "/AAcademic/CAcademicClassCurriculumManagmentUI/GET_MT_BM_BRANCH_BYPARAMTER",
+        url: BasePath + "/AStudent/CStudentManagmentUI/GET_MT_BM_BRANCH_BYPARAMTER",
         data: { 'PostedData': (JsonArg) },
         beforeSend: function () {
             startLoading();
@@ -208,21 +200,13 @@ function PopulateMT_BM_Branch_ListByParam() {
 
 /*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- LINQUERY (ON CHANGE)                                      **----------------------------------------------*/
 function PopulateMT_AASM_AdmissionSession_ListByParam(CampusId, AdmissionSessionId) {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.AASM_ADMISSIONSESSION_BY_CAMPUSID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.AASM_ADMISSIONSESSION_BY_CAMPUSID_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType,
         CampusId: CampusId,
     }
     $.ajax({
         type: "POST",
-        url: BasePath + "/AAccount/CAccountClassFeeStructureManagmentUI/GET_MT_AASM_ADMISSIONSESSION_BYPARAMTER",
+        url: BasePath + "/AStudent/CStudentManagmentUI/GET_MT_AASM_ADMISSIONSESSION_BYPARAMTER",
         data: { 'PostedData': (JsonArg) },
         beforeSend: function () {
             startLoading();
@@ -240,22 +224,14 @@ function PopulateMT_AASM_AdmissionSession_ListByParam(CampusId, AdmissionSession
     });
 }
 function PopulateMT_ACM_Class_ListByParam(CampusId, AdmissionSessionId, ClassId) {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.ACM_CLASS_BY_ADMISSIONSESSIONID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.ACM_CLASS_BY_ADMISSIONSESSIONID_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType,
         CampusId: CampusId,
         AdmissionSessionId: AdmissionSessionId,
     }
     $.ajax({
         type: "POST",
-        url: BasePath + "/AAccount/CAccountClassFeeStructureManagmentUI/GET_MT_ACM_CLASS_BYPARAMTER",
+        url: BasePath + "/AStudent/CStudentManagmentUI/GET_MT_ACM_CLASS_BYPARAMTER",
         data: { 'PostedData': (JsonArg) },
         beforeSend: function () {
             startLoading();
@@ -273,16 +249,8 @@ function PopulateMT_ACM_Class_ListByParam(CampusId, AdmissionSessionId, ClassId)
     });
 }
 function PopulateMT_ACFSM_ClassFeeStructure_ListByParam(ClassId, ClassFeeStructureId) {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.ACFSM_CLASSFEESTRUCTURE_BY_CLASSID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.ACFSM_CLASSFEESTRUCTURE_BY_CLASSID_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType,
         ClassId: ClassId,
     }
     $.ajax({

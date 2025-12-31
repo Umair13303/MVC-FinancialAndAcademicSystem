@@ -449,7 +449,6 @@ namespace office360.GlobalHelper.LookUp
                 return DATA;
             }
         }
-
         public static List<SQLParamters> GET_LK1_WHTaxPolicy_List(SQLParamters PostedData)
         {
             using (FASEntities db = new FASEntities())
@@ -463,6 +462,22 @@ namespace office360.GlobalHelper.LookUp
                             SlabAmount = x.SlabAmount,
                             FixedCharges = x.FixedCharges,
                             IsOnExceedingAmount = x.IsOnExceedingAmount,
+                        })
+                         .ToList();
+
+                return DATA;
+            }
+        }
+
+        public static List<SQLParamters> GET_LK1_QuestionType_List(SQLParamters PostedData)
+        {
+            using (FASEntities db = new FASEntities())
+            {
+                var DATA = db.QuestionType
+                        .Select(x => new SQLParamters
+                        {
+                            Id = x.Id,
+                            Description = x.Description,
                         })
                          .ToList();
 

@@ -229,6 +229,33 @@
           <Property Name="CompanyId" Type="int" />
           <Property Name="Remarks" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="AQM_Question">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GuID" Type="uniqueidentifier" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="CampusId" Type="int" />
+          <Property Name="ClassId" Type="int" />
+          <Property Name="SubjectId" Type="int" />
+          <Property Name="Chapter" Type="nvarchar(max)" />
+          <Property Name="DifficultyLevelId" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="QuestionTypeId" Type="int" />
+          <Property Name="Options" Type="text" />
+          <Property Name="CorrectAnswer" Type="nvarchar(max)" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="DocType" Type="int" />
+          <Property Name="DocumentStatus" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="BranchId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="ASM_Subject">
           <Key>
             <PropertyRef Name="Id" />
@@ -675,6 +702,15 @@ warning 6002: The table/view 'FAS.dbo.PolicyPeriod' does not have a primary key 
           <Property Name="MonthNo" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'FAS.dbo.QuestionType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="QuestionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'FAS.dbo.RegistrationType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="RegistrationType">
           <Key>
@@ -1063,12 +1099,36 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Response" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="AQM_Question_Upsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_OperationType" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="GuID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="CampusId" Type="int" Mode="In" />
+          <Parameter Name="ClassId" Type="int" Mode="In" />
+          <Parameter Name="SubjectId" Type="int" Mode="In" />
+          <Parameter Name="Chapter" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="QuestionTypeId" Type="int" Mode="In" />
+          <Parameter Name="Options" Type="text" Mode="In" />
+          <Parameter Name="CorrectAnswer" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+          <Parameter Name="UpdatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="UpdatedBy" Type="int" Mode="In" />
+          <Parameter Name="DocType" Type="int" Mode="In" />
+          <Parameter Name="DocumentStatus" Type="int" Mode="In" />
+          <Parameter Name="Status" Type="bit" Mode="In" />
+          <Parameter Name="BranchId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Response" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="ASM_Subject_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="SessionCompanyId" Type="int" Mode="In" />
           <Parameter Name="SessionBranchId" Type="int" Mode="In" />
           <Parameter Name="SearchParameter" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="ClassId" Type="int" Mode="In" />
         </Function>
         <Function Name="ASM_Subject_GetListBySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CompanyId" Type="int" Mode="In" />
@@ -1372,6 +1432,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <EntitySet Name="ACOAM_ChartOfAccount" EntityType="Self.ACOAM_ChartOfAccount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ADTM_DiscountType" EntityType="Self.ADTM_DiscountType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AFTM_FeeType" EntityType="Self.AFTM_FeeType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AQM_Question" EntityType="Self.AQM_Question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ASM_Subject" EntityType="Self.ASM_Subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BM_Branch" EntityType="Self.BM_Branch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CM_Company" EntityType="Self.CM_Company" Schema="dbo" store:Type="Tables" />
@@ -1550,6 +1611,12 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
     [PolicyPeriod].[Description] AS [Description], 
     [PolicyPeriod].[MonthNo] AS [MonthNo]
     FROM [dbo].[PolicyPeriod] AS [PolicyPeriod]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="QuestionType" EntityType="Self.QuestionType" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [QuestionType].[Id] AS [Id], 
+    [QuestionType].[Description] AS [Description]
+    FROM [dbo].[QuestionType] AS [QuestionType]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="RegistrationType" EntityType="Self.RegistrationType" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1878,6 +1945,33 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Name="AssetAccountId" Type="Int32" />
           <Property Name="LiabilityAccountId" Type="Int32" />
           <Property Name="CostOfSaleAccountId" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="DocType" Type="Int32" />
+          <Property Name="DocumentStatus" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="BranchId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AQM_Question">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuID" Type="Guid" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CampusId" Type="Int32" />
+          <Property Name="ClassId" Type="Int32" />
+          <Property Name="SubjectId" Type="Int32" />
+          <Property Name="Chapter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DifficultyLevelId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="QuestionTypeId" Type="Int32" />
+          <Property Name="Options" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CorrectAnswer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
@@ -2288,6 +2382,13 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="MonthNo" Type="Int32" />
         </EntityType>
+        <EntityType Name="QuestionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="RegistrationType">
           <Key>
             <PropertyRef Name="Id" />
@@ -2411,6 +2512,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <EntitySet Name="ACOAM_ChartOfAccount" EntityType="Self.ACOAM_ChartOfAccount" />
           <EntitySet Name="ADTM_DiscountType" EntityType="Self.ADTM_DiscountType" />
           <EntitySet Name="AFTM_FeeType" EntityType="Self.AFTM_FeeType" />
+          <EntitySet Name="AQM_Question" EntityType="Self.AQM_Question" />
           <EntitySet Name="ASM_Subject" EntityType="Self.ASM_Subject" />
           <EntitySet Name="BM_Branch" EntityType="Self.BM_Branch" />
           <EntitySet Name="CM_Company" EntityType="Self.CM_Company" />
@@ -2442,6 +2544,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <EntitySet Name="Occupation" EntityType="Self.Occupation" />
           <EntitySet Name="OrganizationType" EntityType="Self.OrganizationType" />
           <EntitySet Name="PolicyPeriod" EntityType="Self.PolicyPeriod" />
+          <EntitySet Name="QuestionType" EntityType="Self.QuestionType" />
           <EntitySet Name="RegistrationType" EntityType="Self.RegistrationType" />
           <EntitySet Name="Relationship" EntityType="Self.Relationship" />
           <EntitySet Name="Religion" EntityType="Self.Religion" />
@@ -2715,12 +2818,36 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
             <Parameter Name="Remarks" Mode="In" Type="String" />
             <Parameter Name="Response" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="AQM_Question_Upsert">
+            <Parameter Name="DB_OperationType" Mode="In" Type="String" />
+            <Parameter Name="GuID" Mode="In" Type="Guid" />
+            <Parameter Name="CampusId" Mode="In" Type="Int32" />
+            <Parameter Name="ClassId" Mode="In" Type="Int32" />
+            <Parameter Name="SubjectId" Mode="In" Type="Int32" />
+            <Parameter Name="Chapter" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="QuestionTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="Options" Mode="In" Type="String" />
+            <Parameter Name="CorrectAnswer" Mode="In" Type="String" />
+            <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="UpdatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="DocType" Mode="In" Type="Int32" />
+            <Parameter Name="DocumentStatus" Mode="In" Type="Int32" />
+            <Parameter Name="Status" Mode="In" Type="Boolean" />
+            <Parameter Name="BranchId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="Remarks" Mode="In" Type="String" />
+            <Parameter Name="Response" Mode="InOut" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="ASM_Subject_GetListByParam" ReturnType="Collection(FASModel.ASM_Subject_GetListByParam_Result)">
             <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
             <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
             <Parameter Name="SessionBranchId" Mode="In" Type="Int32" />
             <Parameter Name="SearchParameter" Mode="In" Type="String" />
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="ClassId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ASM_Subject_GetListBySearch" ReturnType="Collection(FASModel.ASM_Subject_GetListBySearch_Result)">
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
@@ -3479,6 +3606,34 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AQM_Question">
+            <EntityTypeMapping TypeName="FASModel.AQM_Question">
+              <MappingFragment StoreEntitySet="AQM_Question">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="CampusId" ColumnName="CampusId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Chapter" ColumnName="Chapter" />
+                <ScalarProperty Name="DifficultyLevelId" ColumnName="DifficultyLevelId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="QuestionTypeId" ColumnName="QuestionTypeId" />
+                <ScalarProperty Name="Options" ColumnName="Options" />
+                <ScalarProperty Name="CorrectAnswer" ColumnName="CorrectAnswer" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="DocType" ColumnName="DocType" />
+                <ScalarProperty Name="DocumentStatus" ColumnName="DocumentStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ASM_Subject">
             <EntityTypeMapping TypeName="FASModel.ASM_Subject">
               <MappingFragment StoreEntitySet="ASM_Subject">
@@ -3909,6 +4064,14 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="QuestionType">
+            <EntityTypeMapping TypeName="FASModel.QuestionType">
+              <MappingFragment StoreEntitySet="QuestionType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="RegistrationType">
             <EntityTypeMapping TypeName="FASModel.RegistrationType">
               <MappingFragment StoreEntitySet="RegistrationType">
@@ -4234,6 +4397,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="AFTM_FeeType_Upsert" FunctionName="FASModel.Store.AFTM_FeeType_Upsert" />
+          <FunctionImportMapping FunctionImportName="AQM_Question_Upsert" FunctionName="FASModel.Store.AQM_Question_Upsert" />
           <FunctionImportMapping FunctionImportName="ASM_Subject_GetListByParam" FunctionName="FASModel.Store.ASM_Subject_GetListByParam">
             <ResultMapping>
               <ComplexTypeMapping TypeName="FASModel.ASM_Subject_GetListByParam_Result">

@@ -49,16 +49,8 @@ function ChangeCase() {
 
 /*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON LOAD)            **----------------------------------------------*/
 function PopulateMT_ACOAM_CostOfSaleAccount_ListByParam() {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType,
     }
     $.ajax({
         type: "POST",

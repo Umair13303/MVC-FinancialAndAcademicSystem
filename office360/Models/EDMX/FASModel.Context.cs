@@ -37,6 +37,7 @@ namespace office360.Models.EDMX
         public virtual DbSet<ACOAM_ChartOfAccount> ACOAM_ChartOfAccount { get; set; }
         public virtual DbSet<ADTM_DiscountType> ADTM_DiscountType { get; set; }
         public virtual DbSet<AFTM_FeeType> AFTM_FeeType { get; set; }
+        public virtual DbSet<AQM_Question> AQM_Question { get; set; }
         public virtual DbSet<ASM_Subject> ASM_Subject { get; set; }
         public virtual DbSet<BM_Branch> BM_Branch { get; set; }
         public virtual DbSet<CM_Company> CM_Company { get; set; }
@@ -68,6 +69,7 @@ namespace office360.Models.EDMX
         public virtual DbSet<Occupation> Occupation { get; set; }
         public virtual DbSet<OrganizationType> OrganizationType { get; set; }
         public virtual DbSet<PolicyPeriod> PolicyPeriod { get; set; }
+        public virtual DbSet<QuestionType> QuestionType { get; set; }
         public virtual DbSet<RegistrationType> RegistrationType { get; set; }
         public virtual DbSet<Relationship> Relationship { get; set; }
         public virtual DbSet<Religion> Religion { get; set; }
@@ -1025,7 +1027,92 @@ namespace office360.Models.EDMX
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AFTM_FeeType_Upsert", dB_OperationTypeParameter, guIDParameter, descriptionParameter, feeCategoryIdParameter, chargingMethodIdParameter, isOnAdmissionParameter, isSecurityParameter, isRefundableParameter, isDiscountParameter, revenueAccountIdParameter, assetAccountIdParameter, liabilityAccountIdParameter, costOfSaleAccountIdParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, remarksParameter, response);
         }
     
-        public virtual ObjectResult<ASM_Subject_GetListByParam_Result> ASM_Subject_GetListByParam(string dB_IF_PARAM, Nullable<int> sessionCompanyId, Nullable<int> sessionBranchId, string searchParameter, Nullable<int> companyId)
+        public virtual int AQM_Question_Upsert(string dB_OperationType, Nullable<System.Guid> guID, Nullable<int> campusId, Nullable<int> classId, Nullable<int> subjectId, string chapter, string description, Nullable<int> questionTypeId, string options, string correctAnswer, Nullable<System.DateTime> createdOn, Nullable<int> createdBy, Nullable<System.DateTime> updatedOn, Nullable<int> updatedBy, Nullable<int> docType, Nullable<int> documentStatus, Nullable<bool> status, Nullable<int> branchId, Nullable<int> companyId, string remarks, ObjectParameter response)
+        {
+            var dB_OperationTypeParameter = dB_OperationType != null ?
+                new ObjectParameter("DB_OperationType", dB_OperationType) :
+                new ObjectParameter("DB_OperationType", typeof(string));
+    
+            var guIDParameter = guID.HasValue ?
+                new ObjectParameter("GuID", guID) :
+                new ObjectParameter("GuID", typeof(System.Guid));
+    
+            var campusIdParameter = campusId.HasValue ?
+                new ObjectParameter("CampusId", campusId) :
+                new ObjectParameter("CampusId", typeof(int));
+    
+            var classIdParameter = classId.HasValue ?
+                new ObjectParameter("ClassId", classId) :
+                new ObjectParameter("ClassId", typeof(int));
+    
+            var subjectIdParameter = subjectId.HasValue ?
+                new ObjectParameter("SubjectId", subjectId) :
+                new ObjectParameter("SubjectId", typeof(int));
+    
+            var chapterParameter = chapter != null ?
+                new ObjectParameter("Chapter", chapter) :
+                new ObjectParameter("Chapter", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var questionTypeIdParameter = questionTypeId.HasValue ?
+                new ObjectParameter("QuestionTypeId", questionTypeId) :
+                new ObjectParameter("QuestionTypeId", typeof(int));
+    
+            var optionsParameter = options != null ?
+                new ObjectParameter("Options", options) :
+                new ObjectParameter("Options", typeof(string));
+    
+            var correctAnswerParameter = correctAnswer != null ?
+                new ObjectParameter("CorrectAnswer", correctAnswer) :
+                new ObjectParameter("CorrectAnswer", typeof(string));
+    
+            var createdOnParameter = createdOn.HasValue ?
+                new ObjectParameter("CreatedOn", createdOn) :
+                new ObjectParameter("CreatedOn", typeof(System.DateTime));
+    
+            var createdByParameter = createdBy.HasValue ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
+    
+            var updatedOnParameter = updatedOn.HasValue ?
+                new ObjectParameter("UpdatedOn", updatedOn) :
+                new ObjectParameter("UpdatedOn", typeof(System.DateTime));
+    
+            var updatedByParameter = updatedBy.HasValue ?
+                new ObjectParameter("UpdatedBy", updatedBy) :
+                new ObjectParameter("UpdatedBy", typeof(int));
+    
+            var docTypeParameter = docType.HasValue ?
+                new ObjectParameter("DocType", docType) :
+                new ObjectParameter("DocType", typeof(int));
+    
+            var documentStatusParameter = documentStatus.HasValue ?
+                new ObjectParameter("DocumentStatus", documentStatus) :
+                new ObjectParameter("DocumentStatus", typeof(int));
+    
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(bool));
+    
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("BranchId", branchId) :
+                new ObjectParameter("BranchId", typeof(int));
+    
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("CompanyId", companyId) :
+                new ObjectParameter("CompanyId", typeof(int));
+    
+            var remarksParameter = remarks != null ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AQM_Question_Upsert", dB_OperationTypeParameter, guIDParameter, campusIdParameter, classIdParameter, subjectIdParameter, chapterParameter, descriptionParameter, questionTypeIdParameter, optionsParameter, correctAnswerParameter, createdOnParameter, createdByParameter, updatedOnParameter, updatedByParameter, docTypeParameter, documentStatusParameter, statusParameter, branchIdParameter, companyIdParameter, remarksParameter, response);
+        }
+    
+        public virtual ObjectResult<ASM_Subject_GetListByParam_Result> ASM_Subject_GetListByParam(string dB_IF_PARAM, Nullable<int> sessionCompanyId, Nullable<int> sessionBranchId, string searchParameter, Nullable<int> companyId, Nullable<int> classId)
         {
             var dB_IF_PARAMParameter = dB_IF_PARAM != null ?
                 new ObjectParameter("DB_IF_PARAM", dB_IF_PARAM) :
@@ -1047,7 +1134,11 @@ namespace office360.Models.EDMX
                 new ObjectParameter("CompanyId", companyId) :
                 new ObjectParameter("CompanyId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ASM_Subject_GetListByParam_Result>("ASM_Subject_GetListByParam", dB_IF_PARAMParameter, sessionCompanyIdParameter, sessionBranchIdParameter, searchParameterParameter, companyIdParameter);
+            var classIdParameter = classId.HasValue ?
+                new ObjectParameter("ClassId", classId) :
+                new ObjectParameter("ClassId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ASM_Subject_GetListByParam_Result>("ASM_Subject_GetListByParam", dB_IF_PARAMParameter, sessionCompanyIdParameter, sessionBranchIdParameter, searchParameterParameter, companyIdParameter, classIdParameter);
         }
     
         public virtual ObjectResult<ASM_Subject_GetListBySearch_Result> ASM_Subject_GetListBySearch(Nullable<int> companyId, Nullable<int> branchId, Nullable<int> inputTypeId, string inputText)

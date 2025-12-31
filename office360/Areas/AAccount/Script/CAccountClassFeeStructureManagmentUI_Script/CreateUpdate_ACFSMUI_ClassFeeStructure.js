@@ -335,16 +335,8 @@ function PopulateLK_WHTaxPolicy_List() {
 
 /*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON LOAD)            **----------------------------------------------*/
 function PopulateMT_BM_Branch_ListByParam() {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.BM_BRANCH_BY_ALLOWEDBRANCHIDS_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.BM_BRANCH_BY_ALLOWEDBRANCHIDS_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType,
     }
     $.ajax({
         type: "POST",
@@ -366,16 +358,8 @@ function PopulateMT_BM_Branch_ListByParam() {
     });
 }
 function PopulateMT_ACOAM_RevenueAccount_ListByParam() {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType,
     }
     $.ajax({
         type: "POST",
@@ -397,16 +381,8 @@ function PopulateMT_ACOAM_RevenueAccount_ListByParam() {
     });
 }
 function PopulateMT_ACOAM_AssetAccount_ListByParam() {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType,
     }
     $.ajax({
         type: "POST",
@@ -428,16 +404,8 @@ function PopulateMT_ACOAM_AssetAccount_ListByParam() {
     });
 }
 function PopulateMT_ACOAM_LiabilityAccount_ListByParam() {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType,
     }
     $.ajax({
         type: "POST",
@@ -459,16 +427,8 @@ function PopulateMT_ACOAM_LiabilityAccount_ListByParam() {
     });
 }
 function PopulateMT_ACOAM_CostOfSaleAccount_ListByParam() {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.ACOAM_CHARTOFACCOUNT_BY_COMPANYID_ACCOUNTTYPEID_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType,
     }
     $.ajax({
         type: "POST",
@@ -490,16 +450,8 @@ function PopulateMT_ACOAM_CostOfSaleAccount_ListByParam() {
     });
 }
 function PopulateMT_AFTM_FeeType_ListByParam() {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.AFTM_FEETYPE_BY_COMPANYID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.AFTM_FEETYPE_BY_COMPANYID_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType,
     }
     $.ajax({
         type: "POST",
@@ -523,16 +475,8 @@ function PopulateMT_AFTM_FeeType_ListByParam() {
 
 /*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- LINQUERY (ON CHANGE)                  **----------------------------------------------*/
 function PopulateMT_AASM_AdmissionSession_ListByParam(CampusId,AdmissionSessionId) {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.AASM_ADMISSIONSESSION_BY_CAMPUSID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.AASM_ADMISSIONSESSION_BY_CAMPUSID_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType,
         CampusId: CampusId,
     }
     $.ajax({
@@ -555,16 +499,8 @@ function PopulateMT_AASM_AdmissionSession_ListByParam(CampusId,AdmissionSessionI
     });
 }
 function PopulateMT_ACM_Class_ListByParam(CampusId, AdmissionSessionId,ClassId) {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.ACM_CLASS_BY_ADMISSIONSESSIONID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.ACM_CLASS_BY_ADMISSIONSESSIONID_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType,
         CampusId: CampusId,
         AdmissionSessionId: AdmissionSessionId,
     }
@@ -794,7 +730,6 @@ function GET_AFSM_FEESTRUCTURE_LISTBYPARAM() {
                 return {
                     PostedData: {
                         SearchParameter: params.term,
-                        DB_IF_PARAM: DOCUMENT_LIST_CONDITION.ACFSM_CLASSFEESTRUCTURE_BY_ALLOWEDBRANCHIDS_SEARCH_PARAMETER_UPDATECLASSFEESTRUCTURE,
                     }
                 };
             },

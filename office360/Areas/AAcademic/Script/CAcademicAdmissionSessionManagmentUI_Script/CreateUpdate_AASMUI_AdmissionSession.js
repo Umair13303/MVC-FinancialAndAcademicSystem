@@ -166,16 +166,9 @@ function ClearInputFieldsDataTable() {
 
 /*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON LOAD)             **----------------------------------------------*/
 function PopulateMT_BM_Branch_ListByParam() {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.BM_BRANCH_BY_ALLOWEDBRANCHIDS_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.BM_BRANCH_BY_ALLOWEDBRANCHIDS_FORUPDATERECORD;
-            break;
-    }
+    
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType
     }
     $.ajax({
         type: "POST",
@@ -199,16 +192,9 @@ function PopulateMT_BM_Branch_ListByParam() {
 
 /*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON CHANGE)           **----------------------------------------------*/
 function PopulateMT_ACM_Class_ListByParam(CampusId) {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.ACM_CLASS_BY_CAMPUSID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.ACM_CLASS_BY_CAMPUSID_FORUPDATERECORD;
-            break;
-    }
+    
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType,
         CampusId: CampusId,
     }
     $.ajax({
@@ -398,7 +384,6 @@ function GET_AASM_ADMISSIONSESSION_LISTBYPARAM() {
                 return {
                     PostedData: {
                         SearchParameter: params.term,
-                        DB_IF_PARAM: DOCUMENT_LIST_CONDITION.AASM_ADMISSIONSESSION_BY_ALLOWEDBRANCHIDS_SEARCH_PARAMETER_UPDATEADMISSIONSESSION,
                     }
                 };
             },

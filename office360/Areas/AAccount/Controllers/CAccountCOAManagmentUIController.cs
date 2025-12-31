@@ -1,14 +1,15 @@
-﻿using office360.Common.CommonHelper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using office360.Common.CommonHelper;
 using office360.CommonHelper;
 using office360.Extensions;
 using office360.GlobalHelper.LookUp;
 using office360.Models.EDMX;
 using office360.Models.General;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using static office360.Models.General.DDOFilter;
 using static office360.Models.General.HttpServerStatus;
 
 
@@ -93,11 +94,12 @@ namespace office360.Areas.AAccount.Controllers
         }
         #endregion
 
-        /*---------------------- ** ACTION RESULTS FOR :: EDIT (LOAD DOCUMENT OF BRANCH & GET DETAIL BY CHARTOFACCOUNT_GUID) ** ------------------------ */
+        /*---------------------- ** ACTION RESULTS FOR :: EDIT (LOAD DOCUMENT OF CHARTOFACCOUNT & GET DETAIL BY CHARTOFACCOUNT_GUID) ** ------------------------ */
 
         #region ACTION RESULT FOR :: SEARCH DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
         public ActionResult GET_MT_ACOAM_CHARTOFACCOUNT_BYPARAMETER_SEARCH(SQLParamters PostedData)
         {
+            PostedData.DB_IF_PARAM = nameof(MDBDocFilter.ACOAM_CHARTOFACCOUNT_BY_SEARCH_PARAMETER_UPDATECHARTOFACCOUNT);
             var DATA = AAccount.HelperCode.DATA_FROM_SP.GET_MT_ACOAM_ChartOfAccount_By_Param_List(PostedData).ToList();
             return Json(new { data = DATA }, JsonRequestBehavior.AllowGet);
         }

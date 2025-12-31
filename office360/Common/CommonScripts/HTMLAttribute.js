@@ -2,6 +2,37 @@
     static CHECKBOX(Id, Name, ClassName = '') {
         return "<input type='checkbox' id='" + Id + "' name='" + Name + "' class='" + ClassName + "' />";
     }
+
+    static DYNAMIC_MCQ_OPTION_FIELD(ContainerId, OptionLimit) {
+        let HTML_Element = '<div class="row">';
+        for (let i = 1; i <= OptionLimit; i++) {
+            HTML_Element += `
+                <div class="col-md-3 mb-2">
+                    <div class="input-group">
+                        <div class="input-group-prepend"><span class="input-group-text">${String.fromCharCode(64 + i)}</span></div>
+                        <input type="text" name="mcq_option" class="form-control" placeholder="Option Text">
+                    </div>
+                </div>`;
+        }
+        HTML_Element += '</div>';
+        $('#' + ContainerId).html(HTML_Element);
+    }
+    static DYNAMIC_MTQ_ROW(ContainerId) {
+        let rowIdx = $('.match-pair-row').length + 1;
+        let HTML_Element = `
+            <div class="row mb-2 match-pair-row">
+                <div class="col-md-5">
+                    <input type="text" class="form-control match-from" placeholder="From (Column A) ${rowIdx}">
+                </div>
+                <div class="col-md-5">
+                    <input type="text" class="form-control match-to" placeholder="To (Column B) ${rowIdx}">
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-danger btn-remove-row"><i class="fa fa-trash"></i></button>
+                </div>
+            </div>`;
+        $('#' + ContainerId).append(HTML_Element);
+    }
 }
 
 class HTML_BUTTON {

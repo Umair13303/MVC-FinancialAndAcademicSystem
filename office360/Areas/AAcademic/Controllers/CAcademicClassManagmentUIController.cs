@@ -1,14 +1,15 @@
-﻿using office360.Common.CommonHelper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using office360.Common.CommonHelper;
 using office360.CommonHelper;
 using office360.Extensions;
 using office360.GlobalHelper.LookUp;
 using office360.Models.EDMX;
 using office360.Models.General;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using static office360.Models.General.DDOFilter;
 using static office360.Models.General.HttpServerStatus;
 
 namespace office360.Areas.AAcademic.Controllers
@@ -62,13 +63,23 @@ namespace office360.Areas.AAcademic.Controllers
         #endregion
 
         /*---------------------- ** ACTION RESULTS FOR :: RENDER OF DROP DOWN LIST FROM DB_MAIN USING STOREDPROCEDURE ** ---------------------------- */
-        
+
         #region ACTION RESULT FOR :: RENDER DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
         public ActionResult GET_MT_BM_BRANCH_BYPARAMTER(SQLParamters PostedData)
         {
+            switch (PostedData.OperationType)
+            {
+                case nameof(DB_OperationType.INSERT_DATA_INTO_DB):
+                    PostedData.DB_IF_PARAM = nameof(MDBDataFilter.BM_BRANCH_BY_ALLOWEDBRANCHIDS_FORNEWINSERT);
+                    break;
+                default:
+                    PostedData.DB_IF_PARAM = nameof(MDBDataFilter.BM_BRANCH_BY_ALLOWEDBRANCHIDS_FORUPDATERECORD);
+                    break;
+            }
             var DATA = ABranch.HelperCode.DATA_FROM_SP.GET_MT_BM_Branch_By_Param_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
+
         #endregion
 
         /*---------------------- ** ACTION RESULTS FOR :: RENDER DATA FOR DROP DOWN LIST FROM DB_LOOKUP USING LINQUERY ** --------------------------- */
@@ -109,6 +120,7 @@ namespace office360.Areas.AAcademic.Controllers
         #region ACTION RESULT FOR :: SEARCH DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
         public ActionResult GET_MT_ACM_CLASS_BYPARAMETER_SEARCH(SQLParamters PostedData)
         {
+            PostedData.DB_IF_PARAM = nameof(MDBDocFilter.ACM_CLASS_BY_ALLOWEDBRANCHIDS_SEARCH_PARAMETER_UPDATECLASS);
             var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_ACM_Class_By_Param_List(PostedData).ToList();
             return Json(new { data = DATA }, JsonRequestBehavior.AllowGet);
         }

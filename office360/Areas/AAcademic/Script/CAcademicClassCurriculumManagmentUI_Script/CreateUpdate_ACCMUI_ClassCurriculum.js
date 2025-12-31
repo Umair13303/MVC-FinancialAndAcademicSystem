@@ -155,16 +155,8 @@ function ClearInputFieldsDataTable() {
 
 /*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON LOAD)                                **----------------------------------------------*/
 function PopulateMT_BM_Branch_ListByParam() {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.BM_BRANCH_BY_ALLOWEDBRANCHIDS_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.BM_BRANCH_BY_ALLOWEDBRANCHIDS_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType
     }
     $.ajax({
         type: "POST",
@@ -186,16 +178,8 @@ function PopulateMT_BM_Branch_ListByParam() {
     });
 }
 function PopulateMT_ASM_Subject_ListByParam() {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.ASM_SUBJECT_BY_COMPANYID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.ASM_SUBJECT_BY_COMPANYID_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType,
     }
     $.ajax({
         type: "POST",
@@ -219,16 +203,8 @@ function PopulateMT_ASM_Subject_ListByParam() {
 
 /*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON CHANGE)                              **----------------------------------------------*/
 function PopulateMT_ACM_Class_ListByParam(CampusId, ClassId) {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.ACM_CLASS_BY_CAMPUSID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.ACM_CLASS_BY_CAMPUSID_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType,
         CampusId: CampusId,
     }
     $.ajax({
@@ -401,7 +377,6 @@ function GET_ACCM_CLASSCURRICULUM_LISTBYPARAM() {
                 return {
                     PostedData: {
                         SearchParameter: params.term,
-                        DB_IF_PARAM: DOCUMENT_LIST_CONDITION.ACCM_CLASSCURRICULUM_BY_ALLOWEDBRANCHIDS_SEARCH_PARAMETER_UPDATECLASSCURRICULUM,
                     }
                 };
             },
