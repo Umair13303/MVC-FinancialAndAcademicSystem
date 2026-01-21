@@ -1,6 +1,6 @@
 ﻿/*----------------------------------** GLOBAL VARIABLE FOR PAGE :: CREATE/UPDATE CM_COMPANY                       **----------------------------------------------*/
 var OperationType = "";
-var DDL_Condition = "";
+
 var DB_OperationType = $('#HiddenFieldDB_OperationType').val();
 var IsFieldClear = false;
 
