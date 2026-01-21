@@ -136,12 +136,11 @@ function PopulateMT_ACM_Class_ListByParam(CampusId, AdmissionSessionId, ClassId)
 function PopulateMT_ACFSM_ClassFeeStructure_ListByParam(ClassId, ClassFeeStructureId) {
     var JsonArg = {
         OperationType: DB_OperationType,
-        DB_IF_PARAM: DDL_Condition,
         ClassId: ClassId,
     }
     $.ajax({
         type: "POST",
-        url: BasePath + "/AStudent/CStudentManagmentUI/GET_MT_ACFSM_CLASSFEESTRUCTURE_BYPARAMETER_",
+        url: BasePath + "/AStudent/CStudentManagmentUI/GET_MT_ACFSM_CLASSFEESTRUCTURE_BYPARAMETER",
         data: { 'PostedData': (JsonArg) },
         beforeSend: function () {
             startLoading();

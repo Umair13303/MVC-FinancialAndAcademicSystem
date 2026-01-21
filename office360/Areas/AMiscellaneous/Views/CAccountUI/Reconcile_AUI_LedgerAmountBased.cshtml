@@ -63,17 +63,7 @@
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
                             @Html.Label("Question Type", new { @class = "col-form-label", @for = "DropDownListQuestionType" })
-                            @Html.DropDownList("DropDownListQuestionType", new List<SelectListItem>
-                                 {
-                                     new SelectListItem { Value = "0", Text = "Select An Option"},
-                                     new SelectListItem { Value = "1", Text = "MCQ" },
-                                     new SelectListItem { Value = "2", Text = "Fill In The Blanks" },
-                                     new SelectListItem { Value = "3", Text = "True / False" },
-                                     new SelectListItem { Value = "4", Text = "Match The Coloumn" },
-                                     new SelectListItem { Value = "5", Text = "Diagram / Mindmap / Flow Chart" },
-                                     new SelectListItem { Value = "6", Text = "Short Question" },
-                                     new SelectListItem { Value = "7", Text = "Long Question" },
-                                }, new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListQuestionType" })
+                            @Html.DropDownList("DropDownListQuestionType", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListQuestionType" })
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-6">
@@ -108,8 +98,22 @@
                 <div class="row mb-0">
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
+                            @Html.Label("Difficulty Level", new { @class = "col-form-label", @for = "DropDownListDifficultyLevel" })
+                            @Html.DropDownList("DropDownListDifficultyLevel", new List<SelectListItem>
+                                 {
+                                     new SelectListItem { Value = "-1", Text = "Select An Option"},
+                                     new SelectListItem { Value = "1", Text = "Easy" },
+                                     new SelectListItem { Value = "2", Text = "Medium" },
+                                     new SelectListItem { Value = "3", Text = "Hard" },
+                                }, new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListDifficultyLevel" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-0">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
                             @Html.Label("Correct Answer", new { @class = "col-form-label" })
-                            @Html.TextArea("CorrectAnswer", null, new { @class = "form-control", placeholder = "Final Answer for Grading", id = "TextBoxAnswer" })
+                            @Html.TextArea("TextBoxCorrectAnswer", null, new { @class = "form-control", placeholder = "Final Answer for Grading", id = "TextBoxCorrectAnswer" })
                         </div>
                     </div>
                 </div>
@@ -142,12 +146,3 @@
 
 
 <script src="~/Areas/AAcademic/Script/CAcademicQuestionManagmentUI_Script/CreateUpdate_AQMUI_Question.js"></script>
-<script>
-    document.getElementById('DifficultySlider').addEventListener('input', function (e) {
-        const val = e.target.value;
-        const badge = document.getElementById('DifficultyBadge');
-        if (val == 1) { badge.innerText = "EASY"; badge.style.background = "#1abc9c"; }
-        else if (val == 2) { badge.innerText = "MEDIUM"; badge.style.background = "#e2a03f"; }
-        else { badge.innerText = "HARD"; badge.style.background = "#e7515a"; }
-    });
-</script>

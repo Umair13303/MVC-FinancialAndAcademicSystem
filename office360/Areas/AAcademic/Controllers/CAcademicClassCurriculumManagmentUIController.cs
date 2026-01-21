@@ -65,7 +65,7 @@ namespace office360.Areas.AAcademic.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: RENDER OF DROP DOWN LIST FROM DB_MAIN USING STOREDPROCEDURE ** ---------------------- */
 
         #region ACTION RESULT FOR :: RENDER DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
-        public ActionResult GET_MT_BM_BRANCH_BYPARAMTER(SQLParamters PostedData)
+        public JsonResult GET_MT_BM_BRANCH_BYPARAMTER(SQLParamters PostedData)
         {
             switch (PostedData.OperationType)
             {
@@ -79,7 +79,7 @@ namespace office360.Areas.AAcademic.Controllers
             var DATA = ABranch.HelperCode.DATA_FROM_SP.GET_MT_BM_Branch_By_Param_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GET_MT_ACM_CLASS_BYPARAMTER(SQLParamters PostedData)
+        public JsonResult GET_MT_ACM_CLASS_BYPARAMTER(SQLParamters PostedData)
         {
             switch (PostedData.OperationType)
             {
@@ -93,7 +93,7 @@ namespace office360.Areas.AAcademic.Controllers
             var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_ACM_Class_By_Param_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GET_MT_ASM_SUBJECT_BYPARAMTER(SQLParamters PostedData)
+        public JsonResult GET_MT_ASM_SUBJECT_BYPARAMTER(SQLParamters PostedData)
         {
             switch (PostedData.OperationType)
             {
@@ -112,7 +112,7 @@ namespace office360.Areas.AAcademic.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: RENDER DATA FOR DROP DOWN LIST FROM DB_LOOKUP USING LINQUERY ** --------------------- */
 
         #region ACTION RESULT FOR :: RENDER DATA FOR DROP DOWN FROM DB_LOOKUP -- LINQ-QUERY
-        public ActionResult GET_LK1_SEMESTER(SQLParamters PostedData)
+        public JsonResult GET_LK1_SEMESTER(SQLParamters PostedData)
         {
             var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_Semester_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
@@ -135,7 +135,7 @@ namespace office360.Areas.AAcademic.Controllers
 
         #region ACTION RESULT FOR :: SEARCH DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
 
-        public ActionResult GET_MT_ACCM_CLASSCURRICULUM_BYPARAMETER_SEARCH(SQLParamters PostedData)
+        public JsonResult GET_MT_ACCM_CLASSCURRICULUM_BYPARAMETER_SEARCH(SQLParamters PostedData)
         {
             PostedData.DB_IF_PARAM = nameof(MDBDocFilter.ACCM_CLASSCURRICULUM_BY_ALLOWEDBRANCHIDS_SEARCH_PARAMETER_UPDATECLASSCURRICULUM);
             var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_ACCM_ClassCurriculum_By_Param_List(PostedData).ToList();
@@ -144,7 +144,7 @@ namespace office360.Areas.AAcademic.Controllers
         #endregion
 
         #region ACTION RESULT FOR :: GET DOCUMENT DETAIL (DBO.ACM_CLASSCURRICULUM) -- LINQ-QUERY
-        public ActionResult GET_ACCM_CLASSCURRICULUM_INFOBYGUID(SQLParamters PostedData)
+        public JsonResult GET_ACCM_CLASSCURRICULUM_INFOBYGUID(SQLParamters PostedData)
         {
             var DATA = AAcademic.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_ACCM_CLASSCURRICULUM_INFO_BY_GUID(PostedData).ToList();
             var DATA_DETAIL = AAcademic.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_ACCM_CLASSCURRICULUMSUBJECT_INFO_BY_GUID(PostedData).ToList();
@@ -155,7 +155,7 @@ namespace office360.Areas.AAcademic.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: DATA TABLE (LOAD TABLE OF CLASSCURRICULUM BY INPUT TYPE & TEXT) ** ---------------------------- */
 
         #region ACTION RESULT FOR :: GET LIST BY SEARCH PARAMETER FOR DATA-TABLE (DBO.ACCM_ClassCurriculum)-- STORED PROCEDURE
-        public ActionResult GET_MT_ACCM_CLASSCURRICULUM_LIST_BY_SEARCHQUERY_FORDATATABLE(SQLParamters PostedData)
+        public JsonResult GET_MT_ACCM_CLASSCURRICULUM_LIST_BY_SEARCHQUERY_FORDATATABLE(SQLParamters PostedData)
         {
             var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_ACCM_ClassCurriculum_List_By_SearchQuery(PostedData).ToList();
             return Json(new { success = true, data = DATA }, JsonRequestBehavior.AllowGet);

@@ -225,7 +225,6 @@ function GET_CM_COMPANY_LISTBYPARAM() {
                 return {
                     PostedData: {
                         SearchParameter: params.term,
-                        DB_IF_PARAM: DOCUMENT_LIST_CONDITION.CM_COMPANY_BY_SEARCH_PARAMETER_UPDATECOMPANY,
                     }
                 };
             },

@@ -1,9 +1,10 @@
-﻿@{
+﻿
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 @using (Html.BeginForm())
 {
+
     <div class="statbox widget box box-shadow">
         <div class="widget-header">
             <div class="row">
@@ -13,24 +14,34 @@
             </div>
             <nav class="breadcrumb-one" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">Academic</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">Questions</a></li>
-                    <li class="breadcrumb-item active" aria-current="page"><span>@ViewBag.Title</span></li>
+                    <li class="breadcrumb-item">
+                        <a href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="javascript:void(0);">Student</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="javascript:void(0);">Enrollment(s)</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <span>@ViewBag.Title</span>
+                    </li>
                 </ol>
             </nav>
         </div>
     </div>
+
     <form>
         @if (ViewBag.DB_OperationType == nameof(office360.Models.General.DB_OperationType.UPDATE_DATA_INTO_DB))
         {
             <div class="card" style="margin-top:1%;width:100%">
                 <div class="card-body">
+
                     <div class="row mb-0">
                         <div class="col-sm-12 col-md-8">
                             <div class="form-group">
-                                @Html.Label("Questions ( For Edit )", new { @class = "col-form-label", @for = "DropDownListQuestions" })
-                                @Html.DropDownList("DropDownListQuestions", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListQuestions" })
+                                @Html.Label("Question ( For Edit )", new { @class = "col-form-label", @for = "DropDownListQuestion" })
+                                @Html.DropDownList("DropDownListQuestion", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListQuestion" })
                                 <button type="button" class="btn btn-info" id="ButtonSubmitGetInfoForEdit">
                                     <i class="fa fa-sync-alt"></i> Load Information
                                 </button>
@@ -40,54 +51,103 @@
                 </div>
             </div>
         }
-
-    <div class="card" style="margin-top:1%;width:100%">
-        <div class="card-body">
-            <div class="row mb-0">
-                <div class="col-sm-12 col-md-6">
-                    <div class="form-group">
-                        @Html.Label("Question Type", new { @class = "col-form-label", @for = "DropDownListQuestionType" })
-                        @Html.DropDownList("DropDownListQuestionType", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListQuestionType" })
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-5" id="DivDropDownListOptionLimit" style="display:none">
-                    <div class="form-group">
-                        @Html.Label("Option Limit", new { @class = "col-form-label", @for = "DropDownListOptionLimit" })
-                        @Html.DropDownList("DropDownListOptionLimit", new List<SelectListItem>
-                         {
-                             new SelectListItem { Value = "0", Text = "Select An Option" },
-                                                                        new SelectListItem { Value = "1", Text = "1" },
-                                                                        new SelectListItem { Value = "2", Text = "2" },
-                                                                        new SelectListItem { Value = "3", Text = "3" },
-                                                                        new SelectListItem { Value = "4", Text = "4" },
-                         },
-                         new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListOptionLimit" })
+        <div class="card" style="margin-top:1%;width:100%">
+            <div class="card-body">
+                <h3 style="font-family: 'Bahnschrift'; font-weight: bolder; color: navy">Question Detail</h3>
+                <div class="row mb-0">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Campus", new { @class = "col-form-label", @for = "DropDownListCampus" })
+                            @Html.DropDownList("DropDownListCampus", Enumerable.Empty<SelectListItem>(), new { @class = "form -control select2", @data_toggle = "select2", id = "DropDownListCampus" })
+                        </div>
                     </div>
                 </div>
 
                 <div class="row mb-0">
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
-                            @Html.Label("Question Description", new { @class = "col-form-label", @for = "TextBoxDescription" })
-                            @Html.TextBox("TextBoxDescription", null, new { @class = "form-control", placeholder = "Please Enter Question Description Here!", @id = "TextBoxDescription" })
+                            @Html.Label("Class", new { @class = "col-form-label", @for = "DropDownListClass" })
+                            @Html.DropDownList("DropDownListClass", Enumerable.Empty<SelectListItem>(), new { @class = "form -control select2", @data_toggle = "select2", id = "DropDownListClass" })
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Subject", new { @class = "col-form-label", @for = "DropDownListSubject" })
+                            @Html.DropDownList("DropDownListSubject", Enumerable.Empty<SelectListItem>(), new { @class = "form -control select2", @data_toggle = "select2", id = "DropDownListSubject" })
                         </div>
                     </div>
                 </div>
-                <div id="ContainerOption" class="mt-3"></div>
-
                 <div class="row mb-0">
                     <div class="col-sm-12 col-md-6">
                         <div class="form-group">
-                            @Html.Label("Correct Answer", new { @class = "col-form-label", @for = "TextBoxCorrectAnswer" })
-                            @Html.TextBox("TextBoxCorrectAnswer", null, new { @class = "form-control", placeholder = "Please Enter Correct Answer Here!", @id = "TextBoxCorrectAnswer" })
+                            @Html.Label("Question Type", new { @class = "col-form-label", @for = "DropDownListQuestionType" })
+                            @Html.DropDownList("DropDownListQuestionType", Enumerable.Empty<SelectListItem>(), new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListQuestionType" })
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Option Limit", new { @class = "col-form-label", @for = "DropDownListOptionLimit" })
+                            @Html.DropDownList("DropDownListOptionLimit", new List<SelectListItem>
+                                 {
+                                     new SelectListItem { Value = "-1", Text = "Select An Option"},
+                                     new SelectListItem { Value = "1", Text = "1" },
+                                     new SelectListItem { Value = "2", Text = "2" },
+                                     new SelectListItem { Value = "3", Text = "3" },
+                                     new SelectListItem { Value = "4", Text = "4" },
+                                     new SelectListItem { Value = "5", Text = "5" },
+                                }, new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListOptionLimit" })
                         </div>
                     </div>
                 </div>
-
+                <div class="row mb-0">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Chapter", new { @class = "col-form-label", @for = "TextBoxChapter" })
+                            @Html.TextBox("TextBoxChapter", null, new { @class = "form-control", placeholder = "Please Enter Chapter Here!", @id = "TextBoxChapter" })
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Description", new { @class = "col-form-label", @for = "TextBoxDescription" })
+                            @Html.TextArea("TextBoxDescription", null, new { @class = "form-control", placeholder = "Please Enter Description Here!", @id = "TextBoxDescription" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-0">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Difficulty Level", new { @class = "col-form-label", @for = "DropDownListDifficultyLevel" })
+                            @Html.DropDownList("DropDownListDifficultyLevel", new List<SelectListItem>
+                                 {
+                                     new SelectListItem { Value = "-1", Text = "Select An Option"},
+                                     new SelectListItem { Value = "1", Text = "Easy" },
+                                     new SelectListItem { Value = "2", Text = "Medium" },
+                                     new SelectListItem { Value = "3", Text = "Hard" },
+                                }, new { @class = "form-control select2", @data_toggle = "select2", id = "DropDownListDifficultyLevel" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-0">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Correct Answer", new { @class = "col-form-label" })
+                            @Html.TextArea("TextBoxCorrectAnswer", null, new { @class = "form-control", placeholder = "Final Answer for Grading", id = "TextBoxCorrectAnswer" })
+                        </div>
+                    </div>
+                </div>
+                <div id="ContainerDynamicOption"></div>
+                <div class="row mb-0">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            @Html.Label("Remarks", new { @class = "col-form-label", @for = "TextBoxRemarks" })
+                            @Html.TextBox("TextBoxRemarks", null, new { @class = "form-control", placeholder = "Please Enter Remarks Here!", @id = "TextBoxRemarks" })
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
 
-    </div>
+        </div>
     </form>
     <div class="card-footer">
         <div class="col-sm-12 form-group">
@@ -101,5 +161,7 @@
             </div>
         </div>
     </div>
-
 }
+
+
+<script src="~/Areas/AAcademic/Script/CAcademicQuestionManagmentUI_Script/CreateUpdate_AQMUI_Question.js"></script>

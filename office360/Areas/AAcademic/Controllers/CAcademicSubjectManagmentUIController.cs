@@ -1,14 +1,15 @@
-﻿using office360.Common.CommonHelper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using office360.Common.CommonHelper;
 using office360.CommonHelper;
 using office360.Extensions;
 using office360.GlobalHelper.LookUp;
 using office360.Models.EDMX;
 using office360.Models.General;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using static office360.Models.General.DDOFilter;
 using static office360.Models.General.HttpServerStatus;
 
 
@@ -74,15 +75,16 @@ namespace office360.Areas.AAcademic.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: EDIT (LOAD DOCUMENT OF SUBJECT & GET DETAIL BY SUBJECT_GUID) ** ----------------------- */
 
         #region ACTION RESULT FOR :: SEARCH DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
-        public ActionResult GET_MT_ASM_SUBJECT_BYPARAMETER_SEARCH(SQLParamters PostedData)
+        public JsonResult GET_MT_ASM_SUBJECT_BYPARAMETER_SEARCH(SQLParamters PostedData)
         {
+            PostedData.DB_IF_PARAM = nameof(MDBDocFilter.ASM_SUBJECT_BY_COMPANYID_SEARCH_PARAMETER_UPDATESUBJECT);
             var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_ASM_SUBJECT_BYPARAM(PostedData).ToList();
             return Json(new { data = DATA }, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
         #region ACTION RESULT FOR :: GET DOCUMENT DETAIL (DBO.ASM_SUBJECT) -- LINQ-QUERY
-        public ActionResult GET_MT_ASM_SUBJECT_INFOBYGUID(SQLParamters PostedData)
+        public JsonResult GET_MT_ASM_SUBJECT_INFOBYGUID(SQLParamters PostedData)
         {
             var DATA = AAcademic.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_ASM_SUBJECT_INFO_BY_GUID(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
@@ -93,7 +95,7 @@ namespace office360.Areas.AAcademic.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: DATA TABLE (LOAD TABLE OF SUBJECT BY INPUT TYPE & TEXT) ** ---------------------------- */
 
         #region ACTION RESULT FOR :: GET LIST BY SEARCH PARAMETER FOR DATA-TABLE (DBO.ASM_SUBJECT)-- STORED PROCEDURE
-        public ActionResult GET_MT_ASM_SUBJECT_LIST_BY_SEARCHQUERY_FORDATATABLE(SQLParamters PostedData)
+        public JsonResult GET_MT_ASM_SUBJECT_LIST_BY_SEARCHQUERY_FORDATATABLE(SQLParamters PostedData)
         {
             var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_ASM_SUBJECT_LIST_BY_SEARCHQUERY(PostedData).ToList();
             return Json(new { success = true, data = DATA }, JsonRequestBehavior.AllowGet);

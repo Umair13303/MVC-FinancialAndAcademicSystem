@@ -130,6 +130,9 @@ namespace office360.Models.General
         public int? AccountTypeId { get; set; }
         public int? AccountCategoryId { get; set; }
         public int? FinancialStatementId { get; set; }
+        public int? QuestionTypeId { get; set; }
+        public int? DifficultyLevelId { get; set; }
+
 
         public string ActionCondition { get; set; }
         public string Address { get; set; }
@@ -211,6 +214,9 @@ namespace office360.Models.General
         public string Subject { get; set; }
         public string FeeCategoryIds { get; set; }
         public string FeeType { get; set; }
+        public string Chapter { get; set; }
+        public string Options { get; set; }
+        public string CorrectAnswer { get; set; }
 
 
         public static explicit operator List<object>(SQLParamters v)

@@ -52,16 +52,8 @@ function ChangeCase() {
 
 /*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON LOAD)        **----------------------------------------------*/
 function PopulateMT_CM_Company_ListByParam() {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.CM_COMPANY_BY_SOLUTION_DEVELOPER_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.CM_COMPANY_BY_SOLUTION_DEVELOPER_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType
     }
     $.ajax({
         type: "POST",
@@ -86,16 +78,8 @@ function PopulateMT_CM_Company_ListByParam() {
 
 /*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_LOOKUP-- LINQUERY (ON CHANGE)            **----------------------------------------------*/
 function PopulateMT_BM_BranchCampus_ListByParam(CompanyId, AllowedCampusIds) {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.BM_BRANCH_BY_COMPANYID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.BM_BRANCH_BY_COMPANYID_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType,
         CompanyId: CompanyId,
     }
     $.ajax({
@@ -123,16 +107,8 @@ function PopulateMT_BM_BranchCampus_ListByParam(CompanyId, AllowedCampusIds) {
     });
 }
 function PopulateMT_BM_Branch_ListByParam(CompanyId,BranchId) {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.BM_BRANCH_BY_COMPANYID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.BM_BRANCH_BY_COMPANYID_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType,
         CompanyId: CompanyId,
     }
     $.ajax({
@@ -156,16 +132,8 @@ function PopulateMT_BM_Branch_ListByParam(CompanyId,BranchId) {
     });
 }
 function PopulateMT_EM_Employee_ListByParam(CompanyId, EmployeeId) {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.BM_BRANCH_BY_COMPANYID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.BM_BRANCH_BY_COMPANYID_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType,
         CompanyId: CompanyId,
     }
     $.ajax({
@@ -361,7 +329,6 @@ function GET_UM_USER_LISTBYPARAM() {
                 return {
                     PostedData: {
                         SearchParameter: params.term,
-                        DB_IF_PARAM: DOCUMENT_LIST_CONDITION.UM_USER_BY_SEARCH_PARAMETER_UPDATEUSER,
                     }
                 };
             },

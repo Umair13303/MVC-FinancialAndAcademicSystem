@@ -137,7 +137,6 @@ function GET_ASM_SUBJECT_LISTBYPARAM() {
                 return {
                     PostedData: {
                         SearchParameter: params.term,
-                        DB_IF_PARAM: DOCUMENT_LIST_CONDITION.ASM_SUBJECT_BY_COMPANYID_SEARCH_PARAMETER_UPDATESUBJECT,
                     }
                 };
             },

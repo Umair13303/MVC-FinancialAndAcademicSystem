@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AASM_AdmissionSession">
           <Key>
             <PropertyRef Name="Id" />
@@ -239,10 +239,10 @@
           <Property Name="CampusId" Type="int" />
           <Property Name="ClassId" Type="int" />
           <Property Name="SubjectId" Type="int" />
-          <Property Name="Chapter" Type="nvarchar(max)" />
-          <Property Name="DifficultyLevelId" Type="int" />
-          <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="QuestionTypeId" Type="int" />
+          <Property Name="Chapter" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="DifficultyLevelId" Type="int" />
           <Property Name="Options" Type="text" />
           <Property Name="CorrectAnswer" Type="nvarchar(max)" />
           <Property Name="CreatedOn" Type="datetime" />
@@ -1105,11 +1105,12 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Parameter Name="CampusId" Type="int" Mode="In" />
           <Parameter Name="ClassId" Type="int" Mode="In" />
           <Parameter Name="SubjectId" Type="int" Mode="In" />
+          <Parameter Name="QuestionTypeId" Type="int" Mode="In" />
           <Parameter Name="Chapter" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="QuestionTypeId" Type="int" Mode="In" />
-          <Parameter Name="Options" Type="text" Mode="In" />
-          <Parameter Name="CorrectAnswer" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="DifficultyLevelId" Type="int" Mode="In" />
+          <Parameter Name="Options" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CorrectAnswer" Type="text" Mode="In" />
           <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
           <Parameter Name="CreatedBy" Type="int" Mode="In" />
           <Parameter Name="UpdatedOn" Type="datetime" Mode="In" />
@@ -1718,8 +1719,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
     FROM [dbo].[WorkingShift] AS [WorkingShift]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FASModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2559,13 +2559,13 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <EntitySet Name="WHTaxPolicy" EntityType="Self.WHTaxPolicy" />
           <EntitySet Name="WorkingShift" EntityType="Self.WorkingShift" />
           <FunctionImport Name="fn_CodeSplitByCommaAsINT" IsComposable="true" ReturnType="Collection(FASModel.fn_CodeSplitByCommaAsINT_Result)">
-            <Parameter Name="psCSString" Mode="In" Type="String" />
+          <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_CodeSplitByCommaAsUniqueIdentifier" IsComposable="true" ReturnType="Collection(FASModel.fn_CodeSplitByCommaAsUniqueIdentifier_Result)">
-            <Parameter Name="psCSString" Mode="In" Type="String" />
+          <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_GetCommaSepratedValuesInList" IsComposable="true" ReturnType="Collection(FASModel.fn_GetCommaSepratedValuesInList_Result)">
-            <Parameter Name="psCSString" Mode="In" Type="String" />
+          <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="AASM_AdmissionSession_GetListByParam" ReturnType="Collection(FASModel.AASM_AdmissionSession_GetListByParam_Result)">
             <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
@@ -2824,9 +2824,10 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
             <Parameter Name="CampusId" Mode="In" Type="Int32" />
             <Parameter Name="ClassId" Mode="In" Type="Int32" />
             <Parameter Name="SubjectId" Mode="In" Type="Int32" />
+            <Parameter Name="QuestionTypeId" Mode="In" Type="Int32" />
             <Parameter Name="Chapter" Mode="In" Type="String" />
             <Parameter Name="Description" Mode="In" Type="String" />
-            <Parameter Name="QuestionTypeId" Mode="In" Type="Int32" />
+            <Parameter Name="DifficultyLevelId" Mode="In" Type="Int32" />
             <Parameter Name="Options" Mode="In" Type="String" />
             <Parameter Name="CorrectAnswer" Mode="In" Type="String" />
             <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />

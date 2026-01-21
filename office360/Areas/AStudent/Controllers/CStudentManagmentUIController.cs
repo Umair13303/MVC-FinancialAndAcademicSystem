@@ -81,7 +81,7 @@ namespace office360.Areas.AStudent.Controllers
 
         /*---------------------- ** ACTION RESULTS FOR :: RENDER OF DROP DOWN LIST FROM DB_MAIN USING STOREDPROCEDURE ** ------------------------------------------ */
         #region ACTION RESULT FOR :: RENDER DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
-        public ActionResult GET_MT_BM_BRANCH_BYPARAMTER(SQLParamters PostedData)
+        public JsonResult GET_MT_BM_BRANCH_BYPARAMTER(SQLParamters PostedData)
         {
             switch (PostedData.OperationType)
             {
@@ -95,7 +95,7 @@ namespace office360.Areas.AStudent.Controllers
             var DATA = ABranch.HelperCode.DATA_FROM_SP.GET_MT_BM_Branch_By_Param_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GET_MT_AASM_ADMISSIONSESSION_BYPARAMTER(SQLParamters PostedData)
+        public JsonResult GET_MT_AASM_ADMISSIONSESSION_BYPARAMTER(SQLParamters PostedData)
         {
             switch (PostedData.OperationType)
             {
@@ -109,7 +109,7 @@ namespace office360.Areas.AStudent.Controllers
             var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_AASM_AdmissionSession_By_Param_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GET_MT_ACM_CLASS_BYPARAMTER(SQLParamters PostedData)
+        public JsonResult GET_MT_ACM_CLASS_BYPARAMTER(SQLParamters PostedData)
         {
             switch (PostedData.OperationType)
             {
@@ -123,7 +123,7 @@ namespace office360.Areas.AStudent.Controllers
             var DATA = AAcademic.HelperCode.DATA_FROM_SP.GET_MT_ACM_Class_By_Param_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GET_MT_ACFSM_CLASSFEESTRUCTURE_BYPARAMETER_(SQLParamters PostedData)
+        public JsonResult GET_MT_ACFSM_CLASSFEESTRUCTURE_BYPARAMETER(SQLParamters PostedData)
         {
             switch (PostedData.OperationType)
             {
@@ -141,12 +141,12 @@ namespace office360.Areas.AStudent.Controllers
 
         /*---------------------- ** ACTION RESULTS FOR :: RENDER OF DOCUMENT INFORMATION FROM DB_MAIN USING STOREDPROCEDURE ** ------------------------------------------ */
         #region ACTION RESULT FOR :: GET DOCUMENT SETTING -- LINQ-QUERY --> FEE_TYPE
-        public ActionResult GET_MT_ACFSM_CLASSFEESTRUCTURE_INFOBYGUID(SQLParamters PostedData)
+        public JsonResult GET_MT_ACFSM_CLASSFEESTRUCTURE_INFOBYGUID(SQLParamters PostedData)
         {
             var DATA = AAccount.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_ACFSM_CLASSFEESTRUCTURE_INFO_BY_GUID(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GET_LK1_CHALLANMETHOD_INFOBYID(SQLParamters PostedData)
+        public JsonResult GET_LK1_CHALLANMETHOD_INFOBYID(SQLParamters PostedData)
         {
             var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_CHALLANMETHOD_INFO_BY_ID(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
@@ -155,22 +155,22 @@ namespace office360.Areas.AStudent.Controllers
 
         /*---------------------- ** ACTION RESULTS FOR :: RENDER DATA FOR DROP DOWN LIST FROM DB_LOOKUP USING LINQUERY ** ------------------------------------------ */
         #region ACTION RESULT FOR :: RENDER DATA FOR DROP DOWN FROM DB_LOOKUP -- LINQ-QUERY
-        public ActionResult GET_LK1_ADMISSIONCATEGORY(SQLParamters PostedData)
+        public JsonResult GET_LK1_ADMISSIONCATEGORY(SQLParamters PostedData)
         {
             var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_AdmissionCategory_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GET_LK1_COUNTRY(SQLParamters PostedData)
+        public JsonResult GET_LK1_COUNTRY(SQLParamters PostedData)
         {
             var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_Country_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GET_LK1_RELIGION(SQLParamters PostedData)
+        public JsonResult GET_LK1_RELIGION(SQLParamters PostedData)
         {
             var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_Religion_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GET_LK1_OCCUPATION(SQLParamters PostedData)
+        public JsonResult GET_LK1_OCCUPATION(SQLParamters PostedData)
         {
             var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_Occupation_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
@@ -191,7 +191,7 @@ namespace office360.Areas.AStudent.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: EDIT (LOAD DOCUMENT OF STUDENT & GET DETAIL BY STUDENT_GUID) ** ------------------------------------------ */
 
         #region ACTION RESULT FOR :: SEARCH DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
-        public ActionResult GET_MT_SM_STUDENT_BYPARAMETER_SEARCH(SQLParamters PostedData)
+        public JsonResult GET_MT_SM_STUDENT_BYPARAMETER_SEARCH(SQLParamters PostedData)
         {
             var DATA = AStudent.HelperCode.DATA_FROM_SP.GET_MT_SM_Student_By_Param_List(PostedData).ToList();
             return Json(new { data = DATA }, JsonRequestBehavior.AllowGet);
@@ -199,8 +199,9 @@ namespace office360.Areas.AStudent.Controllers
         #endregion
 
         #region ACTION RESULT FOR :: GET DOCUMENT DETAIL (DBO.SM_STUDENT) -- LINQ-QUERY
-        public ActionResult GET_MT_SM_STUDENT_INFOBYGUID(SQLParamters PostedData)
+        public JsonResult GET_MT_SM_STUDENT_INFOBYGUID(SQLParamters PostedData)
         {
+            PostedData.DB_IF_PARAM = nameof(MDBDocFilter.SM_STUDENT_BY_CAMPUSID_SEARCH_PARAMETER_UPDATESTUDENT);
             var DATA = AStudent.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_SM_STUDENT_INFO_BY_GUID(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
@@ -208,7 +209,7 @@ namespace office360.Areas.AStudent.Controllers
 
         /*---------------------- ** ACTION RESULTS FOR :: DATA TABLE (LOAD TABLE OF STUDENT BY INPUT TYPE & TEXT) ** ---------------------------- */
         #region ACTION RESULT FOR :: GET LIST BY SEARCH PARAMETER FOR DATA-TABLE (DBO.ACOAM_CHARTOFACCOUNT)-- STORED PROCEDURE
-        public ActionResult GET_MT_SM_STUDENT_LIST_BY_SEARCHQUERY_FORDATATABLE(SQLParamters PostedData)
+        public JsonResult GET_MT_SM_STUDENT_LIST_BY_SEARCHQUERY_FORDATATABLE(SQLParamters PostedData)
         {
             var DATA = AStudent.HelperCode.DATA_FROM_SP.GET_MT_SM_Student_List_By_SearchQuery(PostedData).ToList();
             return Json(new { success = true, data = DATA }, JsonRequestBehavior.AllowGet);

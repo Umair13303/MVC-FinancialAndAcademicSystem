@@ -6,7 +6,6 @@ var IsFieldClear = false;
 
 /*----------------------------------** FUNCTION FOR::PAGE LOADER                                                    **----------------------------------------------*/
 $(document).ready(function () {
-    DB_OperationType = DBOperation.INSERT;// $('#HiddenFieldDB_OperationType').val();
     switch (DB_OperationType) {
         case DBOperation.INSERT:
             $('#DivButtonSubmitDown').show();
@@ -25,6 +24,8 @@ $(document).ready(function () {
 
 function PopulateDropDownLists() {
     PopulateMT_BM_Branch_ListByParam();
+    PopulateLK_QuestionType_List();
+
 }
 
 /*----------------------------------** FUNCTION FOR::CHANGE CASE LOADER                                             **----------------------------------------------*/
@@ -40,11 +41,13 @@ function ChangeCase() {
         PopulateMT_ASM_Subject_ListByParam(ClassId, null);
     });
     $('#DropDownListQuestionType,#DropDownListOptionLimit').change(function () {
+        $('#DropDownListOptionLimit').prop('disabled', true);
         var QuestionTypeId = $("#DropDownListQuestionType :selected").val();
         var ContainerId = "ContainerDynamicOption";
         $("#" + ContainerId).empty();
         switch (QuestionTypeId) {
             case "1":/* MCQ */
+                $('#DropDownListOptionLimit').prop('disabled', false);
                 var OptionLimit = $("#DropDownListOptionLimit :selected").val();
                 INPUT_FIELD.DYNAMIC_MCQ_OPTION_FIELD(ContainerId, OptionLimit);
                 return;
@@ -81,16 +84,8 @@ function ChangeCase() {
 
 /*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON LOAD)    **----------------------------------------------*/
 function PopulateMT_BM_Branch_ListByParam() {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.BM_BRANCH_BY_ALLOWEDBRANCHIDS_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.BM_BRANCH_BY_ALLOWEDBRANCHIDS_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType,
     }
     $.ajax({
         type: "POST",
@@ -114,16 +109,8 @@ function PopulateMT_BM_Branch_ListByParam() {
 
 /*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_MAIN-- STORED PROCEDURE (ON CHANGE)  **----------------------------------------------*/
 function PopulateMT_ACM_Class_ListByParam(CampusId, ClassId) {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.ACM_CLASS_BY_CAMPUSID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.ACM_CLASS_BY_CAMPUSID_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType,
         CampusId: CampusId,
     }
     $.ajax({
@@ -147,16 +134,8 @@ function PopulateMT_ACM_Class_ListByParam(CampusId, ClassId) {
     });
 }
 function PopulateMT_ASM_Subject_ListByParam(ClassId, SubjectId) {
-    switch (DB_OperationType) {
-        case DBOperation.INSERT:
-            DDL_Condition = MDB_LIST_CONDITION.ASM_SUBJECT_BY_CLASSID_FORNEWINSERT;
-            break;
-        case DBOperation.UPDATE:
-            DDL_Condition = MDB_LIST_CONDITION.ASM_SUBJECT_BY_CLASSID_FORUPDATERECORD;
-            break;
-    }
     var JsonArg = {
-        DB_IF_PARAM: DDL_Condition,
+        OperationType: DB_OperationType,
         ClassId: ClassId
     }
     $.ajax({
@@ -179,6 +158,27 @@ function PopulateMT_ASM_Subject_ListByParam(ClassId, SubjectId) {
     });
 }
 
+/*----------------------------------** FUNCTION FOR:: RENDER DROP DOWN FROM DB_LOOKUP-- LINQUERY (ON LOAD)       **----------------------------------------------*/
+function PopulateLK_QuestionType_List() {
+    $.ajax({
+        type: "POST",
+        url: BasePath + "/AAcademic/CAcademicQuestionManagmentUI/GET_LK1_QUESTIONTYPE",
+        data: {},
+        beforeSend: function () {
+            startLoading();
+        },
+        success: function (data) {
+            var List = '<option  value="-1">Select an option</option>';
+            for (var i = 0; i < data.length; i++) {
+                List += '<option  value="' + data[i].Id + '">' + data[i].Description + '' + '</option>';
+            }
+            $("#DropDownListQuestionType").html(List);
+        },
+        complete: function () {
+            stopLoading();
+        },
+    });
+}
 
 /*----------------------------------** FUNCTION FOR:: DATABASE OPERATION (VALIDATE,UPSERT,CLEAR)                    **----------------------------------------------*/
 function ValidateInputFields() {
@@ -224,10 +224,9 @@ function UpSertDataIntoDB() {
     var SubjectId = $('#DropDownListSubject :selected').val();
     var QuestionTypeId = $("#DropDownListQuestionType :selected").val();
     var OptionLimit = $("#DropDownListOptionLimit :selected").val();
-
-    var Chapter = $('#TextBoxChapter').val();
-    var Description = $('#TextBoxDescription').val();
-    var CorrectAnswer = $('#TextBoxCorrectAnswer').val();
+    var Chapter = $("#TextBoxChapter").val();
+    var Description = $("#TextBoxDescription").val();
+    var DifficultyLevelId = $("#DropDownListDifficultyLevel :selected").val();
     var Options = "";
     if (QuestionTypeId == "1") { // MCQ
         var mcqArray = [];
@@ -241,35 +240,35 @@ function UpSertDataIntoDB() {
     }
     else if (QuestionTypeId == "4") { // Match Column
         var matchPairs = [];
-        $('.match-pair-row').each(function () {
-            var from = $(this).find('.match-from').val();
-            var to = $(this).find('.match-to').val();
+        $(".match-pair-row").each(function () {
+            var from = $(this).find(".match-from").val();
+            var to = $(this).find(".match-to").val();
             if (from !== "" || to !== "") {
                 matchPairs.push({ From: from, To: to });
             }
         });
         Options = JSON.stringify(matchPairs);
     }
-    var Remarks = $('#TextBoxRemarks').val();
-    var QuestionGuID = $('#HiddenFieldQuestionGuID').val();
+    var CorrectAnswer = $("#TextBoxCorrectAnswer").val();
+    
+    var Remarks = $("#TextBoxRemarks").val();
+    var QuestionGuID = $("#HiddenFieldQuestionGuID").val();
 
     var JsonArg = {
         GuID: QuestionGuID,
         OperationType: OperationType,
-
         CampusId: CampusId,
         ClassId: ClassId,
         SubjectId: SubjectId,
         QuestionTypeId: QuestionTypeId,
+        OptionLimit: OptionLimit,
         Chapter: Chapter,
         Description: Description,
+        DifficultyLevelId: DifficultyLevelId,
         Options: Options,
         CorrectAnswer: CorrectAnswer,
         Remarks: Remarks,
     }
-    debugger
-    console.log(JsonArg)
-    return;
     $.ajax({
         type: "POST",
         url: BasePath + "/AAcademic/CAcademicQuestionManagmentUI/UpSert_Into_AQM_Question",

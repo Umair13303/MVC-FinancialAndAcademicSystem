@@ -63,7 +63,7 @@ namespace office360.Areas.AAccount.Controllers
 
         /*---------------------- ** ACTION RESULTS FOR :: RENDER OF DROP DOWN LIST FROM DB_MAIN USING STOREDPROCEDURE ** ------------------------------------------------ */
         #region ACTION RESULT FOR :: RENDER DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
-        public ActionResult GET_MT_ACOAM_COSTOFSALEACCOUNT_BYPARAMTER(SQLParamters PostedData)
+        public JsonResult GET_MT_ACOAM_COSTOFSALEACCOUNT_BYPARAMTER(SQLParamters PostedData)
         {
             switch (PostedData.OperationType)
             {
@@ -82,7 +82,7 @@ namespace office360.Areas.AAccount.Controllers
 
         /*---------------------- ** ACTION RESULTS FOR :: DATABASE OPERATION BY USER (INSERT/UPDATE/DELETE OF ADTM_DISCOUNTTYPE) ** ------------------------------------- */
         #region ACTION RESULT FOR :: INSERT/UPDATE/DELETE INTO DBO.ADTM_DISCOUNTTYPE
-        public ActionResult UpSert_Into_ADTM_DiscountType(SQLParamters PostedData)
+        public JsonResult UpSert_Into_ADTM_DiscountType(SQLParamters PostedData)
         {
             _Exe = AAccount.HelperCode.CUD_Operation.Update_Insert_ADTM_DiscountType(PostedData);
             var data = new { Message = HttpServerStatus.HTTP_DB_TransactionMessagByStatusCode(_Exe), StatusCode = _Exe };
@@ -92,7 +92,7 @@ namespace office360.Areas.AAccount.Controllers
 
         /*---------------------- ** ACTION RESULTS FOR :: EDIT (LOAD DOCUMENT OF DISCOUNTTYPE & GET DETAIL BY DISCOUNTTYPE_GUID) ** ------------------------------------- */
         #region ACTION RESULT FOR :: SEARCH DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
-        public ActionResult GET_MT_ADTM_DISCOUNTTYPE_BYPARAMETER_SEARCH(SQLParamters PostedData)
+        public JsonResult GET_MT_ADTM_DISCOUNTTYPE_BYPARAMETER_SEARCH(SQLParamters PostedData)
         {
             PostedData.DB_IF_PARAM = nameof(MDBDocFilter.ADTM_DISCOUNTTYPE_BY_COMPANYID_SEARCH_PARAMETER_UPDATEDISCOUNTTYPE);
             var DATA = AAccount.HelperCode.DATA_FROM_SP.GET_MT_ADTM_DiscountType_By_Param_List(PostedData).ToList();
@@ -101,7 +101,7 @@ namespace office360.Areas.AAccount.Controllers
         #endregion
 
         #region ACTION RESULT FOR :: GET DOCUMENT DETAIL (DBO.ADTM_DISCOUNTTYPE) -- LINQ-QUERY
-        public ActionResult GET_MT_ADTM_DISCOUNTTYPE_INFOBYGUID(SQLParamters PostedData)
+        public JsonResult GET_MT_ADTM_DISCOUNTTYPE_INFOBYGUID(SQLParamters PostedData)
         {
             var DATA = AAccount.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_ADTM_DISCOUNTTYPE_INFO_BY_GUID(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
@@ -110,7 +110,7 @@ namespace office360.Areas.AAccount.Controllers
 
         /*---------------------- ** ACTION RESULTS FOR :: DATA TABLE (LOAD TABLE OF DISCOUNTTYPE BY INPUT TYPE & TEXT) ** ----------------------------------------------- */
         #region ACTION RESULT FOR :: GET LIST BY SEARCH PARAMETER FOR DATA-TABLE (DBO.ADTM_DISCOUNTTYPE)-- STORED PROCEDURE
-        public ActionResult GET_MT_ACOAM_CHARTOFACCOUNT_LIST_BY_SEARCHQUERY_FORDATATABLE(SQLParamters PostedData)
+        public JsonResult GET_MT_ACOAM_CHARTOFACCOUNT_LIST_BY_SEARCHQUERY_FORDATATABLE(SQLParamters PostedData)
         {
             var DATA = AAccount.HelperCode.DATA_FROM_SP.GET_MT_ADTM_DiscountType_List_By_SearchQuery(PostedData).ToList();
             return Json(new { success = true, data = DATA }, JsonRequestBehavior.AllowGet);

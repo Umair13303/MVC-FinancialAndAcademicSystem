@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static office360.Models.General.DDOFilter;
 using static office360.Models.General.HttpServerStatus;
 
 namespace office360.Areas.ACompany.Controllers
@@ -45,12 +46,12 @@ namespace office360.Areas.ACompany.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: RENDER DATA FOR DROP DOWN LIST FROM DB_LOOKUP USING LINQUERY ** --------------------------- */
 
         #region ACTION RESULT FOR :: RENDER DATA FOR DROP DOWN FROM DB_LOOKUP -- LINQ-QUERY
-        public ActionResult GET_LK1_COUNTRY(SQLParamters PostedData)
+        public JsonResult GET_LK1_COUNTRY(SQLParamters PostedData)
         {
             var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_Country_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GET_LK1_CITY_BYPARAMETER(SQLParamters PostedData)
+        public JsonResult GET_LK1_CITY_BYPARAMETER(SQLParamters PostedData)
         {
             var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_City_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
@@ -73,8 +74,9 @@ namespace office360.Areas.ACompany.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: EDIT (LOAD DOCUMENT OF CM_COMPANY) ** ------------------------ */
 
         #region ACTION RESULT FOR :: SEARCH DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
-        public ActionResult GET_MT_CM_COMPANY_BYPARAMETER_SEARCH(SQLParamters PostedData)
+        public JsonResult GET_MT_CM_COMPANY_BYPARAMETER_SEARCH(SQLParamters PostedData)
         {
+            PostedData.DB_IF_PARAM = nameof(MDBDocFilter.CM_COMPANY_BY_SEARCH_PARAMETER_UPDATECOMPANY);
             var DATA = ACompany.HelperCode.DATA_FROM_SP.GET_MT_CM_Company_By_Param_List(PostedData).ToList();
             return Json(new { data = DATA }, JsonRequestBehavior.AllowGet);
         }
@@ -82,7 +84,7 @@ namespace office360.Areas.ACompany.Controllers
         #endregion
 
         #region ACTION RESULT FOR :: GET DOCUMENT DETAIL (DBO.CM_COMPANY) -- LINQ-QUERY
-        public ActionResult GET_MT_CM_COMPANY_INFOBYGUID(SQLParamters PostedData)
+        public JsonResult GET_MT_CM_COMPANY_INFOBYGUID(SQLParamters PostedData)
         {
             var DATA = ACompany.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_CM_COMPANY_INFO_BY_GUID(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);

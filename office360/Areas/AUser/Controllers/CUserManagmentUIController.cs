@@ -1,14 +1,15 @@
-﻿using office360.Common.CommonHelper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using office360.Common.CommonHelper;
 using office360.CommonHelper;
 using office360.Extensions;
 using office360.GlobalHelper.LookUp;
 using office360.Models.EDMX;
 using office360.Models.General;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using static office360.Models.General.DDOFilter;
 using static office360.Models.General.HttpServerStatus;
 
 
@@ -65,18 +66,45 @@ namespace office360.Areas.AUser.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: RENDER OF DROP DOWN LIST FROM DB_MAIN USING STOREDPROCEDURE ** ---------------------------- */
 
         #region ACTION RESULT FOR :: RENDER DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
-        public ActionResult GET_MT_CM_COMPANY_BYPARAMTER(SQLParamters PostedData)
+        public JsonResult GET_MT_CM_COMPANY_BYPARAMTER(SQLParamters PostedData)
         {
+            switch (PostedData.OperationType)
+            {
+                case nameof(DB_OperationType.INSERT_DATA_INTO_DB):
+                    PostedData.DB_IF_PARAM = nameof(MDBDataFilter.CM_COMPANY_BY_SOLUTION_DEVELOPER_FORNEWINSERT);
+                    break;
+                default:
+                    PostedData.DB_IF_PARAM = nameof(MDBDataFilter.CM_COMPANY_BY_SOLUTION_DEVELOPER_FORUPDATERECORD);
+                    break;
+            }
             var DATA = ACompany.HelperCode.DATA_FROM_SP.GET_MT_CM_Company_By_Param_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GET_MT_BM_BRANCH_BYPARAMTER(SQLParamters PostedData)
+        public JsonResult GET_MT_BM_BRANCH_BYPARAMTER(SQLParamters PostedData)
         {
+            switch (PostedData.OperationType)
+            {
+                case nameof(DB_OperationType.INSERT_DATA_INTO_DB):
+                    PostedData.DB_IF_PARAM = nameof(MDBDataFilter.BM_BRANCH_BY_COMPANYID_FORNEWINSERT);
+                    break;
+                default:
+                    PostedData.DB_IF_PARAM = nameof(MDBDataFilter.BM_BRANCH_BY_COMPANYID_FORUPDATERECORD);
+                    break;
+            }
             var DATA = ABranch.HelperCode.DATA_FROM_SP.GET_MT_BM_Branch_By_Param_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GET_MT_EM_EMPLOYEE_BYPARAMTER(SQLParamters PostedData)
+        public JsonResult GET_MT_EM_EMPLOYEE_BYPARAMTER(SQLParamters PostedData)
         {
+            switch (PostedData.OperationType)
+            {
+                case nameof(DB_OperationType.INSERT_DATA_INTO_DB):
+                    PostedData.DB_IF_PARAM = nameof(MDBDataFilter.BM_BRANCH_BY_COMPANYID_FORNEWINSERT);
+                    break;
+                default:
+                    PostedData.DB_IF_PARAM = nameof(MDBDataFilter.BM_BRANCH_BY_COMPANYID_FORUPDATERECORD);
+                    break;
+            }
             //NOTE :: REPLACE EMPLOYEE LATER WITH ACTUAL EMPLOYEE HELPER
             var DATA = ABranch.HelperCode.DATA_FROM_SP.GET_MT_BM_Branch_By_Param_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
@@ -86,7 +114,7 @@ namespace office360.Areas.AUser.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: RENDER DATA FOR DROP DOWN LIST FROM DB_LOOKUP USING LINQUERY ** --------------------------- */
 
         #region ACTION RESULT FOR :: RENDER DATA FOR DROP DOWN FROM DB_LOOKUP -- LINQ-QUERY
-        public ActionResult GET_LK1_ROLE(SQLParamters PostedData)
+        public JsonResult GET_LK1_ROLE(SQLParamters PostedData)
         {
             var DATA = LookUp_GetDataFromDB_LINQ.GET_LK1_Role_List(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
@@ -109,8 +137,9 @@ namespace office360.Areas.AUser.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: EDIT (LOAD DOCUMENT OF UM_USER) ** ------------------------ */
 
         #region ACTION RESULT FOR :: SEARCH DROP DOWN FROM DB_MAIN -- STORED PROCEDURE
-        public ActionResult GET_MT_UM_USER_BYPARAMETER_SEARCH(SQLParamters PostedData)
+        public JsonResult GET_MT_UM_USER_BYPARAMETER_SEARCH(SQLParamters PostedData)
         {
+            PostedData.DB_IF_PARAM = nameof(MDBDocFilter.UM_USER_BY_SEARCH_PARAMETER_UPDATEUSER);
             var DATA = AUser.HelperCode.DATA_FROM_SP.GET_MT_UM_User_By_Param_List(PostedData).ToList();
             return Json(new { data = DATA }, JsonRequestBehavior.AllowGet);
         }
@@ -118,7 +147,7 @@ namespace office360.Areas.AUser.Controllers
         #endregion
 
         #region ACTION RESULT FOR :: GET DOCUMENT DETAIL (DBO.UM_USER) -- LINQ-QUERY
-        public ActionResult GET_MT_UM_USER_INFOBYGUID(SQLParamters PostedData)
+        public JsonResult GET_MT_UM_USER_INFOBYGUID(SQLParamters PostedData)
         {
             var DATA = AUser.HelperCode.Document_Detail_By_GUID_LINQ.GET_MT_UM_USER_INFO_BY_GUID(PostedData).ToList();
             return Json(DATA, JsonRequestBehavior.AllowGet);
@@ -129,7 +158,7 @@ namespace office360.Areas.AUser.Controllers
         /*---------------------- ** ACTION RESULTS FOR :: DATA TABLE (LOAD TABLE OF USER BY INPUT TYPE & TEXT) ** ---------------------------- */
 
         #region ACTION RESULT FOR :: GET LIST BY SEARCH PARAMETER FOR DATA-TABLE (DBO.UM_USER)-- STORED PROCEDURE
-        public ActionResult GET_MT_UM_USER_LIST_BY_SEARCHQUERY_FORDATATABLE(SQLParamters PostedData)
+        public JsonResult GET_MT_UM_USER_LIST_BY_SEARCHQUERY_FORDATATABLE(SQLParamters PostedData)
         {
             var DATA = AUser.HelperCode.DATA_FROM_SP.GET_MT_UM_User_List_By_SearchQuery(PostedData).ToList();
             return Json(new { success = true, data = DATA }, JsonRequestBehavior.AllowGet);
