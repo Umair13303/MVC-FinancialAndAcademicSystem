@@ -20,10 +20,10 @@ namespace office360.Models.EDMX
         public Nullable<int> CampusId { get; set; }
         public Nullable<int> ClassId { get; set; }
         public Nullable<int> SubjectId { get; set; }
-        public string Chapter { get; set; }
-        public Nullable<int> DifficultyLevelId { get; set; }
-        public string Description { get; set; }
         public Nullable<int> QuestionTypeId { get; set; }
+        public string Chapter { get; set; }
+        public string Description { get; set; }
+        public Nullable<int> DifficultyLevelId { get; set; }
         public string Options { get; set; }
         public string CorrectAnswer { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }

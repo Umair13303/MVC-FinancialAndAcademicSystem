@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="FASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="FASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AASM_AdmissionSession">
           <Key>
             <PropertyRef Name="Id" />
@@ -582,6 +582,15 @@ warning 6002: The table/view 'FAS.dbo.Country' does not have a primary key defin
           <Property Name="Status" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'FAS.dbo.DifficultyLevel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DifficultyLevel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'FAS.dbo.DocType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="DocType">
           <Key>
@@ -1099,6 +1108,17 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Response" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="AQM_Question_GetListByParam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DB_IF_PARAM" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SessionCompanyId" Type="int" Mode="In" />
+          <Parameter Name="SessionBranchId" Type="int" Mode="In" />
+          <Parameter Name="AllowedCampusIds" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="SearchParameter" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CampusId" Type="int" Mode="In" />
+          <Parameter Name="CompanyId" Type="int" Mode="In" />
+          <Parameter Name="ClassId" Type="int" Mode="In" />
+          <Parameter Name="SubjectId" Type="int" Mode="In" />
+        </Function>
         <Function Name="AQM_Question_Upsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DB_OperationType" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="GuID" Type="uniqueidentifier" Mode="In" />
@@ -1529,6 +1549,12 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
     [Country].[Status] AS [Status]
     FROM [dbo].[Country] AS [Country]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="DifficultyLevel" EntityType="Self.DifficultyLevel" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DifficultyLevel].[Id] AS [Id], 
+    [DifficultyLevel].[Description] AS [Description]
+    FROM [dbo].[DifficultyLevel] AS [DifficultyLevel]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="DocType" EntityType="Self.DocType" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [DocType].[Id] AS [Id], 
@@ -1719,7 +1745,8 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
     FROM [dbo].[WorkingShift] AS [WorkingShift]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FASModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1966,10 +1993,10 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Name="CampusId" Type="Int32" />
           <Property Name="ClassId" Type="Int32" />
           <Property Name="SubjectId" Type="Int32" />
-          <Property Name="Chapter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DifficultyLevelId" Type="Int32" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="QuestionTypeId" Type="Int32" />
+          <Property Name="Chapter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DifficultyLevelId" Type="Int32" />
           <Property Name="Options" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CorrectAnswer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
@@ -2286,6 +2313,13 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Name="CallingCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Boolean" />
         </EntityType>
+        <EntityType Name="DifficultyLevel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="DocType">
           <Key>
             <PropertyRef Name="Id" />
@@ -2532,6 +2566,7 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <EntitySet Name="ChargingMethod" EntityType="Self.ChargingMethod" />
           <EntitySet Name="City" EntityType="Self.City" />
           <EntitySet Name="Country" EntityType="Self.Country" />
+          <EntitySet Name="DifficultyLevel" EntityType="Self.DifficultyLevel" />
           <EntitySet Name="DocType" EntityType="Self.DocType" />
           <EntitySet Name="DocumentStatus" EntityType="Self.DocumentStatus" />
           <EntitySet Name="EducationBoard" EntityType="Self.EducationBoard" />
@@ -2559,13 +2594,13 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <EntitySet Name="WHTaxPolicy" EntityType="Self.WHTaxPolicy" />
           <EntitySet Name="WorkingShift" EntityType="Self.WorkingShift" />
           <FunctionImport Name="fn_CodeSplitByCommaAsINT" IsComposable="true" ReturnType="Collection(FASModel.fn_CodeSplitByCommaAsINT_Result)">
-          <Parameter Name="psCSString" Mode="In" Type="String" />
+            <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_CodeSplitByCommaAsUniqueIdentifier" IsComposable="true" ReturnType="Collection(FASModel.fn_CodeSplitByCommaAsUniqueIdentifier_Result)">
-          <Parameter Name="psCSString" Mode="In" Type="String" />
+            <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_GetCommaSepratedValuesInList" IsComposable="true" ReturnType="Collection(FASModel.fn_GetCommaSepratedValuesInList_Result)">
-          <Parameter Name="psCSString" Mode="In" Type="String" />
+            <Parameter Name="psCSString" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="AASM_AdmissionSession_GetListByParam" ReturnType="Collection(FASModel.AASM_AdmissionSession_GetListByParam_Result)">
             <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
@@ -2817,6 +2852,17 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
             <Parameter Name="CompanyId" Mode="In" Type="Int32" />
             <Parameter Name="Remarks" Mode="In" Type="String" />
             <Parameter Name="Response" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AQM_Question_GetListByParam" ReturnType="Collection(FASModel.AQM_Question_GetListByParam_Result)">
+            <Parameter Name="DB_IF_PARAM" Mode="In" Type="String" />
+            <Parameter Name="SessionCompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="SessionBranchId" Mode="In" Type="Int32" />
+            <Parameter Name="AllowedCampusIds" Mode="In" Type="String" />
+            <Parameter Name="SearchParameter" Mode="In" Type="String" />
+            <Parameter Name="CampusId" Mode="In" Type="Int32" />
+            <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+            <Parameter Name="ClassId" Mode="In" Type="Int32" />
+            <Parameter Name="SubjectId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AQM_Question_Upsert">
             <Parameter Name="DB_OperationType" Mode="In" Type="String" />
@@ -3221,6 +3267,11 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
           <Property Type="String" Name="ChargingMethod" Nullable="false" />
           <Property Type="Int32" Name="DocumentStatus" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="AQM_Question_GetListByParam_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="GuID" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="ASM_Subject_GetListByParam_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="Guid" Name="GuID" Nullable="true" />
@@ -3616,10 +3667,10 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
                 <ScalarProperty Name="CampusId" ColumnName="CampusId" />
                 <ScalarProperty Name="ClassId" ColumnName="ClassId" />
                 <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
-                <ScalarProperty Name="Chapter" ColumnName="Chapter" />
-                <ScalarProperty Name="DifficultyLevelId" ColumnName="DifficultyLevelId" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="QuestionTypeId" ColumnName="QuestionTypeId" />
+                <ScalarProperty Name="Chapter" ColumnName="Chapter" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DifficultyLevelId" ColumnName="DifficultyLevelId" />
                 <ScalarProperty Name="Options" ColumnName="Options" />
                 <ScalarProperty Name="CorrectAnswer" ColumnName="CorrectAnswer" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -3954,6 +4005,14 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="CallingCode" ColumnName="CallingCode" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DifficultyLevel">
+            <EntityTypeMapping TypeName="FASModel.DifficultyLevel">
+              <MappingFragment StoreEntitySet="DifficultyLevel">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4398,6 +4457,15 @@ warning 6002: The table/view 'FAS.dbo.WorkingShift' does not have a primary key 
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="AFTM_FeeType_Upsert" FunctionName="FASModel.Store.AFTM_FeeType_Upsert" />
+          <FunctionImportMapping FunctionImportName="AQM_Question_GetListByParam" FunctionName="FASModel.Store.AQM_Question_GetListByParam">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FASModel.AQM_Question_GetListByParam_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GuID" ColumnName="GuID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="AQM_Question_Upsert" FunctionName="FASModel.Store.AQM_Question_Upsert" />
           <FunctionImportMapping FunctionImportName="ASM_Subject_GetListByParam" FunctionName="FASModel.Store.ASM_Subject_GetListByParam">
             <ResultMapping>

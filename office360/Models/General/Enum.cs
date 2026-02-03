@@ -144,4 +144,11 @@ namespace office360.Models.General
         ACADEMIC_FEE=1,
         OTHER_FEE=2,
     }
+    
+    public enum OPTION_ENABLE_QUESTION_TYPE
+    {
+        MCQ=1,
+        TRUE_FALSE = 3,
+        MATCH_THE_COLUMN = 4,
+    }
 }

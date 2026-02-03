@@ -6,10 +6,6 @@ using System.Web;
 namespace office360.Models.General
 {
 
-    public static class _Managment
-    {
-        public static string RoleId { get; set; }
-    }
     public static class _Controller
     {
         public static string Home = "Home";
@@ -21,12 +17,6 @@ namespace office360.Models.General
         public static string Class = "MClassUIController";
         public static string Enrollment = "MEnrollmentUIController";
 
-    }
-    public static class _Areas
-    {
-        public static string Account = "AAccount";
-        public static string Company = "ACompany";
-        public static string Student = "AStudent";
     }
     public class _ActionsURL
     {
