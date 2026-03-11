@@ -131,6 +131,7 @@ namespace office360.Models.General
         public int? AccountCategoryId { get; set; }
         public int? FinancialStatementId { get; set; }
         public int? QuestionTypeId { get; set; }
+        public int? OptionLimit { get; set; }
         public int? DifficultyLevelId { get; set; }
 
 

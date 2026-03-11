@@ -470,9 +470,6 @@
     <Compile Include="Models\EDMX\AQM_Question.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EDMX\AQM_Question_GetListByParam_Result.cs">
-      <DependentUpon>FASModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\EDMX\ASM_Subject.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
@@ -519,9 +516,6 @@
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\Country.cs">
-      <DependentUpon>FASModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EDMX\DifficultyLevel.cs">
       <DependentUpon>FASModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDMX\DocType.cs">
